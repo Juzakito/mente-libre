@@ -1,0 +1,277 @@
+/**
+ * Utility Classes
+ * ================
+ * Reusable CSS classes for common UI patterns.
+ * Components, layout utilities, and interactive elements.
+ */
+
+/* ─── Glassmorphism ─────────────────────────────────────── */
+.glass {
+  background: var(--glass-bg, rgba(255, 255, 255, 0.85));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-color);
+}
+
+[data-theme='dark'] .glass {
+  background: rgba(35, 39, 56, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* ─── Buttons ───────────────────────────────────────────── */
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+  padding: 0.875rem 1.5rem;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all var(--transition-fast);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+[data-theme='dark'] .btn-primary {
+  box-shadow: 0 4px 16px rgba(45, 212, 191, 0.3);
+}
+
+[data-theme='dark'] .btn-primary:hover:not(:disabled) {
+  box-shadow: 0 6px 24px rgba(45, 212, 191, 0.45);
+}
+
+[data-theme='dark'] .btn-primary:disabled {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: var(--text-muted);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: none;
+  opacity: 0.6;
+}
+
+.btn-secondary {
+  background-color: var(--surface);
+  color: var(--text-main);
+  padding: 0.875rem 1.5rem;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all var(--transition-fast);
+}
+
+.btn-secondary:hover {
+  background-color: var(--surface-hover, var(--bg-color));
+}
+
+/* ─── Cards ─────────────────────────────────────────────── */
+.card {
+  background: var(--surface);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+  transition: box-shadow var(--transition-fast),
+    transform var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+[data-theme='dark'] .card {
+  background: var(--surface);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 12px -2px rgba(0, 0, 0, 0.25);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+[data-theme='dark'] .card:hover {
+  box-shadow: 0 6px 20px -3px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(45, 212, 191, 0.15);
+  border-color: rgba(45, 212, 191, 0.3);
+}
+
+/* ─── Badges ────────────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-green {
+  background: #dcfce7;
+  color: #166534;
+}
+[data-theme='dark'] .badge-green {
+  background: rgba(52, 211, 153, 0.15);
+  color: #6ee7b7;
+}
+
+.badge-red {
+  background: #fee2e2;
+  color: #991b1b;
+}
+[data-theme='dark'] .badge-red {
+  background: rgba(251, 113, 133, 0.15);
+  color: #fda4af;
+}
+
+.badge-blue {
+  background: #dbeafe;
+  color: #1e40af;
+}
+[data-theme='dark'] .badge-blue {
+  background: rgba(96, 165, 250, 0.15);
+  color: #93c5fd;
+}
+
+.badge-amber {
+  background: #fef3c7;
+  color: #92400e;
+}
+[data-theme='dark'] .badge-amber {
+  background: rgba(251, 191, 36, 0.15);
+  color: #fcd34d;
+}
+
+/* ─── Tags ──────────────────────────────────────────────── */
+.tag {
+  background: var(--bg-color);
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-color);
+}
+
+/* ─── Text Gradients ────────────────────────────────────── */
+.text-gradient-emerald {
+  background: linear-gradient(to right, #34d399, #10b981);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-blue {
+  background: linear-gradient(to right, #60a5fa, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Toast (legacy — now handled by NotificationContext) ─ */
+.toast {
+  position: fixed;
+  bottom: 5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--surface);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  box-shadow: var(--shadow-lg);
+  z-index: var(--z-toast);
+  animation: slideUp 0.3s forwards;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ─── Scrollbar Hide ────────────────────────────────────── */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ─── Twitter-style Action Buttons ──────────────────────── */
+.twitter-action-btn {
+  position: relative;
+  padding: 0.25rem !important;
+  margin: -0.25rem;
+  border-radius: 9999px;
+  transition: color 0.2s, background-color 0.2s;
+}
+.twitter-action-btn:hover {
+  background-color: rgba(13, 148, 136, 0.1);
+  color: var(--primary) !important;
+}
+.twitter-action-btn:nth-child(2):hover {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: var(--accent-emerald) !important;
+}
+.twitter-action-btn:nth-child(3):hover {
+  background-color: rgba(244, 63, 94, 0.1);
+  color: var(--accent-rose) !important;
+}
+
+/* ─── Author Links ──────────────────────────────────────── */
+.author-link:hover .author-name {
+  text-decoration: underline;
+  color: var(--primary);
+}
+
+/* ─── Premium Slider ────────────────────────────────────── */
+input[type='range'].premium-slider {
+  -webkit-appearance: none;
+  height: 6px;
+  border-radius: var(--radius-full);
+  outline: none;
+  transition: background 0.1s;
+}
+
+input[type='range'].premium-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--primary);
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.1s;
+}
+
+input[type='range'].premium-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+input[type='range'].premium-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--primary);
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.1s;
+}
+
+input[type='range'].premium-slider::-moz-range-thumb:hover {
+  transform: scale(1.2);
+}

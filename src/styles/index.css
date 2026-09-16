@@ -1,0 +1,18 @@
+/**
+ * Mente Libre — Styles Entry Point
+ * ==================================
+ * Imports all CSS modules in the correct order.
+ *
+ * Order matters:
+ * 1. Variables (design tokens) — must be first
+ * 2. Reset (normalization) — depends on variables
+ * 3. Animations (keyframes) — standalone
+ * 4. Layout (structural) — depends on variables
+ * 5. Utilities (components) — depends on variables + animations
+ */
+
+@import './variables.css';
+@import './reset.css';
+@import './animations.css';
+@import './layout.css';
+@import './utilities.css';

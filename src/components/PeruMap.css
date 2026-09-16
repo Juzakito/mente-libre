@@ -1,0 +1,156 @@
+/* Experts Page Layout styles */
+.experts-page {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.experts-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.experts-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--text-main);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.experts-subtitle {
+  color: var(--text-light);
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.map-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+/* Map specific styles */
+.peru-map-container {
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto;
+  position: relative;
+  /* 3D Isometric Transform - More dramatic angle */
+  transform: perspective(1200px) rotateX(55deg) rotateZ(-25deg);
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* The glow of the entire map base */
+  filter: drop-shadow(0px 30px 30px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 40px color-mix(in srgb, var(--primary) 20%, transparent));
+}
+
+.peru-map-container:hover {
+  transform: perspective(1200px) rotateX(50deg) rotateZ(-20deg) scale(1.05) translateZ(20px);
+}
+
+.peru-map-container svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.map-region {
+  /* Rich glassmorphism fill instead of transparent */
+  fill: color-mix(in srgb, var(--primary) 15%, var(--surface));
+  stroke: var(--primary);
+  stroke-width: 1.5px;
+  stroke-linejoin: round;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-origin: center;
+  
+  /* 3D Extrusion Effect using multiple stacked drop-shadows */
+  filter: 
+    drop-shadow(1px 1px 0px var(--primary-dark))
+    drop-shadow(2px 2px 0px var(--primary-dark))
+    drop-shadow(3px 3px 0px var(--primary-dark))
+    drop-shadow(4px 4px 0px rgba(0,0,0,0.4));
+}
+
+/* Dim other regions when hovering one to make it spectacular */
+.peru-map-container:has(.map-region:hover) .map-region:not(:hover):not(.active) {
+  opacity: 0.6;
+  fill: color-mix(in srgb, var(--bg-color) 80%, var(--surface));
+  stroke: color-mix(in srgb, var(--primary) 40%, transparent);
+  filter: drop-shadow(1px 1px 0px color-mix(in srgb, var(--primary-dark) 40%, transparent));
+  transform: translateZ(-10px);
+}
+
+.map-region:hover, .map-region.active {
+  /* Brighter fill on hover */
+  fill: var(--primary-light);
+  stroke: #ffffff;
+  stroke-width: 2px;
+  
+  /* Massive pop out effect */
+  transform: translateZ(40px) translateY(-15px) translateX(-15px);
+  
+  /* Extrusion + Intense Glow + Deep Shadow */
+  filter: 
+    drop-shadow(1px 1px 0px var(--primary))
+    drop-shadow(2px 2px 0px var(--primary))
+    drop-shadow(3px 3px 0px var(--primary))
+    drop-shadow(4px 4px 0px var(--primary))
+    drop-shadow(5px 5px 0px var(--primary-dark))
+    drop-shadow(10px 15px 15px rgba(0,0,0,0.7))
+    drop-shadow(0 0 25px var(--primary));
+  z-index: 10;
+}
+
+/* 📱 Responsive Adjustments */
+@media (max-width: 768px) {
+  .experts-page {
+    padding: 1rem;
+    padding-top: 5rem; /* Fix overlap with mobile header */
+    padding-bottom: 7rem; /* Extra space for mobile bottom bar */
+  }
+
+  .experts-title {
+    font-size: 1.5rem;
+    gap: 0.5rem;
+  }
+  
+  .title-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .experts-subtitle {
+    font-size: 0.9rem;
+  }
+
+  /* Make map slightly smaller to avoid clipping edges */
+  .peru-map-container {
+    max-width: 100%;
+    width: 100%;
+    margin-left: 0;
+    margin-top: 2rem;
+    transform: perspective(1000px) rotateX(35deg) rotateZ(-15deg) scale(1.15);
+    filter: drop-shadow(0px 15px 15px rgba(0, 0, 0, 0.4));
+  }
+
+  .peru-map-container:hover {
+    transform: perspective(1000px) rotateX(35deg) rotateZ(-10deg) scale(1.2) translateZ(10px);
+  }
+
+  /* Less aggressive pop out on small screens to prevent clipping */
+  .map-region:hover, .map-region.active {
+    transform: translateZ(15px) translateY(-5px) translateX(-5px);
+  }
+}

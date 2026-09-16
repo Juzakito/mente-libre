@@ -1,0 +1,177 @@
+/**
+ * Animations
+ * ===========
+ * All keyframe animations and animation utility classes.
+ * Organized by category for easy reference.
+ */
+
+/* ─── Fade ──────────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn var(--transition-normal) forwards;
+}
+
+/* ─── Slide ─────────────────────────────────────────────── */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideDownAccordion {
+  from { opacity: 0; transform: translateY(-10px); max-height: 0; overflow: hidden; }
+  to { opacity: 1; transform: translateY(0); max-height: 1500px; overflow: visible; }
+}
+
+.animate-slide-up {
+  animation: slideUp var(--transition-normal) forwards;
+}
+
+.animate-accordion-down {
+  animation: slideDownAccordion 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* ─── Scale ─────────────────────────────────────────────── */
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(0.98); }
+}
+
+@keyframes pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.animate-pop {
+  animation: pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* ─── Float ─────────────────────────────────────────────── */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes float1 {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+@keyframes float2 {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-30px, 50px) scale(1.2); }
+  66% { transform: translate(20px, -20px) scale(0.8); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-1 {
+  animation: float1 15s ease-in-out infinite;
+}
+
+.animate-float-2 {
+  animation: float2 18s ease-in-out infinite reverse;
+}
+
+/* ─── Glow ──────────────────────────────────────────────── */
+@keyframes glowPulse {
+  0% { box-shadow: 0 0 10px rgba(16, 185, 129, 0.2), inset 0 0 10px rgba(16, 185, 129, 0.1); }
+  50% { box-shadow: 0 0 25px rgba(16, 185, 129, 0.6), inset 0 0 15px rgba(16, 185, 129, 0.2); }
+  100% { box-shadow: 0 0 10px rgba(16, 185, 129, 0.2), inset 0 0 10px rgba(16, 185, 129, 0.1); }
+}
+
+.animate-glow-pulse {
+  animation: glowPulse 3s infinite alternate;
+}
+
+/* ─── Gradient ──────────────────────────────────────────── */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.bg-gradient-animated {
+  background-size: 200% 200%;
+  animation: gradientMove 5s ease infinite;
+}
+
+/* ─── Loading ───────────────────────────────────────────── */
+@keyframes typingBlink {
+  0%, 100% { opacity: 0.2; }
+  20% { opacity: 1; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.typing-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--text-muted);
+  border-radius: 50%;
+  display: inline-block;
+  animation: typingBlink 1.4s infinite both;
+}
+.typing-dot:nth-child(1) { animation-delay: 0s; }
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+.shimmer {
+  background: linear-gradient(90deg, var(--bg-color) 25%, #e2e8f0 50%, var(--bg-color) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+[data-theme='dark'] .shimmer {
+  background: linear-gradient(90deg, var(--surface) 25%, var(--surface-elevated, #3a3f58) 50%, var(--surface) 75%);
+  background-size: 200% 100%;
+}
+
+/* ─── SOS ───────────────────────────────────────────────── */
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(244, 63, 94, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0); }
+}
+
+@keyframes sosPulse {
+  0% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(244, 63, 94, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0); }
+}
+
+.sos-pulse-btn {
+  animation: sosPulse 2s infinite;
+}
+
+/* ─── Breathing ─────────────────────────────────────────── */
+.breathing-circle.inhala {
+  transform: scale(1.5);
+  transition: transform 4s ease-out;
+}
+.breathing-circle.mantén {
+  transform: scale(1.5);
+  transition: transform 4s linear;
+}
+.breathing-circle.exhala {
+  transform: scale(0.8);
+  transition: transform 4s ease-in;
+}

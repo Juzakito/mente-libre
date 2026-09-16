@@ -1,0 +1,121 @@
+/**
+ * Design System — CSS Custom Properties
+ * =======================================
+ * Single source of truth for all design tokens.
+ * Light and dark theme definitions.
+ *
+ * Color Palette: Inspired by Linear, Vercel, and Figma
+ * Typography: Inter (Google Fonts)
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  /* ─── Brand Colors ──────────────────────────────────── */
+  --primary: #0d9488;
+  --primary-hover: #0f766e;
+  --primary-light: #ccfbf1;
+  --secondary: #171717;
+
+  /* ─── Background & Surface ─────────────────────────── */
+  --bg-color: #fafafa;
+  --surface: #ffffff;
+
+  /* ─── Typography ───────────────────────────────────── */
+  --text-main: #111827;
+  --text-muted: #6b7280;
+  --text-light: #9ca3af;
+
+  /* ─── Accent Colors ────────────────────────────────── */
+  --accent-blue: #2563eb;
+  --accent-amber: #f59e0b;
+  --accent-orange: #f97316;
+  --accent-rose: #e11d48;
+  --accent-emerald: #10b981;
+
+  /* ─── Borders ──────────────────────────────────────── */
+  --border-color: #e5e7eb;
+  --glass-bg: rgba(255, 255, 255, 0.7);
+
+  /* ─── Semantic Colors ──────────────────────────────── */
+  --bg-danger: #fef2f2;
+  --border-danger: #fecaca;
+
+  /* ─── Shadows ──────────────────────────────────────── */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+  --shadow-glow: 0 0 24px 0 rgba(0, 0, 0, 0.06);
+
+  /* ─── Border Radius ────────────────────────────────── */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-full: 9999px;
+
+  /* ─── Spacing ──────────────────────────────────────── */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+
+  /* ─── Transitions ──────────────────────────────────── */
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ─── Z-Index Scale ────────────────────────────────── */
+  --z-dropdown: 10;
+  --z-sticky: 20;
+  --z-nav: 30;
+  --z-overlay: 40;
+  --z-sidebar: 50;
+  --z-modal: 60;
+  --z-tooltip: 70;
+  --z-toast: 100;
+  --z-max: 10000;
+}
+
+/* ─── Dark Theme ────────────────────────────────────────── */
+[data-theme='dark'] {
+  --primary: #2dd4bf;
+  --primary-hover: #5eead4;
+  --primary-light: rgba(45, 212, 191, 0.15);
+  --secondary: #94a3b8;
+
+  /* ✨ Elevated dark palette — Discord/Figma inspired */
+  --bg-color: #1a1d2e;
+  --surface: #232738;
+  --surface-hover: #2d3148;
+  --surface-elevated: #323650;
+
+  /* Ultra-readable text */
+  --text-main: #f1f5f9;
+  --text-muted: #a1adc4;
+  --text-light: #c8d3e3;
+
+  /* Vibrant neon accents */
+  --accent-blue: #60a5fa;
+  --accent-amber: #fbbf24;
+  --accent-orange: #fb923c;
+  --accent-rose: #fb7185;
+  --accent-emerald: #34d399;
+
+  /* Visible borders + frosted glass */
+  --border-color: rgba(255, 255, 255, 0.12);
+  --glass-bg: rgba(35, 39, 56, 0.85);
+
+  --bg-danger: rgba(251, 113, 133, 0.12);
+  --border-danger: rgba(251, 113, 133, 0.3);
+
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 10px 24px -4px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 20px 40px -8px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 40px 0 rgba(45, 212, 191, 0.12);
+}

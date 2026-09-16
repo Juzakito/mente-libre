@@ -1,0 +1,43 @@
+# ============================================
+# Mente Libre — Docker Compose (Development)
+# ============================================
+# Usage:
+#   docker compose up -d
+#   Open http://localhost:5173
+# ============================================
+
+version: '3.8'
+
+services:
+  # Frontend dev server
+  app:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile
+      target: builder
+    ports:
+      - "5173:5173"
+    volumes:
+      - ../../src:/app/src
+      - ../../public:/app/public
+      - ../../index.html:/app/index.html
+    environment:
+      - VITE_SUPABASE_URL=${VITE_SUPABASE_URL}
+      - VITE_SUPABASE_ANON_KEY=${VITE_SUPABASE_ANON_KEY}
+      - VITE_GEMINI_API_KEY=${VITE_GEMINI_API_KEY}
+    command: npm run dev -- --host 0.0.0.0
+
+  # Production build test
+  app-prod:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile
+      target: production
+      args:
+        - VITE_SUPABASE_URL=${VITE_SUPABASE_URL}
+        - VITE_SUPABASE_ANON_KEY=${VITE_SUPABASE_ANON_KEY}
+        - VITE_GEMINI_API_KEY=${VITE_GEMINI_API_KEY}
+    ports:
+      - "8080:80"
+    profiles:
+      - production
