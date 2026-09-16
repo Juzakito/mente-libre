@@ -161,8 +161,9 @@ export async function updatePostHugs(id, newHugs) {
 export function subscribeToPostChanges(onUpdate) {
   if (!supabase) return () => {};
 
+  const channelName = `posts_changes_${Date.now()}_${Math.random().toString(36).substring(2, 8)}`;
   const channel = supabase
-    .channel('public:posts')
+    .channel(channelName)
     .on(
       'postgres_changes',
       { event: '*', schema: 'public', table: 'posts' },
@@ -176,6 +177,10 @@ export function subscribeToPostChanges(onUpdate) {
     .subscribe();
 
   return () => {
-    supabase.removeChannel(channel);
+    try {
+      supabase.removeChannel(channel);
+    } catch (e) {
+      console.warn('Error removing channel:', e);
+    }
   };
 }

@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import { Heart, Sparkles, EyeOff, Trash2, Edit3, Check, MessageCircle, Repeat2, BarChart2, Bookmark, Share, X } from 'lucide-react';
-import { useAuth } from '../../../store/AuthContext';
-import { usePosts } from '../hooks/usePosts';
+import { useAppContext } from '../../../context/AppContext';
 import { safeJSONParse } from '../../../utils/helpers';
 import { useOutletContext, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import AppleEmoji from '../../../components/ui/AppleEmoji';
 
 export default function PostCard({ post }) {
-  const { user } = useAuth();
-  const { deletePost, updatePost, toggleHug, addComment, deleteComment, updateComment, toggleCommentHug } = usePosts();
+  const { user, deletePost, updatePost, toggleHug, addComment, deleteComment, updateComment, toggleCommentHug } = useAppContext();
   const outletCtx = useOutletContext();
   const showToast = outletCtx?.showToast || console.log;
   const { t } = useTranslation();

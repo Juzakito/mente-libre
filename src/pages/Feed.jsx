@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Plus } from 'lucide-react';
-import { useAuth } from '../store/AuthContext';
-import { usePosts } from '../features/feed/hooks/usePosts';
+import { useAppContext } from '../context/AppContext';
 import { useOutletContext } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { trackEvent } from '../utils/tracker';
@@ -19,8 +18,7 @@ const checkRiskWords = (text) => {
 };
 
 export default function Feed() {
-  const { user } = useAuth();
-  const { posts, addPost } = usePosts();
+  const { user, posts, addPost } = useAppContext();
   const outletCtx = useOutletContext();
   const handleSOS = outletCtx?.handleSOS || (() => {});
   const showToast = outletCtx?.showToast || (() => {});
