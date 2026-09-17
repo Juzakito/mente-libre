@@ -38,6 +38,7 @@ import { useAuth } from '../store/AuthContext';
 import { useTheme } from '../store/ThemeContext';
 import FreeMindLogo from '../components/ui/FreeMindLogo';
 import TalkCampusAvatar from '../components/ui/TalkCampusAvatar';
+import AppleEmoji from '../components/ui/AppleEmoji';
 
 /* ═══════════════════════════════════════════════════════════
    LANDING PAGE — Free Mind
@@ -539,9 +540,15 @@ export default function Landing() {
             animationDelay: '0.4s', opacity: 0, position: 'relative'
           }}>
             {/* Emojis flotantes (derecha) */}
-            <div className="animate-float-1" style={{ position: 'absolute', right: '-15px', top: '25%', fontSize: '2.5rem', filter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.2))', zIndex: 10 }}>😰</div>
-            <div className="animate-float-2" style={{ position: 'absolute', right: '-5px', top: '50%', fontSize: '2.5rem', filter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.2))', zIndex: 10 }}>😔</div>
-            <div className="animate-float-1" style={{ position: 'absolute', right: '-10px', top: '75%', fontSize: '2.5rem', filter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.2))', zIndex: 10 }}>🙂</div>
+            <div className="animate-float-1" style={{ position: 'absolute', right: '-15px', top: '25%', filter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.2))', zIndex: 10 }}>
+              <AppleEmoji emoji="😰" size={44} />
+            </div>
+            <div className="animate-float-2" style={{ position: 'absolute', right: '-5px', top: '50%', filter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.2))', zIndex: 10 }}>
+              <AppleEmoji emoji="😔" size={44} />
+            </div>
+            <div className="animate-float-1" style={{ position: 'absolute', right: '-10px', top: '75%', filter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.2))', zIndex: 10 }}>
+              <AppleEmoji emoji="🙂" size={44} />
+            </div>
 
             {/* Tarjeta flotante (Relajación Progresiva) (izquierda) */}
             <div className="animate-float-2" style={{
@@ -642,7 +649,7 @@ export default function Landing() {
                 <div style={{ display: 'flex', gap: '0.75rem', overflow: 'hidden' }}>
                   {/* Card 1 */}
                   <div style={{ flex: '0 0 85%', backgroundColor: '#a855f7', borderRadius: '16px', padding: '1rem', color: '#ffffff' }}>
-                    <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🫂</div>
+                    <div style={{ marginBottom: '0.5rem' }}><AppleEmoji emoji="🫂" size={32} /></div>
                     <div style={{ fontWeight: 800, fontSize: '0.9rem', marginBottom: '0.25rem' }}>Manejo de Ansiedad Social</div>
                     <div style={{ fontSize: '0.7rem', fontWeight: 500, opacity: 0.9, marginBottom: '0.75rem', lineHeight: 1.4 }}>
                       Módulo diseñado para ayudarte cuando sientes temor a participar en clase...
