@@ -6,6 +6,8 @@ import { useTranslation } from 'react-i18next';
 import { useAppContext } from '../context/AppContext';
 import { useNavigate } from 'react-router-dom';
 
+import { executeRoutingAgent, parseAgentResponse } from '../services/aiRoutingAgent';
+
 export default function AIAssistant() {
   const { t } = useTranslation();
   const { showAIAssistant, toggleAIAssistant } = useAppContext();
@@ -29,74 +31,64 @@ export default function AIAssistant() {
   const startConversation = () => {
     setIsTyping(true);
     setTimeout(() => {
-      setMessages([{ sender: 'bot', text: '¡Hola! Soy tu asistente inteligente en Free Mind. Puedo guiarte por la plataforma. ¿Qué buscas hoy?' }]);
+      setMessages([{
+        sender: 'bot',
+        text: '¡Hola! Soy tu Agente de Enrutamiento Inteligente en Free Mind. Cuéntame qué sientes o qué estás viviendo en la universidad hoy.'
+      }]);
       setIsTyping(false);
-    }, 1000);
+    }, 800);
   };
 
-  // Intent parsing logic
+  // High-fidelity NLU Routing Agent Processing
   const processUserMessage = (text) => {
     setIsTyping(true);
-    const lowerText = text.toLowerCase();
     
     setTimeout(() => {
-      let botResponse = { sender: 'bot', text: 'No estoy muy seguro de entender eso. ¿Podrías intentar con palabras clave como "citas", "mapa", "foro" o "diario"?' };
+      // 1. Execute the Agent Engine Spec
+      const rawOutput = executeRoutingAgent(text);
       
-      if (lowerText.match(/(cita|agendar|experto|psicólogo|psicologo|mapa)/)) {
-        botResponse = {
-          sender: 'bot',
-          text: 'Entendido. Si buscas conectar con un experto de salud mental, tenemos un mapa interactivo por regiones para agendar citas. También puedes ver "Mis citas".',
-          action: {
-            label: 'Ir al Mapa de Expertos',
-            icon: <Map size={16} />,
-            path: '/app/expertos'
-          }
+      // 2. Parse Dual Output (Conversational Text + System Payload JSON)
+      const { message, payload } = parseAgentResponse(rawOutput);
+
+      const targetRoomId = payload?.routing?.target_room_id;
+      const actionTrigger = payload?.routing?.action_trigger;
+      const crisisLevel = payload?.session?.crisis_level;
+
+      // Room Map Details
+      const ROOM_DETAILS = {
+        primeros_ciclos: { name: 'Primeros Ciclos Universitarios', tag: '#PrimerAño', icon: <Users size={16} /> },
+        preparacion_examenes: { name: 'Preparación de Exámenes', tag: '#ExámenesFinales', icon: <BookHeart size={16} /> },
+        manejo_ansiedad: { name: 'Manejo de la Ansiedad', tag: '#SaludMental', icon: <AlertTriangle size={16} /> },
+        desahogo_libre: { name: 'Desahogo Libre 24/7', tag: '#DesahogoLibre', icon: <MessageSquare size={16} /> }
+      };
+
+      let action = null;
+
+      if (actionTrigger === 'EMERGENCY_HOTLINE' || crisisLevel === 'CRITICAL') {
+        action = {
+          label: 'Activar S.O.S & Línea de Crisis 24/7',
+          icon: <AlertTriangle size={16} />,
+          actionType: 'SOS'
         };
-      } else if (lowerText.match(/(foro|comunidad|hablar|leer|post)/)) {
-        botResponse = {
-          sender: 'bot',
-          text: 'Claro, la comunidad es un espacio seguro para expresarte de manera anónima y apoyarnos entre todos.',
-          action: {
-            label: 'Ir a la Comunidad',
-            icon: <Users size={16} />,
-            path: '/app/feed'
-          }
-        };
-      } else if (lowerText.match(/(triste|feliz|diario|emoción|emocion|registro|animo)/)) {
-        botResponse = {
-          sender: 'bot',
-          text: 'Registrar cómo te sientes es un gran paso. En tu diario emocional puedes hacer seguimiento de tu estado de ánimo diario.',
-          action: {
-            label: 'Ir a mi Diario',
-            icon: <BookHeart size={16} />,
-            path: '/app/mood'
-          }
-        };
-      } else if (lowerText.match(/(ayuda|sos|peligro|urgente|crisis|suicidio|morir)/)) {
-        botResponse = {
-          sender: 'bot',
-          text: 'Si te encuentras en una situación de crisis o peligro, por favor usa el botón de S.O.S inmediatamente para obtener ayuda profesional urgente.',
-          action: {
-            label: 'Activar S.O.S',
-            icon: <AlertTriangle size={16} />,
-            actionType: 'SOS'
-          }
-        };
-      } else if (lowerText.match(/(perfil|donar|apoyo|configuracion|ajustes)/)) {
-         botResponse = {
-          sender: 'bot',
-          text: 'Desde tu perfil puedes ajustar tus opciones. Opcionalmente puedes apoyar a la plataforma.',
-          action: {
-            label: 'Ver mi Perfil',
-            icon: <User size={16} />,
-            path: '/app/profile'
-          }
+      } else if (targetRoomId && ROOM_DETAILS[targetRoomId]) {
+        const roomObj = ROOM_DETAILS[targetRoomId];
+        action = {
+          label: `Unirme a "${roomObj.name}" →`,
+          icon: roomObj.icon,
+          roomData: { id: targetRoomId, name: roomObj.name, tag: roomObj.tag }
         };
       }
 
+      const botResponse = {
+        sender: 'bot',
+        text: message,
+        action: action,
+        payload: payload // Attached for MIT telemetry & analytics
+      };
+
       setMessages(prev => [...prev, botResponse]);
       setIsTyping(false);
-    }, 1200);
+    }, 1000);
   };
 
   const handleSendMessage = (e) => {
@@ -117,6 +109,8 @@ export default function AIAssistant() {
   const handleActionClick = (action) => {
     if (action.actionType === 'SOS') {
       navigate('/app/feed?sos=true');
+    } else if (action.roomData) {
+      navigate('/app/chat', { state: { activeRoom: action.roomData } });
     } else if (action.path) {
       navigate(action.path);
     }
