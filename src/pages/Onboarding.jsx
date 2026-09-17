@@ -334,7 +334,7 @@ export default function Onboarding() {
       minHeight: '100vh',
       width: '100%',
       flex: 1,
-      backgroundColor: screen === 3 ? 'var(--bg-color)' : '#082e30',
+      backgroundColor: 'var(--bg-color)',
       color: '#ffffff',
       fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
       position: 'relative',
@@ -354,7 +354,7 @@ export default function Onboarding() {
           style={{
             background: 'none',
             border: 'none',
-            color: '#ffffff',
+            color: 'var(--text-main)',
             fontSize: '0.95rem',
             fontWeight: 800,
             cursor: 'pointer',
@@ -439,7 +439,7 @@ export default function Onboarding() {
               fontWeight: 900,
               lineHeight: 1.1,
               letterSpacing: '-0.035em',
-              color: 'rgba(255, 255, 255, 0.45)',
+              color: 'var(--text-muted)',
               marginBottom: '2.5rem',
               maxWidth: '960px'
             }}>
@@ -536,11 +536,11 @@ export default function Onboarding() {
           <div style={{
             width: '100%',
             maxWidth: '420px',
-            backgroundColor: '#141819',
-            borderRadius: '20px',
+            backgroundColor: 'var(--surface)',
+            borderRadius: '24px',
             padding: '1.75rem 1.75rem',
-            boxShadow: '0 20px 50px rgba(0, 0, 0, 0.65)',
-            border: '1px solid rgba(255, 255, 255, 0.08)',
+            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.05)',
+            border: '1px solid var(--border-color)',
             display: 'flex',
             flexDirection: 'column',
             gap: '1.15rem'
@@ -554,21 +554,21 @@ export default function Onboarding() {
                   width: '56px',
                   height: '56px',
                   borderRadius: '16px',
-                  backgroundColor: 'rgba(0, 230, 118, 0.12)',
-                  border: '1px solid rgba(0, 230, 118, 0.35)',
+                  backgroundColor: 'var(--surface-hover)',
+                  border: '1px solid var(--border-color)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   margin: '0 auto'
                 }}>
-                  <KeyRound size={28} color="#00e676" />
+                  <KeyRound size={28} color="var(--primary)" />
                 </div>
 
                 <div style={{ textAlign: 'center' }}>
-                  <h2 style={{ fontSize: '1.55rem', fontWeight: 900, color: '#ffffff', margin: '0 0 0.4rem' }}>
+                  <h2 style={{ fontSize: '1.55rem', fontWeight: 900, color: 'var(--text-main)', margin: '0 0 0.4rem' }}>
                     Recuperar Contraseña
                   </h2>
-                  <p style={{ fontSize: '0.84rem', color: 'rgba(255, 255, 255, 0.72)', lineHeight: 1.45, margin: 0 }}>
+                  <p style={{ fontSize: '0.84rem', color: 'var(--text-muted)', lineHeight: 1.45, margin: 0 }}>
                     Ingresa tu correo o tu seudónimo (ej: <strong>Josh</strong>). Te enviaremos un enlace para restablecer tu contraseña.
                   </p>
                 </div>
@@ -599,13 +599,13 @@ export default function Onboarding() {
                     alignItems: 'center',
                     gap: '1rem'
                   }} className="animate-slide-down">
-                    <CheckCircle2 size={48} color="#00e676" />
+                    <CheckCircle2 size={48} color="var(--primary)" />
                     <div>
-                      <h3 style={{ fontSize: '1.2rem', fontWeight: 900, color: '#ffffff', margin: '0 0 0.35rem' }}>
+                      <h3 style={{ fontSize: '1.2rem', fontWeight: 900, color: 'var(--text-main)', margin: '0 0 0.35rem' }}>
                         ¡Correo Enviado con Éxito!
                       </h3>
-                      <p style={{ fontSize: '0.85rem', color: 'rgba(255, 255, 255, 0.85)', lineHeight: 1.45, margin: 0 }}>
-                        Hemos enviado las instrucciones para restablecer tu contraseña a <strong style={{ color: '#00e676' }}>{resetSentAddress}</strong>. Revisa tu bandeja de entrada.
+                      <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', lineHeight: 1.45, margin: 0 }}>
+                        Hemos enviado las instrucciones para restablecer tu contraseña a <strong style={{ color: 'var(--primary)' }}>{resetSentAddress}</strong>. Revisa tu bandeja de entrada.
                       </p>
                     </div>
 
@@ -615,15 +615,15 @@ export default function Onboarding() {
                         onClick={() => navigate('/update-password')}
                         style={{
                           width: '100%',
-                          backgroundColor: '#00e676',
-                          color: '#082e30',
+                          backgroundColor: 'var(--primary)',
+                          color: '#ffffff',
                           border: 'none',
                           padding: '0.85rem',
                           borderRadius: '9999px',
                           fontSize: '0.95rem',
                           fontWeight: 900,
                           cursor: 'pointer',
-                          boxShadow: '0 6px 20px rgba(0, 230, 118, 0.35)'
+                          boxShadow: 'none'
                         }}
                       >
                         Crear nueva contraseña ahora
@@ -639,7 +639,7 @@ export default function Onboarding() {
                         style={{
                           background: 'none',
                           border: 'none',
-                          color: 'rgba(255, 255, 255, 0.7)',
+                          color: 'var(--text-muted)',
                           fontSize: '0.82rem',
                           fontWeight: 700,
                           cursor: 'pointer',
@@ -662,12 +662,12 @@ export default function Onboarding() {
                         required
                         style={{
                           width: '100%',
-                          backgroundColor: '#202528',
-                          border: '1px solid rgba(0, 230, 118, 0.35)',
+                          backgroundColor: 'var(--surface-hover)',
+                          border: '1px solid var(--border-color)',
                           borderRadius: '12px',
                           padding: '0.85rem 1rem 0.85rem 2.8rem',
                           fontSize: '0.92rem',
-                          color: '#ffffff',
+                          color: 'var(--text-main)',
                           outline: 'none',
                           boxSizing: 'border-box'
                         }}
@@ -679,15 +679,15 @@ export default function Onboarding() {
                       disabled={loading}
                       style={{
                         width: '100%',
-                        backgroundColor: '#00e676',
-                        color: '#082e30',
+                        backgroundColor: 'var(--primary)',
+                        color: '#ffffff',
                         border: 'none',
                         padding: '0.9rem',
                         borderRadius: '9999px',
                         fontSize: '1rem',
                         fontWeight: 900,
                         cursor: loading ? 'not-allowed' : 'pointer',
-                        boxShadow: '0 6px 20px rgba(0, 230, 118, 0.4)',
+                        boxShadow: 'none',
                         transition: 'all 0.2s ease',
                         display: 'flex',
                         alignItems: 'center',
@@ -709,7 +709,7 @@ export default function Onboarding() {
                         style={{
                           background: 'none',
                           border: 'none',
-                          color: '#00e676',
+                          color: 'var(--primary)',
                           fontSize: '0.84rem',
                           fontWeight: 700,
                           cursor: 'pointer',
@@ -749,14 +749,14 @@ export default function Onboarding() {
                     width: '52px',
                     height: '52px',
                     borderRadius: '16px',
-                    backgroundColor: 'rgba(0, 230, 118, 0.12)',
-                    border: '1px solid rgba(0, 230, 118, 0.3)',
+                    backgroundColor: 'var(--surface-hover)',
+                    border: '1px solid var(--border-color)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     margin: '0 auto 0.25rem'
                   }}>
-                    <Lock size={24} color="#00e676" />
+                    <Lock size={24} color="var(--primary)" />
                   </div>
                 )}
 
@@ -766,13 +766,13 @@ export default function Onboarding() {
                     fontWeight: 900,
                     lineHeight: 1.2,
                     letterSpacing: '-0.02em',
-                    color: '#ffffff',
+                    color: 'var(--text-main)',
                     margin: '0 0 0.4rem'
                   }}>
                     {isLoginMode ? 'Bienvenido de vuelta' : 'Ingresa tu correo para comenzar'}
                   </h2>
                   {isLoginMode && (
-                    <p style={{ fontSize: '0.84rem', color: 'rgba(255, 255, 255, 0.7)', lineHeight: 1.45, margin: 0 }}>
+                    <p style={{ fontSize: '0.84rem', color: 'var(--text-muted)', lineHeight: 1.45, margin: 0 }}>
                       Free Mind es un espacio seguro para estudiantes universitarios. Tu identidad real se mantendrá anónima en la plataforma.
                     </p>
                   )}
@@ -804,12 +804,12 @@ export default function Onboarding() {
                       required
                       style={{
                         width: '100%',
-                        backgroundColor: '#202528',
-                        border: '1px solid rgba(0, 230, 118, 0.35)',
+                        backgroundColor: 'var(--surface-hover)',
+                        border: '1px solid var(--border-color)',
                         borderRadius: '12px',
                         padding: '0.85rem 1rem 0.85rem 2.8rem',
                         fontSize: '0.92rem',
-                        color: '#ffffff',
+                        color: 'var(--text-main)',
                         outline: 'none',
                         boxSizing: 'border-box'
                       }}
@@ -827,12 +827,12 @@ export default function Onboarding() {
                       required
                       style={{
                         width: '100%',
-                        backgroundColor: '#202528',
-                        border: '1px solid rgba(0, 230, 118, 0.35)',
+                        backgroundColor: 'var(--surface-hover)',
+                        border: '1px solid var(--border-color)',
                         borderRadius: '12px',
                         padding: '0.85rem 2.8rem 0.85rem 2.8rem',
                         fontSize: '0.92rem',
-                        color: '#ffffff',
+                        color: 'var(--text-main)',
                         outline: 'none',
                         boxSizing: 'border-box'
                       }}
@@ -847,7 +847,7 @@ export default function Onboarding() {
                         transform: 'translateY(-50%)',
                         background: 'none',
                         border: 'none',
-                        color: 'rgba(255, 255, 255, 0.5)',
+                        color: 'var(--text-muted)',
                         cursor: 'pointer',
                         padding: '0.2rem',
                         display: 'flex',
@@ -867,7 +867,7 @@ export default function Onboarding() {
                           style={{
                             background: 'none',
                             border: 'none',
-                            color: '#ffffff',
+                            color: 'var(--text-main)',
                             textDecoration: 'underline',
                             fontSize: '0.85rem',
                             fontWeight: 700,
@@ -888,12 +888,12 @@ export default function Onboarding() {
                               placeholder="Código de invitación (ej: UCS-2026)"
                               style={{
                                 width: '100%',
-                                backgroundColor: '#202528',
-                                border: '1px solid rgba(0, 230, 118, 0.4)',
+                                backgroundColor: 'var(--surface-hover)',
+                                border: '1px solid var(--border-color)',
                                 borderRadius: '12px',
                                 padding: '0.75rem 1rem',
                                 fontSize: '0.9rem',
-                                color: '#ffffff',
+                                color: 'var(--text-main)',
                                 outline: 'none',
                                 boxSizing: 'border-box'
                               }}
@@ -922,7 +922,7 @@ export default function Onboarding() {
                           >
                             {optInUpdates && <Check size={12} color="#082e30" strokeWidth={3} />}
                           </div>
-                          <span style={{ fontSize: '0.78rem', color: 'rgba(255, 255, 255, 0.9)', lineHeight: 1.35 }}>
+                          <span style={{ fontSize: '0.78rem', color: 'var(--text-main)', lineHeight: 1.35 }}>
                             Mantenme informado con correos sobre actualizaciones y más.
                           </span>
                         </label>
@@ -946,7 +946,7 @@ export default function Onboarding() {
                           >
                             {agreeTerms && <Check size={12} color="#082e30" strokeWidth={3} />}
                           </div>
-                          <span style={{ fontSize: '0.75rem', color: 'rgba(255, 255, 255, 0.82)', lineHeight: 1.35 }}>
+                          <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', lineHeight: 1.35 }}>
                             Acepto los <span style={{ textDecoration: 'underline' }}>Términos y Política de Privacidad</span>,
                             {' '}y doy mi consentimiento para compartir mi experiencia de forma anónima y segura en Free Mind.
                           </span>
@@ -960,23 +960,23 @@ export default function Onboarding() {
                     disabled={loading}
                     style={{
                       width: '100%',
-                      backgroundColor: '#00e676',
-                      color: '#082e30',
+                      backgroundColor: 'var(--primary)',
+                      color: '#ffffff',
                       border: 'none',
                       padding: '0.9rem',
                       borderRadius: '9999px',
                       fontSize: '1rem',
                       fontWeight: 900,
                       cursor: loading ? 'not-allowed' : 'pointer',
-                      boxShadow: '0 6px 20px rgba(0, 230, 118, 0.4)',
+                      boxShadow: 'none',
                       transition: 'all 0.2s ease',
                       marginTop: '0.4rem',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center'
                     }}
-                    onMouseEnter={(e) => { if (!loading) e.currentTarget.style.backgroundColor = '#00c853'; }}
-                    onMouseLeave={(e) => { if (!loading) e.currentTarget.style.backgroundColor = '#00e676'; }}
+                    onMouseEnter={(e) => { if (!loading) e.currentTarget.style.opacity = '0.9'; }}
+                    onMouseLeave={(e) => { if (!loading) e.currentTarget.style.opacity = '1'; }}
                   >
                     {loading ? (isLoginMode ? 'Iniciando sesión...' : 'Guardando...') : (isLoginMode ? 'Iniciar Sesión' : 'Continuar')}
                   </button>
@@ -989,7 +989,7 @@ export default function Onboarding() {
                         style={{
                           background: 'none',
                           border: 'none',
-                          color: '#00e676',
+                          color: 'var(--primary)',
                           fontSize: '0.84rem',
                           fontWeight: 700,
                           cursor: 'pointer',

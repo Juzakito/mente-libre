@@ -346,29 +346,29 @@ export default function CodeEntry() {
   };
 
   return (
-    <div style={{ flex: 1, minHeight: '100vh', backgroundColor: '#082e30', color: '#ffffff', display: 'flex', flexDirection: 'column', position: 'relative' }} className="animate-fade-in">
+    <div style={{ flex: 1, minHeight: '100vh', backgroundColor: 'var(--bg-color)', color: 'var(--text-main)', display: 'flex', flexDirection: 'column', position: 'relative' }} className="animate-fade-in">
       <button 
         onClick={() => navigate(-1)} 
-        style={{ position: 'absolute', top: '1.5rem', left: '1.5rem', padding: '0.75rem', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', color: '#ffffff', cursor: 'pointer' }}
+        style={{ position: 'absolute', top: '1.5rem', left: '1.5rem', padding: '0.75rem', borderRadius: '50%', backgroundColor: 'var(--surface-hover)', border: '1px solid var(--border-color)', color: 'var(--text-main)', cursor: 'pointer' }}
       >
         <ChevronLeft size={24} />
       </button>
 
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', margin: '0 auto', maxWidth: '420px', width: '100%', padding: '2rem' }}>
-        <div style={{ width: '3.5rem', height: '3.5rem', backgroundColor: 'rgba(0, 230, 118, 0.15)', color: '#00e676', borderRadius: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' }}>
-          <Lock size={28} />
+        <div style={{ width: '3.5rem', height: '3.5rem', backgroundColor: 'var(--surface-hover)', border: '1px solid var(--border-color)', borderRadius: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' }}>
+          <Lock size={28} color="var(--primary)" />
         </div>
         
-        <h2 style={{ fontSize: '1.85rem', fontWeight: 900, color: '#ffffff', marginBottom: '0.5rem' }}>
+        <h2 style={{ fontSize: '1.85rem', fontWeight: 900, color: 'var(--text-main)', marginBottom: '0.5rem' }}>
           {mode === 'login' ? 'Bienvenido de vuelta' : mode === 'register' ? 'Únete a TalkCampus' : 'Recuperar acceso'}
         </h2>
-        <p style={{ color: 'rgba(255, 255, 255, 0.8)', marginBottom: '1.5rem', lineHeight: 1.5, fontSize: '0.9rem' }}>
+        <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem', lineHeight: 1.5, fontSize: '0.9rem' }}>
           Espacio seguro y anónimo para estudiantes. Tu identidad real se mantendrá 100% protegida.
         </p>
         
         {successMsg && (
-          <div style={{ backgroundColor: 'rgba(0, 230, 118, 0.15)', border: '1px solid #00e676', padding: '0.85rem', borderRadius: '12px', textAlign: 'center', marginBottom: '1.25rem' }}>
-            <p style={{ color: '#00e676', fontSize: '0.85rem', fontWeight: 700 }}>{successMsg}</p>
+          <div style={{ backgroundColor: 'var(--surface-hover)', border: '1px solid var(--primary)', padding: '0.85rem', borderRadius: '12px', textAlign: 'center', marginBottom: '1.25rem' }}>
+            <p style={{ color: 'var(--primary)', fontSize: '0.85rem', fontWeight: 700 }}>{successMsg}</p>
           </div>
         )}
 
