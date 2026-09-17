@@ -68,11 +68,11 @@ const LandingPage = () => {
             <form onSubmit={handleLogin} className="space-y-6">
               
               <div className="space-y-2">
-                <label className="text-sm font-medium text-primary-color">Correo Institucional</label>
+                <label className="text-sm font-medium text-primary-color">Correo Electrónico (Gmail)</label>
                 <input 
                   type="email" 
                   required
-                  placeholder="ej. alumno@cientifica.edu.pe"
+                  placeholder="ej. tu.correo@gmail.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"

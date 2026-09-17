@@ -13,10 +13,10 @@ const ACTIVE_USER_KEY = 'mente-libre-user';
 
 // Seed initial default accounts if registry is empty
 const INITIAL_DEFAULT_ACCOUNTS = [
-  { id: 'user_josh', email: 'josh@cientifica.edu.pe', nickname: 'Josh', avatar: '🦊', career: 'Ingeniería de Sistemas', onboarding_completed: true },
-  { id: 'user_buho', email: 'buho@cientifica.edu.pe', nickname: 'Búho_Científica', avatar: '🦉', career: 'Medicina Humana', onboarding_completed: true },
-  { id: 'user_jay', email: 'flyingjay@cientifica.edu.pe', nickname: 'FlyingJay_99', avatar: '🦊', career: 'Ingeniería de Sistemas', onboarding_completed: true },
-  { id: 'user_anxious', email: 'anxious@cientifica.edu.pe', nickname: 'Anxious_Soul', avatar: '👽', career: 'Psicología', onboarding_completed: true }
+  { id: 'user_josh', email: 'josh@gmail.com', nickname: 'Josh', avatar: '🦊', career: 'Ingeniería de Sistemas', onboarding_completed: true },
+  { id: 'user_buho', email: 'buho@gmail.com', nickname: 'Búho_Uni', avatar: '🦉', career: 'Medicina Humana', onboarding_completed: true },
+  { id: 'user_jay', email: 'flyingjay@gmail.com', nickname: 'FlyingJay_99', avatar: '🦊', career: 'Ingeniería de Sistemas', onboarding_completed: true },
+  { id: 'user_anxious', email: 'anxious@gmail.com', nickname: 'Anxious_Soul', avatar: '👽', career: 'Psicología', onboarding_completed: true }
 ];
 
 export function getRegisteredAccounts() {
@@ -117,7 +117,7 @@ export async function findAccountByIdentifier(identifier) {
       if (!error && data) {
         return {
           id: data.id,
-          email: data.email || `${clean}@cientifica.edu.pe`,
+          email: data.email || `${clean}@gmail.com`,
           nickname: data.full_name || clean,
           avatar: data.avatar_url || '🦊',
           career: data.career || 'Estudiante Universitario',

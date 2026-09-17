@@ -569,7 +569,7 @@ export default function Onboarding() {
                     Recuperar Contraseña
                   </h2>
                   <p style={{ fontSize: '0.84rem', color: 'rgba(255, 255, 255, 0.72)', lineHeight: 1.45, margin: 0 }}>
-                    Ingresa tu correo institucional o tu seudónimo (ej: <strong>Josh</strong>). Te enviaremos un enlace para restablecer tu contraseña.
+                    Ingresa tu correo o tu seudónimo (ej: <strong>Josh</strong>). Te enviaremos un enlace para restablecer tu contraseña.
                   </p>
                 </div>
 
@@ -773,7 +773,7 @@ export default function Onboarding() {
                   </h2>
                   {isLoginMode && (
                     <p style={{ fontSize: '0.84rem', color: 'rgba(255, 255, 255, 0.7)', lineHeight: 1.45, margin: 0 }}>
-                      Free Mind es exclusivo para estudiantes de la Científica del Sur. Tu identidad real se mantendrá anónima en la plataforma.
+                      Free Mind es un espacio seguro para estudiantes universitarios. Tu identidad real se mantendrá anónima en la plataforma.
                     </p>
                   )}
                 </div>
@@ -800,7 +800,7 @@ export default function Onboarding() {
                       type="text"
                       value={email}
                       onChange={(e) => { setEmail(e.target.value); setError(''); }}
-                      placeholder={isLoginMode ? "Correo o seudónimo (ej: Josh)" : "tu.correo@cientifica.edu.pe"}
+                      placeholder={isLoginMode ? "Correo o seudónimo (ej: Josh)" : "tu.correo@gmail.com"}
                       required
                       style={{
                         width: '100%',
@@ -1178,7 +1178,7 @@ export default function Onboarding() {
                 <CareerDropdown
                   value={career}
                   onChange={(val) => { setCareer(val); setError(''); }}
-                  placeholder="Selecciona tu carrera (Científica...)"
+                  placeholder="Selecciona tu carrera..."
                 />
               </div>
 

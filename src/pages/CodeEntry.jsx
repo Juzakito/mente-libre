@@ -213,7 +213,7 @@ export default function CodeEntry() {
                 type="email" 
                 value={email}
                 onChange={(e) => { setEmail(e.target.value); setError(''); }}
-                placeholder="tu.correo@ejemplo.com"
+                placeholder="tu.correo@gmail.com"
                 required
                 style={{ width: '100%', padding: '1rem 1rem 1rem 2.75rem', fontSize: '1rem', fontWeight: 600, borderColor: error ? 'var(--accent-rose)' : 'var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-main)', outline: 'none', borderRadius: 'var(--radius-md)' }}
               />
@@ -273,7 +273,7 @@ export default function CodeEntry() {
                 type="email" 
                 value={email}
                 onChange={(e) => { setEmail(e.target.value); setError(''); }}
-                placeholder="tu.correo@ejemplo.com"
+                placeholder="tu.correo@gmail.com"
                 required
                 style={{ width: '100%', padding: '1rem 1rem 1rem 2.75rem', fontSize: '1rem', fontWeight: 600, borderColor: error ? 'var(--accent-rose)' : 'var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-main)', outline: 'none', borderRadius: 'var(--radius-md)' }}
               />
@@ -326,7 +326,7 @@ export default function CodeEntry() {
                 type="email" 
                 value={email}
                 onChange={(e) => { setEmail(e.target.value); setError(''); }}
-                placeholder="tu.correo@ejemplo.com"
+                placeholder="tu.correo@gmail.com"
                 required
                 style={{ width: '100%', padding: '1rem 1rem 1rem 2.75rem', fontSize: '1rem', fontWeight: 600, borderColor: error ? 'var(--accent-rose)' : 'var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-main)', outline: 'none', borderRadius: 'var(--radius-md)' }}
               />

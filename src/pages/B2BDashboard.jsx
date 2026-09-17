@@ -17,8 +17,11 @@ import LanguageToggle from '../components/ui/LanguageToggle';
 
 const ADMIN_EMAILS = [
   '100199483@cientifica.edu.pe',
+  '100199483@gmail.com',
   'admin@cientifica.edu.pe',
+  'admin@gmail.com',
   'rectorado@cientifica.edu.pe',
+  'rectorado@gmail.com',
   'admin@mentelibre.app'
 ];
 
