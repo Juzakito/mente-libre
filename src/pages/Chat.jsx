@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { MessageCircle, Send, ShieldAlert, ArrowLeft } from 'lucide-react';
+import { MessageCircle, Send, ShieldAlert, ArrowLeft, LogOut } from 'lucide-react';
 import { useOutletContext, useLocation, useNavigate, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import AppleEmoji from '../components/ui/AppleEmoji';
@@ -16,6 +16,56 @@ const GEMINI_API_KEY = config.ai.geminiApiKey;
 const SYSTEM_PROMPT = "Eres un estudiante universitario empático y solidario hablando de forma anónima con otro compañero en una plataforma de apoyo emocional llamada Free Mind. Tu nombre de usuario es BuhoNocturno. Tu objetivo es escuchar, validar sus sentimientos, ofrecer consejos amables y mantener una charla humana y natural, como si fuera WhatsApp. REGLA CRÍTICA 1: Tus respuestas deben ser MUY BREVES y CONCISAS (máximo 1 o 2 oraciones cortas). REGLA CRÍTICA 2: En lugar de hacer preguntas abiertas o caer en un bucle de 'cuéntame más', asume un rol PROACTIVO: propón soluciones concretas, pequeños retos accionables o da perspectivas resolutivas basadas en lo que te cuentan, manteniendo siempre el apoyo emocional. Si te preguntan cosas fuera de contexto, responde de forma amigable intentando volver al tema de cómo se sienten. Usa emojis ocasionalmente.";
 
 const quickReplies = ['Me siento mal 😞', 'Estoy estresado 😫', 'Necesito hablar', 'Hola 👋'];
+
+const ROOM_PEERS = {
+  primer_ano: [
+    { author: 'FlyingJay_99', avatar: '🦊', role: '3er Ciclo · Ciencias' },
+    { author: 'Val_Psi', avatar: '🌿', role: 'Mentora Estudiantil' },
+    { author: 'Lucas_Ing', avatar: '🎓', role: '2do Ciclo · Campus' }
+  ],
+  examenes: [
+    { author: 'Sofi_Med', avatar: '📚', role: 'Grupos de Estudio' },
+    { author: 'Mateo_Ing', avatar: '⚡', role: 'Pomodoro Lead' },
+    { author: 'Nico_Bio', avatar: '🔬', role: 'Repaso Activo' }
+  ],
+  salud_mental: [
+    { author: 'AlmaLibre', avatar: '🧘', role: 'Espacio Seguro' },
+    { author: 'Búho_Comunitario', avatar: '🦉', role: 'Moderador Aliado' },
+    { author: 'Luz_Serena', avatar: '🌸', role: 'Escucha Empática' }
+  ],
+  desahogo: [
+    { author: 'Cris_Arq', avatar: '🎨', role: 'Compañero Nocturno' },
+    { author: 'Anonimo_Campus', avatar: '💬', role: 'Voz del Campus' },
+    { author: 'Alex_Rock', avatar: '🎸', role: 'Compañero 24/7' }
+  ]
+};
+
+const ROOM_QUICK_REPLIES = {
+  primer_ano: [
+    '¿Cómo organizan sus horarios? 🕒',
+    '¿Consejos para el primer ciclo? 🌱',
+    'Me siento algo abrumado con las lecturas 🥺',
+    '¿Qué profes recomiendan? 📚'
+  ],
+  examenes: [
+    '¿Alguien para Pomodoro de 45m? 🍅',
+    '¿Cómo repasan para los parciales? 📝',
+    'Necesito un descanso de 5 min ☕',
+    '¡Mucho ánimo con los exámenes! 💪'
+  ],
+  salud_mental: [
+    'Tengo el pecho algo apretado hoy 🫁',
+    '¿Hacemos respiración 4-7-8? 🧘',
+    'Gracias por este espacio seguro 🤍',
+    'Hoy fue un día pesado en la universidad 🥺'
+  ],
+  desahogo: [
+    'Esta semana fue agotadora 😵‍💫',
+    'Solo necesitaba desahogarme un poco 💬',
+    'Siento que no doy más con las entregas 🫂',
+    'Agradezco mucho leerlos por aquí ✨'
+  ]
+};
 
 export default function Chat() {
   const { t } = useTranslation();
@@ -45,6 +95,7 @@ export default function Chat() {
   });
   const [inputText, setInputText] = useState('');
   const [peerTyping, setPeerTyping] = useState(false);
+  const [typingPeer, setTypingPeer] = useState(null);
   const [history, setHistory] = useState(() => {
     const saved = sessionStorage.getItem('chat_history');
     return safeJSONParse(saved, []);
@@ -54,7 +105,7 @@ export default function Chat() {
 
   useEffect(() => {
     const incomingPeerMatch = location.state?.peerMatch;
-    const incomingRoom = location.state?.selectedRoom;
+    const incomingRoom = location.state?.activeRoom || location.state?.selectedRoom;
     
     if (incomingPeerMatch) {
       setPeerMatch(incomingPeerMatch);
@@ -66,19 +117,48 @@ export default function Chat() {
         { id: 2, sender: 'system', text: `Estás hablando con ${incomingPeerMatch.nickname}` },
         { id: 3, sender: 'peer', text: `¡Hola! Vi que también quieres hablar sobre ${incomingPeerMatch.topic}`, time: new Date().toLocaleTimeString(undefined, {hour: '2-digit', minute:'2-digit'}) }
       ]);
-      // Clear location state to prevent loop
       navigate(location.pathname, { replace: true, state: {} });
     } else if (incomingRoom) {
       setActiveRoom(incomingRoom);
       setPeerMatch(null);
       setConnected(true);
       setHistory([]);
-      setMessages([
-        { id: 1, sender: 'system', text: `🔒 Conectado a la Sala Comunitaria: ${incomingRoom.name} (${incomingRoom.tag})` },
-        { id: 2, sender: 'system', text: `🟢 ${incomingRoom.users} estudiantes compartiendo en vivo.` },
-        { id: 3, sender: 'peer', author: 'FlyingJay_99', avatar: '🦊', text: '¡Hola a todos en la sala! 👋 ¿Cómo van con sus avances de esta semana?', time: 'hace 2m' },
-        { id: 4, sender: 'peer', author: 'Búho_Científica', avatar: '🦉', text: '¡Buenas! Con bastante carga académica pero aquí nos apoyamos entre todos 💪', time: 'hace 1m' }
-      ]);
+      
+      // Tailored room messages
+      const getInitialRoomMessages = (room) => {
+        if (room.id === 'primer_ano') {
+          return [
+            { id: 1, sender: 'system', text: `🔒 Conectado a la Sala Comunitaria: ${room.name} (${room.tag})` },
+            { id: 2, sender: 'system', text: `🟢 ${room.users} estudiantes compartiendo en vivo.` },
+            { id: 3, sender: 'peer', author: 'FlyingJay_99', avatar: '🦊', text: '¡Hola a todos! 👋 ¿Alguien más adaptándose a los horarios de este ciclo? Me costó agarrarle el ritmo a los cursos.', time: 'hace 3m' },
+            { id: 4, sender: 'peer', author: 'Val_Psi', avatar: '🌿', text: '¡Tranqui! El inicio es demandante pero con calma se saca adelante. Recuerden pausar entre lecturas 💪', time: 'hace 1m' }
+          ];
+        }
+        if (room.id === 'examenes') {
+          return [
+            { id: 1, sender: 'system', text: `🔒 Conectado a la Sala Comunitaria: ${room.name} (${room.tag})` },
+            { id: 2, sender: 'system', text: `🟢 ${room.users} estudiantes en sesión de estudio activa.` },
+            { id: 3, sender: 'peer', author: 'Mateo_Ing', avatar: '⚡', text: 'Bloque de estudio pomodoro de 50 minutos arrancando ahora mismo 🍅 ¿Quién se suma sin distracciones?', time: 'hace 4m' },
+            { id: 4, sender: 'peer', author: 'Sofi_Med', avatar: '📚', text: '¡Me sumo! Repasando para el parcial de mañana. Recuerden hidratarse y descansar la vista.', time: 'hace 2m' }
+          ];
+        }
+        if (room.id === 'salud_mental') {
+          return [
+            { id: 1, sender: 'system', text: `🔒 Conectado a la Sala Comunitaria: ${room.name} (${room.tag})` },
+            { id: 2, sender: 'system', text: `🟢 ${room.users} compañeros en espacio seguro guiado.` },
+            { id: 3, sender: 'peer', author: 'AlmaLibre', avatar: '🧘', text: 'Hola a todos. Hoy sentí bastante ansiedad antes de una sustentación, pero hacer pausas de respiración me bajó las pulsaciones.', time: 'hace 5m' },
+            { id: 4, sender: 'peer', author: 'Búho_Comunitario', avatar: '🦉', text: 'Gracias por compartirlo. Es completamente válido sentirse así. Este es un espacio libre de juicios 🤍', time: 'hace 1m' }
+          ];
+        }
+        return [
+          { id: 1, sender: 'system', text: `🔒 Conectado a la Sala Comunitaria: ${room.name} (${room.tag})` },
+          { id: 2, sender: 'system', text: `🟢 ${room.users} estudiantes compartiendo libremente.` },
+          { id: 3, sender: 'peer', author: 'Anonimo_Campus', avatar: '💬', text: 'Solo necesitaba desahogarme: esta semana se sintió larguísima 😵‍💫 Necesitaba un respiro sincero.', time: 'hace 3m' },
+          { id: 4, sender: 'peer', author: 'Cris_Arq', avatar: '🎨', text: 'Te entiendo al 100%, las entregas son agotadoras. Desahógate tranquilo que aquí nos acompañamos.', time: 'hace 1m' }
+        ];
+      };
+
+      setMessages(getInitialRoomMessages(incomingRoom));
       navigate(location.pathname, { replace: true, state: {} });
     }
   }, [location.state, navigate, location.pathname]);
@@ -450,6 +530,71 @@ export default function Chat() {
     return fallbackReply;
   };
 
+  const generateRoomPeerResponse = async (userMessage, room, peer) => {
+    if (GEMINI_API_KEY) {
+      try {
+        const roomPrompt = `Eres ${peer.author} (${peer.role}), un estudiante universitario real en la sala comunitaria "${room.name}" (${room.tag}) de Free Mind.
+Un compañero acaba de escribir en la sala: "${userMessage}".
+Responde como un estudiante empático, cercano y solidario en un chat grupal (estilo Discord o WhatsApp estudiantil).
+REGLAS ESTRICTAS:
+1. Respuesta muy breve (máximo 1 o 2 oraciones concisas).
+2. Enfócate en el tema de la sala: "${room.topic}".
+3. Usa lenguaje universitario natural y algún emoji ocasionalmente.`;
+
+        const response = await fetchWithTimeout(
+          `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              contents: [{ role: 'user', parts: [{ text: roomPrompt }] }],
+              generationConfig: { temperature: 0.8, maxOutputTokens: 120 }
+            })
+          },
+          8000
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          const reply = data.candidates?.[0]?.content?.parts?.[0]?.text?.trim();
+          if (reply) return reply;
+        }
+      } catch (e) {
+        console.warn('Room peer AI error, using room fallback', e);
+      }
+    }
+
+    const roomReplies = {
+      primer_ano: [
+        '¡Totalmente! En las primeras semanas ayuda un montón armar un Google Calendar con los deadlines de cada curso 🗓️',
+        '¡No te desanimes! Al inicio todos nos sentimos algo perdidos con el campus y los profes, pero se acomoda rápido con los días 💪',
+        'Pregúntale sin miedo a los delegados de curso, siempre tienen carpetas de Drive con material pasado y resúmenes 📚✨',
+        'Tranqui, es cuestión de agarrarle el ritmo a las lecturas. Recuerda tomarte tus pausas entre clases ☕'
+      ],
+      examenes: [
+        '¡Vamos con todo! La clave es no estudiar más de 50 minutos seguidos sin pararse a tomar agua 🍅💧',
+        'Si un tema se te complica, intenta explicárselo a alguien en voz alta; la técnica Feynman nunca falla 🧠',
+        'Un respiro de 5 minutos, estirar la espalda y volvemos con mente despejada. ¡Sí la hacemos! 🚀',
+        '¡Mucho ánimo con esos parciales! Hacer cuadros sinópticos ahorra horas enteras de repaso 📝'
+      ],
+      salud_mental: [
+        'Respira hondo conmigo: inhala en 4, mantén 4 y suelta despacio en 4 🫁 Estás a salvo aquí 🤍',
+        'Tus emociones son 100% válidas. Nadie rinde al máximo todos los días y no te hace menos capaz 🌸',
+        'Gracias por compartirlo con nosotros. A veces solo soltarlo en voz alta ya quita un poco de peso 🫂',
+        'Tómate una pausa sin culpa hoy. Tu bienestar mental siempre va primero que cualquier entrega 🌿'
+      ],
+      desahogo: [
+        'Te escuchamos fuerte y claro. Suéltalo todo, para eso estamos aquí sin juzgar a nadie 💬',
+        'Uff, qué semanas tan pesadas. Date el permiso de descansar hoy, no tienes que cargar con todo tú solo 🤍',
+        'Aquí nos acompañamos. Desahógate tranquilo que entre todos nos entendemos las ojeras de la u 🫂',
+        'Completamente comprensible. A veces el campus satura mucho, pero mañana será un nuevo respiro 🍃'
+      ]
+    };
+
+    const pool = roomReplies[room.id] || roomReplies.desahogo;
+    return pool[Math.floor(Math.random() * pool.length)];
+  };
+
   const handleSend = async (e) => {
     e?.preventDefault?.();
     if(!inputText.trim()) return;
@@ -466,12 +611,33 @@ export default function Chat() {
     setInputText('');
     
     // Random delay to feel more human
-    const typingDelay = 800 + Math.random() * 2000;
+    const typingDelay = 900 + Math.random() * 1600;
+    
+    if (activeRoom) {
+      const peers = ROOM_PEERS[activeRoom.id] || ROOM_PEERS.primer_ano;
+      const chosenPeer = peers[Math.floor(Math.random() * peers.length)];
+      setTypingPeer(chosenPeer);
+      setPeerTyping(true);
+
+      const reply = await generateRoomPeerResponse(currentInput, activeRoom, chosenPeer);
+      await new Promise(r => setTimeout(r, Math.max(0, typingDelay - 300)));
+
+      setPeerTyping(false);
+      setTypingPeer(null);
+      setMessages(prev => [...prev, {
+        id: Date.now() + 1,
+        sender: 'peer',
+        author: chosenPeer.author,
+        avatar: chosenPeer.avatar,
+        role: chosenPeer.role,
+        text: reply,
+        time: new Date().toLocaleTimeString(undefined, {hour: '2-digit', minute:'2-digit'})
+      }]);
+      return;
+    }
+
     setPeerTyping(true);
-    
     const reply = await generateRealAIResponse(currentInput);
-    
-    // Ensure minimum typing time
     await new Promise(r => setTimeout(r, Math.max(0, typingDelay - 500)));
     
     setPeerTyping(false);
@@ -494,11 +660,33 @@ export default function Chat() {
     setMessages(prev => [...prev, newUserMsg]);
     setInputText('');
     
-    const typingDelay = 800 + Math.random() * 2000;
+    const typingDelay = 900 + Math.random() * 1600;
+    
+    if (activeRoom) {
+      const peers = ROOM_PEERS[activeRoom.id] || ROOM_PEERS.primer_ano;
+      const chosenPeer = peers[Math.floor(Math.random() * peers.length)];
+      setTypingPeer(chosenPeer);
+      setPeerTyping(true);
+
+      const reply = await generateRoomPeerResponse(text, activeRoom, chosenPeer);
+      await new Promise(r => setTimeout(r, Math.max(0, typingDelay - 300)));
+
+      setPeerTyping(false);
+      setTypingPeer(null);
+      setMessages(prev => [...prev, {
+        id: Date.now() + 1,
+        sender: 'peer',
+        author: chosenPeer.author,
+        avatar: chosenPeer.avatar,
+        role: chosenPeer.role,
+        text: reply,
+        time: new Date().toLocaleTimeString(undefined, {hour: '2-digit', minute:'2-digit'})
+      }]);
+      return;
+    }
+
     setPeerTyping(true);
-    
     const reply = await generateRealAIResponse(text);
-    
     await new Promise(r => setTimeout(r, Math.max(0, typingDelay - 500)));
     
     setPeerTyping(false);
@@ -570,23 +758,37 @@ export default function Chat() {
       {/* Chat Header */}
       <div style={{ backgroundColor: 'var(--surface)', borderBottom: '1px solid var(--border-color)', padding: '0.875rem 1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-          <button onClick={leaveRoom} style={{ color: 'var(--text-light)', padding: '0.25rem', background: 'none', border: 'none', cursor: 'pointer' }}>
+          <button onClick={leaveRoom} style={{ color: 'var(--text-light)', padding: '0.25rem', background: 'none', border: 'none', cursor: 'pointer' }} title="Volver">
             <ArrowLeft size={20} />
           </button>
           
           {activeRoom ? (
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-              <div style={{ backgroundColor: 'var(--primary-light)', width: '2.5rem', height: '2.5rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem' }}>
-                <AppleEmoji emoji="🚪" size={24} />
+              <div style={{
+                backgroundColor: 'rgba(16, 185, 129, 0.12)',
+                border: '1px solid rgba(16, 185, 129, 0.25)',
+                width: '2.6rem',
+                height: '2.6rem',
+                borderRadius: '13px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '1.2rem',
+                flexShrink: 0
+              }}>
+                <AppleEmoji emoji={activeRoom.emoji || '🏛️'} size={24} />
               </div>
               <div>
-                <h2 style={{ fontSize: '1.15rem', fontWeight: 900, color: 'var(--text-main)', margin: 0 }}>
+                <h2 style={{ fontSize: '1.12rem', fontWeight: 850, color: 'var(--text-main)', margin: 0, letterSpacing: '-0.01em' }}>
                   {activeRoom.name}
                 </h2>
-                <div style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--primary)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                  <span>🟢 {activeRoom.users} en vivo</span>
-                  <span>·</span>
-                  <span style={{ color: 'var(--text-muted)' }}>{activeRoom.tag}</span>
+                <div style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--primary)', display: 'flex', alignItems: 'center', gap: '0.4rem', marginTop: '1px' }}>
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
+                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--primary)', display: 'inline-block' }} />
+                    {activeRoom.users} compañeros en vivo
+                  </span>
+                  <span style={{ color: 'var(--text-muted)' }}>·</span>
+                  <span style={{ color: 'var(--text-muted)', fontWeight: 600 }}>{activeRoom.tag}</span>
                 </div>
               </div>
             </div>
@@ -618,18 +820,61 @@ export default function Chat() {
             </Link>
           )}
         </div>
+
+        {activeRoom && (
+          <button
+            onClick={leaveRoom}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.35rem',
+              backgroundColor: 'var(--surface-hover)',
+              border: '1px solid var(--border-color)',
+              color: 'var(--text-muted)',
+              padding: '0.42rem 0.8rem',
+              borderRadius: '10px',
+              fontSize: '0.75rem',
+              fontWeight: 700,
+              cursor: 'pointer',
+              transition: 'all 0.15s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = 'var(--text-main)';
+              e.currentTarget.style.borderColor = 'var(--border-color)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = 'var(--text-muted)';
+              e.currentTarget.style.borderColor = 'var(--border-color)';
+            }}
+          >
+            <LogOut size={13} />
+            <span>Salir de sala</span>
+          </button>
+        )}
       </div>
 
       {/* Messages Area */}
       <div style={{ flex: 1, padding: '1rem', backgroundColor: 'var(--bg-color)', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '0.5rem' }} className="no-scrollbar">
         {messages.map((msg) => (
-          <div key={msg.id} style={{ display: 'flex', justifyContent: msg.sender === 'me' ? 'flex-end' : msg.sender === 'system' ? 'center' : 'flex-start', marginBottom: '0.25rem' }} className="animate-slide-up">
+          <div key={msg.id} style={{ display: 'flex', justifyContent: msg.sender === 'me' ? 'flex-end' : msg.sender === 'system' ? 'center' : 'flex-start', marginBottom: '0.3rem' }} className="animate-slide-up">
             {msg.sender === 'system' ? (
-              <div style={{ backgroundColor: 'var(--surface-hover, #e2e8f0)', color: 'var(--text-muted)', padding: '0.375rem 0.75rem', borderRadius: 'var(--radius-full)', fontSize: '0.7rem', fontWeight: 700 }}>
+              <div style={{ backgroundColor: 'var(--surface-hover, #e2e8f0)', color: 'var(--text-muted)', padding: '0.375rem 0.85rem', borderRadius: 'var(--radius-full)', fontSize: '0.72rem', fontWeight: 750, border: '1px solid var(--border-color)' }}>
                 {msg.text}
               </div>
             ) : (
               <div style={{ maxWidth: '80%' }}>
+                {/* Peer Header info if message has author */}
+                {msg.sender !== 'me' && msg.author && (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', marginBottom: '0.25rem', paddingLeft: '0.25rem' }}>
+                    <div style={{ width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'var(--surface-hover)', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid var(--border-color)', flexShrink: 0 }}>
+                      <AppleEmoji emoji={msg.avatar || '👤'} size={13} />
+                    </div>
+                    <span style={{ fontSize: '0.76rem', fontWeight: 800, color: 'var(--text-main)' }}>{msg.author}</span>
+                    {msg.role && (
+                      <span style={{ fontSize: '0.66rem', color: 'var(--text-muted)', fontWeight: 600 }}>• {msg.role}</span>
+                    )}
+                  </div>
+                )}
                 <div style={{
                   padding: '0.75rem 1rem', fontSize: '0.875rem', lineHeight: 1.5,
                   background: msg.sender === 'me' ? 'linear-gradient(135deg, var(--primary) 0%, #0f766e 100%)' : 'var(--surface)',
@@ -644,7 +889,7 @@ export default function Chat() {
                   {msg.text}
                 </div>
                 {msg.time && (
-                  <div style={{ fontSize: '0.6rem', color: 'var(--text-light)', marginTop: '0.25rem', textAlign: msg.sender === 'me' ? 'right' : 'left', padding: '0 0.25rem' }}>
+                  <div style={{ fontSize: '0.62rem', color: 'var(--text-muted)', marginTop: '0.25rem', textAlign: msg.sender === 'me' ? 'right' : 'left', padding: '0 0.35rem' }}>
                     {msg.time}
                   </div>
                 )}
@@ -653,7 +898,17 @@ export default function Chat() {
           </div>
         ))}
         {peerTyping && (
-           <div style={{ display: 'flex', justifyContent: 'flex-start' }} className="animate-slide-up">
+           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '0.25rem' }} className="animate-slide-up">
+             {typingPeer && (
+               <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', paddingLeft: '0.35rem' }}>
+                 <div style={{ width: '18px', height: '18px', borderRadius: '50%', backgroundColor: 'var(--surface-hover)', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid var(--border-color)' }}>
+                   <AppleEmoji emoji={typingPeer.avatar || '👤'} size={12} />
+                 </div>
+                 <span style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--text-muted)' }}>
+                   {typingPeer.author} está escribiendo...
+                 </span>
+               </div>
+             )}
              <div style={{ backgroundColor: 'var(--surface)', padding: '0.75rem 1rem', borderRadius: '1.25rem', borderBottomLeftRadius: '0.25rem', border: '1px solid var(--border-color)', display: 'flex', gap: '4px', alignItems: 'center', boxShadow: 'var(--shadow-sm)' }}>
                <span className="typing-dot"></span>
                <span className="typing-dot"></span>
@@ -665,13 +920,32 @@ export default function Chat() {
       </div>
 
       {/* Quick Replies */}
-      {messages.length <= 3 && !peerTyping && (
-        <div style={{ padding: '0.5rem 1rem', display: 'flex', gap: '0.5rem', overflowX: 'auto', borderTop: '1px solid var(--border-color)', backgroundColor: 'var(--surface)' }} className="no-scrollbar">
-          {quickReplies.map((qr, i) => (
+      {!peerTyping && (
+        <div style={{ padding: '0.55rem 1rem', display: 'flex', gap: '0.5rem', overflowX: 'auto', borderTop: '1px solid var(--border-color)', backgroundColor: 'var(--surface)' }} className="no-scrollbar">
+          {(activeRoom ? (ROOM_QUICK_REPLIES[activeRoom.id] || ROOM_QUICK_REPLIES.primer_ano) : quickReplies).map((qr, i) => (
             <button
               key={i}
               onClick={() => handleQuickReply(qr)}
-              style={{ whiteSpace: 'nowrap', padding: '0.5rem 0.875rem', borderRadius: 'var(--radius-full)', backgroundColor: 'var(--bg-color)', border: '1px solid var(--border-color)', fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', cursor: 'pointer', transition: 'all 0.15s' }}
+              style={{
+                whiteSpace: 'nowrap',
+                padding: '0.45rem 0.85rem',
+                borderRadius: 'var(--radius-full)',
+                backgroundColor: 'var(--surface-hover)',
+                border: '1px solid var(--border-color)',
+                fontSize: '0.76rem',
+                fontWeight: 700,
+                color: 'var(--text-main)',
+                cursor: 'pointer',
+                transition: 'all 0.15s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'var(--primary)';
+                e.currentTarget.style.color = 'var(--primary)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'var(--border-color)';
+                e.currentTarget.style.color = 'var(--text-main)';
+              }}
             >
               {qr}
             </button>
@@ -687,7 +961,7 @@ export default function Chat() {
               type="text" 
               value={inputText} 
               onChange={(e) => setInputText(e.target.value)} 
-              placeholder={t('student.chat.inputPlaceholder')}
+              placeholder={activeRoom ? `Escribe en #${activeRoom.name}...` : (peerMatch ? `Escribe un mensaje anónimo a ${peerMatch.nickname}...` : t('student.chat.inputPlaceholder'))}
               style={{ flex: 1, backgroundColor: 'transparent', padding: '0.5rem 0', border: 'none', outline: 'none', fontSize: '0.875rem', color: 'var(--text-main)' }} 
             />
             <button 

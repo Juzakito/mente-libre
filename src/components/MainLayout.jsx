@@ -657,11 +657,12 @@ export default function MainLayout() {
             </button>
 
             {activeInfoModal === 'salas' && (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', textAlign: 'left' }} className="animate-fade-in">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', textAlign: 'left' }} className="animate-fade-in">
+                {/* Header */}
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.9rem', paddingRight: '2.5rem' }}>
                   <div style={{
-                    width: '46px',
-                    height: '46px',
+                    width: '48px',
+                    height: '48px',
                     borderRadius: '14px',
                     backgroundColor: 'rgba(16, 185, 129, 0.12)',
                     border: '1px solid rgba(16, 185, 129, 0.25)',
@@ -670,29 +671,91 @@ export default function MainLayout() {
                     justifyContent: 'center',
                     flexShrink: 0
                   }}>
-                    <AppleEmoji emoji="🚪" size={24} />
+                    <AppleEmoji emoji="🏛️" size={26} />
                   </div>
                   <div>
-                    <h3 style={{ fontSize: '1.35rem', fontWeight: 850, margin: 0, color: 'var(--text-main)', letterSpacing: '-0.02em' }}>
-                      Salas Comunitarias
-                    </h3>
-                    <p style={{ color: 'var(--text-muted)', fontSize: '0.84rem', margin: '0.15rem 0 0', lineHeight: 1.35 }}>
-                      Encuentra compañeros y conversaciones anónimas en tiempo real
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+                      <h3 style={{ fontSize: '1.35rem', fontWeight: 850, margin: 0, color: 'var(--text-main)', letterSpacing: '-0.02em' }}>
+                        Salas Comunitarias 24/7
+                      </h3>
+                      <span style={{
+                        fontSize: '0.68rem',
+                        fontWeight: 800,
+                        color: 'var(--primary)',
+                        backgroundColor: 'rgba(16, 185, 129, 0.12)',
+                        border: '1px solid rgba(16, 185, 129, 0.25)',
+                        padding: '0.15rem 0.55rem',
+                        borderRadius: '9999px',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '0.35rem'
+                      }}>
+                        <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--primary)', display: 'inline-block' }} />
+                        133 en vivo
+                      </span>
+                    </div>
+                    <p style={{ color: 'var(--text-muted)', fontSize: '0.84rem', margin: '0.25rem 0 0', lineHeight: 1.4 }}>
+                      Espacios anónimos de encuentro, grupos de estudio y desahogo en tiempo real entre estudiantes de campus.
                     </p>
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginTop: '0.2rem' }}>
+                {/* Rooms List */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                   {[
-                    { id: 'primer_ano', emoji: '🌱', name: 'Primeros Ciclos Universitarios', topic: 'Adaptación, profesores y vida en el campus', users: 38, tag: '#PrimerAño' },
-                    { id: 'examenes', emoji: '📚', name: 'Preparación de Exámenes', topic: 'Desahogo y grupos de estudio sin estrés', users: 52, tag: '#ExámenesFinales' },
-                    { id: 'salud_mental', emoji: '🧠', name: 'Manejo de la Ansiedad', topic: 'Espacio de escucha y apoyo guiado', users: 24, tag: '#SaludMental' },
-                    { id: 'desahogo', emoji: '💬', name: 'Desahogo Libre 24/7', topic: 'Exprésate sin filtros de forma anónima', users: 19, tag: '#DesahogoLibre' }
+                    {
+                      id: 'primer_ano',
+                      emoji: '🌱',
+                      name: 'Primeros Ciclos Universitarios',
+                      tag: '#PrimerAño',
+                      topic: 'Adaptación al campus, consejos sobre profesores, trámites y primeros parciales.',
+                      users: 38,
+                      accentColor: '#10b981',
+                      bgAlpha: 'rgba(16, 185, 129, 0.08)',
+                      borderAlpha: 'rgba(16, 185, 129, 0.22)',
+                      avatars: ['🦊', '🌿', '🎓']
+                    },
+                    {
+                      id: 'examenes',
+                      emoji: '📚',
+                      name: 'Preparación de Exámenes',
+                      tag: '#ExámenesFinales',
+                      topic: 'Grupos de estudio, sesiones Pomodoro de 50m y resúmenes compartidos.',
+                      users: 52,
+                      accentColor: '#3b82f6',
+                      bgAlpha: 'rgba(59, 130, 246, 0.08)',
+                      borderAlpha: 'rgba(59, 130, 246, 0.22)',
+                      avatars: ['⚡', '📚', '💻']
+                    },
+                    {
+                      id: 'salud_mental',
+                      emoji: '🧠',
+                      name: 'Manejo de la Ansiedad',
+                      tag: '#SaludMental',
+                      topic: 'Espacio de contención, pausas de respiración y apoyo guiado sin juicios.',
+                      users: 24,
+                      accentColor: '#8b5cf6',
+                      bgAlpha: 'rgba(139, 92, 246, 0.08)',
+                      borderAlpha: 'rgba(139, 92, 246, 0.22)',
+                      avatars: ['🧘', '🦉', '🌸']
+                    },
+                    {
+                      id: 'desahogo',
+                      emoji: '💬',
+                      name: 'Desahogo Libre 24/7',
+                      tag: '#DesahogoLibre',
+                      topic: 'Exprésate con total libertad y sin filtros, 100% anónimo entre compañeros.',
+                      users: 19,
+                      accentColor: '#f59e0b',
+                      bgAlpha: 'rgba(245, 158, 11, 0.08)',
+                      borderAlpha: 'rgba(245, 158, 11, 0.22)',
+                      avatars: ['💬', '🎨', '✨']
+                    }
                   ].map((room) => (
                     <div
                       key={room.id}
                       style={{
-                        padding: '1rem 1.15rem',
+                        padding: '1.05rem 1.15rem',
                         borderRadius: '16px',
                         backgroundColor: 'var(--surface-elevated)',
                         border: '1px solid var(--border-color)',
@@ -700,69 +763,166 @@ export default function MainLayout() {
                         alignItems: 'center',
                         justifyContent: 'space-between',
                         gap: '1rem',
-                        transition: 'all 0.2s ease'
+                        transition: 'all 0.2s ease',
+                        cursor: 'pointer'
+                      }}
+                      onClick={() => {
+                        setNotificationsList(prev => [{
+                          id: Date.now(),
+                          type: 'chat',
+                          title: `💬 Te uniste a la sala ${room.name}`,
+                          desc: `Conexión establecida con ${room.users} compañeros en ${room.tag}`,
+                          time: 'Justo ahora',
+                          read: false
+                        }, ...prev]);
+                        sessionStorage.setItem('active_chat_room', JSON.stringify(room));
+                        sessionStorage.removeItem('active_peer_match');
+                        setActiveInfoModal(null);
+                        showToast(`Conectado a la sala ${room.name} ✨`);
+                        navigate('/app/chat', { state: { activeRoom: room, selectedRoom: room } });
                       }}
                       onMouseEnter={(e) => {
-                        e.currentTarget.style.borderColor = 'var(--primary)';
+                        e.currentTarget.style.borderColor = room.accentColor;
                         e.currentTarget.style.backgroundColor = 'var(--surface-hover)';
+                        e.currentTarget.style.transform = 'translateY(-2px)';
+                        e.currentTarget.style.boxShadow = '0 6px 20px rgba(0,0,0,0.06)';
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.borderColor = 'var(--border-color)';
                         e.currentTarget.style.backgroundColor = 'var(--surface-elevated)';
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = 'none';
                       }}
                     >
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', flex: 1 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.9rem', flex: 1, minWidth: 0 }}>
                         <div style={{
-                          width: '40px',
-                          height: '40px',
-                          borderRadius: '12px',
-                          backgroundColor: 'var(--surface)',
-                          border: '1px solid var(--border-color)',
+                          width: '44px',
+                          height: '44px',
+                          borderRadius: '14px',
+                          backgroundColor: room.bgAlpha,
+                          border: `1px solid ${room.borderAlpha}`,
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
                           flexShrink: 0
                         }}>
-                          <AppleEmoji emoji={room.emoji} size={22} />
+                          <AppleEmoji emoji={room.emoji} size={24} />
                         </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', flex: 1 }}>
-                          <div style={{ fontWeight: 800, fontSize: '0.92rem', color: 'var(--text-main)', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-                            <span>{room.name}</span>
-                            <span style={{ fontSize: '0.7rem', backgroundColor: 'rgba(16, 185, 129, 0.12)', color: 'var(--primary)', padding: '0.15rem 0.55rem', borderRadius: '9999px', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
-                              <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--primary)' }} />
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', flex: 1, minWidth: 0 }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+                            <span style={{ fontWeight: 800, fontSize: '0.94rem', color: 'var(--text-main)' }}>
+                              {room.name}
+                            </span>
+                            <span style={{
+                              fontSize: '0.68rem',
+                              fontWeight: 700,
+                              color: room.accentColor,
+                              backgroundColor: room.bgAlpha,
+                              padding: '0.12rem 0.5rem',
+                              borderRadius: '9999px',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '0.25rem'
+                            }}>
+                              <span style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: room.accentColor }} />
                               {room.users} en vivo
                             </span>
                           </div>
-                          <span style={{ color: 'var(--text-muted)', fontSize: '0.78rem', lineHeight: 1.35 }}>{room.topic}</span>
+                          <span style={{ color: 'var(--text-muted)', fontSize: '0.78rem', lineHeight: 1.35 }}>
+                            {room.topic}
+                          </span>
+                          {/* Live peers preview avatars */}
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginTop: '0.15rem' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', marginLeft: '2px' }}>
+                              {room.avatars.map((av, idx) => (
+                                <div
+                                  key={idx}
+                                  style={{
+                                    width: '20px',
+                                    height: '20px',
+                                    borderRadius: '50%',
+                                    backgroundColor: 'var(--surface)',
+                                    border: '1.5px solid var(--surface-elevated)',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    marginLeft: idx > 0 ? '-6px' : 0,
+                                    zIndex: 3 - idx
+                                  }}
+                                >
+                                  <AppleEmoji emoji={av} size={12} />
+                                </div>
+                              ))}
+                            </div>
+                            <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontWeight: 600 }}>
+                              +{room.users - 3} estudiantes participando
+                            </span>
+                          </div>
                         </div>
                       </div>
+
                       <button
-                        onClick={() => {
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setNotificationsList(prev => [{
+                            id: Date.now(),
+                            type: 'chat',
+                            title: `💬 Te uniste a la sala ${room.name}`,
+                            desc: `Conexión establecida con ${room.users} compañeros en ${room.tag}`,
+                            time: 'Justo ahora',
+                            read: false
+                          }, ...prev]);
+                          sessionStorage.setItem('active_chat_room', JSON.stringify(room));
+                          sessionStorage.removeItem('active_peer_match');
                           setActiveInfoModal(null);
-                          showToast(`Conectado a la sala ${room.tag} ✨`);
-                          navigate('/app/chat', { state: { activeRoom: room } });
+                          showToast(`Conectado a la sala ${room.name} ✨`);
+                          navigate('/app/chat', { state: { activeRoom: room, selectedRoom: room } });
                         }}
                         style={{
                           background: 'var(--primary)',
                           color: '#ffffff',
                           border: 'none',
-                          padding: '0.55rem 1.15rem',
+                          padding: '0.55rem 1.05rem',
                           borderRadius: '12px',
                           fontWeight: 800,
                           fontSize: '0.82rem',
                           cursor: 'pointer',
                           whiteSpace: 'nowrap',
-                          boxShadow: '0 4px 14px rgba(16, 185, 129, 0.3)',
+                          boxShadow: '0 4px 14px rgba(16, 185, 129, 0.25)',
                           flexShrink: 0,
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '0.35rem',
                           transition: 'all 0.15s ease'
                         }}
                         onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.04)'}
                         onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
                       >
-                        Unirme →
+                        <span>Unirme</span>
+                        <ArrowRight size={14} />
                       </button>
                     </div>
                   ))}
+                </div>
+
+                {/* Privacy and Moderation Trust Banner */}
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '0.5rem',
+                  backgroundColor: 'var(--surface-hover)',
+                  border: '1px solid var(--border-color)',
+                  borderRadius: '12px',
+                  padding: '0.7rem 1rem',
+                  fontSize: '0.76rem',
+                  color: 'var(--text-muted)',
+                  fontWeight: 600,
+                  textAlign: 'center'
+                }}>
+                  <ShieldCheck size={16} color="var(--primary)" style={{ flexShrink: 0 }} />
+                  <span>Espacios 100% anónimos · Sin registro de nombres personales · Moderación activa</span>
                 </div>
               </div>
             )}
