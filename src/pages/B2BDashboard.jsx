@@ -395,31 +395,218 @@ export default function B2BDashboard() {
 
   if (!isAuthenticated) {
     return (
-      <div style={{ minHeight: '100vh', backgroundColor: 'var(--bg-color)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', fontFamily: 'system-ui, sans-serif', position: 'relative' }}>
-        <button 
-          onClick={handleBackToApp} 
-          style={{ position: 'absolute', top: '2rem', left: '2rem', backgroundColor: 'var(--surface)', border: '1px solid var(--border-color)', color: 'var(--primary)', fontSize: '0.85rem', fontWeight: 700, cursor: 'pointer', padding: '0.6rem 1rem', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', boxShadow: '0 1px 2px rgba(0,0,0,0.05)' }}
-        >
-          {t('b2bDashboard.backToApp')}
-        </button>
-        <div style={{ position: 'absolute', top: '2rem', right: '2rem', display: 'flex', gap: '0.5rem' }}>
-          <LanguageToggle />
-        </div>
-        <div style={{ width: '100%', maxWidth: '400px', backgroundColor: 'var(--surface)', borderRadius: '1.5rem', padding: '2.5rem', boxShadow: '0 10px 25px -5px rgba(0,0,0,0.05)', border: '1px solid var(--border-color)' }}>
-          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}>
-            <div style={{ width: '4rem', height: '4rem', backgroundColor: 'var(--primary-light)', borderRadius: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <ShieldCheck size={32} color="var(--primary)" />
-            </div>
+      <div style={{
+        minHeight: '100vh',
+        width: '100vw',
+        backgroundColor: 'var(--bg-color)',
+        backgroundImage: 'radial-gradient(ellipse at 50% 35%, rgba(0, 230, 118, 0.08) 0%, transparent 65%)',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
+        boxSizing: 'border-box'
+      }}>
+        {/* Top Header Navigation */}
+        <header style={{
+          width: '100%',
+          maxWidth: '1200px',
+          padding: '1.5rem 2rem',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          boxSizing: 'border-box'
+        }}>
+          <button 
+            onClick={handleBackToApp} 
+            style={{
+              backgroundColor: 'var(--surface)',
+              border: '1px solid var(--border-color)',
+              color: 'var(--primary)',
+              fontSize: '0.9rem',
+              fontWeight: 700,
+              cursor: 'pointer',
+              padding: '0.65rem 1.25rem',
+              borderRadius: '9999px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+              transition: 'all 0.2s ease'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-1px)'}
+            onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+          >
+            {t('b2bDashboard.backToApp')}
+          </button>
+          
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <LanguageToggle />
           </div>
-          <h2 style={{ textAlign: 'center', fontSize: '1.5rem', fontWeight: 800, marginBottom: '0.5rem', color: 'var(--text-main)' }}>{t('b2bDashboard.institutionalAccess')}</h2>
-          <p style={{ textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.875rem', marginBottom: '2rem' }}>{t('b2bDashboard.enterCredentials')}</p>
-          <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            <input type="email" placeholder={t('b2bDashboard.emailPlaceholder')} value={email} onChange={e => setEmail(e.target.value)} style={{ padding: '0.875rem 1rem', borderRadius: '0.75rem', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-main)', width: '100%', boxSizing: 'border-box' }} required />
-            <input type="password" placeholder={t('b2bDashboard.passwordPlaceholder')} value={password} onChange={e => setPassword(e.target.value)} style={{ padding: '0.875rem 1rem', borderRadius: '0.75rem', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-main)', width: '100%', boxSizing: 'border-box' }} required />
-            {authError && <div style={{ color: '#ef4444', fontSize: '0.85rem', textAlign: 'center' }}>{authError}</div>}
-            <button type="submit" style={{ backgroundColor: 'var(--primary)', color: 'white', padding: '0.875rem', borderRadius: '0.75rem', border: 'none', fontWeight: 800, cursor: 'pointer', marginTop: '0.5rem' }}>{t('b2bDashboard.loginButton')}</button>
-          </form>
+        </header>
+
+        {/* Center Card */}
+        <div style={{
+          flex: 1,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '100%',
+          padding: '1.5rem',
+          boxSizing: 'border-box'
+        }}>
+          <div style={{
+            width: '100%',
+            maxWidth: '500px',
+            backgroundColor: 'var(--surface)',
+            borderRadius: '24px',
+            padding: '3rem 2.5rem',
+            boxShadow: '0 20px 50px -10px rgba(0, 0, 0, 0.4), 0 0 40px rgba(0, 230, 118, 0.08)',
+            border: '1px solid var(--border-color)',
+            boxSizing: 'border-box',
+            backdropFilter: 'blur(12px)'
+          }} className="animate-fade-in">
+            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.75rem' }}>
+              <div style={{
+                width: '4.5rem',
+                height: '4.5rem',
+                backgroundColor: 'rgba(0, 230, 118, 0.12)',
+                borderRadius: '1.25rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                border: '1px solid rgba(0, 230, 118, 0.25)',
+                boxShadow: '0 8px 20px rgba(0, 230, 118, 0.15)'
+              }}>
+                <ShieldCheck size={36} color="#00e676" />
+              </div>
+            </div>
+            
+            <h2 style={{ textAlign: 'center', fontSize: '1.85rem', fontWeight: 900, marginBottom: '0.5rem', color: 'var(--text-main)', letterSpacing: '-0.02em' }}>
+              {t('b2bDashboard.institutionalAccess')}
+            </h2>
+            <p style={{ textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.925rem', marginBottom: '2.25rem', lineHeight: 1.5 }}>
+              {t('b2bDashboard.enterCredentials')}
+            </p>
+            
+            <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                <label style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  {t('b2bDashboard.emailPlaceholder')}
+                </label>
+                <input 
+                  type="email" 
+                  placeholder="rectorado@universidad.edu.pe" 
+                  value={email} 
+                  onChange={e => setEmail(e.target.value)} 
+                  style={{
+                    padding: '0.95rem 1.15rem',
+                    borderRadius: '14px',
+                    border: '1.5px solid var(--border-color)',
+                    backgroundColor: 'var(--bg-color)',
+                    color: 'var(--text-main)',
+                    width: '100%',
+                    boxSizing: 'border-box',
+                    fontSize: '0.975rem',
+                    outline: 'none',
+                    fontWeight: 600,
+                    transition: 'border-color 0.2s, box-shadow 0.2s'
+                  }}
+                  onFocus={e => {
+                    e.target.style.borderColor = '#00e676';
+                    e.target.style.boxShadow = '0 0 0 3px rgba(0, 230, 118, 0.15)';
+                  }}
+                  onBlur={e => {
+                    e.target.style.borderColor = 'var(--border-color)';
+                    e.target.style.boxShadow = 'none';
+                  }}
+                  required 
+                />
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                <label style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  {t('b2bDashboard.passwordPlaceholder')}
+                </label>
+                <input 
+                  type="password" 
+                  placeholder="••••••••••••" 
+                  value={password} 
+                  onChange={e => setPassword(e.target.value)} 
+                  style={{
+                    padding: '0.95rem 1.15rem',
+                    borderRadius: '14px',
+                    border: '1.5px solid var(--border-color)',
+                    backgroundColor: 'var(--bg-color)',
+                    color: 'var(--text-main)',
+                    width: '100%',
+                    boxSizing: 'border-box',
+                    fontSize: '0.975rem',
+                    outline: 'none',
+                    fontWeight: 600,
+                    transition: 'border-color 0.2s, box-shadow 0.2s'
+                  }}
+                  onFocus={e => {
+                    e.target.style.borderColor = '#00e676';
+                    e.target.style.boxShadow = '0 0 0 3px rgba(0, 230, 118, 0.15)';
+                  }}
+                  onBlur={e => {
+                    e.target.style.borderColor = 'var(--border-color)';
+                    e.target.style.boxShadow = 'none';
+                  }}
+                  required 
+                />
+              </div>
+
+              {authError && (
+                <div style={{
+                  color: '#f43f5e',
+                  backgroundColor: 'rgba(244, 63, 94, 0.1)',
+                  border: '1px solid rgba(244, 63, 94, 0.25)',
+                  padding: '0.75rem',
+                  borderRadius: '12px',
+                  fontSize: '0.85rem',
+                  fontWeight: 700,
+                  textAlign: 'center'
+                }}>
+                  {authError}
+                </div>
+              )}
+
+              <button 
+                type="submit" 
+                style={{
+                  backgroundColor: '#00e676',
+                  color: '#082e30',
+                  padding: '1.05rem',
+                  borderRadius: '14px',
+                  border: 'none',
+                  fontWeight: 900,
+                  fontSize: '1rem',
+                  cursor: 'pointer',
+                  marginTop: '0.75rem',
+                  boxShadow: '0 8px 24px rgba(0, 230, 118, 0.35)',
+                  transition: 'all 0.2s ease'
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.backgroundColor = '#00c853';
+                  e.currentTarget.style.transform = 'translateY(-1px)';
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.backgroundColor = '#00e676';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                }}
+              >
+                {t('b2bDashboard.loginButton')}
+              </button>
+            </form>
+          </div>
         </div>
+
+        {/* Footer info */}
+        <footer style={{ padding: '1.5rem', color: 'var(--text-muted)', fontSize: '0.8rem', textAlign: 'center' }}>
+          Free Mind Institutional Portal • Plataforma de Gestión de Salud Mental Universitaria
+        </footer>
       </div>
     );
   }

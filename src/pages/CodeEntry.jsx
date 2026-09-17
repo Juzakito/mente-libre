@@ -4,6 +4,7 @@ import { ChevronLeft, Lock, Mail, KeyRound, Eye, EyeOff } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../store/AuthContext';
 import { safeJSONParse } from '../utils/helpers';
+import { isEmailRegistered, findAccountByIdentifier } from '../services/accountRegistryService';
 
 export default function CodeEntry() {
   const [mode, setMode] = useState('login'); // 'login', 'register', 'forgot'
@@ -77,8 +78,8 @@ export default function CodeEntry() {
 
   const validateEmail = (emailStr) => {
     const trimmed = emailStr.trim().toLowerCase();
-    if (!trimmed.endsWith('@cientifica.edu.pe')) {
-      setError('Solo se permiten correos institucionales (@cientifica.edu.pe)');
+    if (!trimmed || !trimmed.includes('@') || !trimmed.includes('.')) {
+      setError('Por favor ingresa una dirección de correo válida.');
       return false;
     }
     return true;
@@ -137,6 +138,13 @@ export default function CodeEntry() {
     setLoading(true);
     
     try {
+      const alreadyReg = await isEmailRegistered(emailTrimmed);
+      if (alreadyReg) {
+        setError('Este correo electrónico ya está registrado. Por favor inicia sesión con tu cuenta.');
+        setLoading(false);
+        return;
+      }
+
       const { error: signUpError } = await supabase.auth.signUp({
         email: emailTrimmed,
         password: password,
@@ -148,7 +156,6 @@ export default function CodeEntry() {
       if (signUpError) throw signUpError;
       
       setSuccessMsg('¡Cuenta creada exitosamente! Entrando a Free Mind...');
-      // Si Confirm Email está apagado en Supabase, el useEffect redireccionará automáticamente.
     } catch (err) {
       console.error(err);
       if (err.message.includes('User already registered')) {
@@ -206,7 +213,7 @@ export default function CodeEntry() {
                 type="email" 
                 value={email}
                 onChange={(e) => { setEmail(e.target.value); setError(''); }}
-                placeholder="ejemplo@cientifica.edu.pe"
+                placeholder="tu.correo@ejemplo.com"
                 required
                 style={{ width: '100%', padding: '1rem 1rem 1rem 2.75rem', fontSize: '1rem', fontWeight: 600, borderColor: error ? 'var(--accent-rose)' : 'var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-main)', outline: 'none', borderRadius: 'var(--radius-md)' }}
               />
@@ -266,7 +273,7 @@ export default function CodeEntry() {
                 type="email" 
                 value={email}
                 onChange={(e) => { setEmail(e.target.value); setError(''); }}
-                placeholder="Correo institucional"
+                placeholder="tu.correo@ejemplo.com"
                 required
                 style={{ width: '100%', padding: '1rem 1rem 1rem 2.75rem', fontSize: '1rem', fontWeight: 600, borderColor: error ? 'var(--accent-rose)' : 'var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-main)', outline: 'none', borderRadius: 'var(--radius-md)' }}
               />
@@ -319,7 +326,7 @@ export default function CodeEntry() {
                 type="email" 
                 value={email}
                 onChange={(e) => { setEmail(e.target.value); setError(''); }}
-                placeholder="Correo institucional"
+                placeholder="tu.correo@ejemplo.com"
                 required
                 style={{ width: '100%', padding: '1rem 1rem 1rem 2.75rem', fontSize: '1rem', fontWeight: 600, borderColor: error ? 'var(--accent-rose)' : 'var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-main)', outline: 'none', borderRadius: 'var(--radius-md)' }}
               />
@@ -339,30 +346,29 @@ export default function CodeEntry() {
   };
 
   return (
-    <div style={{ flex: 1, backgroundColor: 'var(--surface)', display: 'flex', flexDirection: 'column', position: 'relative' }} className="animate-fade-in">
+    <div style={{ flex: 1, minHeight: '100vh', backgroundColor: '#082e30', color: '#ffffff', display: 'flex', flexDirection: 'column', position: 'relative' }} className="animate-fade-in">
       <button 
         onClick={() => navigate(-1)} 
-        style={{ position: 'absolute', top: '1.5rem', left: '1.5rem', padding: '0.75rem', borderRadius: '50%', backgroundColor: 'var(--bg-color)', color: 'var(--text-muted)' }}
-        className="glass"
+        style={{ position: 'absolute', top: '1.5rem', left: '1.5rem', padding: '0.75rem', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', color: '#ffffff', cursor: 'pointer' }}
       >
         <ChevronLeft size={24} />
       </button>
 
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', margin: '0 auto', maxWidth: '400px', width: '100%', padding: '2rem' }}>
-        <div style={{ width: '4rem', height: '4rem', backgroundColor: 'var(--primary-light)', color: 'var(--primary)', borderRadius: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem' }}>
-          <Lock size={32} />
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', margin: '0 auto', maxWidth: '420px', width: '100%', padding: '2rem' }}>
+        <div style={{ width: '3.5rem', height: '3.5rem', backgroundColor: 'rgba(0, 230, 118, 0.15)', color: '#00e676', borderRadius: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' }}>
+          <Lock size={28} />
         </div>
         
-        <h2 style={{ fontSize: '1.75rem', fontWeight: 900, color: 'var(--secondary)', marginBottom: '0.5rem' }}>
-          {mode === 'login' ? 'Bienvenido de vuelta' : mode === 'register' ? 'Únete a la comunidad' : 'Recuperar acceso'}
+        <h2 style={{ fontSize: '1.85rem', fontWeight: 900, color: '#ffffff', marginBottom: '0.5rem' }}>
+          {mode === 'login' ? 'Bienvenido de vuelta' : mode === 'register' ? 'Únete a TalkCampus' : 'Recuperar acceso'}
         </h2>
-        <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem', lineHeight: 1.5, fontSize: '0.9rem' }}>
-          Free Mind es exclusivo para estudiantes de la Científica del Sur. Tu identidad real se mantendrá anónima en la plataforma.
+        <p style={{ color: 'rgba(255, 255, 255, 0.8)', marginBottom: '1.5rem', lineHeight: 1.5, fontSize: '0.9rem' }}>
+          Espacio seguro y anónimo para estudiantes. Tu identidad real se mantendrá 100% protegida.
         </p>
         
         {successMsg && (
-          <div style={{ backgroundColor: 'var(--primary-light)', border: '1px solid var(--primary)', padding: '1rem', borderRadius: 'var(--radius-md)', textAlign: 'center', marginBottom: '1.5rem' }}>
-            <p style={{ color: 'var(--primary)', fontSize: '0.9rem', fontWeight: 600 }}>{successMsg}</p>
+          <div style={{ backgroundColor: 'rgba(0, 230, 118, 0.15)', border: '1px solid #00e676', padding: '0.85rem', borderRadius: '12px', textAlign: 'center', marginBottom: '1.25rem' }}>
+            <p style={{ color: '#00e676', fontSize: '0.85rem', fontWeight: 700 }}>{successMsg}</p>
           </div>
         )}
 
@@ -371,3 +377,4 @@ export default function CodeEntry() {
     </div>
   );
 }
+

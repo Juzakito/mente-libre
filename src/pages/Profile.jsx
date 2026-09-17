@@ -5,6 +5,7 @@ import { useNavigate, useOutletContext } from 'react-router-dom';
 import CareerDropdown from '../components/CareerDropdown';
 import AppleEmoji from '../components/ui/AppleEmoji';
 import { useTranslation } from 'react-i18next';
+import { isNicknameRegistered, updateAccountInRegistry } from '../services/accountRegistryService';
 
 const SHOP_AVATARS = [
   { emoji: '🦉', name: 'Búho Base', cost: 0 },
@@ -40,29 +41,35 @@ export default function Profile() {
   const [founderCode, setFounderCode] = useState('');
 
   useEffect(() => {
-    // Auto-credit 1000 feathers to founder upon viewing Profile
-    const alreadyCredited = localStorage.getItem('mente-libre-founder-auto-1000');
-    if (!alreadyCredited) {
-      localStorage.setItem('mente-libre-founder-auto-1000', 'true');
-      addFeathers(1000);
-      showToast('¡1000 Plumas de Fundador acreditadas a tu cuenta! 🎉🪶');
+    if (user) {
+      setEditNickname(user.nickname || user.full_name || '');
+      setEditAvatar(user.avatar || '🦊');
+      setEditCareer(user.career || '');
     }
-  }, []);
-
-  // Streak is now managed by AppContext, no need for the local simulator effect
+  }, [user]);
 
   const myPosts = posts.filter(p => p.isMine);
 
   const handleLogout = () => {
     logout();
-    navigate('/');
+    navigate('/', { replace: true });
   };
 
   const handleSaveProfile = async () => {
-    if (!editNickname.trim() || !editCareer) return;
-    await updateProfile(editNickname, editAvatar, editCareer);
+    const trimmedNick = editNickname.trim();
+    if (!trimmedNick || !editCareer) return;
+
+    // Check if new nickname is taken by another user
+    const isTaken = await isNicknameRegistered(trimmedNick, user?.id);
+    if (isTaken) {
+      showToast(`El seudónimo "${trimmedNick}" ya está ocupado por otro estudiante.`);
+      return;
+    }
+
+    await updateProfile(trimmedNick, editAvatar, editCareer);
+    updateAccountInRegistry(user?.id, trimmedNick, editAvatar, editCareer);
     setIsEditing(false);
-    showToast('Perfil actualizado');
+    showToast('Perfil actualizado 🎉');
   };
 
   const handleEquipOrUnlock = async (avatar) => {
@@ -82,7 +89,7 @@ export default function Profile() {
   };
 
   return (
-    <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '2rem', minHeight: '100%', paddingBottom: '6rem' }}>
+    <div style={{ maxWidth: '680px', margin: '0 auto', width: '100%', padding: '1.5rem 1rem 6rem', display: 'flex', flexDirection: 'column', gap: '1.75rem', minHeight: '100%', boxSizing: 'border-box' }}>
       
       {/* Profile Card */}
       <div style={{ 

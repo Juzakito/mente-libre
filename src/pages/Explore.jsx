@@ -86,7 +86,7 @@ export default function Explore() {
   const filtered = posts.filter(p => p.text.toLowerCase().includes(searchTerm.toLowerCase()));
   
   return (
-    <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '2rem', paddingBottom: '6rem' }}>
+    <div style={{ maxWidth: '680px', margin: '0 auto', width: '100%', padding: '1.5rem 1rem 6rem', display: 'flex', flexDirection: 'column', gap: '2rem', boxSizing: 'border-box' }}>
       
       {/* Breathing Minigame */}
       <div className="card" style={{ padding: '2rem', display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: 'var(--surface)', border: '1px solid var(--border-color)', boxShadow: 'var(--shadow-md)' }}>

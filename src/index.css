@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
+*:focus-visible {
+  outline: 2px solid #00e676 !important;
+  outline-offset: 2px !important;
+}
+
 :root {
   /* Color Palette inspired by Linear & Vercel */
   --primary: #0d9488;
@@ -8,6 +13,12 @@
   --secondary: #171717;
   --bg-color: #fafafa; 
   --surface: #ffffff;
+  --sidebar-bg: #ffffff;
+  --sidebar-border: #e2e8f0;
+  --active-nav-bg: #e6f4f1;
+  --active-nav-border: #0d9488;
+  --active-nav-text: #0f766e;
+
   --text-main: #111827;
   --text-muted: #6b7280; 
   --text-light: #9ca3af;
@@ -47,15 +58,20 @@
   --secondary: #94a3b8;
   
   /* ✨ Bright, elevated dark palette — Discord/Figma inspired */
-  --bg-color: #1a1d2e;
-  --surface: #232738;
-  --surface-hover: #2d3148;
-  --surface-elevated: #323650;
+  --bg-color: #091D1E;
+  --surface: #0f292b;
+  --surface-hover: #163a3d;
+  --surface-elevated: #1a4347;
+  --sidebar-bg: #0c2325;
+  --sidebar-border: rgba(255, 255, 255, 0.08);
+  --active-nav-bg: rgba(16, 185, 129, 0.12);
+  --active-nav-border: #10b981;
+  --active-nav-text: #10b981;
   
   /* Ultra-readable text */
-  --text-main: #f1f5f9;
-  --text-muted: #a1adc4;
-  --text-light: #c8d3e3;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-light: #cbd5e1;
   
   /* Vibrant neon accents */
   --accent-blue: #60a5fa;
@@ -126,6 +142,31 @@ input, textarea {
 input::placeholder, textarea::placeholder {
   color: var(--text-muted);
   opacity: 0.7;
+}
+
+/* Custom Visible Scrollbar Utility */
+.custom-styled-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #00e676 rgba(0, 0, 0, 0.2);
+}
+
+.custom-styled-scrollbar::-webkit-scrollbar {
+  width: 7px;
+}
+
+.custom-styled-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 9999px;
+}
+
+.custom-styled-scrollbar::-webkit-scrollbar-thumb {
+  background: #00e676;
+  border-radius: 9999px;
+  box-shadow: 0 0 6px rgba(0, 230, 118, 0.5);
+}
+
+.custom-styled-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #00b35c;
 }
 
 input:focus, textarea:focus {
@@ -557,20 +598,34 @@ input[type=range].premium-slider::-webkit-slider-runnable-track {
   }
 }
 
-/* Custom sleek scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+/* Custom sleek dark scrollbar across all elements & containers */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #283033 transparent;
 }
-::-webkit-scrollbar-track {
-  background: transparent; 
+
+::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
 }
-::-webkit-scrollbar-thumb {
-  background: var(--border-color); 
-  border-radius: 10px;
+
+::-webkit-scrollbar-track,
+*::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 9999px;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: var(--text-muted); 
+
+::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-thumb {
+  background: #283033;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb:hover,
+*::-webkit-scrollbar-thumb:hover {
+  background: #00e676;
 }
 
 /* Optional Scrollbar hiding for specific clean UI elements */
@@ -784,9 +839,18 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   color: var(--primary-hover);
 }
 
-/* Smooth scrolling */
+/* Smooth scrolling & adaptive color scheme */
 html {
+  color-scheme: light dark;
   scroll-behavior: smooth;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+[data-theme='light'] {
+  color-scheme: light;
 }
 
 

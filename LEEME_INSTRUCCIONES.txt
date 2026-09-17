@@ -1,0 +1,60 @@
+================================================================================
+                    MENTE LIBRE - COPIA DE SEGURIDAD MAESTRA
+================================================================================
+Fecha de creación: 16 de Septiembre, 2026
+Ubicación: Escritorio / Mente-Libre-Proyecto
+
+Esta carpeta contiene el código fuente completo, configuraciones, credenciales
+locales (.env) y base de datos del proyecto "Mente Libre".
+¡Con esta carpeta nunca perderás tu trabajo!
+
+--------------------------------------------------------------------------------
+1. ENLACES DEL PROYECTO EN LA NUBE
+--------------------------------------------------------------------------------
+- Aplicación en Producción (Vercel):
+  https://freemind-app.vercel.app
+
+- Repositorio en GitHub:
+  https://github.com/Juzakito/mente-libre
+
+- Panel de Base de Datos (Supabase):
+  https://supabase.com/dashboard/project/lfgdcvvqukcfbbijszur
+
+--------------------------------------------------------------------------------
+2. CÓMO EJECUTAR EL PROYECTO EN TU COMPUTADORA
+--------------------------------------------------------------------------------
+Opción Rápida:
+  1. Haz doble clic en el archivo:
+     iniciar_mente_libre.bat
+     (Instalará librerías si faltan y abrirá la aplicación en tu navegador).
+
+Opción Manual (Terminal / PowerShell):
+  1. Abre una terminal dentro de esta carpeta.
+  2. Ejecuta:
+     npm install
+  3. Ejecuta:
+     npm run dev
+  4. Abre en tu navegador:
+     http://localhost:5173
+
+--------------------------------------------------------------------------------
+3. CONTENIDO DE ESTA CARPETA
+--------------------------------------------------------------------------------
+- src/               : Código fuente modular (Componentes, Contextos, Servicios, Páginas).
+- public/            : Íconos, manifest.json, sonidos relajantes y assets estáticos.
+- database/          : Scripts SQL de migraciones para Supabase (tablas, RLS, triggers).
+- docs/              : Documentación técnica completa (Arquitectura, Seguridad, Guías).
+- .env & .env.local  : Credenciales de conexión a Supabase y claves de API.
+- .git/              : Historial completo de versiones conectado a GitHub.
+- package.json       : Dependencias y scripts de ejecución.
+
+--------------------------------------------------------------------------------
+4. CÓMO SUBIR NUEVOS CAMBIOS A GITHUB Y VERCEL
+--------------------------------------------------------------------------------
+Desde la terminal en esta carpeta:
+  git add .
+  git commit -m "Descripción de los cambios"
+  git push origin main
+
+(Vercel detectará el commit automáticamente y actualizará la web en minutos).
+================================================================================

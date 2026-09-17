@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { ChevronDown, Search, Check } from 'lucide-react';
 import { CAREERS } from '../utils/constants';
@@ -12,9 +12,9 @@ export default function CareerDropdown({ value, onChange, placeholder = "Selecci
 
   const filteredCareers = CAREERS.filter(c => c.toLowerCase().includes(searchTerm.toLowerCase()));
 
-  // Recalculate dropdown position whenever it opens
-  useEffect(() => {
-    if (isOpen && triggerRef.current) {
+  // Function to calculate and update position relative to trigger button
+  const updatePosition = useCallback(() => {
+    if (triggerRef.current) {
       const rect = triggerRef.current.getBoundingClientRect();
       const spaceBelow = window.innerHeight - rect.bottom;
       const spaceAbove = rect.top;
@@ -36,10 +36,19 @@ export default function CareerDropdown({ value, onChange, placeholder = "Selecci
         });
       }
     }
-  }, [isOpen]);
+  }, []);
 
-  // Close when clicking outside
+  // Recalculate position on open
   useEffect(() => {
+    if (isOpen) {
+      updatePosition();
+    }
+  }, [isOpen, updatePosition]);
+
+  // Close when clicking outside or pressing Escape
+  useEffect(() => {
+    if (!isOpen) return;
+
     const handleClickOutside = (event) => {
       if (
         dropdownRef.current && !dropdownRef.current.contains(event.target) &&
@@ -48,17 +57,45 @@ export default function CareerDropdown({ value, onChange, placeholder = "Selecci
         setIsOpen(false);
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
 
-  // Close on scroll (reposition would be complex, simpler to close)
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside);
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen]);
+
+  // Handle page scrolling / resizing — DO NOT close when scrolling inside the dropdown list!
   useEffect(() => {
     if (!isOpen) return;
-    const handleScroll = () => setIsOpen(false);
+
+    const handleScroll = (event) => {
+      // Ignore scroll events originating from inside the dropdown container itself
+      if (dropdownRef.current && dropdownRef.current.contains(event.target)) {
+        return;
+      }
+      // Re-anchor or update position on page scroll
+      updatePosition();
+    };
+
     window.addEventListener('scroll', handleScroll, true);
-    return () => window.removeEventListener('scroll', handleScroll, true);
-  }, [isOpen]);
+    window.addEventListener('resize', updatePosition);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll, true);
+      window.removeEventListener('resize', updatePosition);
+    };
+  }, [isOpen, updatePosition]);
 
   const handleSelect = (career) => {
     onChange(career);
@@ -149,7 +186,7 @@ export default function CareerDropdown({ value, onChange, placeholder = "Selecci
           </div>
 
           {/* List */}
-          <div style={{ overflowY: 'auto', maxHeight: '230px', padding: '0.5rem' }} className="no-scrollbar">
+          <div style={{ overflowY: 'auto', maxHeight: '250px', padding: '0.5rem' }} className="custom-styled-scrollbar">
             {filteredCareers.length > 0 ? (
               filteredCareers.map(c => (
                 <div

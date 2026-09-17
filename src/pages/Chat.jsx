@@ -20,7 +20,18 @@ const quickReplies = ['Me siento mal 😞', 'Estoy estresado 😫', 'Necesito ha
 
 export default function Chat() {
   const { t } = useTranslation();
-  const [connected, setConnected] = useState(() => sessionStorage.getItem('chat_connected') === 'true');
+  const location = useLocation();
+
+  const [activeRoom, setActiveRoom] = useState(() => {
+    if (location.state?.selectedRoom) return location.state.selectedRoom;
+    return safeJSONParse(sessionStorage.getItem('active_chat_room'), null);
+  });
+
+  const [connected, setConnected] = useState(() => {
+    const savedRoom = safeJSONParse(sessionStorage.getItem('active_chat_room'), null);
+    return Boolean(location.state?.selectedRoom || savedRoom || sessionStorage.getItem('chat_connected') === 'true');
+  });
+
   const [searching, setSearching] = useState(false);
   const [messages, setMessages] = useState(() => {
     const saved = sessionStorage.getItem('chat_messages');
@@ -36,10 +47,32 @@ export default function Chat() {
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
+    const room = location.state?.selectedRoom || safeJSONParse(sessionStorage.getItem('active_chat_room'), null);
+    if (room) {
+      setActiveRoom(room);
+      setConnected(true);
+      setMessages([
+        { id: 1, sender: 'system', text: `🔒 Conectado a la Sala Comunitaria: ${room.name} (${room.tag})` },
+        { id: 2, sender: 'system', text: `🟢 ${room.users} estudiantes compartiendo en vivo.` },
+        { id: 3, sender: 'peer', author: 'FlyingJay_99', avatar: '🦊', text: '¡Hola a todos en la sala! 👋 ¿Cómo van con sus avances de esta semana?', time: 'hace 2m' },
+        { id: 4, sender: 'peer', author: 'Búho_Científica', avatar: '🦉', text: '¡Buenas! Con bastante carga académica pero aquí nos apoyamos entre todos 💪', time: 'hace 1m' }
+      ]);
+    }
+  }, [location.state]);
+
+  useEffect(() => {
     sessionStorage.setItem('chat_connected', connected);
     sessionStorage.setItem('chat_messages', JSON.stringify(messages));
     sessionStorage.setItem('chat_history', JSON.stringify(history));
   }, [connected, messages, history]);
+
+  const leaveRoom = () => {
+    sessionStorage.removeItem('active_chat_room');
+    setActiveRoom(null);
+    setConnected(false);
+    setMessages([]);
+    setHistory([]);
+  };
 
   const { handleSOS } = useOutletContext();
 
@@ -502,22 +535,41 @@ export default function Chat() {
       {/* Chat Header */}
       <div style={{ backgroundColor: 'var(--surface)', borderBottom: '1px solid var(--border-color)', padding: '0.875rem 1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-          <button onClick={() => { setConnected(false); setMessages([]); setHistory([]); }} style={{ color: 'var(--text-light)', padding: '0.25rem' }}>
+          <button onClick={leaveRoom} style={{ color: 'var(--text-light)', padding: '0.25rem', background: 'none', border: 'none', cursor: 'pointer' }}>
             <ArrowLeft size={20} />
           </button>
-          <Link to="/app/u/BuhoNocturno" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none', color: 'inherit' }} className="author-link">
-            <div style={{ backgroundColor: 'var(--bg-color)', width: '2.5rem', height: '2.5rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <div className="animate-owl-blink">
-                <AppleEmoji emoji="🦉" size={24} />
+          
+          {activeRoom ? (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <div style={{ backgroundColor: 'rgba(0, 230, 118, 0.12)', width: '2.5rem', height: '2.5rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem' }}>
+                🚪
+              </div>
+              <div>
+                <h2 style={{ fontSize: '1.15rem', fontWeight: 900, color: 'var(--text-main)', margin: 0 }}>
+                  {activeRoom.name}
+                </h2>
+                <div style={{ fontSize: '0.72rem', fontWeight: 700, color: '#00e676', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  <span>🟢 {activeRoom.users} en vivo</span>
+                  <span>·</span>
+                  <span style={{ color: 'var(--text-muted)' }}>{activeRoom.tag}</span>
+                </div>
               </div>
             </div>
-            <div>
-              <h2 style={{ fontSize: '1.25rem', fontWeight: 900, color: 'var(--text-main)', margin: 0 }} className="author-name">BuhoNocturno 🦉</h2>
-              <div style={{ fontSize: '0.65rem', fontWeight: 700, color: peerTyping ? 'var(--primary)' : 'var(--accent-emerald)', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-                {peerTyping ? t('chatMisc.typing') : <><span style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: 'var(--accent-emerald)', display: 'inline-block' }}></span> {t('chatMisc.online')}</>}
+          ) : (
+            <Link to="/app/u/BuhoNocturno" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none', color: 'inherit' }} className="author-link">
+              <div style={{ backgroundColor: 'var(--bg-color)', width: '2.5rem', height: '2.5rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div className="animate-owl-blink">
+                  <AppleEmoji emoji="🦉" size={24} />
+                </div>
               </div>
-            </div>
-          </Link>
+              <div>
+                <h2 style={{ fontSize: '1.25rem', fontWeight: 900, color: 'var(--text-main)', margin: 0 }} className="author-name">BuhoNocturno 🦉</h2>
+                <div style={{ fontSize: '0.65rem', fontWeight: 700, color: peerTyping ? 'var(--primary)' : 'var(--accent-emerald)', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                  {peerTyping ? t('chatMisc.typing') : <><span style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: 'var(--accent-emerald)', display: 'inline-block' }}></span> {t('chatMisc.online')}</>}
+                </div>
+              </div>
+            </Link>
+          )}
         </div>
       </div>
 

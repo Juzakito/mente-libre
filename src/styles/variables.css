@@ -11,44 +11,51 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 :root {
-  /* ─── Brand Colors ──────────────────────────────────── */
+  /* ─── Light Theme Palette (Image 2) ───────────────────────── */
   --primary: #0d9488;
   --primary-hover: #0f766e;
-  --primary-light: #ccfbf1;
-  --secondary: #171717;
+  --primary-light: #e6f4f1;
+  --secondary: #475569;
 
-  /* ─── Background & Surface ─────────────────────────── */
-  --bg-color: #fafafa;
-  --surface: #ffffff;
+  /* Backgrounds & Surfaces */
+  --bg-color: #f7faf9;         /* Soft off-white background */
+  --surface: #ffffff;          /* Crisp white cards */
+  --surface-hover: #f1f5f4;
+  --surface-elevated: #ffffff;
+  --sidebar-bg: #ffffff;       /* Pure white sidebar */
+  --sidebar-border: #e2e8f0;
 
-  /* ─── Typography ───────────────────────────────────── */
-  --text-main: #111827;
-  --text-muted: #6b7280;
-  --text-light: #9ca3af;
+  /* Active Nav Item */
+  --active-nav-bg: #e6f4f1;
+  --active-nav-border: #0d9488;
+  --active-nav-text: #0f766e;
 
-  /* ─── Accent Colors ────────────────────────────────── */
+  /* Typography */
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+
+  /* Accents */
   --accent-blue: #2563eb;
   --accent-amber: #f59e0b;
   --accent-orange: #f97316;
-  --accent-rose: #e11d48;
+  --accent-rose: #f43f5e;
   --accent-emerald: #10b981;
 
-  /* ─── Borders ──────────────────────────────────────── */
-  --border-color: #e5e7eb;
-  --glass-bg: rgba(255, 255, 255, 0.7);
+  /* Borders & Glass */
+  --border-color: #e2e8f0;
+  --glass-bg: rgba(255, 255, 255, 0.88);
 
-  /* ─── Semantic Colors ──────────────────────────────── */
   --bg-danger: #fef2f2;
   --border-danger: #fecaca;
 
-  /* ─── Shadows ──────────────────────────────────────── */
+  /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
-  --shadow-glow: 0 0 24px 0 rgba(0, 0, 0, 0.06);
+  --shadow-glow: 0 0 24px 0 rgba(13, 148, 136, 0.15);
 
-  /* ─── Border Radius ────────────────────────────────── */
   --radius-sm: 4px;
   --radius-md: 6px;
   --radius-lg: 8px;
@@ -56,66 +63,61 @@
   --radius-2xl: 16px;
   --radius-full: 9999px;
 
-  /* ─── Spacing ──────────────────────────────────────── */
-  --space-xs: 0.25rem;
-  --space-sm: 0.5rem;
-  --space-md: 1rem;
-  --space-lg: 1.5rem;
-  --space-xl: 2rem;
-  --space-2xl: 3rem;
-
-  /* ─── Transitions ──────────────────────────────────── */
   --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 
-  /* ─── Z-Index Scale ────────────────────────────────── */
   --z-dropdown: 10;
   --z-sticky: 20;
   --z-nav: 30;
   --z-overlay: 40;
   --z-sidebar: 50;
   --z-modal: 60;
-  --z-tooltip: 70;
   --z-toast: 100;
-  --z-max: 10000;
 }
 
-/* ─── Dark Theme ────────────────────────────────────────── */
+/* ─── Dark Theme Palette (Image 1) ────────────────────────── */
 [data-theme='dark'] {
-  --primary: #2dd4bf;
-  --primary-hover: #5eead4;
-  --primary-light: rgba(45, 212, 191, 0.15);
+  --primary: #10b981;          /* Vibrant Mint Green */
+  --primary-hover: #059669;
+  --primary-light: rgba(16, 185, 129, 0.15);
   --secondary: #94a3b8;
 
-  /* ✨ Elevated dark palette — Discord/Figma inspired */
-  --bg-color: #1a1d2e;
-  --surface: #232738;
-  --surface-hover: #2d3148;
-  --surface-elevated: #323650;
+  /* Deep Dark Navy Palette */
+  --bg-color: #101424;         /* Deep dark navy background */
+  --surface: #1a1e32;          /* Elevated dark navy cards */
+  --surface-hover: #222740;
+  --surface-elevated: #262c47;
+  --sidebar-bg: #16192c;       /* Dark navy sidebar */
+  --sidebar-border: rgba(255, 255, 255, 0.08);
 
-  /* Ultra-readable text */
-  --text-main: #f1f5f9;
-  --text-muted: #a1adc4;
-  --text-light: #c8d3e3;
+  /* Active Nav Item */
+  --active-nav-bg: rgba(16, 185, 129, 0.12);
+  --active-nav-border: #10b981;
+  --active-nav-text: #10b981;
 
-  /* Vibrant neon accents */
-  --accent-blue: #60a5fa;
+  /* Typography */
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-light: #cbd5e1;
+
+  /* Accents */
+  --accent-blue: #38bdf8;
   --accent-amber: #fbbf24;
   --accent-orange: #fb923c;
-  --accent-rose: #fb7185;
-  --accent-emerald: #34d399;
+  --accent-rose: #f43f5e;
+  --accent-emerald: #10b981;
 
-  /* Visible borders + frosted glass */
-  --border-color: rgba(255, 255, 255, 0.12);
-  --glass-bg: rgba(35, 39, 56, 0.85);
+  /* Borders & Glass */
+  --border-color: #272d47;
+  --glass-bg: rgba(26, 30, 50, 0.88);
 
-  --bg-danger: rgba(251, 113, 133, 0.12);
-  --border-danger: rgba(251, 113, 133, 0.3);
+  --bg-danger: rgba(244, 63, 94, 0.15);
+  --border-danger: rgba(244, 63, 94, 0.3);
 
-  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.25);
-  --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.35);
-  --shadow-lg: 0 10px 24px -4px rgba(0, 0, 0, 0.4);
-  --shadow-xl: 0 20px 40px -8px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 40px 0 rgba(45, 212, 191, 0.12);
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 4px 14px -2px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 12px 28px -4px rgba(0, 0, 0, 0.6);
+  --shadow-xl: 0 24px 48px -8px rgba(0, 0, 0, 0.7);
+  --shadow-glow: 0 0 40px 0 rgba(16, 185, 129, 0.2);
 }
+

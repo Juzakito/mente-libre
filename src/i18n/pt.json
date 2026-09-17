@@ -1,0 +1,18 @@
+{
+  "nav": {
+    "feed": "Comunidade",
+    "explore": "Explorar & Recursos",
+    "chat": "Chat IA de Apoio",
+    "mood": "Centro de Bem-Estar",
+    "experts": "Conectar com Especialistas",
+    "profile": "Perfil & Identidade",
+    "donate": "Apoiar",
+    "sos": "Ajuda Imediata (SOS)"
+  },
+  "welcome": "Bem-vindo ao Free Mind",
+  "tagline": "Seu espaço universitário seguro e 100% anônimo para compartilhar, desabafar e curar.",
+  "anonymous": "Modo 100% Anônimo",
+  "connected": "CONECTADO",
+  "chatPlaceholder": "Desabafe ou expresse como você se sente hoje...",
+  "aiTone": "Tom da IA Emocional"
+}

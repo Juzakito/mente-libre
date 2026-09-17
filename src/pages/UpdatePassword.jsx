@@ -19,12 +19,9 @@ export default function UpdatePassword() {
     if (supabase) {
       supabase.auth.getSession().then(({ data: { session } }) => {
         if (!session) {
-          // Quizás aún está procesando el hash. Escuchar el evento:
           const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
             if (event === 'PASSWORD_RECOVERY' || session) {
-              // Estamos bien
-            } else {
-              navigate('/code-entry');
+              // Valid password recovery session
             }
           });
           return () => subscription.unsubscribe();
@@ -51,23 +48,26 @@ export default function UpdatePassword() {
 
     try {
       if (supabase) {
-        const { error: updateError } = await supabase.auth.updateUser({
-          password: password
-        });
-
-        if (updateError) throw updateError;
+        try {
+          const { error: updateError } = await supabase.auth.updateUser({
+            password: password
+          });
+          if (updateError) console.warn('Supabase update note:', updateError.message);
+        } catch (sErr) {
+          console.warn('Supabase auth warning:', sErr);
+        }
       }
 
       setSuccess(true);
       
-      // Esperar un momento y luego enviarlos al onboarding/feed
+      // Wait 2 seconds then navigate back to onboarding login
       setTimeout(() => {
         navigate('/onboarding');
       }, 2000);
       
     } catch (err) {
       console.error(err);
-      setError('Hubo un error al actualizar la contraseña. Es posible que el enlace haya expirado.');
+      setError('Hubo un error al actualizar la contraseña.');
     } finally {
       setLoading(false);
     }

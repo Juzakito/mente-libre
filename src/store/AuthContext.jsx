@@ -26,17 +26,20 @@ function buildUserFromSession(authUser, dbData) {
   const meta = authUser?.user_metadata || {};
   const db = dbData || {};
 
-  const nickname =
-    db.full_name ||
-    meta.nickname ||
-    local?.nickname ||
-    authUser?.email?.split('@')[0] ||
-    'Estudiante';
-  const avatar = db.avatar_url || meta.avatar || local?.avatar || '🦊';
-  const career = db.career || meta.career || local?.career || '';
+  // Prioritize user's explicit custom saved pseudonym over email prefix
+  let nickname = local?.nickname || meta.nickname || meta.full_name;
+  if (!nickname || (nickname.includes('@') && db.full_name && !db.full_name.includes('@'))) {
+    nickname = db.full_name;
+  }
+  if (!nickname || nickname.includes('@')) {
+    nickname = authUser?.email?.split('@')[0] || 'Josh';
+  }
+
+  const avatar = local?.avatar || meta.avatar || db.avatar_url || '🦊';
+  const career = local?.career || meta.career || db.career || 'Estudiante Universitario';
 
   return {
-    id: authUser?.id || local?.id,
+    id: authUser?.id || local?.id || 'user_local',
     email: authUser?.email || local?.email,
     nickname,
     avatar,
@@ -44,11 +47,7 @@ function buildUserFromSession(authUser, dbData) {
     full_name: nickname,
     avatar_url: avatar,
     university_id: db.university_id || local?.university_id || null,
-    onboarding_completed:
-      db.onboarding_completed ??
-      meta.onboarding_completed ??
-      local?.onboarding_completed ??
-      Boolean(nickname && career),
+    onboarding_completed: true,
   };
 }
 
@@ -178,6 +177,7 @@ export const AuthProvider = ({ children }) => {
         avatar_url: newAvatar,
       };
       setUser(newUserData);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(newUserData));
 
       if (supabase) {
         try {
