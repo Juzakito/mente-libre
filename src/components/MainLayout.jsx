@@ -577,7 +577,9 @@ export default function MainLayout() {
           <div className="tc-verification-card" onClick={(e) => e.stopPropagation()}>
             <button
               onClick={() => setActiveInfoModal(null)}
-              style={{ position: 'absolute', top: '1.25rem', right: '1.25rem', background: 'none', border: 'none', color: '#8e9ca0', cursor: 'pointer' }}
+              style={{ position: 'absolute', top: '1.25rem', right: '1.25rem', background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', padding: '4px', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.15s' }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--surface-hover)'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
             >
               <X size={20} />
             </button>
@@ -893,24 +895,42 @@ export default function MainLayout() {
             )}
 
             {activeInfoModal === 'seguridad' && (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem', textAlign: 'left' }} className="animate-fade-in">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                  <div style={{ fontSize: '2.2rem' }}>🛡️</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', textAlign: 'left' }} className="animate-fade-in">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+                  <div style={{ 
+                    width: '44px', height: '44px', borderRadius: '12px', 
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)', 
+                    display: 'flex', alignItems: 'center', justifyContent: 'center'
+                  }}>
+                    <Shield size={22} color="var(--primary)" strokeWidth={2.5} />
+                  </div>
                   <div>
-                    <h3 style={{ fontSize: '1.3rem', fontWeight: 900, margin: 0, color: '#ffffff' }}>Centro de Seguridad</h3>
-                    <p style={{ color: '#9ba7ac', fontSize: '0.82rem', margin: 0 }}>Configura tus preferencias de privacidad y anonimato</p>
+                    <h3 style={{ fontSize: '1.25rem', fontWeight: 900, margin: 0, color: 'var(--text-main)', letterSpacing: '-0.01em' }}>Privacidad y Seguridad</h3>
+                    <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', margin: '0.1rem 0 0', fontWeight: 500 }}>Gestiona quién puede ver tu actividad</p>
                   </div>
                 </div>
 
-                <div style={{ backgroundColor: 'rgba(16, 185, 129, 0.12)', border: '1px solid rgba(16, 185, 129, 0.35)', padding: '0.75rem 1rem', borderRadius: '14px', color: '#10b981', fontSize: '0.82rem', fontWeight: 800, textAlign: 'left' }}>
-                  🔒 100% Anónimo: Tu nombre e identidad real no se vinculan con tus desahogos en la plataforma.
+                <div style={{ 
+                  backgroundColor: 'var(--surface-elevated)', 
+                  border: '1px solid var(--primary-light)', 
+                  padding: '1rem', 
+                  borderRadius: '16px', 
+                  display: 'flex', alignItems: 'flex-start', gap: '0.75rem' 
+                }}>
+                  <Lock size={18} color="var(--primary)" style={{ marginTop: '0.1rem', flexShrink: 0 }} />
+                  <div>
+                    <div style={{ color: 'var(--primary)', fontSize: '0.85rem', fontWeight: 800, marginBottom: '0.2rem' }}>100% Anónimo</div>
+                    <div style={{ color: 'var(--text-main)', fontSize: '0.8rem', lineHeight: 1.5, opacity: 0.8 }}>
+                      Tu nombre e identidad real nunca se vinculan con tus publicaciones. Tu privacidad está garantizada.
+                    </div>
+                  </div>
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', textAlign: 'left' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', textAlign: 'left' }}>
                   {[
-                    { key: 'hideCareer', label: 'Ocultar mi carrera en publicaciones públicas' },
-                    { key: 'allowDM', label: 'Permitir solicitudes de chat directo de Aliados' },
-                    { key: 'hideProfile', label: 'Ocultar mi perfil en búsquedas de estudiantes' }
+                    { key: 'hideCareer', label: 'Ocultar mi carrera', desc: 'No mostrar mi facultad en posts' },
+                    { key: 'allowDM', label: 'Permitir chats privados', desc: 'Recibir mensajes directos de Aliados' },
+                    { key: 'hideProfile', label: 'Modo Incógnito', desc: 'Ocultar mi perfil del directorio de estudiantes' }
                   ].map((setting) => (
                     <label
                       key={setting.key}
@@ -918,22 +938,52 @@ export default function MainLayout() {
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'space-between',
-                        padding: '0.75rem 0.9rem',
-                        backgroundColor: '#1f262a',
-                        borderRadius: '12px',
-                        border: '1px solid rgba(255,255,255,0.08)',
-                        cursor: 'pointer'
+                        padding: '1rem 1.25rem',
+                        backgroundColor: 'var(--surface)',
+                        borderRadius: '16px',
+                        border: '1px solid var(--border-color)',
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease'
                       }}
+                      onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--text-muted)'; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border-color)'; }}
                     >
-                      <span style={{ fontSize: '0.84rem', fontWeight: 700, color: '#ffffff' }}>{setting.label}</span>
+                      <div>
+                        <div style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-main)' }}>{setting.label}</div>
+                        <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.15rem' }}>{setting.desc}</div>
+                      </div>
+                      
+                      {/* Custom Toggle Switch */}
+                      <div style={{
+                        width: '40px',
+                        height: '22px',
+                        backgroundColor: privacySettings[setting.key] ? 'var(--primary)' : 'var(--surface-hover)',
+                        borderRadius: '11px',
+                        position: 'relative',
+                        transition: 'background-color 0.3s ease',
+                        border: privacySettings[setting.key] ? 'none' : '1px solid var(--border-color)'
+                      }}>
+                        <div style={{
+                          width: '18px',
+                          height: '18px',
+                          backgroundColor: '#ffffff',
+                          borderRadius: '50%',
+                          position: 'absolute',
+                          top: privacySettings[setting.key] ? '2px' : '1px',
+                          left: privacySettings[setting.key] ? '20px' : '2px',
+                          transition: 'left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                          boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
+                        }} />
+                      </div>
+                      
                       <input
                         type="checkbox"
                         checked={privacySettings[setting.key]}
                         onChange={(e) => {
                           setPrivacySettings(prev => ({ ...prev, [setting.key]: e.target.checked }));
-                          showToast('Preferencias de privacidad actualizadas');
+                          showToast('Preferencias actualizadas');
                         }}
-                        style={{ width: '18px', height: '18px', accentColor: '#00e676', cursor: 'pointer' }}
+                        style={{ display: 'none' }}
                       />
                     </label>
                   ))}
@@ -942,47 +992,79 @@ export default function MainLayout() {
             )}
 
             {activeInfoModal === 'guia' && (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem', textAlign: 'left' }} className="animate-fade-in">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                  <div style={{ fontSize: '2.2rem' }}>📖</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', textAlign: 'left' }} className="animate-fade-in">
+                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
                   <div>
-                    <h3 style={{ fontSize: '1.3rem', fontWeight: 900, margin: 0, color: '#ffffff' }}>Guía de la Comunidad</h3>
-                    <p style={{ color: '#9ba7ac', fontSize: '0.82rem', margin: 0 }}>Paso {guideStep} de 4 · Aprende a usar Free Mind</p>
+                    <h3 style={{ fontSize: '1.25rem', fontWeight: 900, margin: 0, color: 'var(--text-main)', letterSpacing: '-0.01em' }}>Comienza en Free Mind</h3>
+                    <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', margin: '0.25rem 0 0', fontWeight: 500 }}>Guía rápida ({guideStep}/4)</p>
+                  </div>
+                  {/* Progress indicator dots */}
+                  <div style={{ display: 'flex', gap: '4px', marginTop: '6px' }}>
+                    {[1,2,3,4].map(step => (
+                      <div key={step} style={{ 
+                        width: step === guideStep ? '16px' : '6px', 
+                        height: '6px', 
+                        borderRadius: '3px', 
+                        backgroundColor: step === guideStep ? 'var(--primary)' : 'var(--border-color)',
+                        transition: 'all 0.3s ease'
+                      }} />
+                    ))}
                   </div>
                 </div>
 
-                <div style={{ backgroundColor: '#1f262a', padding: '1.25rem', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.08)', textAlign: 'left', minHeight: '130px' }}>
+                <div style={{ 
+                  backgroundColor: 'var(--surface)', 
+                  padding: '1.5rem', 
+                  borderRadius: '16px', 
+                  border: '1px solid var(--border-color)', 
+                  textAlign: 'left', 
+                  minHeight: '140px',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.02)',
+                  display: 'flex', flexDirection: 'column', justifyContent: 'center'
+                }}>
                   {guideStep === 1 && (
-                    <>
-                      <h4 style={{ color: '#00e676', margin: '0 0 0.4rem', fontSize: '1rem', fontWeight: 900 }}>1. Desahógate sin juicios</h4>
-                      <p style={{ color: '#9ba7ac', fontSize: '0.85rem', lineHeight: 1.5, margin: 0 }}>
-                        Publica lo que sientes con total tranquilidad. Tu seudónimo protege tu privacidad para que puedas hablar sobre estrés, exámenes o emociones libremente.
+                    <div className="animate-slide-in-right">
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--primary)', marginBottom: '0.65rem' }}>
+                        <MessageCircle size={20} strokeWidth={2.5} />
+                        <h4 style={{ margin: 0, fontSize: '1rem', fontWeight: 800 }}>Desahógate sin juicios</h4>
+                      </div>
+                      <p style={{ color: 'var(--text-main)', fontSize: '0.9rem', lineHeight: 1.6, margin: 0, opacity: 0.9 }}>
+                        Publica lo que sientes con total tranquilidad. Tu identidad es <strong style={{ color: 'var(--primary)' }}>100% anónima</strong> para que hables sobre estrés o exámenes libremente.
                       </p>
-                    </>
+                    </div>
                   )}
                   {guideStep === 2 && (
-                    <>
-                      <h4 style={{ color: '#38bdf8', margin: '0 0 0.4rem', fontSize: '1rem', fontWeight: 900 }}>2. Apoya a tus compañeros</h4>
-                      <p style={{ color: '#9ba7ac', fontSize: '0.85rem', lineHeight: 1.5, margin: 0 }}>
-                        Haz clic en el botón 💙 de cada publicación para enviar un abrazo virtual. Una sola palabra empática puede cambiar el día de un estudiante.
+                    <div className="animate-slide-in-right">
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-blue)', marginBottom: '0.65rem' }}>
+                        <Heart size={20} strokeWidth={2.5} />
+                        <h4 style={{ margin: 0, fontSize: '1rem', fontWeight: 800 }}>Apoya a tus compañeros</h4>
+                      </div>
+                      <p style={{ color: 'var(--text-main)', fontSize: '0.9rem', lineHeight: 1.6, margin: 0, opacity: 0.9 }}>
+                        Envía <strong>abrazos virtuales</strong> a quienes lo necesiten. Una simple acción empática puede cambiar el día de un estudiante.
                       </p>
-                    </>
+                    </div>
                   )}
                   {guideStep === 3 && (
-                    <>
-                      <h4 style={{ color: '#fbbf24', margin: '0 0 0.4rem', fontSize: '1rem', fontWeight: 900 }}>3. Acumula Plumas & Avatares</h4>
-                      <p style={{ color: '#9ba7ac', fontSize: '0.85rem', lineHeight: 1.5, margin: 0 }}>
-                        Cada día que registres tu estado de ánimo o ayudes a un par ganarás Plumas para personalizar tu perfil con avatares exclusivos.
+                    <div className="animate-slide-in-right">
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-amber)', marginBottom: '0.65rem' }}>
+                        <Award size={20} strokeWidth={2.5} />
+                        <h4 style={{ margin: 0, fontSize: '1rem', fontWeight: 800 }}>Gana recompensas</h4>
+                      </div>
+                      <p style={{ color: 'var(--text-main)', fontSize: '0.9rem', lineHeight: 1.6, margin: 0, opacity: 0.9 }}>
+                        Cada día que ayudes a un par, ganarás <strong>Puntos Dotz</strong> para personalizar tu perfil con avatares exclusivos.
                       </p>
-                    </>
+                    </div>
                   )}
                   {guideStep === 4 && (
-                    <>
-                      <h4 style={{ color: '#f43f5e', margin: '0 0 0.4rem', fontSize: '1rem', fontWeight: 900 }}>4. Botón S.O.S de Emergencia</h4>
-                      <p style={{ color: '#9ba7ac', fontSize: '0.85rem', lineHeight: 1.5, margin: 0 }}>
-                        Si tú o alguien necesita apoyo profesional inmediato, el botón S.O.S conecta 24/7 con psicólogos del campus y líneas clínicas gratuitas.
+                    <div className="animate-slide-in-right">
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-rose)', marginBottom: '0.65rem' }}>
+                        <Shield size={20} strokeWidth={2.5} />
+                        <h4 style={{ margin: 0, fontSize: '1rem', fontWeight: 800 }}>Botón S.O.S de Emergencia</h4>
+                      </div>
+                      <p style={{ color: 'var(--text-main)', fontSize: '0.9rem', lineHeight: 1.6, margin: 0, opacity: 0.9 }}>
+                        Si necesitas apoyo profesional inmediato, el botón S.O.S te conecta 24/7 con líneas clínicas gratuitas. Nunca estás solo.
                       </p>
-                    </>
+                    </div>
                   )}
                 </div>
 
@@ -990,9 +1072,16 @@ export default function MainLayout() {
                   {guideStep > 1 && (
                     <button
                       onClick={() => setGuideStep(guideStep - 1)}
-                      style={{ flex: 1, backgroundColor: '#1f262a', color: '#ffffff', border: '1px solid rgba(255,255,255,0.08)', padding: '0.75rem', borderRadius: '12px', fontWeight: 800, cursor: 'pointer' }}
+                      style={{ 
+                        flex: 1, backgroundColor: 'transparent', color: 'var(--text-main)', 
+                        border: '1px solid var(--border-color)', padding: '0.8rem', 
+                        borderRadius: '12px', fontWeight: 700, cursor: 'pointer',
+                        transition: 'all 0.2s ease', fontSize: '0.9rem'
+                      }}
+                      onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--surface-hover)'; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; }}
                     >
-                      ← Anterior
+                      Atrás
                     </button>
                   )}
                   <button
@@ -1004,42 +1093,63 @@ export default function MainLayout() {
                         setGuideStep(1);
                       }
                     }}
-                    style={{ flex: 1, backgroundColor: '#00e676', color: '#082e30', border: 'none', padding: '0.75rem', borderRadius: '12px', fontWeight: 900, cursor: 'pointer' }}
+                    style={{ 
+                      flex: guideStep === 1 ? '1' : '2', 
+                      backgroundColor: 'var(--text-main)', color: 'var(--surface)', 
+                      border: 'none', padding: '0.8rem', 
+                      borderRadius: '12px', fontWeight: 800, cursor: 'pointer',
+                      transition: 'all 0.2s ease', fontSize: '0.9rem'
+                    }}
+                    onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}
                   >
-                    {guideStep < 4 ? 'Siguiente Paso →' : 'Comenzar a explorar ✨'}
+                    {guideStep < 4 ? 'Siguiente' : 'Comenzar a explorar'}
                   </button>
                 </div>
               </div>
             )}
 
             {activeInfoModal === 'helpline' && (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem' }} className="animate-fade-in">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                  <div style={{ fontSize: '2.2rem' }}>📞</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }} className="animate-fade-in">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+                  <div style={{ 
+                    width: '44px', height: '44px', borderRadius: '12px', 
+                    backgroundColor: 'rgba(244,63,94,0.1)', 
+                    display: 'flex', alignItems: 'center', justifyContent: 'center'
+                  }}>
+                    <Heart size={22} color="var(--accent-rose)" strokeWidth={2.5} />
+                  </div>
                   <div>
-                    <h3 style={{ fontSize: '1.3rem', fontWeight: 900, margin: 0 }}>Líneas de Atención Clínica 24/7</h3>
-                    <p style={{ color: 'var(--text-muted)', fontSize: '0.82rem', margin: 0 }}>Atención psicológica gratuita e inmediata</p>
+                    <h3 style={{ fontSize: '1.25rem', fontWeight: 900, margin: 0, color: 'var(--text-main)', letterSpacing: '-0.01em' }}>Atención Clínica 24/7</h3>
+                    <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', margin: '0.1rem 0 0', fontWeight: 500 }}>Soporte psicológico inmediato</p>
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                   <a
                     href="tel:113"
                     style={{
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'space-between',
-                      backgroundColor: '#f43f5e',
+                      backgroundColor: 'var(--accent-rose)',
                       color: '#ffffff',
-                      padding: '0.85rem 1.1rem',
-                      borderRadius: '14px',
+                      padding: '1rem 1.25rem',
+                      borderRadius: '16px',
                       textDecoration: 'none',
-                      fontWeight: 900,
-                      fontSize: '0.95rem'
+                      fontWeight: 800,
+                      fontSize: '0.95rem',
+                      boxShadow: '0 4px 15px rgba(244,63,94,0.3)',
+                      transition: 'all 0.2s ease'
                     }}
+                    onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 20px rgba(244,63,94,0.4)'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 15px rgba(244,63,94,0.3)'; }}
                   >
-                    <span>📞 MINSA 113 Opción 5 (Gratis 24/7)</span>
-                    <span>Llamar →</span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+                      <PhoneCall size={18} strokeWidth={2.5} />
+                      <span>MINSA 113 (Opción 5)</span>
+                    </div>
+                    <span style={{ fontSize: '0.75rem', backgroundColor: 'rgba(255,255,255,0.2)', padding: '0.2rem 0.6rem', borderRadius: '9999px' }}>Gratis</span>
                   </a>
 
                   <a
@@ -1048,162 +1158,333 @@ export default function MainLayout() {
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'space-between',
-                      backgroundColor: 'var(--surface-elevated)',
+                      backgroundColor: 'var(--surface)',
                       color: 'var(--text-main)',
                       border: '1px solid var(--border-color)',
-                      padding: '0.85rem 1.1rem',
-                      borderRadius: '14px',
+                      padding: '1rem 1.25rem',
+                      borderRadius: '16px',
                       textDecoration: 'none',
-                      fontWeight: 800,
-                      fontSize: '0.9rem'
+                      fontWeight: 700,
+                      fontSize: '0.9rem',
+                      transition: 'all 0.2s ease',
+                      boxShadow: '0 2px 8px rgba(0,0,0,0.02)'
                     }}
+                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--text-muted)'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border-color)'; }}
                   >
-                    <span>🏥 Central Bienestar Científica del Sur</span>
-                    <span>Llamar →</span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+                      <Building size={18} color="var(--text-muted)" />
+                      <span>Bienestar Científica del Sur</span>
+                    </div>
+                    <ArrowUpRight size={16} color="var(--text-muted)" />
                   </a>
                 </div>
 
                 {/* Interactive Breathing Exercise Box */}
-                <div style={{ backgroundColor: 'rgba(0, 230, 118, 0.08)', border: '1.5px solid rgba(0, 230, 118, 0.35)', padding: '1rem', borderRadius: '16px', textAlign: 'center' }}>
-                  <div style={{ fontWeight: 800, fontSize: '0.88rem', color: '#00e676', marginBottom: '0.4rem' }}>
-                    🧘 Ejercicio Guiado de Calma (1 Minuto)
+                <div style={{ 
+                  backgroundColor: 'var(--surface)', 
+                  border: '1px solid var(--border-color)', 
+                  padding: '1.25rem', 
+                  borderRadius: '18px', 
+                  textAlign: 'center',
+                  display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.85rem'
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 800, fontSize: '0.85rem', color: 'var(--primary)' }}>
+                    <Sparkles size={14} /> Ejercicio de Calma
                   </div>
-                  <div style={{ fontSize: '0.84rem', color: 'var(--text-main)', fontWeight: 700, minHeight: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <div style={{ 
+                    fontSize: '0.9rem', 
+                    color: 'var(--text-main)', 
+                    fontWeight: 700, 
+                    minHeight: '24px', 
+                    display: 'flex', alignItems: 'center', justifyContent: 'center' 
+                  }}>
                     {breathingText}
                   </div>
                   <button
                     onClick={() => setBreathingActive(!breathingActive)}
                     style={{
-                      marginTop: '0.5rem',
-                      backgroundColor: breathingActive ? '#f43f5e' : '#00e676',
-                      color: breathingActive ? '#ffffff' : '#082e30',
+                      backgroundColor: breathingActive ? 'rgba(244,63,94,0.1)' : 'var(--primary-light)',
+                      color: breathingActive ? 'var(--accent-rose)' : 'var(--primary)',
                       border: 'none',
-                      padding: '0.45rem 1.25rem',
+                      padding: '0.6rem 1.25rem',
                       borderRadius: '9999px',
-                      fontWeight: 900,
+                      fontWeight: 800,
                       fontSize: '0.8rem',
-                      cursor: 'pointer'
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease',
+                      display: 'flex', alignItems: 'center', gap: '0.4rem'
                     }}
                   >
-                    {breathingActive ? 'Detener Ejercicio' : 'Iniciar Respiración 4-7-8'}
+                    {breathingActive ? 'Detener Ejercicio' : 'Iniciar Respiración'}
                   </button>
                 </div>
               </div>
             )}
 
             {activeInfoModal === 'acerca' && (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem' }} className="animate-fade-in">
-                <TalkCampusLogo size={36} showText textColor="var(--text-main)" style={{ justifyContent: 'center', marginBottom: '0.2rem' }} />
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }} className="animate-fade-in">
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginBottom: '0.2rem' }}>
+                  <TalkCampusLogo size={32} showText={false} />
+                  <span style={{ fontSize: '1.4rem', fontWeight: 900, color: 'var(--text-main)', letterSpacing: '-0.02em' }}>Free Mind</span>
+                </div>
                 
-                <p style={{ color: 'var(--text-muted)', fontSize: '0.86rem', lineHeight: 1.5, margin: 0 }}>
-                  Free Mind es la primera plataforma universitaria peruana diseñada para brindar apoyo psicológico anónimo y contención emocional entre pares.
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', lineHeight: 1.6, margin: 0, textAlign: 'center', fontWeight: 500 }}>
+                  La plataforma universitaria diseñada para brindar apoyo psicológico anónimo y contención emocional entre pares.
                 </p>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem' }}>
-                  <div style={{ backgroundColor: 'var(--surface-elevated)', padding: '0.75rem 0.5rem', borderRadius: '12px', border: '1px solid var(--border-color)', textAlign: 'center' }}>
-                    <div style={{ fontWeight: 900, color: '#00e676', fontSize: '1.1rem' }}>+5,200</div>
-                    <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Estudiantes</div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.65rem' }}>
+                  <div style={{ backgroundColor: 'var(--surface)', padding: '1rem 0.5rem', borderRadius: '16px', border: '1px solid var(--border-color)', textAlign: 'center', boxShadow: '0 4px 12px rgba(0,0,0,0.02)' }}>
+                    <div style={{ fontWeight: 900, color: 'var(--text-main)', fontSize: '1.2rem', marginBottom: '0.2rem' }}>+5.2k</div>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 600 }}>Estudiantes</div>
                   </div>
-                  <div style={{ backgroundColor: 'var(--surface-elevated)', padding: '0.75rem 0.5rem', borderRadius: '12px', border: '1px solid var(--border-color)', textAlign: 'center' }}>
-                    <div style={{ fontWeight: 900, color: '#38bdf8', fontSize: '1.1rem' }}>+18.5k</div>
-                    <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Abrazos</div>
+                  <div style={{ backgroundColor: 'var(--surface)', padding: '1rem 0.5rem', borderRadius: '16px', border: '1px solid var(--border-color)', textAlign: 'center', boxShadow: '0 4px 12px rgba(0,0,0,0.02)' }}>
+                    <div style={{ fontWeight: 900, color: 'var(--text-main)', fontSize: '1.2rem', marginBottom: '0.2rem' }}>+18k</div>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 600 }}>Abrazos</div>
                   </div>
-                  <div style={{ backgroundColor: 'var(--surface-elevated)', padding: '0.75rem 0.5rem', borderRadius: '12px', border: '1px solid var(--border-color)', textAlign: 'center' }}>
-                    <div style={{ fontWeight: 900, color: '#fbbf24', fontSize: '1.1rem' }}>100%</div>
-                    <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Anónimo</div>
+                  <div style={{ backgroundColor: 'var(--surface)', padding: '1rem 0.5rem', borderRadius: '16px', border: '1px solid var(--border-color)', textAlign: 'center', boxShadow: '0 4px 12px rgba(0,0,0,0.02)' }}>
+                    <div style={{ fontWeight: 900, color: 'var(--primary)', fontSize: '1.2rem', marginBottom: '0.2rem' }}>100%</div>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 600 }}>Anónimo</div>
                   </div>
                 </div>
 
                 <button
                   onClick={() => { setActiveInfoModal(null); setShowShare(true); }}
-                  style={{ width: '100%', backgroundColor: '#00e676', color: '#082e30', border: 'none', padding: '0.85rem', borderRadius: '9999px', fontWeight: 900, fontSize: '0.92rem', cursor: 'pointer', boxShadow: '0 6px 20px rgba(0, 230, 118, 0.35)' }}
+                  style={{ 
+                    width: '100%', 
+                    backgroundColor: 'var(--text-main)', 
+                    color: 'var(--surface)', 
+                    border: 'none', 
+                    padding: '0.9rem', 
+                    borderRadius: '14px', 
+                    fontWeight: 800, 
+                    fontSize: '0.95rem', 
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '0.5rem',
+                    transition: 'all 0.2s ease',
+                    marginTop: '0.5rem'
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.02)'; e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.15)'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.boxShadow = 'none'; }}
                 >
-                  Compartir Plataforma con un Compañero 🤝
+                  Compartir Plataforma
+                  <ArrowRight size={16} strokeWidth={2.5} />
                 </button>
               </div>
             )}
 
             {activeInfoModal === 'aliado' && (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem' }} className="animate-fade-in">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                  <div style={{ fontSize: '2.2rem' }}>🤝</div>
-                  <div>
-                    <h3 style={{ fontSize: '1.3rem', fontWeight: 900, margin: 0 }}>Programa Hazte un Amigo</h3>
-                    <p style={{ color: 'var(--text-muted)', fontSize: '0.82rem', margin: 0 }}>Encuentra o sé un acompañante universitario</p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0', textAlign: 'left' }} className="animate-fade-in">
+
+                {/* ── Gradient Header ── */}
+                <div style={{
+                  background: 'linear-gradient(135deg, #0d9488 0%, #0891b2 50%, #7c3aed 100%)',
+                  borderRadius: '16px',
+                  padding: '1.4rem 1.25rem',
+                  marginBottom: '1.25rem',
+                  position: 'relative',
+                  overflow: 'hidden'
+                }}>
+                  {/* Decorative blobs */}
+                  <div style={{ position: 'absolute', top: '-20px', right: '-20px', width: '80px', height: '80px', background: 'rgba(255,255,255,0.08)', borderRadius: '50%' }} />
+                  <div style={{ position: 'absolute', bottom: '-15px', left: '30%', width: '60px', height: '60px', background: 'rgba(255,255,255,0.06)', borderRadius: '50%' }} />
+
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', position: 'relative', zIndex: 1 }}>
+                    <div style={{
+                      width: '52px', height: '52px', borderRadius: '16px',
+                      background: 'rgba(255,255,255,0.18)',
+                      backdropFilter: 'blur(8px)',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.6rem',
+                      border: '1px solid rgba(255,255,255,0.25)', flexShrink: 0
+                    }}>🤝</div>
+                    <div>
+                      <h3 style={{ fontSize: '1.2rem', fontWeight: 900, margin: 0, color: '#ffffff', letterSpacing: '-0.02em' }}>Hazte un Amigo</h3>
+                      <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '0.78rem', margin: '2px 0 0', fontWeight: 500 }}>Encuentra o sé un acompañante universitario</p>
+                    </div>
+                  </div>
+
+                  {/* Mini stats */}
+                  <div style={{ display: 'flex', gap: '0.85rem', marginTop: '1rem', position: 'relative', zIndex: 1 }}>
+                    {[{ val: '42', label: 'aliados online', icon: '🟢' }, { val: '100%', label: 'anónimo', icon: '🔒' }, { val: '2 min', label: 'tiempo medio', icon: '⚡' }].map((s, i) => (
+                      <div key={i} style={{ flex: 1, background: 'rgba(255,255,255,0.12)', borderRadius: '10px', padding: '0.45rem 0.5rem', textAlign: 'center', backdropFilter: 'blur(4px)' }}>
+                        <div style={{ fontSize: '0.7rem', marginBottom: '1px' }}>{s.icon}</div>
+                        <div style={{ fontWeight: 900, color: '#ffffff', fontSize: '0.9rem', lineHeight: 1 }}>{s.val}</div>
+                        <div style={{ fontSize: '0.62rem', color: 'rgba(255,255,255,0.7)', fontWeight: 600, marginTop: '1px' }}>{s.label}</div>
+                      </div>
+                    ))}
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', backgroundColor: 'var(--surface-elevated)', borderRadius: '9999px', padding: '0.25rem', border: '1px solid var(--border-color)' }}>
-                  <button
-                    onClick={() => { setPeerRole('search'); setPeerMatchResult(null); }}
-                    style={{ flex: 1, border: 'none', backgroundColor: peerRole === 'search' ? '#00e676' : 'transparent', color: peerRole === 'search' ? '#082e30' : 'var(--text-muted)', fontWeight: 800, padding: '0.5rem', borderRadius: '9999px', fontSize: '0.8rem', cursor: 'pointer' }}
-                  >
-                    Busco un Amigo
-                  </button>
-                  <button
-                    onClick={() => { setPeerRole('volunteer'); setPeerMatchResult(null); }}
-                    style={{ flex: 1, border: 'none', backgroundColor: peerRole === 'volunteer' ? '#00e676' : 'transparent', color: peerRole === 'volunteer' ? '#082e30' : 'var(--text-muted)', fontWeight: 800, padding: '0.5rem', borderRadius: '9999px', fontSize: '0.8rem', cursor: 'pointer' }}
-                  >
-                    Quiero Ser Aliado
-                  </button>
+                {/* ── Role Toggle ── */}
+                <div style={{ display: 'flex', backgroundColor: 'var(--surface-hover)', borderRadius: '12px', padding: '4px', border: '1px solid var(--border-color)', marginBottom: '1rem' }}>
+                  {[{ id: 'search', label: '🔍 Busco un Amigo' }, { id: 'volunteer', label: '🌟 Quiero Ser Aliado' }].map((r) => (
+                    <button
+                      key={r.id}
+                      onClick={() => { setPeerRole(r.id); setPeerMatchResult(null); }}
+                      style={{
+                        flex: 1, border: 'none', cursor: 'pointer', fontWeight: 800, fontSize: '0.78rem',
+                        padding: '0.55rem 0.5rem', borderRadius: '9px', transition: 'all 0.2s ease',
+                        backgroundColor: peerRole === r.id ? 'var(--primary)' : 'transparent',
+                        color: peerRole === r.id ? '#ffffff' : 'var(--text-muted)',
+                        boxShadow: peerRole === r.id ? '0 2px 8px rgba(13,148,136,0.35)' : 'none'
+                      }}
+                    >
+                      {r.label}
+                    </button>
+                  ))}
                 </div>
 
+                {/* ── SEARCH MODE ── */}
                 {peerRole === 'search' ? (
-                  <>
-                    <div style={{ textAlign: 'left', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-                      <label style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--text-muted)' }}>SELECCIONA EL TEMA DE CONVERSACIÓN:</label>
-                      <select
-                        value={peerTopic}
-                        onChange={(e) => setPeerTopic(e.target.value)}
-                        style={{ backgroundColor: 'var(--surface-elevated)', border: '1px solid var(--border-color)', borderRadius: '12px', padding: '0.65rem', color: 'var(--text-main)', fontSize: '0.86rem', outline: 'none' }}
-                      >
-                        <option value="Exámenes y Estrés">📚 Exámenes y Estrés Académico</option>
-                        <option value="Adaptación UCS">🌱 Adaptación al Primer Año UCS</option>
-                        <option value="Salud Mental">🧠 Salud Mental y Emociones</option>
-                        <option value="Habilidades Sociales">💬 Conversación Tranquila</option>
-                      </select>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+
+                    {/* Topic selector with chips */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                      <label style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-muted)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>Tema de conversación</label>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                        {[
+                          { value: 'Exámenes y Estrés', label: '📚 Exámenes', color: 'var(--accent-amber)' },
+                          { value: 'Adaptación UCS', label: '🌱 Adaptación', color: 'var(--accent-emerald)' },
+                          { value: 'Salud Mental', label: '🧠 Salud Mental', color: 'var(--primary)' },
+                          { value: 'Habilidades Sociales', label: '💬 Conversación', color: 'var(--accent-blue)' },
+                        ].map((t) => (
+                          <button
+                            key={t.value}
+                            onClick={() => setPeerTopic(t.value)}
+                            style={{
+                              padding: '0.4rem 0.8rem',
+                              borderRadius: '9999px',
+                              fontSize: '0.75rem',
+                              fontWeight: 700,
+                              cursor: 'pointer',
+                              border: peerTopic === t.value ? `2px solid ${t.color}` : '1.5px solid var(--border-color)',
+                              backgroundColor: peerTopic === t.value ? `color-mix(in srgb, ${t.color} 14%, var(--bg-color))` : 'var(--surface-hover)',
+                              color: peerTopic === t.value ? t.color : 'var(--text-muted)',
+                              transition: 'all 0.15s ease',
+                              boxShadow: peerTopic === t.value ? `0 0 0 3px color-mix(in srgb, ${t.color} 10%, transparent)` : 'none'
+                            }}
+                          >
+                            {t.label}
+                          </button>
+                        ))}
+                      </div>
                     </div>
 
+                    {/* Match result or find button */}
                     {peerMatchResult ? (
-                      <div style={{ backgroundColor: 'rgba(0, 230, 118, 0.12)', border: '1.5px solid #00e676', padding: '1rem', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }} className="animate-slide-down">
+                      <div style={{
+                        background: 'linear-gradient(135deg, rgba(13,148,136,0.1) 0%, rgba(8,145,178,0.08) 100%)',
+                        border: '1.5px solid var(--primary)',
+                        padding: '1rem', borderRadius: '16px',
+                        display: 'flex', flexDirection: 'column', gap: '0.75rem'
+                      }} className="animate-slide-down">
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                          <TalkCampusAvatar id={peerMatchResult.avatar} size={44} />
-                          <div style={{ textAlign: 'left' }}>
-                            <div style={{ fontWeight: 900, color: '#ffffff', fontSize: '0.95rem' }}>{peerMatchResult.nickname}</div>
-                            <div style={{ fontSize: '0.78rem', color: '#00e676', fontWeight: 700 }}>{peerMatchResult.career} · {peerMatchResult.status}</div>
+                          <TalkCampusAvatar id={peerMatchResult.avatar} size={48} />
+                          <div style={{ flex: 1 }}>
+                            <div style={{ fontWeight: 900, color: 'var(--text-main)', fontSize: '0.95rem' }}>{peerMatchResult.nickname}</div>
+                            <div style={{ fontSize: '0.75rem', color: 'var(--primary)', fontWeight: 700, marginTop: '2px' }}>{peerMatchResult.career}</div>
+                            <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '1px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                              <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#22c55e', display: 'inline-block' }} />
+                              {peerMatchResult.status}
+                            </div>
                           </div>
+                          <div style={{ fontSize: '1.4rem' }}>✅</div>
                         </div>
-                        <button
-                          onClick={() => { setActiveInfoModal(null); navigate('/app/chat'); }}
-                          style={{ backgroundColor: '#00e676', color: '#082e30', border: 'none', padding: '0.5rem 1rem', borderRadius: '9999px', fontWeight: 900, fontSize: '0.82rem', cursor: 'pointer' }}
-                        >
-                          Chatear →
-                        </button>
+                        <div style={{ display: 'flex', gap: '0.5rem' }}>
+                          <button
+                            onClick={() => setPeerMatchResult(null)}
+                            style={{ flex: 1, backgroundColor: 'var(--surface-hover)', color: 'var(--text-muted)', border: '1px solid var(--border-color)', padding: '0.55rem', borderRadius: '10px', fontWeight: 700, fontSize: '0.8rem', cursor: 'pointer' }}
+                          >
+                            Buscar otro
+                          </button>
+                          <button
+                            onClick={() => { setActiveInfoModal(null); navigate('/app/chat'); }}
+                            style={{ flex: 2, background: 'linear-gradient(135deg, var(--primary) 0%, #0891b2 100%)', color: '#ffffff', border: 'none', padding: '0.55rem', borderRadius: '10px', fontWeight: 900, fontSize: '0.8rem', cursor: 'pointer', boxShadow: '0 4px 12px rgba(13,148,136,0.35)' }}
+                          >
+                            Chatear ahora →
+                          </button>
+                        </div>
                       </div>
                     ) : (
                       <button
                         onClick={handleFindPeerMatch}
                         disabled={peerMatching}
-                        style={{ width: '100%', backgroundColor: '#00e676', color: '#082e30', border: 'none', padding: '0.85rem', borderRadius: '9999px', fontWeight: 900, fontSize: '0.92rem', cursor: peerMatching ? 'not-allowed' : 'pointer', boxShadow: '0 6px 20px rgba(0, 230, 118, 0.35)' }}
+                        style={{
+                          width: '100%',
+                          background: peerMatching ? 'var(--surface-hover)' : 'linear-gradient(135deg, var(--primary) 0%, #0891b2 100%)',
+                          color: peerMatching ? 'var(--text-muted)' : '#ffffff',
+                          border: 'none', padding: '0.9rem', borderRadius: '12px',
+                          fontWeight: 900, fontSize: '0.92rem',
+                          cursor: peerMatching ? 'not-allowed' : 'pointer',
+                          boxShadow: peerMatching ? 'none' : '0 6px 20px rgba(13,148,136,0.35)',
+                          transition: 'all 0.2s ease',
+                          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem'
+                        }}
                       >
-                        {peerMatching ? 'Buscando coincidencia anónima...' : 'Encontrar Amigo Anónimo ✨'}
+                        {peerMatching ? (
+                          <>
+                            <span style={{ width: '14px', height: '14px', border: '2px solid var(--text-muted)', borderTopColor: 'var(--primary)', borderRadius: '50%', display: 'inline-block', animation: 'spin 0.8s linear infinite' }} />
+                            Buscando coincidencia anónima...
+                          </>
+                        ) : (
+                          <>✨ Encontrar Amigo Anónimo</>
+                        )}
                       </button>
                     )}
-                  </>
-                ) : (
-                  <div style={{ textAlign: 'left', display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
-                    <p style={{ color: 'var(--text-muted)', fontSize: '0.84rem', lineHeight: 1.5, margin: 0 }}>
-                      Recibe capacitación en primera escucha empática del Centro de Bienestar Psicológico UCS y ayuda a tus compañeros.
+
+                    <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textAlign: 'center', margin: 0 }}>
+                      🔒 Tu identidad permanece anónima en todo momento
                     </p>
+                  </div>
+
+                ) : (
+                  /* ── VOLUNTEER MODE ── */
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+
+                    {/* Benefits */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                      {[
+                        { icon: '🎓', title: 'Capacitación oficial', desc: 'Centro de Bienestar Psicológico UCS' },
+                        { icon: '🏅', title: 'Certificado Aliado UCS', desc: 'Reconocimiento académico y horas extracurriculares' },
+                        { icon: '💙', title: 'Impacto real', desc: 'Acompaña a compañeros que necesitan apoyo' },
+                      ].map((b, i) => (
+                        <div key={i} style={{
+                          display: 'flex', alignItems: 'flex-start', gap: '0.75rem',
+                          backgroundColor: 'var(--surface-hover)',
+                          border: '1px solid var(--border-color)',
+                          padding: '0.7rem 0.85rem', borderRadius: '12px'
+                        }}>
+                          <span style={{ fontSize: '1.2rem', flexShrink: 0 }}>{b.icon}</span>
+                          <div>
+                            <div style={{ fontWeight: 800, fontSize: '0.82rem', color: 'var(--text-main)' }}>{b.title}</div>
+                            <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: '1px' }}>{b.desc}</div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
                     <button
                       onClick={() => {
                         showToast('¡Postulación recibida! Revisa tu correo institucional para los siguientes pasos ✨');
                         setActiveInfoModal(null);
                       }}
-                      style={{ width: '100%', backgroundColor: '#00e676', color: '#082e30', border: 'none', padding: '0.85rem', borderRadius: '9999px', fontWeight: 900, fontSize: '0.92rem', cursor: 'pointer' }}
+                      style={{
+                        width: '100%',
+                        background: 'linear-gradient(135deg, #7c3aed 0%, #0d9488 100%)',
+                        color: '#ffffff', border: 'none', padding: '0.9rem', borderRadius: '12px',
+                        fontWeight: 900, fontSize: '0.88rem', cursor: 'pointer',
+                        boxShadow: '0 6px 20px rgba(124,58,237,0.3)'
+                      }}
                     >
-                      Inscribirme como Aliado Certificado UCS →
+                      🌟 Inscribirme como Aliado Certificado UCS
                     </button>
+
+                    <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textAlign: 'center', margin: 0 }}>
+                      Proceso completamente voluntario · Modalidad virtual
+                    </p>
                   </div>
                 )}
               </div>
