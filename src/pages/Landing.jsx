@@ -1148,10 +1148,10 @@ export default function Landing() {
                 Comenzar Ahora Gratis →
               </button>
 
-              <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', fontSize: '0.8rem', color: t.bodyColor }}>
-                <span>🔒 100% Anónimo</span>
-                <span>🛡️ Cifrado E2E</span>
-                <span>🎓 UCS Oficial</span>
+              <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '1.5rem', fontSize: '0.82rem', color: 'var(--text-muted)', fontWeight: 600 }}>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}><Lock size={14} color="var(--primary)" /> 100% Anónimo</span>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}><Shield size={14} color="var(--primary)" /> Cifrado E2E</span>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}><Award size={14} color="var(--primary)" /> UCS Oficial</span>
               </div>
             </div>
           </div>
