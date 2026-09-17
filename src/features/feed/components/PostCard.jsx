@@ -159,22 +159,20 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
     <div
       className="card animate-fade-in"
       style={{
-        padding: '1.25rem',
-        borderRadius: 'var(--radius-xl)',
+        padding: '1.25rem 1.5rem',
+        borderRadius: '16px',
         backgroundColor: 'var(--surface)',
         border: '1px solid var(--border-color)',
-        boxShadow: 'var(--shadow-sm)',
-        transition: 'all var(--transition-fast)',
+        transition: 'all 0.2s ease',
         color: 'var(--text-main)',
         position: 'relative',
         overflow: 'hidden'
       }}
       onMouseOver={(e) => {
-        e.currentTarget.style.boxShadow = 'var(--shadow-md)';
-        e.currentTarget.style.borderColor = 'var(--border-color)';
+        e.currentTarget.style.borderColor = 'var(--text-muted)';
       }}
       onMouseOut={(e) => {
-        e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
+        e.currentTarget.style.borderColor = 'var(--border-color)';
       }}
     >
       {/* Top accent bar for Solid style */}

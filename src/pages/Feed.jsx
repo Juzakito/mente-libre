@@ -462,13 +462,15 @@ export default function Feed() {
                   backgroundColor: 'var(--primary)',
                   color: '#ffffff',
                   border: 'none',
-                  borderRadius: '9999px',
+                  borderRadius: '12px',
                   padding: '0.75rem 1.75rem',
                   fontSize: '0.9rem',
                   fontWeight: 900,
                   cursor: 'pointer',
-                  boxShadow: '0 4px 14px rgba(13,148,136,0.35)'
+                  transition: 'opacity 0.2s ease'
                 }}
+                onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
+                onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
               >
                 Restablecer Opciones
               </button>
@@ -527,8 +529,8 @@ export default function Feed() {
             <div
               onClick={() => handleSelectStyle('classic')}
               style={{
-                backgroundColor: 'var(--surface-hover)',
-                border: feedStyle === 'classic' ? '2px solid var(--primary)' : '1px solid var(--border-color)',
+                backgroundColor: feedStyle === 'classic' ? 'var(--surface-elevated)' : 'var(--surface-hover)',
+                border: feedStyle === 'classic' ? '1px solid var(--primary)' : '1px solid var(--border-color)',
                 borderRadius: '12px',
                 padding: '0.85rem 0.6rem',
                 display: 'flex',
@@ -536,8 +538,7 @@ export default function Feed() {
                 alignItems: 'center',
                 gap: '0.4rem',
                 cursor: 'pointer',
-                transition: 'all 0.15s ease',
-                boxShadow: feedStyle === 'classic' ? '0 0 14px rgba(13,148,136,0.25)' : 'none'
+                transition: 'all 0.15s ease'
               }}
             >
               <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', width: '100%', padding: '0 4px' }}>
@@ -554,8 +555,8 @@ export default function Feed() {
             <div
               onClick={() => handleSelectStyle('solid')}
               style={{
-                backgroundColor: 'var(--surface-hover)',
-                border: feedStyle === 'solid' ? '2px solid var(--primary)' : '1px solid var(--border-color)',
+                backgroundColor: feedStyle === 'solid' ? 'var(--surface-elevated)' : 'var(--surface-hover)',
+                border: feedStyle === 'solid' ? '1px solid var(--primary)' : '1px solid var(--border-color)',
                 borderRadius: '12px',
                 padding: '0.85rem 0.6rem',
                 display: 'flex',
@@ -563,8 +564,7 @@ export default function Feed() {
                 alignItems: 'center',
                 gap: '0.4rem',
                 cursor: 'pointer',
-                transition: 'all 0.15s ease',
-                boxShadow: feedStyle === 'solid' ? '0 0 14px rgba(13,148,136,0.25)' : 'none'
+                transition: 'all 0.15s ease'
               }}
             >
               <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', width: '100%', padding: '0 4px' }}>

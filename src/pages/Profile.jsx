@@ -93,49 +93,47 @@ export default function Profile() {
       
       {/* Profile Card */}
       <div style={{ 
-        background: 'linear-gradient(145deg, color-mix(in srgb, var(--primary) 90%, black), color-mix(in srgb, var(--primary) 40%, black))', 
-        borderRadius: '28px', 
+        backgroundColor: 'var(--surface)', 
+        borderRadius: '24px', 
         padding: '2.5rem 1.5rem', 
-        color: 'white', 
+        color: 'var(--text-main)', 
         textAlign: 'center', 
         position: 'relative',
-        boxShadow: '0 25px 50px -12px color-mix(in srgb, var(--primary) 40%, transparent), inset 0 1px 0 rgba(255,255,255,0.2)',
-        overflow: 'hidden',
-        border: '1px solid color-mix(in srgb, var(--primary) 60%, transparent)'
+        border: '1px solid var(--border-color)',
+        boxShadow: 'var(--shadow-sm)'
       }}>
-        <div style={{ position: 'absolute', top: '-50%', left: '-50%', width: '200%', height: '200%', background: 'radial-gradient(circle at top right, rgba(255,255,255,0.15), transparent 50%)', pointerEvents: 'none' }}></div>
         
         {!isEditing ? (
           <div className="animate-fade-in" style={{ position: 'relative', zIndex: 1 }}>
             <button 
               onClick={() => setIsEditing(true)}
-              style={{ position: 'absolute', top: '-1rem', right: '-0.5rem', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', color: 'white', padding: '0.5rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', backdropFilter: 'blur(10px)', transition: 'all 0.2s' }}
-              onMouseOver={e => e.currentTarget.style.background = 'rgba(255,255,255,0.2)'}
-              onMouseOut={e => e.currentTarget.style.background = 'rgba(255,255,255,0.1)'}
+              style={{ position: 'absolute', top: '-1rem', right: '-0.5rem', background: 'var(--surface-hover)', border: '1px solid var(--border-color)', color: 'var(--text-muted)', padding: '0.5rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', transition: 'all 0.2s' }}
+              onMouseOver={e => { e.currentTarget.style.background = 'var(--surface-elevated)'; e.currentTarget.style.color = 'var(--text-main)'; }}
+              onMouseOut={e => { e.currentTarget.style.background = 'var(--surface-hover)'; e.currentTarget.style.color = 'var(--text-muted)'; }}
             >
               <Edit3 size={16} />
             </button>
-            <div style={{ width: '6rem', height: '6rem', backgroundColor: 'rgba(255,255,255,0.1)', borderRadius: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '0 auto 1.5rem', backdropFilter: 'blur(10px)', border: '2px solid rgba(255,255,255,0.3)', boxShadow: '0 0 30px rgba(255,255,255,0.1), inset 0 0 20px rgba(255,255,255,0.1)' }}>
+            <div style={{ width: '6rem', height: '6rem', backgroundColor: 'var(--surface-hover)', borderRadius: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '0 auto 1.5rem', border: '1px solid var(--border-color)', boxShadow: 'var(--shadow-sm)' }}>
               <AppleEmoji emoji={user.avatar} size={48} />
             </div>
-            <h2 style={{ fontSize: '1.75rem', fontWeight: 900, marginBottom: '0.75rem', letterSpacing: '-0.02em', textShadow: '0 2px 4px rgba(0,0,0,0.2)' }}>{user.nickname}</h2>
+            <h2 style={{ fontSize: '1.75rem', fontWeight: 900, marginBottom: '0.75rem', letterSpacing: '-0.02em', color: 'var(--text-main)' }}>{user.nickname}</h2>
             
             <div style={{ display: 'flex', justifyContent: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.375rem', backgroundColor: 'rgba(0,0,0,0.2)', border: '1px solid rgba(255,255,255,0.1)', padding: '0.375rem 0.875rem', borderRadius: 'var(--radius-full)', fontSize: '0.75rem', fontWeight: 700, backdropFilter: 'blur(5px)' }}>
-                <BookOpen size={14} /> {user.career || 'Estudiante'}
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.375rem', backgroundColor: 'var(--surface-hover)', border: '1px solid var(--border-color)', color: 'var(--text-main)', padding: '0.375rem 0.875rem', borderRadius: '9999px', fontSize: '0.75rem', fontWeight: 700 }}>
+                <BookOpen size={14} color="var(--text-muted)" /> {user.career || 'Estudiante'}
               </div>
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.375rem', background: 'linear-gradient(135deg, #f97316 0%, #ea580c 100%)', color: 'white', padding: '0.375rem 0.875rem', borderRadius: 'var(--radius-full)', fontSize: '0.75rem', fontWeight: 800, boxShadow: '0 4px 10px rgba(234, 88, 12, 0.3)' }}>
-                <Flame size={14} fill="white" /> Racha: {streak} {streak === 1 ? 'día' : 'días'}
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.375rem', backgroundColor: 'rgba(249, 115, 22, 0.1)', color: '#ea580c', border: '1px solid rgba(234, 88, 12, 0.2)', padding: '0.375rem 0.875rem', borderRadius: '9999px', fontSize: '0.75rem', fontWeight: 800 }}>
+                <Flame size={14} fill="#ea580c" color="#ea580c" /> Racha: {streak} {streak === 1 ? 'día' : 'días'}
               </div>
             </div>
           </div>
         ) : (
           <div className="animate-fade-in" style={{ position: 'relative', zIndex: 10, display: 'flex', flexDirection: 'column', gap: '1.25rem', textAlign: 'left' }}>
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 900, color: 'white', textAlign: 'center' }}>Editar Perfil</h3>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: 900, color: 'var(--text-main)', textAlign: 'center' }}>Editar Perfil</h3>
             
             <div>
-              <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 800, marginBottom: '0.5rem', color: 'rgba(255,255,255,0.7)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Avatar</label>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', backgroundColor: 'rgba(0,0,0,0.2)', padding: '1rem', borderRadius: 'var(--radius-lg)', border: '1px solid rgba(255,255,255,0.1)' }}>
+              <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 800, marginBottom: '0.5rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Avatar</label>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', backgroundColor: 'var(--surface-hover)', padding: '1rem', borderRadius: '16px', border: '1px solid var(--border-color)' }}>
                 {unlockedAvatars.map(a => (
                   <button
                     key={a}
@@ -143,11 +141,10 @@ export default function Profile() {
                     style={{
                       fontSize: '1.75rem', width: '3.5rem', height: '3.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center',
                       borderRadius: '50%',
-                      backgroundColor: editAvatar === a ? 'var(--primary)' : 'rgba(255,255,255,0.1)',
-                      border: editAvatar === a ? '2px solid white' : '1px solid transparent',
+                      backgroundColor: editAvatar === a ? 'var(--surface-elevated)' : 'var(--surface)',
+                      border: editAvatar === a ? '2px solid var(--primary)' : '1px solid var(--border-color)',
                       cursor: 'pointer',
-                      transform: editAvatar === a ? 'scale(1.1)' : 'none',
-                      boxShadow: editAvatar === a ? '0 8px 16px rgba(0,0,0,0.3)' : 'none',
+                      transform: editAvatar === a ? 'scale(1.05)' : 'none',
                       transition: 'all 0.2s'
                     }}
                   >
@@ -158,22 +155,22 @@ export default function Profile() {
             </div>
 
             <div>
-              <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 800, marginBottom: '0.5rem', color: 'rgba(255,255,255,0.7)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{t('profile.pseudonym')}</label>
+              <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 800, marginBottom: '0.5rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{t('profile.pseudonym')}</label>
               <input 
                 type="text" 
                 value={editNickname}
                 onChange={(e) => setEditNickname(e.target.value)}
                 placeholder="Tu seudónimo"
                 maxLength={15}
-                style={{ width: '100%', padding: '1rem', fontSize: '1rem', fontWeight: 800, backgroundColor: 'rgba(0,0,0,0.2)', color: 'white', border: '1px solid rgba(255,255,255,0.2)', borderRadius: 'var(--radius-md)', outline: 'none', transition: 'border 0.2s' }}
-                onFocus={e => e.target.style.borderColor = 'white'}
-                onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.2)'}
+                style={{ width: '100%', padding: '1rem', fontSize: '1rem', fontWeight: 800, backgroundColor: 'var(--surface-hover)', color: 'var(--text-main)', border: '1px solid var(--border-color)', borderRadius: '12px', outline: 'none', transition: 'border 0.2s' }}
+                onFocus={e => e.target.style.borderColor = 'var(--primary)'}
+                onBlur={e => e.target.style.borderColor = 'var(--border-color)'}
               />
             </div>
 
             <div>
-              <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 800, marginBottom: '0.5rem', color: 'rgba(255,255,255,0.7)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Carrera</label>
-              <div style={{ backgroundColor: 'rgba(0,0,0,0.2)', borderRadius: 'var(--radius-md)', border: '1px solid rgba(255,255,255,0.2)' }}>
+              <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 800, marginBottom: '0.5rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Carrera</label>
+              <div style={{ backgroundColor: 'var(--surface-hover)', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
                 <CareerDropdown 
                   value={editCareer} 
                   onChange={setEditCareer} 
@@ -186,16 +183,16 @@ export default function Profile() {
             <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.5rem' }}>
               <button 
                 onClick={() => setIsEditing(false)}
-                style={{ flex: 1, padding: '1rem', backgroundColor: 'transparent', border: '1px solid rgba(255,255,255,0.3)', color: 'white', borderRadius: 'var(--radius-full)', fontWeight: 800, cursor: 'pointer', transition: 'background 0.2s' }}
-                onMouseOver={e => e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.1)'}
-                onMouseOut={e => e.currentTarget.style.backgroundColor = 'transparent'}
+                style={{ flex: 1, padding: '1rem', backgroundColor: 'var(--surface-hover)', border: '1px solid var(--border-color)', color: 'var(--text-main)', borderRadius: '9999px', fontWeight: 800, cursor: 'pointer', transition: 'background 0.2s' }}
+                onMouseOver={e => e.currentTarget.style.backgroundColor = 'var(--surface-elevated)'}
+                onMouseOut={e => e.currentTarget.style.backgroundColor = 'var(--surface-hover)'}
               >
                 Cancelar
               </button>
               <button 
                 onClick={handleSaveProfile}
                 disabled={!editNickname.trim() || !editCareer}
-                style={{ flex: 1, padding: '1rem', backgroundColor: 'white', color: 'var(--primary)', border: 'none', borderRadius: 'var(--radius-full)', fontWeight: 900, cursor: 'pointer', opacity: (!editNickname.trim() || !editCareer) ? 0.5 : 1, boxShadow: '0 8px 16px rgba(0,0,0,0.2)' }}
+                style={{ flex: 1, padding: '1rem', backgroundColor: 'var(--primary)', color: 'white', border: 'none', borderRadius: '9999px', fontWeight: 900, cursor: 'pointer', opacity: (!editNickname.trim() || !editCareer) ? 0.5 : 1 }}
               >
                 Guardar
               </button>

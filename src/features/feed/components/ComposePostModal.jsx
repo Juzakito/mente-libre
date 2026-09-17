@@ -95,17 +95,14 @@ export default function ComposePostModal({ onClose, onPublish }) {
           overflow: 'hidden'
         }}
       >
-        {/* Subtle top gradient bar */}
-        <div style={{ height: '4px', width: '100%', background: 'linear-gradient(90deg, #0d9488 0%, #3b82f6 50%, #8b5cf6 100%)' }} />
-
         {/* Header */}
         <div style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          padding: '1.25rem 1.75rem',
+          padding: '1.25rem 1.5rem',
           borderBottom: '1px solid var(--border-color)',
-          backgroundColor: 'var(--bg-color)',
+          backgroundColor: 'var(--surface)',
           position: 'relative',
           zIndex: 10
         }}>
@@ -216,35 +213,31 @@ export default function ComposePostModal({ onClose, onPublish }) {
                     type="button"
                     onClick={() => setSelectedIntention(m)}
                     style={{
-                      backgroundColor: isSelected ? `color-mix(in srgb, ${m.color} 12%, var(--bg-color))` : 'var(--surface-hover)',
-                      border: isSelected ? `2px solid ${m.color}` : '1.5px solid var(--border-color)',
-                      borderRadius: '14px',
+                      backgroundColor: isSelected ? 'var(--surface)' : 'var(--surface-hover)',
+                      border: `1px solid ${isSelected ? m.color : 'transparent'}`,
+                      borderRadius: '12px',
                       padding: '0.65rem 0.85rem',
-                      color: isSelected ? m.color : 'var(--text-main)',
-                      fontSize: '0.88rem',
-                      fontWeight: isSelected ? 800 : 600,
+                      color: isSelected ? 'var(--text-main)' : 'var(--text-muted)',
+                      fontSize: '0.85rem',
+                      fontWeight: isSelected ? 700 : 500,
                       cursor: 'pointer',
                       display: 'flex',
                       alignItems: 'center',
                       gap: '0.5rem',
-                      transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
-                      boxShadow: isSelected ? `0 4px 12px color-mix(in srgb, ${m.color} 20%, transparent)` : 'none',
-                      transform: isSelected ? 'scale(1.02)' : 'scale(1)'
+                      transition: 'all 0.15s ease'
                     }}
                     onMouseEnter={(e) => {
                       if (!isSelected) {
-                        e.currentTarget.style.borderColor = 'var(--text-muted)';
-                        e.currentTarget.style.transform = 'scale(1.01)';
+                        e.currentTarget.style.backgroundColor = 'var(--surface-elevated)';
                       }
                     }}
                     onMouseLeave={(e) => {
                       if (!isSelected) {
-                        e.currentTarget.style.borderColor = 'var(--border-color)';
-                        e.currentTarget.style.transform = 'scale(1)';
+                        e.currentTarget.style.backgroundColor = 'var(--surface-hover)';
                       }
                     }}
                   >
-                    <span style={{ fontSize: '1.2rem', filter: isSelected ? 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))' : 'none' }}>{m.emoji}</span>
+                    <span style={{ fontSize: '1.1rem' }}>{m.emoji}</span>
                     <span>{m.label}</span>
                   </button>
                 );
