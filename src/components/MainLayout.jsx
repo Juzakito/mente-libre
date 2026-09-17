@@ -235,9 +235,9 @@ export default function MainLayout() {
         padding: '1.15rem 0.85rem 1rem',
         overflowY: 'auto',
         zIndex: 95,
-        scrollbarWidth: 'thin',
+        scrollbarWidth: 'none',
         position: 'relative'
-      }} className={`desktop-sidebar ${mobileMenuOpen ? 'mobile-open' : ''}`}>
+      }} className={`desktop-sidebar no-scrollbar ${mobileMenuOpen ? 'mobile-open' : ''}`}>
 
         {/* Top Brand Header: Logo + CONECTADO status + Language Toggle */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', marginBottom: '1.25rem', padding: '0 0.25rem' }}>
@@ -280,7 +280,7 @@ export default function MainLayout() {
               onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#00e676'; e.currentTarget.style.transform = 'translateY(0)'; }}
             >
               <Plus size={18} strokeWidth={3} />
-              <span>+ Publicación</span>
+              <span>Crear Publicación</span>
             </button>
           </div>
 
