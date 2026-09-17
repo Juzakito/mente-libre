@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { MessageCircle, Send, ShieldAlert, ArrowLeft } from 'lucide-react';
-import { useOutletContext } from 'react-router-dom';
+import { useOutletContext, useLocation, useNavigate, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import AppleEmoji from '../components/ui/AppleEmoji';
 import { safeJSONParse } from '../utils/helpers';
-import { Link } from 'react-router-dom';
 
 const checkRiskWords = (text) => {
   const riskWords = /morir|matarme|desaparecer|suicidio|acabar con todo|ya no quiero vivir/i;
@@ -23,13 +22,14 @@ export default function Chat() {
   const location = useLocation();
 
   const [activeRoom, setActiveRoom] = useState(() => {
+    if (location.state?.activeRoom) return location.state.activeRoom;
     if (location.state?.selectedRoom) return location.state.selectedRoom;
     return safeJSONParse(sessionStorage.getItem('active_chat_room'), null);
   });
 
   const [connected, setConnected] = useState(() => {
     const savedRoom = safeJSONParse(sessionStorage.getItem('active_chat_room'), null);
-    return Boolean(location.state?.selectedRoom || savedRoom || sessionStorage.getItem('chat_connected') === 'true');
+    return Boolean(location.state?.activeRoom || location.state?.selectedRoom || savedRoom || sessionStorage.getItem('chat_connected') === 'true');
   });
 
   const [searching, setSearching] = useState(false);
