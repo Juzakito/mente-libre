@@ -5,21 +5,39 @@ import MainLayout from './components/MainLayout';
 import ErrorBoundary from './components/ErrorBoundary';
 import { ROUTES } from './config/routes';
 
-// Lazy load pages for better performance
-const Landing = lazy(() => import('./pages/Landing'));
-const B2BDashboard = lazy(() => import('./pages/B2BDashboard'));
-const CodeEntry = lazy(() => import('./pages/CodeEntry'));
-const Onboarding = lazy(() => import('./pages/Onboarding'));
-const UpdatePassword = lazy(() => import('./pages/UpdatePassword'));
-const Feed = lazy(() => import('./pages/Feed'));
-const Explore = lazy(() => import('./pages/Explore'));
-const Chat = lazy(() => import('./pages/Chat'));
-const Profile = lazy(() => import('./pages/Profile'));
-const PublicProfile = lazy(() => import('./pages/PublicProfile'));
-const Donate = lazy(() => import('./pages/Donate'));
-const Mood = lazy(() => import('./pages/Mood'));
-const Experts = lazy(() => import('./pages/Experts'));
-const Appointments = lazy(() => import('./pages/Appointments'));
+// Helper to safely load dynamic chunks with automatic refresh upon new deployments
+const lazyRetry = (componentImport) =>
+  lazy(async () => {
+    try {
+      return await componentImport();
+    } catch (error) {
+      console.warn('Chunk load error, refreshing for latest deployment...', error);
+      const lastReload = parseInt(sessionStorage.getItem('last_chunk_reload') || '0', 10);
+      const now = Date.now();
+      if (now - lastReload > 3000) {
+        sessionStorage.setItem('last_chunk_reload', now.toString());
+        window.location.reload();
+        return new Promise(() => {}); // Wait for reload
+      }
+      throw error;
+    }
+  });
+
+// Lazy load pages with auto-reload resilience
+const Landing = lazyRetry(() => import('./pages/Landing'));
+const B2BDashboard = lazyRetry(() => import('./pages/B2BDashboard'));
+const CodeEntry = lazyRetry(() => import('./pages/CodeEntry'));
+const Onboarding = lazyRetry(() => import('./pages/Onboarding'));
+const UpdatePassword = lazyRetry(() => import('./pages/UpdatePassword'));
+const Feed = lazyRetry(() => import('./pages/Feed'));
+const Explore = lazyRetry(() => import('./pages/Explore'));
+const Chat = lazyRetry(() => import('./pages/Chat'));
+const Profile = lazyRetry(() => import('./pages/Profile'));
+const PublicProfile = lazyRetry(() => import('./pages/PublicProfile'));
+const Donate = lazyRetry(() => import('./pages/Donate'));
+const Mood = lazyRetry(() => import('./pages/Mood'));
+const Experts = lazyRetry(() => import('./pages/Experts'));
+const Appointments = lazyRetry(() => import('./pages/Appointments'));
 
 // Loading Fallback
 const LoadingScreen = () => (
