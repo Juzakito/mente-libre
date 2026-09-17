@@ -265,7 +265,7 @@ export default function Profile() {
             return (
               <div key={badge.id} style={{ 
                 display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem', 
-                minWidth: '110px', padding: '1.25rem 0.5rem', 
+                flex: 1, padding: '1.25rem 0.5rem',
                 backgroundColor: isUnlocked ? 'var(--surface)' : 'color-mix(in srgb, var(--surface) 50%, transparent)', 
                 border: `1px solid ${isUnlocked ? 'var(--border-color)' : 'transparent'}`, 
                 borderRadius: '20px', boxShadow: isUnlocked ? 'var(--shadow-sm)' : 'none', 

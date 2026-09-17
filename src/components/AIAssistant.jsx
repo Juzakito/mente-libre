@@ -129,7 +129,7 @@ export default function AIAssistant() {
       <div className="ai-assistant-container">
       
       {isOpen && (
-        <div className="glass ai-assistant-popup" style={{ display: 'flex', flexDirection: 'column', height: '400px', width: '320px' }}>
+        <div className="glass ai-assistant-popup" style={{ display: 'flex', flexDirection: 'column', height: '400px', width: 'min(320px, calc(100vw - 2rem))' }}>
           {/* Header */}
           <div style={{ 
             backgroundColor: 'var(--primary)', 

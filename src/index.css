@@ -100,6 +100,11 @@
   padding: 0;
 }
 
+html, body, #root {
+  overflow-x: hidden;
+  width: 100%;
+}
+
 body {
   font-family: 'Inter', sans-serif;
   background-color: var(--bg-color);

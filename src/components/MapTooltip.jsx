@@ -64,7 +64,7 @@ export default function MapTooltip({ region, x, y, onClose, onContact }) {
     left: Math.min(x + 15, window.innerWidth - 300) + 'px',
     top: Math.min(y + 15, window.innerHeight - (experts.length * 90 + 100)) + 'px',
     zIndex: 1000,
-    width: '320px',
+    width: 'min(320px, 90vw)',
     pointerEvents: 'auto',
   };
 

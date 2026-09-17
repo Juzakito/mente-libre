@@ -438,10 +438,10 @@ export default function Landing() {
         display: 'flex', flexDirection: 'column', gap: '3rem'
       }}>
         <div className="landing-hero-split" style={{
-          display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '3.5rem'
+          display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap', gap: '3.5rem'
         }}>
           {/* Left Content */}
-          <div className="landing-hero-left" style={{ flex: 1, maxWidth: '620px', textAlign: 'left' }}>
+          <div className="landing-hero-left" style={{ flex: '1 1 400px', maxWidth: '620px', textAlign: 'left' }}>
             {/* Tag: Espacio 100% Anónimo y Seguro */}
             <div className="landing-pill-anim" style={{
               display: 'inline-flex', alignItems: 'center', gap: '0.55rem',
