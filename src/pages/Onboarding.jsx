@@ -89,7 +89,7 @@ export default function Onboarding() {
         setQuoteIndex((prev) => (prev + 1) % HOOK_QUOTES.length);
         setQuoteFading(false);
       }, 400);
-    }, 30000); // 30 seconds
+    }, 7000); // 7 seconds
 
     return () => clearInterval(interval);
   }, [screen]);
@@ -405,8 +405,8 @@ export default function Onboarding() {
                 size={64}
                 style={{
                   borderRadius: '18px',
-                  boxShadow: '0 10px 30px rgba(0,0,0,0.45)',
-                  border: '1.5px solid rgba(0, 210, 142, 0.5)'
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                  border: '1px solid var(--border-color)'
                 }}
               />
 
@@ -443,7 +443,7 @@ export default function Onboarding() {
               marginBottom: '2.5rem',
               maxWidth: '960px'
             }}>
-              <span style={{ color: '#ffffff' }}>{currentQuote.highlight}</span>
+              <span style={{ color: 'var(--text-main)' }}>{currentQuote.highlight}</span>
               {currentQuote.body}
             </h1>
           </div>
@@ -465,26 +465,26 @@ export default function Onboarding() {
             <button
               onClick={handleContinueToEmail}
               style={{
-                backgroundColor: '#00e676',
-                color: '#082e30',
+                backgroundColor: 'var(--primary)',
+                color: '#ffffff',
                 border: 'none',
                 padding: '1.15rem 4rem',
                 borderRadius: '9999px',
                 fontSize: '1.2rem',
                 fontWeight: 900,
                 cursor: 'pointer',
-                boxShadow: '0 8px 28px rgba(0, 230, 118, 0.45)',
+                boxShadow: 'none',
                 transition: 'all 0.2s ease',
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#00c853';
+                e.currentTarget.style.opacity = '0.9';
                 e.currentTarget.style.transform = 'translateY(-2px)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = '#00e676';
+                e.currentTarget.style.opacity = '1';
                 e.currentTarget.style.transform = 'translateY(0)';
               }}
             >
@@ -509,7 +509,7 @@ export default function Onboarding() {
                     width: idx === quoteIndex ? '28px' : '10px',
                     height: '10px',
                     borderRadius: '9999px',
-                    backgroundColor: idx === quoteIndex ? '#00e676' : 'rgba(255, 255, 255, 0.25)',
+                    backgroundColor: idx === quoteIndex ? 'var(--primary)' : 'var(--border-color)',
                     border: 'none',
                     cursor: 'pointer',
                     transition: 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
