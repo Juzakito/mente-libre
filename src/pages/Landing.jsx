@@ -2,6 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   ArrowRight,
+  ArrowLeft,
+  ArrowUpRight,
+  Search,
   Shield,
   Heart,
   Lock,
@@ -533,76 +536,122 @@ export default function Landing() {
           {/* Right Mobile Mockup Integrated */}
           <div className="landing-hero-mockup landing-hero-anim" style={{
             flex: 1, display: 'flex', justifyContent: 'flex-end',
-            animationDelay: '0.4s', opacity: 0
+            animationDelay: '0.4s', opacity: 0, position: 'relative'
           }}>
-            <div style={{
-              width: '100%', maxWidth: '420px',
-              borderRadius: '28px',
-              backgroundColor: '#0f292b',
-              border: '2px solid rgba(0, 210, 142, 0.25)',
-              boxShadow: '0 25px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(0, 210, 142, 0.15)',
-              padding: '1.75rem', position: 'relative'
+            {/* Emojis flotantes (derecha) */}
+            <div className="animate-float-1" style={{ position: 'absolute', right: '-15px', top: '25%', fontSize: '2.5rem', filter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.2))', zIndex: 10 }}>😰</div>
+            <div className="animate-float-2" style={{ position: 'absolute', right: '-5px', top: '50%', fontSize: '2.5rem', filter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.2))', zIndex: 10 }}>😔</div>
+            <div className="animate-float-1" style={{ position: 'absolute', right: '-10px', top: '75%', fontSize: '2.5rem', filter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.2))', zIndex: 10 }}>🙂</div>
+
+            {/* Tarjeta flotante (Relajación Progresiva) (izquierda) */}
+            <div className="animate-float-2" style={{
+              position: 'absolute', left: '-50px', bottom: '15%', width: '220px',
+              backgroundColor: '#a3e635', borderRadius: '16px', padding: '1rem',
+              boxShadow: '0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(163,230,53,0.3)',
+              color: '#14532d', zIndex: 10
             }}>
-              {/* Floating Shield Tag Top Right */}
-              <div style={{
-                position: 'absolute', top: '-16px', right: '-12px',
-                backgroundColor: '#00D28E', color: '#042721',
-                padding: '0.45rem 0.95rem', borderRadius: '9999px',
-                fontSize: '0.78rem', fontWeight: 900,
-                display: 'flex', alignItems: 'center', gap: '0.4rem',
-                boxShadow: '0 6px 20px rgba(0, 210, 142, 0.4)',
-                animation: 'floatSlow 4s ease-in-out infinite'
-              }}>
-                <Shield size={14} /> 100% Anónimo
+               <div style={{ backgroundColor: '#bef264', borderRadius: '12px', height: '90px', marginBottom: '0.75rem', position: 'relative', overflow: 'hidden' }}>
+                 <div style={{ position: 'absolute', bottom: 0, width: '100%', height: '30px', backgroundColor: '#4d7c0f' }}></div>
+                 <div style={{ position: 'absolute', left: '25px', bottom: '30px', width: '25px', height: '40px', backgroundColor: '#a3e635', borderRadius: '12px 12px 0 0' }}></div>
+                 <div style={{ position: 'absolute', right: '10px', top: '10px', width: '24px', height: '24px', borderRadius: '50%', border: '1.5px solid #14532d', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                   <ArrowUpRight size={14} color="#14532d" strokeWidth={3} />
+                 </div>
+               </div>
+               <div style={{ fontWeight: 900, fontSize: '0.9rem', marginBottom: '0.25rem' }}>Relajación Progresiva</div>
+               <div style={{ fontSize: '0.7rem', fontWeight: 600, opacity: 0.8, lineHeight: 1.4, marginBottom: '0.75rem' }}>
+                 Técnica muscular para reducir el estrés antes de exámenes...
+               </div>
+               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                 <Clock size={12} strokeWidth={3} />
+                 <span style={{ fontSize: '0.7rem', fontWeight: 800 }}>15 mins</span>
+                 <div style={{ flex: 1, height: '4px', backgroundColor: 'rgba(20,83,45,0.2)', borderRadius: '2px', overflow: 'hidden' }}>
+                   <div style={{ width: '40%', height: '100%', backgroundColor: '#14532d' }} />
+                 </div>
+               </div>
+            </div>
+
+            <div style={{
+              width: '100%', maxWidth: '340px',
+              height: '620px',
+              borderRadius: '32px',
+              backgroundColor: '#0f292b',
+              border: '6px solid #1a3c3e',
+              boxShadow: '0 25px 60px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(0,0,0,0.5)',
+              padding: '1.5rem', position: 'relative',
+              overflow: 'hidden',
+              display: 'flex', flexDirection: 'column'
+            }}>
+              {/* Top gradient blur */}
+              <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '200px', background: 'linear-gradient(180deg, rgba(0,210,142,0.15) 0%, transparent 100%)', zIndex: 0 }} />
+
+              {/* Status bar */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', zIndex: 1, marginBottom: '1.5rem' }}>
+                <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#f8fafc' }}>9:41</span>
+                <div style={{ display: 'flex', gap: '0.25rem' }}>
+                  <div style={{ width: '16px', height: '10px', backgroundColor: '#f8fafc', borderRadius: '2px' }} />
+                  <div style={{ width: '16px', height: '10px', backgroundColor: '#f8fafc', borderRadius: '2px' }} />
+                  <div style={{ width: '20px', height: '10px', backgroundColor: '#00e676', borderRadius: '2px' }} />
+                </div>
               </div>
 
-              {/* Mobile App Header Mock */}
-              <div style={{
-                display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                paddingBottom: '1rem', marginBottom: '1.25rem',
-                borderBottom: '1px solid rgba(255,255,255,0.08)'
-              }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                  <TalkCampusAvatar id="owl" size={36} />
-                  <div>
-                    <div style={{ fontWeight: 900, fontSize: '0.88rem', color: '#ffffff' }}>BúhoEstudiantil</div>
-                    <div style={{ fontSize: '0.72rem', color: '#00D28E', fontWeight: 700 }}>🟢 Conectado anónimamente</div>
+              {/* Header */}
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'relative', zIndex: 1, marginBottom: '1.5rem' }}>
+                <ArrowLeft size={20} color="#f8fafc" />
+                <span style={{ fontSize: '1.1rem', fontWeight: 800, color: '#f8fafc' }}>Bienestar Free Mind</span>
+                <Search size={20} color="#f8fafc" />
+              </div>
+
+              {/* Title */}
+              <div style={{ position: 'relative', zIndex: 1, marginBottom: '2rem' }}>
+                <h2 style={{ fontSize: '1.4rem', fontWeight: 900, color: '#ffffff', margin: '0 0 0.5rem', lineHeight: 1.2 }}>
+                  Estudiante,<br/>Eres resiliente incluso en los momentos más difíciles.
+                </h2>
+              </div>
+
+              {/* Mood Tracker */}
+              <div style={{ position: 'relative', zIndex: 1, marginBottom: '2rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
+                  <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#ffffff' }}>Tu estado esta semana</span>
+                  <span style={{ fontSize: '0.7rem', fontWeight: 800, color: '#00e676' }}>Ver más</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  {[
+                    { day: 'VIE', score: '3', color: '#a855f7' },
+                    { day: 'SAB', score: '7', color: '#00e676' },
+                    { day: 'DOM', score: '+', color: '#1a3c3e' },
+                    { day: 'LUN', score: '+', color: '#1a3c3e' },
+                    { day: 'MAR', score: '5', color: '#3b82f6' },
+                    { day: 'MIE', score: '5', color: '#3b82f6' }
+                  ].map((m, i) => (
+                    <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
+                      <div style={{ width: '32px', height: '32px', borderRadius: '50%', backgroundColor: m.color, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, color: '#ffffff', fontSize: '0.85rem' }}>
+                        {m.score}
+                      </div>
+                      <span style={{ fontSize: '0.65rem', fontWeight: 700, color: '#94a3b8' }}>{m.day}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Modules */}
+              <div style={{ position: 'relative', zIndex: 1 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
+                  <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#ffffff' }}>Cápsulas Guiadas</span>
+                  <span style={{ fontSize: '0.7rem', fontWeight: 800, color: '#00e676' }}>Ver todo</span>
+                </div>
+                <div style={{ display: 'flex', gap: '0.75rem', overflow: 'hidden' }}>
+                  {/* Card 1 */}
+                  <div style={{ flex: '0 0 85%', backgroundColor: '#a855f7', borderRadius: '16px', padding: '1rem', color: '#ffffff' }}>
+                    <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🫂</div>
+                    <div style={{ fontWeight: 800, fontSize: '0.9rem', marginBottom: '0.25rem' }}>Manejo de Ansiedad Social</div>
+                    <div style={{ fontSize: '0.7rem', fontWeight: 500, opacity: 0.9, marginBottom: '0.75rem', lineHeight: 1.4 }}>
+                      Módulo diseñado para ayudarte cuando sientes temor a participar en clase...
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      <Clock size={12} strokeWidth={3} />
+                      <span style={{ fontSize: '0.7rem', fontWeight: 800 }}>20 mins</span>
+                    </div>
                   </div>
-                </div>
-                <span style={{ fontSize: '0.75rem', color: '#94a3b8' }}>12:15 AM</span>
-              </div>
-
-              {/* Simulated Post Card 1 */}
-              <div style={{
-                backgroundColor: 'rgba(9, 29, 30, 0.9)',
-                borderRadius: '16px', padding: '1.1rem',
-                border: '1px solid rgba(255,255,255,0.08)',
-                marginBottom: '1rem'
-              }}>
-                <p style={{ fontSize: '0.88rem', color: '#f8fafc', lineHeight: 1.5, margin: '0 0 0.85rem' }}>
-                  "Los exámenes finales me paralizan el pensamiento esta semana. ¿Alguien libre para desahogarse?"
-                </p>
-                <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
-                  <span style={{ backgroundColor: 'rgba(0, 210, 142, 0.15)', color: '#00D28E', padding: '0.25rem 0.65rem', borderRadius: '9999px', fontSize: '0.72rem', fontWeight: 800 }}>
-                    Ansioso 🥺
-                  </span>
-                  <span style={{ backgroundColor: 'rgba(45, 104, 255, 0.15)', color: '#60a5fa', padding: '0.25rem 0.65rem', borderRadius: '9999px', fontSize: '0.72rem', fontWeight: 800 }}>
-                    💙 24 Abrazos
-                  </span>
-                </div>
-              </div>
-
-              {/* Simulated Response Card 2 */}
-              <div style={{
-                backgroundColor: 'rgba(0, 210, 142, 0.12)',
-                borderRadius: '16px', padding: '1.1rem',
-                border: '1px solid rgba(0, 210, 142, 0.3)',
-                display: 'flex', alignItems: 'center', gap: '0.75rem'
-              }}>
-                <TalkCampusAvatar id="fox" size={32} />
-                <div>
-                  <div style={{ fontSize: '0.8rem', fontWeight: 900, color: '#00D28E' }}>FlyingJay_UCS</div>
-                  <div style={{ fontSize: '0.82rem', color: '#ffffff', fontWeight: 600 }}>"¡No estás solo! Todos estamos en el mismo barco 💪"</div>
                 </div>
               </div>
             </div>
