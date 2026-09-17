@@ -6,6 +6,7 @@ import {
   Bell,
   Sparkles,
   Heart,
+  Shield,
   ShieldCheck,
   ShieldAlert,
   BookOpen,
