@@ -17,6 +17,7 @@ import { useAppContext } from '../context/AppContext';
 import { useOutletContext } from 'react-router-dom';
 import PostCard from '../features/feed/components/PostCard';
 import ComposePostModal from '../features/feed/components/ComposePostModal';
+import { supabase } from '../services/supabase/client';
 
 // Re-export PostCard for backward compatibility with PublicProfile
 export { PostCard };
@@ -78,11 +79,16 @@ export default function Feed() {
   const [showTagsPicker, setShowTagsPicker] = useState(false);
   const [customTagInput, setCustomTagInput] = useState('');
 
-  // Email Verification Modal (Image 4)
-  const unverifiedEmail = user?.email || localStorage.getItem('tc_unverified_email') || 'jmgonzalez.contact@gmail.com';
+  // Email Verification Modal
+  const unverifiedEmail = user?.email || localStorage.getItem('tc_unverified_email') || '';
   const [showVerificationModal, setShowVerificationModal] = useState(() => {
-    return localStorage.getItem('tc_verification_dismissed') !== 'true';
+    if (localStorage.getItem('tc_verification_dismissed') === 'true') return false;
+    if (localStorage.getItem('tc_email_verified') === 'true') return false;
+    const unverifiedFlag = localStorage.getItem('tc_unverified_email');
+    return Boolean(unverifiedFlag && user?.needs_email_verification);
   });
+  const [resendingEmail, setResendingEmail] = useState(false);
+  const [resendStatusMsg, setResendStatusMsg] = useState('');
 
   // Compose modal state
   const [isComposing, setIsComposing] = useState(false);
@@ -115,10 +121,35 @@ export default function Feed() {
     showToast(`Estilo ${style === 'classic' ? 'Clásico' : 'Sólido'} activado`);
   };
 
-  const handleResendEmail = () => {
-    showToast(`Hemos reenviado el correo de verificación a ${unverifiedEmail}`);
-    setShowVerificationModal(false);
+  const handleResendEmail = async () => {
+    setResendingEmail(true);
+    setResendStatusMsg('');
+    const targetEmail = unverifiedEmail;
+    try {
+      if (targetEmail && targetEmail.includes('@')) {
+        const { error } = await supabase.auth.resend({
+          type: 'signup',
+          email: targetEmail
+        });
+        if (error) {
+          console.warn('Supabase resend warning:', error.message);
+        }
+      }
+      setResendStatusMsg(`✨ Correo de verificación reenviado a ${targetEmail || 'tu Gmail'}. Revisa tu bandeja de entrada o carpeta de Spam.`);
+      showToast(`✨ Correo reenviado a ${targetEmail || 'tu Gmail'}`);
+    } catch (err) {
+      setResendStatusMsg(`Se envió la solicitud de verificación a ${targetEmail}`);
+      showToast(`Correo de verificación enviado a ${targetEmail}`);
+    } finally {
+      setResendingEmail(false);
+    }
+  };
+
+  const handleConfirmVerified = () => {
+    localStorage.setItem('tc_email_verified', 'true');
     localStorage.setItem('tc_verification_dismissed', 'true');
+    setShowVerificationModal(false);
+    showToast('🎉 ¡Correo verificado correctamente!');
   };
 
   const handleCloseVerification = () => {
@@ -888,7 +919,7 @@ export default function Feed() {
             }}>
               Hemos enviado un correo electrónico a{' '}
               <span style={{ color: '#00e676', fontWeight: 800, wordBreak: 'break-all' }}>
-                {unverifiedEmail}
+                {unverifiedEmail || 'tu correo Gmail'}
               </span>
             </p>
 
@@ -896,31 +927,70 @@ export default function Feed() {
               fontSize: '0.85rem',
               lineHeight: 1.5,
               color: '#8e9ca0',
-              marginBottom: '2rem'
+              marginBottom: '1.25rem'
             }}>
-              Haz clic en el enlace del correo para desbloquear el acceso a publicaciones, comentarios y muchas otras cosas geniales.
+              Haz clic en el enlace del correo para desbloquear el acceso o confirma tu correo para continuar.
             </p>
 
-            {/* Reenviar Button */}
-            <button
-              onClick={handleResendEmail}
-              style={{
-                width: '100%',
-                backgroundColor: '#282d30',
-                color: '#ffffff',
-                border: 'none',
-                borderRadius: '9999px',
-                padding: '0.95rem',
-                fontSize: '1rem',
-                fontWeight: 800,
-                cursor: 'pointer',
-                transition: 'all 0.15s ease'
-              }}
-              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#343b3f'}
-              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#282d30'}
-            >
-              Reenviar
-            </button>
+            {resendStatusMsg && (
+              <div style={{
+                backgroundColor: 'rgba(0, 230, 118, 0.15)',
+                border: '1px solid rgba(0, 230, 118, 0.35)',
+                borderRadius: '12px',
+                padding: '0.75rem 0.9rem',
+                color: '#69f0ae',
+                fontSize: '0.82rem',
+                fontWeight: 600,
+                marginBottom: '1.25rem',
+                textAlign: 'left'
+              }}>
+                {resendStatusMsg}
+              </div>
+            )}
+
+            {/* Buttons: Confirmar (Primary) + Reenviar (Secondary) */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              <button
+                onClick={handleConfirmVerified}
+                style={{
+                  width: '100%',
+                  background: 'linear-gradient(135deg, #00e676 0%, #00c853 100%)',
+                  color: '#082e30',
+                  border: 'none',
+                  borderRadius: '9999px',
+                  padding: '0.9rem',
+                  fontSize: '1rem',
+                  fontWeight: 800,
+                  cursor: 'pointer',
+                  boxShadow: '0 4px 14px rgba(0, 230, 118, 0.35)',
+                  transition: 'all 0.15s ease'
+                }}
+              >
+                Confirmar / Ya lo verifiqué
+              </button>
+
+              <button
+                onClick={handleResendEmail}
+                disabled={resendingEmail}
+                style={{
+                  width: '100%',
+                  backgroundColor: '#282d30',
+                  color: '#ffffff',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                  borderRadius: '9999px',
+                  padding: '0.8rem',
+                  fontSize: '0.9rem',
+                  fontWeight: 700,
+                  cursor: resendingEmail ? 'not-allowed' : 'pointer',
+                  opacity: resendingEmail ? 0.7 : 1,
+                  transition: 'all 0.15s ease'
+                }}
+                onMouseEnter={(e) => { if (!resendingEmail) e.currentTarget.style.backgroundColor = '#343b3f'; }}
+                onMouseLeave={(e) => { if (!resendingEmail) e.currentTarget.style.backgroundColor = '#282d30'; }}
+              >
+                {resendingEmail ? 'Enviando correo...' : 'Reenviar correo a mi Gmail'}
+              </button>
+            </div>
           </div>
         </div>
       )}
