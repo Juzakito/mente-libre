@@ -600,10 +600,10 @@ export default function Feed() {
             onChange={(e) => setAgeRange(Number(e.target.value))}
             style={{
               width: '100%',
-              accentColor: '#00e676',
+              accentColor: 'var(--primary)',
               cursor: 'pointer',
               height: '4px',
-              background: `linear-gradient(to right, #00e676 0%, #00e676 ${((ageRange - 16) / (60 - 16)) * 100}%, #283033 ${((ageRange - 16) / (60 - 16)) * 100}%, #283033 100%)`,
+              background: `linear-gradient(to right, var(--primary) 0%, var(--primary) ${((ageRange - 16) / (60 - 16)) * 100}%, var(--border-color) ${((ageRange - 16) / (60 - 16)) * 100}%, var(--border-color) 100%)`,
               borderRadius: '9999px',
               outline: 'none'
             }}
@@ -651,8 +651,8 @@ export default function Feed() {
                   key={v}
                   onClick={() => setSelectedVibes(selectedVibes.filter(item => item !== v))}
                   style={{
-                    backgroundColor: 'rgba(0, 230, 118, 0.15)',
-                    color: '#00e676',
+                    backgroundColor: 'var(--primary-light)',
+                    color: 'var(--primary)',
                     fontSize: '0.72rem',
                     fontWeight: 800,
                     padding: '0.2rem 0.5rem',
@@ -745,8 +745,9 @@ export default function Feed() {
                   key={tag}
                   onClick={() => setSelectedTags(selectedTags.filter(item => item !== tag))}
                   style={{
-                    backgroundColor: 'rgba(56, 189, 248, 0.15)',
-                    color: '#38bdf8',
+                    backgroundColor: 'var(--surface-hover)',
+                    border: '1px solid var(--accent-blue)',
+                    color: 'var(--accent-blue)',
                     fontSize: '0.72rem',
                     fontWeight: 800,
                     padding: '0.2rem 0.5rem',
@@ -774,20 +775,20 @@ export default function Feed() {
                   placeholder="Escribir etiqueta..."
                   style={{
                     flex: 1,
-                    backgroundColor: '#1b2022',
-                    border: '1px solid #2e373b',
+                    backgroundColor: 'var(--surface-hover)',
+                    border: '1px solid var(--border-color)',
                     borderRadius: '8px',
                     padding: '0.35rem 0.6rem',
                     fontSize: '0.75rem',
-                    color: '#ffffff',
+                    color: 'var(--text-main)',
                     outline: 'none'
                   }}
                 />
                 <button
                   type="submit"
                   style={{
-                    backgroundColor: '#38bdf8',
-                    color: '#082e30',
+                    backgroundColor: 'var(--accent-blue)',
+                    color: '#ffffff',
                     border: 'none',
                     borderRadius: '8px',
                     padding: '0.35rem 0.65rem',
@@ -818,9 +819,9 @@ export default function Feed() {
                         borderRadius: '9999px',
                         fontSize: '0.75rem',
                         fontWeight: 700,
-                        border: isSelected ? '1px solid #38bdf8' : '1px solid #2e373b',
-                        backgroundColor: isSelected ? 'rgba(56, 189, 248, 0.15)' : '#1b2022',
-                        color: isSelected ? '#38bdf8' : '#8e9ca0',
+                        border: isSelected ? '1px solid var(--accent-blue)' : '1px solid var(--border-color)',
+                        backgroundColor: isSelected ? 'var(--surface-elevated)' : 'var(--surface-hover)',
+                        color: isSelected ? 'var(--accent-blue)' : 'var(--text-muted)',
                         cursor: 'pointer',
                         transition: 'all 0.15s ease'
                       }}

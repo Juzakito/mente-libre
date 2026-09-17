@@ -330,14 +330,14 @@
   flex-shrink: 0;
   position: sticky;
   top: 1.25rem;
-  background-color: #121516;
-  border: 1px solid #232a2d;
+  background-color: var(--surface);
+  border: 1px solid var(--border-color);
   border-radius: 18px;
   padding: 1.25rem;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  color: #f1f5f9;
+  color: var(--text-main);
 }
 
 @media (max-width: 1023px) {
