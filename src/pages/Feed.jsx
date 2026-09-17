@@ -25,10 +25,9 @@ export { PostCard };
 const FEED_TABS = [
   'Más reciente',
   'Mi universidad',
-  'Noticias',
-  'Haciendo Olas',
-  'Nuevos desahogos',
-  'Preguntas a la comunidad'
+  'Ansiedad & Estrés',
+  'Consejos',
+  'Comunidad'
 ];
 
 const AVAILABLE_VIBES = [

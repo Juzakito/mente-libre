@@ -11,22 +11,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 :root {
-  /* ─── Light Theme Palette (Image 2) ───────────────────────── */
-  --primary: #0d9488;
+  /* ─── Light Theme Palette ───────────────────────── */
+  --primary: #0d9488;          /* Warm Teal */
   --primary-hover: #0f766e;
-  --primary-light: #e6f4f1;
+  --primary-light: #f0fdfa;
   --secondary: #475569;
 
   /* Backgrounds & Surfaces */
-  --bg-color: #f7faf9;         /* Soft off-white background */
-  --surface: #ffffff;          /* Crisp white cards */
-  --surface-hover: #f1f5f4;
+  --bg-color: #f8fafc;         /* Crisp light paper background */
+  --surface: #ffffff;          /* Pure white cards */
+  --surface-hover: #f1f5f9;
   --surface-elevated: #ffffff;
-  --sidebar-bg: #ffffff;       /* Pure white sidebar */
+  --sidebar-bg: #ffffff;
   --sidebar-border: #e2e8f0;
 
   /* Active Nav Item */
-  --active-nav-bg: #e6f4f1;
+  --active-nav-bg: #ccfbf1;
   --active-nav-border: #0d9488;
   --active-nav-text: #0f766e;
 
@@ -37,24 +37,24 @@
 
   /* Accents */
   --accent-blue: #2563eb;
-  --accent-amber: #f59e0b;
-  --accent-orange: #f97316;
-  --accent-rose: #f43f5e;
-  --accent-emerald: #10b981;
+  --accent-amber: #d97706;
+  --accent-orange: #ea580c;
+  --accent-rose: #e11d48;
+  --accent-emerald: #059669;
 
   /* Borders & Glass */
   --border-color: #e2e8f0;
-  --glass-bg: rgba(255, 255, 255, 0.88);
+  --glass-bg: rgba(255, 255, 255, 0.92);
 
   --bg-danger: #fef2f2;
   --border-danger: #fecaca;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
-  --shadow-glow: 0 0 24px 0 rgba(13, 148, 136, 0.15);
+  /* Subtle Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 25px -4px rgba(0, 0, 0, 0.06);
+  --shadow-xl: 0 20px 30px -6px rgba(0, 0, 0, 0.08);
+  --shadow-glow: 0 0 20px 0 rgba(13, 148, 136, 0.08);
 
   --radius-sm: 4px;
   --radius-md: 6px;
@@ -75,49 +75,49 @@
   --z-toast: 100;
 }
 
-/* ─── Dark Theme Palette (Image 1) ────────────────────────── */
+/* ─── Dark Theme Palette (Linear / Notion Inspired Slate) ────────────────────────── */
 [data-theme='dark'] {
-  --primary: #10b981;          /* Vibrant Mint Green */
-  --primary-hover: #059669;
-  --primary-light: rgba(16, 185, 129, 0.15);
+  --primary: #0d9488;          /* Warm Teal */
+  --primary-hover: #14b8a6;
+  --primary-light: rgba(13, 148, 136, 0.18);
   --secondary: #94a3b8;
 
-  /* Deep Dark Navy Palette */
-  --bg-color: #101424;         /* Deep dark navy background */
-  --surface: #1a1e32;          /* Elevated dark navy cards */
-  --surface-hover: #222740;
-  --surface-elevated: #262c47;
-  --sidebar-bg: #16192c;       /* Dark navy sidebar */
+  /* Deep Slate & Satin Dark Surfaces */
+  --bg-color: #0b0f12;         /* Abyssal slate dark */
+  --surface: #14191d;          /* Card & panel surface */
+  --surface-hover: #1c2227;
+  --surface-elevated: #21282e;
+  --sidebar-bg: #0f1317;       /* Dark sidebar */
   --sidebar-border: rgba(255, 255, 255, 0.08);
 
   /* Active Nav Item */
-  --active-nav-bg: rgba(16, 185, 129, 0.12);
-  --active-nav-border: #10b981;
-  --active-nav-text: #10b981;
+  --active-nav-bg: rgba(13, 148, 136, 0.14);
+  --active-nav-border: #14b8a6;
+  --active-nav-text: #2dd4bf;
 
   /* Typography */
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
-  --text-light: #cbd5e1;
+  --text-light: #64748b;
 
   /* Accents */
   --accent-blue: #38bdf8;
   --accent-amber: #fbbf24;
   --accent-orange: #fb923c;
-  --accent-rose: #f43f5e;
-  --accent-emerald: #10b981;
+  --accent-rose: #fb7185;
+  --accent-emerald: #34d399;
 
-  /* Borders & Glass */
-  --border-color: #272d47;
-  --glass-bg: rgba(26, 30, 50, 0.88);
+  /* Crisp 1px Borders */
+  --border-color: rgba(255, 255, 255, 0.08);
+  --glass-bg: rgba(20, 25, 29, 0.88);
 
-  --bg-danger: rgba(244, 63, 94, 0.15);
-  --border-danger: rgba(244, 63, 94, 0.3);
+  --bg-danger: rgba(239, 68, 68, 0.12);
+  --border-danger: rgba(239, 68, 68, 0.25);
 
-  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.35);
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.4);
   --shadow-md: 0 4px 14px -2px rgba(0, 0, 0, 0.5);
   --shadow-lg: 0 12px 28px -4px rgba(0, 0, 0, 0.6);
   --shadow-xl: 0 24px 48px -8px rgba(0, 0, 0, 0.7);
-  --shadow-glow: 0 0 40px 0 rgba(16, 185, 129, 0.2);
+  --shadow-glow: 0 0 24px 0 rgba(13, 148, 136, 0.15);
 }
 

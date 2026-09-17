@@ -160,18 +160,22 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
       className="card animate-fade-in"
       style={{
         padding: '1.25rem',
-        borderRadius: '16px',
-        backgroundColor: isSolid ? '#0f1d21' : '#141719',
-        backgroundImage: isSolid ? 'linear-gradient(145deg, #0d1e22 0%, #152c30 100%)' : 'none',
-        border: isSolid ? '1.5px solid #00e676' : '1px solid #232a2d',
-        boxShadow: isSolid ? '0 8px 24px rgba(0, 230, 118, 0.22)' : '0 2px 10px rgba(0,0,0,0.3)',
-        transition: 'all 0.25s ease',
-        color: '#ffffff',
+        borderRadius: 'var(--radius-xl)',
+        backgroundColor: 'var(--surface)',
+        border: '1px solid var(--border-color)',
+        boxShadow: 'var(--shadow-sm)',
+        transition: 'all var(--transition-fast)',
+        color: 'var(--text-main)',
         position: 'relative',
         overflow: 'hidden'
       }}
-      onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
-      onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+      onMouseOver={(e) => {
+        e.currentTarget.style.boxShadow = 'var(--shadow-md)';
+        e.currentTarget.style.borderColor = 'var(--border-color)';
+      }}
+      onMouseOut={(e) => {
+        e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
+      }}
     >
       {/* Top accent bar for Solid style */}
       {isSolid && (

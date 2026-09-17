@@ -261,25 +261,25 @@ export default function MainLayout() {
               onClick={() => setShowCompose(true)}
               style={{
                 width: '100%',
-                backgroundColor: '#00e676',
-                color: '#082e30',
+                backgroundColor: 'var(--primary)',
+                color: '#ffffff',
                 border: 'none',
                 borderRadius: '9999px',
                 padding: '0.75rem 1rem',
-                fontSize: '0.95rem',
-                fontWeight: 900,
+                fontSize: '0.9rem',
+                fontWeight: 700,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: '0.5rem',
                 cursor: 'pointer',
-                boxShadow: '0 4px 18px rgba(0, 230, 118, 0.4)',
-                transition: 'all 0.15s ease'
+                boxShadow: 'var(--shadow-sm)',
+                transition: 'all var(--transition-fast)'
               }}
-              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#00c853'; e.currentTarget.style.transform = 'translateY(-1px)'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#00e676'; e.currentTarget.style.transform = 'translateY(0)'; }}
+              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--primary-hover)'; e.currentTarget.style.transform = 'translateY(-1px)'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--primary)'; e.currentTarget.style.transform = 'translateY(0)'; }}
             >
-              <Plus size={18} strokeWidth={3} />
+              <Plus size={18} strokeWidth={2.5} />
               <span>Crear Publicación</span>
             </button>
           </div>
@@ -1231,17 +1231,16 @@ function SidebarButton({ icon, label, active = false, onClick, accentColor, righ
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: '0.65rem 0.85rem',
-        borderRadius: '16px',
-        backgroundColor: active ? 'rgba(0, 230, 118, 0.12)' : 'transparent',
-        border: active ? '1.5px solid #00e676' : '1.5px solid transparent',
-        color: active ? '#00e676' : (accentColor || 'var(--text-muted)'),
-        fontWeight: active ? 800 : 600,
+        borderRadius: 'var(--radius-xl)',
+        backgroundColor: active ? 'var(--active-nav-bg)' : 'transparent',
+        border: active ? '1px solid var(--active-nav-border)' : '1px solid transparent',
+        color: active ? 'var(--active-nav-text)' : (accentColor || 'var(--text-muted)'),
+        fontWeight: active ? 700 : 500,
         fontSize: '0.88rem',
         cursor: 'pointer',
         textAlign: 'left',
         width: '100%',
-        transition: 'all 0.15s ease',
-        boxShadow: active ? '0 4px 14px rgba(0, 230, 118, 0.18)' : 'none',
+        transition: 'all var(--transition-fast)',
         outline: 'none'
       }}
       onMouseEnter={(e) => {
@@ -1258,7 +1257,7 @@ function SidebarButton({ icon, label, active = false, onClick, accentColor, righ
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flex: 1, minWidth: 0 }}>
-        <div style={{ display: 'flex', alignItems: 'center', flexShrink: 0, color: active ? '#00e676' : 'inherit' }}>
+        <div style={{ display: 'flex', alignItems: 'center', flexShrink: 0, color: active ? 'var(--active-nav-text)' : 'inherit' }}>
           {icon}
         </div>
         <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
