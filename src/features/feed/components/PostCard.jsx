@@ -198,8 +198,8 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
                 id={creatureKey}
                 size={42}
                 style={{
-                  border: isSolid ? '2px solid #00e676' : '1px solid rgba(255,255,255,0.12)',
-                  boxShadow: isSolid ? '0 0 12px rgba(0, 230, 118, 0.4)' : 'none'
+                  border: isSolid ? '2px solid var(--primary)' : '1px solid var(--border-color)',
+                  boxShadow: isSolid ? '0 0 12px var(--primary-light)' : 'none'
                 }}
               />
             ) : (
@@ -209,9 +209,8 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
                 borderRadius: '12px',
                 overflow: 'hidden',
                 flexShrink: 0,
-                backgroundColor: '#23282b',
-                border: isSolid ? '2px solid #00e676' : '1px solid rgba(255,255,255,0.12)',
-                boxShadow: isSolid ? '0 0 10px rgba(0, 230, 118, 0.35)' : 'none',
+                backgroundColor: 'var(--surface-hover)',
+                border: isSolid ? '2px solid var(--primary)' : '1px solid var(--border-color)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center'
@@ -220,10 +219,10 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
               </div>
             )}
             <div>
-              <div style={{ fontWeight: 900, color: '#ffffff', fontSize: '0.95rem', lineHeight: 1.2 }}>
+              <div style={{ fontWeight: 800, color: 'var(--text-main)', fontSize: '0.95rem', lineHeight: 1.2 }}>
                 {post.author}
               </div>
-              <div style={{ fontSize: '0.72rem', color: isSolid ? '#38bdf8' : '#8e9ca0', marginTop: '2px', fontWeight: 600 }}>
+              <div style={{ fontSize: '0.72rem', color: isSolid ? 'var(--primary)' : 'var(--text-muted)', marginTop: '2px', fontWeight: 600 }}>
                 {timeFormatted}
               </div>
             </div>
@@ -235,16 +234,16 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
           {post.isMine && !isEditing && (
             <>
               {(!post.created_at || (Date.now() - new Date(post.created_at).getTime()) < 300000) && (
-                <button onClick={() => setIsEditing(true)} style={{ color: '#8e9ca0', background: 'transparent', border: 'none', cursor: 'pointer', padding: '4px' }}>
+                <button onClick={() => setIsEditing(true)} style={{ color: 'var(--text-muted)', background: 'transparent', border: 'none', cursor: 'pointer', padding: '4px' }}>
                   <Edit3 size={15} />
                 </button>
               )}
-              <button onClick={() => deletePost(post.id)} style={{ color: '#f43f5e', background: 'transparent', border: 'none', cursor: 'pointer', padding: '4px' }}>
+              <button onClick={() => deletePost(post.id)} style={{ color: 'var(--accent-rose)', background: 'transparent', border: 'none', cursor: 'pointer', padding: '4px' }}>
                 <Trash2 size={15} />
               </button>
             </>
           )}
-          <button style={{ color: '#8e9ca0', background: 'transparent', border: 'none', cursor: 'pointer', padding: '4px' }} title="Opciones">
+          <button style={{ color: 'var(--text-muted)', background: 'transparent', border: 'none', cursor: 'pointer', padding: '4px' }} title="Opciones">
             <MoreHorizontal size={18} />
           </button>
         </div>
@@ -252,10 +251,10 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
 
       {/* Post Text */}
       {!showSensitive && !isEditing ? (
-        <div style={{ border: '1px solid #2e373b', padding: '1.25rem', borderRadius: '12px', textAlign: 'center', margin: '0.5rem 0', backgroundColor: '#131718' }}>
-          <EyeOff color="#8e9ca0" size={22} style={{ margin: '0 auto 0.4rem' }} />
-          <p style={{ fontSize: '0.85rem', fontWeight: 700, color: '#8e9ca0' }}>Contenido sensible</p>
-          <button onClick={() => setShowSensitive(true)} style={{ marginTop: '0.5rem', backgroundColor: '#00e676', color: '#082e30', border: 'none', fontSize: '0.75rem', fontWeight: 800, padding: '0.4rem 1rem', borderRadius: '9999px', cursor: 'pointer' }}>
+        <div style={{ border: '1px solid var(--border-color)', padding: '1.25rem', borderRadius: '12px', textAlign: 'center', margin: '0.5rem 0', backgroundColor: 'var(--surface-hover)' }}>
+          <EyeOff color="var(--text-muted)" size={22} style={{ margin: '0 auto 0.4rem' }} />
+          <p style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-muted)' }}>Contenido sensible</p>
+          <button onClick={() => setShowSensitive(true)} style={{ marginTop: '0.5rem', backgroundColor: 'var(--primary)', color: '#ffffff', border: 'none', fontSize: '0.75rem', fontWeight: 700, padding: '0.4rem 1rem', borderRadius: '9999px', cursor: 'pointer' }}>
             Ver contenido
           </button>
         </div>
@@ -264,25 +263,25 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
           <textarea
             value={editText}
             onChange={(e) => setEditText(e.target.value)}
-            style={{ width: '100%', minHeight: '80px', padding: '0.75rem', borderRadius: '10px', border: '1px solid #2e373b', backgroundColor: '#22272a', color: '#ffffff', fontSize: '0.95rem', resize: 'vertical' }}
+            style={{ width: '100%', minHeight: '80px', padding: '0.75rem', borderRadius: '10px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-main)', fontSize: '0.95rem', resize: 'vertical' }}
             autoFocus
           />
           <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.5rem', marginTop: '0.5rem' }}>
-            <button onClick={() => { setIsEditing(false); setEditText(post.text); }} style={{ padding: '0.375rem 0.75rem', fontSize: '0.75rem', borderRadius: '9999px', backgroundColor: 'transparent', color: '#8e9ca0', border: 'none', cursor: 'pointer' }}>
+            <button onClick={() => { setIsEditing(false); setEditText(post.text); }} style={{ padding: '0.375rem 0.75rem', fontSize: '0.75rem', borderRadius: '9999px', backgroundColor: 'transparent', color: 'var(--text-muted)', border: 'none', cursor: 'pointer' }}>
               Cancelar
             </button>
-            <button onClick={() => { updatePost(post.id, editText); setIsEditing(false); }} style={{ padding: '0.375rem 0.75rem', fontSize: '0.75rem', borderRadius: '9999px', backgroundColor: '#00e676', color: '#082e30', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.25rem', border: 'none', cursor: 'pointer' }}>
+            <button onClick={() => { updatePost(post.id, editText); setIsEditing(false); }} style={{ padding: '0.375rem 0.75rem', fontSize: '0.75rem', borderRadius: '9999px', backgroundColor: 'var(--primary)', color: '#ffffff', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.25rem', border: 'none', cursor: 'pointer' }}>
               <Check size={14} /> Guardar
             </button>
           </div>
         </div>
       ) : (
-        <p style={{ color: '#e2e8f0', fontSize: '0.95rem', lineHeight: 1.55, marginBottom: '0.85rem', wordBreak: 'break-word' }}>
+        <p style={{ color: 'var(--text-main)', fontSize: '0.95rem', lineHeight: 1.55, marginBottom: '0.85rem', wordBreak: 'break-word' }}>
           {displayedText}
           {isLongText && (
             <button
               onClick={() => setIsExpanded(!isExpanded)}
-              style={{ background: 'none', border: 'none', color: isSolid ? '#00e676' : '#8e9ca0', fontSize: '0.92rem', cursor: 'pointer', padding: '0 0 0 4px', textDecoration: 'none', fontWeight: 700 }}
+              style={{ background: 'none', border: 'none', color: 'var(--primary)', fontSize: '0.92rem', cursor: 'pointer', padding: '0 0 0 4px', textDecoration: 'none', fontWeight: 700 }}
             >
               {isExpanded ? ' (leer menos)' : ' (leer más)'}
             </button>
@@ -290,7 +289,7 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
         </p>
       )}
 
-      {/* Mood Tag Pill (Matching Image 4) */}
+      {/* Mood Tag Pill */}
       {mood && (
         <div style={{ marginBottom: '0.85rem' }}>
           <span style={{
@@ -299,11 +298,11 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
             gap: '0.3rem',
             padding: isSolid ? '0.3rem 0.75rem' : '0.25rem 0.65rem',
             borderRadius: '9999px',
-            backgroundColor: isSolid ? '#00e676' : mood.bg,
-            color: isSolid ? '#06291d' : mood.color,
+            backgroundColor: isSolid ? 'var(--primary-light)' : mood.bg,
+            color: isSolid ? 'var(--primary)' : mood.color,
             fontSize: '0.75rem',
-            fontWeight: isSolid ? 900 : 800,
-            boxShadow: isSolid ? '0 4px 14px rgba(0, 230, 118, 0.35)' : 'none'
+            fontWeight: 700,
+            border: '1px solid var(--border-color)'
           }}>
             {mood.label}
           </span>
@@ -313,14 +312,14 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
       {/* Card Footer: Comments & Hearts counter */}
       <div style={{
         display: 'flex',
-        justify: 'flex-end',
+        justifyContent: 'flex-end',
         alignItems: 'center',
         gap: '0.75rem',
-        color: '#8e9ca0',
+        color: 'var(--text-muted)',
         fontSize: '0.82rem',
-        fontWeight: 700,
+        fontWeight: 600,
         paddingTop: '0.6rem',
-        borderTop: isSolid ? '1px solid rgba(0, 230, 118, 0.2)' : '1px solid rgba(255, 255, 255, 0.05)'
+        borderTop: '1px solid var(--border-color)'
       }}>
         {/* Comments Count */}
         <button
@@ -329,15 +328,15 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
             display: 'flex',
             alignItems: 'center',
             gap: '0.4rem',
-            color: isSolid ? '#38bdf8' : showComments ? '#ffffff' : '#8e9ca0',
-            backgroundColor: isSolid ? 'rgba(56, 189, 248, 0.12)' : 'none',
-            border: isSolid ? '1px solid rgba(56, 189, 248, 0.25)' : 'none',
-            padding: isSolid ? '0.35rem 0.75rem' : '0',
+            color: showComments ? 'var(--primary)' : 'var(--text-muted)',
+            backgroundColor: 'transparent',
+            border: 'none',
+            padding: '0.3rem 0.6rem',
             borderRadius: '9999px',
             cursor: 'pointer',
             fontSize: '0.82rem',
-            fontWeight: 800,
-            transition: 'all 0.15s ease'
+            fontWeight: 700,
+            transition: 'all var(--transition-fast)'
           }}
         >
           <MessageCircle size={16} />
@@ -351,24 +350,24 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
             display: 'flex',
             alignItems: 'center',
             gap: '0.4rem',
-            color: isSolid || hasHugged ? '#f43f5e' : '#8e9ca0',
-            backgroundColor: isSolid ? 'rgba(244, 63, 94, 0.12)' : 'none',
-            border: isSolid ? '1px solid rgba(244, 63, 94, 0.25)' : 'none',
-            padding: isSolid ? '0.35rem 0.75rem' : '0',
+            color: hasHugged ? 'var(--accent-rose)' : 'var(--text-muted)',
+            backgroundColor: 'transparent',
+            border: 'none',
+            padding: '0.3rem 0.6rem',
             borderRadius: '9999px',
             cursor: 'pointer',
             fontSize: '0.82rem',
-            fontWeight: 800,
-            transition: 'all 0.15s ease'
+            fontWeight: 700,
+            transition: 'all var(--transition-fast)'
           }}
         >
-          <Heart size={16} fill={hasHugged ? '#f43f5e' : 'none'} color={hasHugged ? '#f43f5e' : (isSolid ? '#f43f5e' : '#8e9ca0')} className={hugAnimating ? 'animate-pop' : ''} />
+          <Heart size={16} fill={hasHugged ? 'var(--accent-rose)' : 'none'} color={hasHugged ? 'var(--accent-rose)' : 'var(--text-muted)'} className={hugAnimating ? 'animate-pop' : ''} />
           <span>{post.hugs ?? 0}</span>
         </button>
       </div>
 
       {showComments && (
-        <div style={{ marginTop: '1rem', borderTop: '1px solid rgba(255, 255, 255, 0.1)', paddingTop: '1rem' }} className="animate-slide-up">
+        <div style={{ marginTop: '1rem', borderTop: '1px solid var(--border-color)', paddingTop: '1rem' }} className="animate-slide-up">
           
           {!replyingToId && (
             <form onSubmit={(e) => handleCommentSubmit(e, null)} style={{ display: 'flex', gap: '0.75rem', marginBottom: '1.25rem', alignItems: 'flex-start' }}>
@@ -384,11 +383,11 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
                     width: '100%',
                     minHeight: '65px',
                     padding: '0.75rem 1rem',
-                    border: '1px solid #283033',
-                    backgroundColor: '#131718',
+                    border: '1px solid var(--border-color)',
+                    backgroundColor: 'var(--bg-color)',
                     fontSize: '0.95rem',
-                    color: '#ffffff',
-                    WebkitTextFillColor: '#ffffff',
+                    color: 'var(--text-main)',
+                    WebkitTextFillColor: 'var(--text-main)',
                     outline: 'none',
                     resize: 'vertical',
                     borderRadius: '12px',
@@ -400,8 +399,8 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
                     type="submit"
                     disabled={!commentText.trim()}
                     style={{
-                      backgroundColor: commentText.trim() ? '#00e676' : '#232a2d',
-                      color: commentText.trim() ? '#082e30' : '#8e9ca0',
+                      backgroundColor: commentText.trim() ? 'var(--primary)' : 'var(--surface-hover)',
+                      color: commentText.trim() ? '#ffffff' : 'var(--text-muted)',
                       padding: '0.45rem 1.25rem',
                       borderRadius: '9999px',
                       fontWeight: 900,
@@ -409,7 +408,7 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
                       border: 'none',
                       cursor: commentText.trim() ? 'pointer' : 'default',
                       transition: 'all 0.2s ease',
-                      boxShadow: commentText.trim() ? '0 4px 12px rgba(0, 230, 118, 0.3)' : 'none'
+                      boxShadow: commentText.trim() ? '0 4px 12px rgba(13,148,136,0.3)' : 'none'
                     }}
                   >
                     Responder
@@ -424,32 +423,32 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
               {topLevelComments.map((c) => {
                 const replies = getReplies(c.id);
                 return (
-                  <div key={c.id} style={{ display: 'flex', flexDirection: 'column', padding: '0.85rem 0', borderBottom: '1px solid rgba(255, 255, 255, 0.06)' }}>
+                  <div key={c.id} style={{ display: 'flex', flexDirection: 'column', padding: '0.85rem 0', borderBottom: '1px solid var(--border-color)' }}>
                     <div style={{ display: 'flex', gap: '0.75rem' }}>
                       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                         <div style={{ width: '36px', height: '36px', flexShrink: 0 }}>
                           <TalkCampusAvatar id={c.isMine ? (user?.avatar || 'owl') : (c.avatar || 'owl')} size={36} />
                         </div>
                         {replies.length > 0 && (
-                          <div style={{ flex: 1, width: '2px', backgroundColor: '#283033', margin: '0.25rem 0' }}></div>
+                          <div style={{ flex: 1, width: '2px', backgroundColor: 'var(--border-color)', margin: '0.25rem 0' }}></div>
                         )}
                       </div>
                       <div style={{ flex: 1, minWidth: 0, paddingBottom: '0.25rem' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', marginBottom: '0.25rem' }}>
                           <Link to={`/app/u/${c.author}`} style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                            <span style={{ fontWeight: 800, fontSize: '0.92rem', color: '#ffffff', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{c.author}</span>
-                            <span style={{ fontSize: '0.8rem', color: '#38bdf8', fontWeight: 600 }}>@{c.author.replace(/\s/g, '').toLowerCase()}</span>
+                            <span style={{ fontWeight: 800, fontSize: '0.92rem', color: 'var(--text-main)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{c.author}</span>
+                            <span style={{ fontSize: '0.8rem', color: 'var(--primary)', fontWeight: 600 }}>@{c.author.replace(/\s/g, '').toLowerCase()}</span>
                           </Link>
-                          <span style={{ fontSize: '0.78rem', color: '#94a3b8' }}>· {c.time || 'Reciente'}</span>
+                          <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>· {c.time || 'Reciente'}</span>
                           
                           {c.isMine && editingCommentId !== c.id && (
                             <div style={{ display: 'flex', gap: '0.5rem', marginLeft: 'auto' }}>
                               {(!c.created_at || (Date.now() - new Date(c.created_at).getTime()) < 300000) && (
-                                <button onClick={() => { setEditingCommentId(c.id); setEditCommentText(c.text); }} style={{ color: '#8e9ca0', background: 'transparent', cursor: 'pointer', padding: 0 }} title="Editar">
+                                <button onClick={() => { setEditingCommentId(c.id); setEditCommentText(c.text); }} style={{ color: 'var(--text-muted)', background: 'transparent', cursor: 'pointer', padding: 0 }} title="Editar">
                                   <Edit3 size={15} strokeWidth={2} />
                                 </button>
                               )}
-                              <button onClick={() => { if(window.confirm('¿Borrar?')) deleteComment(c.id); }} style={{ color: '#f43f5e', background: 'transparent', cursor: 'pointer', padding: 0 }}>
+                              <button onClick={() => { if(window.confirm('¿Borrar?')) deleteComment(c.id); }} style={{ color: 'var(--accent-rose)', background: 'transparent', cursor: 'pointer', padding: 0 }}>
                                 <Trash2 size={15} strokeWidth={2} />
                               </button>
                             </div>
@@ -461,48 +460,47 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
                             <textarea 
                               value={editCommentText}
                               onChange={(e) => setEditCommentText(e.target.value)}
-                              style={{ width: '100%', minHeight: '60px', padding: '0.6rem', borderRadius: '10px', border: '1px solid #00e676', backgroundColor: '#131718', fontSize: '0.92rem', color: '#ffffff', WebkitTextFillColor: '#ffffff', outline: 'none', resize: 'vertical' }}
+                              style={{ width: '100%', minHeight: '60px', padding: '0.6rem', borderRadius: '10px', border: '1px solid var(--primary)', backgroundColor: 'var(--surface-hover)', fontSize: '0.92rem', color: 'var(--text-main)', outline: 'none', resize: 'vertical' }}
                               autoFocus
                             />
                             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.5rem' }}>
-                              <button onClick={() => setEditingCommentId(null)} style={{ backgroundColor: 'transparent', color: '#8e9ca0', padding: '0.25rem 0.75rem', borderRadius: '9999px', border: '1px solid #283033', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 800 }}>
+                              <button onClick={() => setEditingCommentId(null)} style={{ backgroundColor: 'transparent', color: 'var(--text-muted)', padding: '0.25rem 0.75rem', borderRadius: '9999px', border: '1px solid var(--border-color)', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 800 }}>
                                 Cancelar
                               </button>
-                              <button onClick={() => { updateComment(c.id, editCommentText); setEditingCommentId(null); }} style={{ backgroundColor: '#00e676', color: '#082e30', padding: '0.25rem 0.75rem', borderRadius: '9999px', border: 'none', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 900 }}>
+                              <button onClick={() => { updateComment(c.id, editCommentText); setEditingCommentId(null); }} style={{ backgroundColor: 'var(--primary)', color: '#ffffff', padding: '0.25rem 0.75rem', borderRadius: '9999px', border: 'none', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 700 }}>
                                 Guardar
                               </button>
                             </div>
                           </div>
                         ) : (
                           <>
-                            <p style={{ fontSize: '0.92rem', color: '#f1f5f9', margin: '0.25rem 0 0.5rem', wordBreak: 'break-word', lineHeight: 1.5, fontWeight: 500 }}>
+                            <p style={{ fontSize: '0.92rem', color: 'var(--text-main)', margin: '0.25rem 0 0.5rem', wordBreak: 'break-word', lineHeight: 1.5, fontWeight: 500 }}>
                               {c.text}
                             </p>
                             
-                            <div style={{ display: 'flex', justifyContent: 'space-between', maxWidth: '380px', marginTop: '0.5rem', color: '#8e9ca0' }}>
-                              <button onClick={() => handleReplyClick(c.author, c.id)} style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: '#8e9ca0', background: 'transparent', cursor: 'pointer', padding: 0 }} className="twitter-action-btn">
+                            <div style={{ display: 'flex', justifyContent: 'space-between', maxWidth: '380px', marginTop: '0.5rem', color: 'var(--text-muted)' }}>
+                              <button onClick={() => handleReplyClick(c.author, c.id)} style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: 'var(--text-muted)', background: 'transparent', cursor: 'pointer', padding: 0 }}>
                                 <MessageCircle size={16} strokeWidth={1.75} />
                               </button>
-                              <button onClick={() => showToast('¡Compartido!')} style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: '#8e9ca0', background: 'transparent', cursor: 'pointer', padding: 0 }} className="twitter-action-btn">
+                              <button onClick={() => showToast('¡Compartido!')} style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: 'var(--text-muted)', background: 'transparent', cursor: 'pointer', padding: 0 }}>
                                 <Repeat2 size={16} strokeWidth={1.75} />
                               </button>
                               <button 
                                 onClick={() => handleCommentHug(c.id, c.hugs, c.author)} 
                                 disabled={c.author === user?.nickname}
-                                style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: huggedComments.includes(c.id) ? '#f43f5e' : '#8e9ca0', background: 'transparent', cursor: c.author === user?.nickname ? 'not-allowed' : 'pointer', padding: 0, opacity: c.author === user?.nickname ? 0.5 : 1 }} 
-                                className="twitter-action-btn"
+                                style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: huggedComments.includes(c.id) ? 'var(--accent-rose)' : 'var(--text-muted)', background: 'transparent', cursor: c.author === user?.nickname ? 'not-allowed' : 'pointer', padding: 0, opacity: c.author === user?.nickname ? 0.5 : 1 }}
                               >
-                                <Heart size={16} strokeWidth={1.75} fill={huggedComments.includes(c.id) ? '#f43f5e' : 'none'} />
+                                <Heart size={16} strokeWidth={1.75} fill={huggedComments.includes(c.id) ? 'var(--accent-rose)' : 'none'} />
                                 {c.hugs > 0 && <span style={{ fontSize: '0.75rem', fontWeight: 700 }}>{c.hugs}</span>}
                               </button>
-                              <button style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: '#8e9ca0', background: 'transparent', cursor: 'pointer', padding: 0 }} className="twitter-action-btn">
+                              <button style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: 'var(--text-muted)', background: 'transparent', cursor: 'pointer', padding: 0 }}>
                                 <BarChart2 size={16} strokeWidth={1.75} />
                               </button>
                               <div style={{ display: 'flex', gap: '0.75rem' }}>
-                                <button onClick={() => showToast('Guardado')} style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: '#8e9ca0', background: 'transparent', cursor: 'pointer', padding: 0 }} className="twitter-action-btn">
+                                <button onClick={() => showToast('Guardado')} style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: 'var(--text-muted)', background: 'transparent', cursor: 'pointer', padding: 0 }}>
                                   <Bookmark size={16} strokeWidth={1.75} />
                                 </button>
-                                <button onClick={() => showToast('Enlace copiado')} style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: '#8e9ca0', background: 'transparent', cursor: 'pointer', padding: 0 }} className="twitter-action-btn">
+                                <button onClick={() => showToast('Enlace copiado')} style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: 'var(--text-muted)', background: 'transparent', cursor: 'pointer', padding: 0 }}>
                                   <Share size={16} strokeWidth={1.75} />
                                 </button>
                               </div>
@@ -519,9 +517,9 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
                           <TalkCampusAvatar id={user?.avatar || 'owl'} size={30} />
                         </div>
                         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
-                          <div style={{ fontSize: '0.8rem', color: '#94a3b8', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                            <span>Respondiendo a <span style={{ color: '#00e676', fontWeight: 700 }}>@{replyingTo?.replace(/\s/g, '')}</span></span>
-                            <button type="button" onClick={() => setReplyingToId(null)} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: '#8e9ca0', padding: 0 }}>
+                          <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                            <span>Respondiendo a <span style={{ color: 'var(--primary)', fontWeight: 700 }}>@{replyingTo?.replace(/\s/g, '')}</span></span>
+                            <button type="button" onClick={() => setReplyingToId(null)} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--text-muted)', padding: 0 }}>
                               <X size={14} />
                             </button>
                           </div>
@@ -530,10 +528,10 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
                             value={commentText}
                             onChange={(e) => setCommentText(e.target.value)}
                             placeholder="Escribe tu respuesta..."
-                            style={{ width: '100%', minHeight: '55px', padding: '0.6rem 0.85rem', border: '1px solid #283033', backgroundColor: '#131718', fontSize: '0.9rem', color: '#ffffff', WebkitTextFillColor: '#ffffff', outline: 'none', resize: 'vertical', borderRadius: '10px', fontFamily: 'inherit' }}
+                            style={{ width: '100%', minHeight: '55px', padding: '0.6rem 0.85rem', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', fontSize: '0.9rem', color: 'var(--text-main)', outline: 'none', resize: 'vertical', borderRadius: '10px', fontFamily: 'inherit' }}
                           />
                           <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: '0.25rem' }}>
-                            <button type="submit" disabled={!commentText.trim()} style={{ backgroundColor: commentText.trim() ? '#00e676' : '#232a2d', color: commentText.trim() ? '#082e30' : '#8e9ca0', padding: '0.35rem 1rem', borderRadius: '9999px', fontWeight: 900, fontSize: '0.8rem', border: 'none', cursor: commentText.trim() ? 'pointer' : 'default', transition: 'all 0.15s ease' }}>
+                            <button type="submit" disabled={!commentText.trim()} style={{ backgroundColor: commentText.trim() ? 'var(--primary)' : 'var(--surface-hover)', color: commentText.trim() ? '#ffffff' : 'var(--text-muted)', padding: '0.35rem 1rem', borderRadius: '9999px', fontWeight: 700, fontSize: '0.8rem', border: 'none', cursor: commentText.trim() ? 'pointer' : 'default', transition: 'all 0.15s ease' }}>
                               Responder
                             </button>
                           </div>
@@ -552,31 +550,31 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
                             <div style={{ flex: 1, minWidth: 0 }}>
                               <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', marginBottom: '0.2rem' }}>
                                 <Link to={`/app/u/${reply.author}`} style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-                                  <span style={{ fontWeight: 800, fontSize: '0.88rem', color: '#ffffff', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{reply.author}</span>
-                                  <span style={{ fontSize: '0.78rem', color: '#38bdf8' }}>@{reply.author.replace(/\s/g, '').toLowerCase()}</span>
+                                  <span style={{ fontWeight: 800, fontSize: '0.88rem', color: 'var(--text-main)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{reply.author}</span>
+                                  <span style={{ fontSize: '0.78rem', color: 'var(--primary)' }}>@{reply.author.replace(/\s/g, '').toLowerCase()}</span>
                                 </Link>
-                                <span style={{ fontSize: '0.78rem', color: '#94a3b8' }}>· {reply.time || 'Reciente'}</span>
+                                <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>· {reply.time || 'Reciente'}</span>
                                 {reply.isMine && (
                                   <div style={{ marginLeft: 'auto' }}>
-                                    <button onClick={() => deleteComment(reply.id)} style={{ color: '#8e9ca0', background: 'transparent', cursor: 'pointer', padding: 0 }}>
+                                    <button onClick={() => deleteComment(reply.id)} style={{ color: 'var(--text-muted)', background: 'transparent', cursor: 'pointer', padding: 0 }}>
                                       <Trash2 size={14} strokeWidth={2} />
                                     </button>
                                   </div>
                                 )}
                               </div>
-                              <p style={{ fontSize: '0.88rem', color: '#f1f5f9', margin: 0, wordBreak: 'break-word', lineHeight: 1.45, fontWeight: 500 }}>
+                              <p style={{ fontSize: '0.88rem', color: 'var(--text-main)', margin: 0, wordBreak: 'break-word', lineHeight: 1.45, fontWeight: 500 }}>
                                 {reply.text.startsWith('@') ? (
                                   <>
-                                    <span style={{ color: '#00e676', fontWeight: 700 }}>{reply.text.split(' ')[0]}</span>{' '}
-                                    <span style={{ color: '#f1f5f9' }}>{reply.text.substring(reply.text.indexOf(' ') + 1)}</span>
+                                    <span style={{ color: 'var(--primary)', fontWeight: 700 }}>{reply.text.split(' ')[0]}</span>{' '}
+                                    <span>{reply.text.substring(reply.text.indexOf(' ') + 1)}</span>
                                   </>
                                 ) : (
                                   reply.text
                                 )}
                               </p>
-                              <div style={{ display: 'flex', gap: '1.25rem', marginTop: '0.35rem', color: '#8e9ca0' }}>
-                                <button onClick={() => handleCommentHug(reply.id, reply.hugs, reply.author)} style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: huggedComments.includes(reply.id) ? '#f43f5e' : '#8e9ca0', background: 'transparent', cursor: 'pointer', padding: 0 }} className="twitter-action-btn">
-                                  <Heart size={14} strokeWidth={1.75} fill={huggedComments.includes(reply.id) ? '#f43f5e' : 'none'} />
+                              <div style={{ display: 'flex', gap: '1.25rem', marginTop: '0.35rem', color: 'var(--text-muted)' }}>
+                                <button onClick={() => handleCommentHug(reply.id, reply.hugs, reply.author)} style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: huggedComments.includes(reply.id) ? 'var(--accent-rose)' : 'var(--text-muted)', background: 'transparent', cursor: 'pointer', padding: 0 }}>
+                                  <Heart size={14} strokeWidth={1.75} fill={huggedComments.includes(reply.id) ? 'var(--accent-rose)' : 'none'} />
                                   {reply.hugs > 0 && <span style={{ fontSize: '0.72rem', fontWeight: 700 }}>{reply.hugs}</span>}
                                 </button>
                               </div>
@@ -590,7 +588,7 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
               })}
             </div>
           ) : (
-            <div style={{ fontSize: '0.85rem', color: '#8e9ca0', textAlign: 'center', margin: '1.5rem 0', fontWeight: 600 }}>Aún no hay respuestas. ¡Sé el primero!</div>
+            <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', textAlign: 'center', margin: '1.5rem 0', fontWeight: 600 }}>Aún no hay respuestas. ¡Sé el primero!</div>
           )}
         </div>
       )}

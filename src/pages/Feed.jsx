@@ -270,10 +270,10 @@ export default function Feed() {
           alignItems: 'center',
           justifyContent: 'space-between',
           gap: '0.75rem',
-          backgroundColor: '#121516',
+          backgroundColor: 'var(--surface)',
           borderRadius: '16px',
           padding: '0.5rem 0.75rem',
-          border: '1px solid #232a2d'
+          border: '1px solid var(--border-color)'
         }}>
           {/* Tabs list */}
           <div className="tc-tabs-bar" style={{ flex: 1 }}>
@@ -295,7 +295,7 @@ export default function Feed() {
               style={{
                 background: 'none',
                 border: 'none',
-                color: '#8e9ca0',
+                color: 'var(--text-muted)',
                 cursor: 'pointer',
                 padding: '6px',
                 display: 'flex',
@@ -310,9 +310,9 @@ export default function Feed() {
             <button
               onClick={() => setSearchOpen(!searchOpen)}
               style={{
-                background: searchOpen ? '#1e2427' : 'none',
+                background: searchOpen ? 'var(--surface-hover)' : 'none',
                 border: 'none',
-                color: searchOpen ? '#00e676' : '#8e9ca0',
+                color: searchOpen ? 'var(--primary)' : 'var(--text-muted)',
                 cursor: 'pointer',
                 padding: '6px',
                 display: 'flex',
@@ -331,8 +331,8 @@ export default function Feed() {
           <div className="animate-slide-down" style={{
             display: 'flex',
             alignItems: 'center',
-            backgroundColor: '#161a1c',
-            border: '1px solid #00e676',
+            backgroundColor: 'var(--surface)',
+            border: '1px solid var(--primary)',
             borderRadius: '12px',
             padding: '0.6rem 1rem',
             gap: '0.5rem'
@@ -349,7 +349,7 @@ export default function Feed() {
                 background: 'transparent',
                 border: 'none',
                 outline: 'none',
-                color: '#ffffff',
+                color: 'var(--text-main)',
                 fontSize: '0.9rem'
               }}
             />
@@ -366,15 +366,15 @@ export default function Feed() {
 
         {/* Active Filters Bar (if any selected) */}
         {(selectedVibes.length > 0 || selectedTags.length > 0 || ageRange < 60 || searchQuery) && (
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', alignItems: 'center', backgroundColor: '#14181a', padding: '0.6rem 0.85rem', borderRadius: '12px', border: '1px solid #232a2d' }}>
-            <span style={{ fontSize: '0.75rem', color: '#8e9ca0', fontWeight: 700 }}>Filtros activos:</span>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', alignItems: 'center', backgroundColor: 'var(--surface-hover)', padding: '0.6rem 0.85rem', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
+            <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 700 }}>Filtros activos:</span>
 
             {ageRange < 60 && (
               <span
                 onClick={() => setAgeRange(60)}
                 style={{
-                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                  color: '#ffffff',
+                  backgroundColor: 'var(--surface-hover)',
+                  color: 'var(--text-main)',
                   fontSize: '0.75rem',
                   fontWeight: 800,
                   padding: '0.2rem 0.6rem',
@@ -433,8 +433,7 @@ export default function Feed() {
 
             <button
               onClick={handleResetFilters}
-              style={{ background: 'none', border: 'none', color: '#8e9ca0', fontSize: '0.75rem', cursor: 'pointer', textDecoration: 'underline', marginLeft: 'auto' }}
-            >
+              style={{ background: 'none', border: 'none', color: 'var(--text-muted)', fontSize: '0.75rem', cursor: 'pointer', textDecoration: 'underline', marginLeft: 'auto' }}>
               Limpiar todos
             </button>
           </div>
@@ -444,31 +443,31 @@ export default function Feed() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           {filteredPosts.length === 0 ? (
             <div style={{
-              backgroundColor: '#161a1c',
-              border: '1px dashed #232a2d',
+              backgroundColor: 'var(--surface)',
+              border: '1px dashed var(--border-color)',
               borderRadius: '16px',
               padding: '3.5rem 1.5rem',
               textAlign: 'center'
             }}>
               <div style={{ fontSize: '3rem', marginBottom: '0.75rem' }}>🌱</div>
-              <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#ffffff', marginBottom: '0.4rem' }}>
+              <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-main)', marginBottom: '0.4rem' }}>
                 No hay publicaciones en este filtro
               </h3>
-              <p style={{ color: '#8e9ca0', fontSize: '0.9rem', maxWidth: '380px', margin: '0 auto 1.5rem' }}>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', maxWidth: '380px', margin: '0 auto 1.5rem' }}>
                 Prueba ajustando las opciones de feed o sé el primero en iniciar un desahogo con la comunidad.
               </p>
               <button
                 onClick={handleResetFilters}
                 style={{
-                  backgroundColor: '#00e676',
-                  color: '#082e30',
+                  backgroundColor: 'var(--primary)',
+                  color: '#ffffff',
                   border: 'none',
                   borderRadius: '9999px',
                   padding: '0.75rem 1.75rem',
                   fontSize: '0.9rem',
                   fontWeight: 900,
                   cursor: 'pointer',
-                  boxShadow: '0 4px 14px rgba(0, 230, 118, 0.35)'
+                  boxShadow: '0 4px 14px rgba(13,148,136,0.35)'
                 }}
               >
                 Restablecer Opciones
@@ -493,8 +492,8 @@ export default function Feed() {
         {/* Header with Filter icon, title and reset icon */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-            <SlidersHorizontal size={18} color="#ffffff" />
-            <h3 style={{ fontSize: '1.05rem', fontWeight: 900, color: '#ffffff', margin: 0 }}>
+            <SlidersHorizontal size={18} color="var(--text-main)" />
+            <h3 style={{ fontSize: '1.05rem', fontWeight: 900, color: 'var(--text-main)', margin: 0 }}>
               Opciones de feed
             </h3>
           </div>
@@ -503,7 +502,7 @@ export default function Feed() {
             style={{
               background: 'none',
               border: 'none',
-              color: '#8e9ca0',
+              color: 'var(--text-muted)',
               cursor: 'pointer',
               padding: '4px',
               display: 'flex',
@@ -511,8 +510,8 @@ export default function Feed() {
               borderRadius: '50%',
               transition: 'all 0.15s ease'
             }}
-            onMouseEnter={(e) => e.currentTarget.style.color = '#00e676'}
-            onMouseLeave={(e) => e.currentTarget.style.color = '#8e9ca0'}
+            onMouseEnter={(e) => e.currentTarget.style.color = 'var(--primary)'}
+            onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
             title="Restablecer opciones"
           >
             <RotateCcw size={16} />
@@ -521,15 +520,15 @@ export default function Feed() {
 
         {/* ─── 1. Section: Styles (Clásico / Sólido) ─── */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-          <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#e2e8f0' }}>Styles</span>
+          <span style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--text-main)' }}>Styles</span>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
             {/* Clásico Card Preview */}
             <div
               onClick={() => handleSelectStyle('classic')}
               style={{
-                backgroundColor: '#121617',
-                border: feedStyle === 'classic' ? '2px solid #00e676' : '1px solid #283033',
+                backgroundColor: 'var(--surface-hover)',
+                border: feedStyle === 'classic' ? '2px solid var(--primary)' : '1px solid var(--border-color)',
                 borderRadius: '12px',
                 padding: '0.85rem 0.6rem',
                 display: 'flex',
@@ -538,15 +537,15 @@ export default function Feed() {
                 gap: '0.4rem',
                 cursor: 'pointer',
                 transition: 'all 0.15s ease',
-                boxShadow: feedStyle === 'classic' ? '0 0 14px rgba(0, 230, 118, 0.25)' : 'none'
+                boxShadow: feedStyle === 'classic' ? '0 0 14px rgba(13,148,136,0.25)' : 'none'
               }}
             >
               <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', width: '100%', padding: '0 4px' }}>
-                <div style={{ height: '8px', backgroundColor: '#202628', borderRadius: '3px', width: '100%' }} />
-                <div style={{ height: '8px', backgroundColor: '#202628', borderRadius: '3px', width: '100%' }} />
-                <div style={{ height: '8px', backgroundColor: '#202628', borderRadius: '3px', width: '100%' }} />
+                <div style={{ height: '8px', backgroundColor: 'var(--border-color)', borderRadius: '3px', width: '100%' }} />
+                <div style={{ height: '8px', backgroundColor: 'var(--border-color)', borderRadius: '3px', width: '100%' }} />
+                <div style={{ height: '8px', backgroundColor: 'var(--border-color)', borderRadius: '3px', width: '100%' }} />
               </div>
-              <span style={{ fontSize: '0.72rem', fontWeight: 800, color: feedStyle === 'classic' ? '#00e676' : '#8e9ca0', marginTop: '0.2rem' }}>
+              <span style={{ fontSize: '0.72rem', fontWeight: 800, color: feedStyle === 'classic' ? 'var(--primary)' : 'var(--text-muted)', marginTop: '0.2rem' }}>
                 Clásico
               </span>
             </div>
@@ -555,8 +554,8 @@ export default function Feed() {
             <div
               onClick={() => handleSelectStyle('solid')}
               style={{
-                backgroundColor: '#121617',
-                border: feedStyle === 'solid' ? '2px solid #00e676' : '1px solid #283033',
+                backgroundColor: 'var(--surface-hover)',
+                border: feedStyle === 'solid' ? '2px solid var(--primary)' : '1px solid var(--border-color)',
                 borderRadius: '12px',
                 padding: '0.85rem 0.6rem',
                 display: 'flex',
@@ -565,7 +564,7 @@ export default function Feed() {
                 gap: '0.4rem',
                 cursor: 'pointer',
                 transition: 'all 0.15s ease',
-                boxShadow: feedStyle === 'solid' ? '0 0 14px rgba(0, 230, 118, 0.25)' : 'none'
+                boxShadow: feedStyle === 'solid' ? '0 0 14px rgba(13,148,136,0.25)' : 'none'
               }}
             >
               <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', width: '100%', padding: '0 4px' }}>
@@ -573,13 +572,13 @@ export default function Feed() {
                 <div style={{ height: '8px', backgroundColor: '#10b981', borderRadius: '3px', width: '100%' }} />
                 <div style={{ height: '8px', backgroundColor: '#8b5cf6', borderRadius: '3px', width: '100%' }} />
               </div>
-              <span style={{ fontSize: '0.72rem', fontWeight: 800, color: feedStyle === 'solid' ? '#00e676' : '#8e9ca0', marginTop: '0.2rem' }}>
+              <span style={{ fontSize: '0.72rem', fontWeight: 800, color: feedStyle === 'solid' ? 'var(--primary)' : 'var(--text-muted)', marginTop: '0.2rem' }}>
                 Sólido
               </span>
             </div>
           </div>
 
-          <span style={{ fontSize: '0.72rem', color: '#8e9ca0' }}>
+          <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
             Los temas cambian mensualmente.
           </span>
         </div>
@@ -587,8 +586,8 @@ export default function Feed() {
         {/* ─── 2. Section: Edad Slider (16-60+) ─── */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#e2e8f0' }}>Edad</span>
-            <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#00e676' }}>
+            <span style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--text-main)' }}>Edad</span>
+            <span style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--primary)' }}>
               16-{ageRange === 60 ? '60+' : ageRange}
             </span>
           </div>
@@ -613,17 +612,17 @@ export default function Feed() {
 
         {/* ─── 3. Section: Vibras ─── */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-          <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#e2e8f0' }}>Vibras</span>
+          <span style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--text-main)' }}>Vibras</span>
 
           <button
             onClick={() => setShowVibesPicker(!showVibesPicker)}
             style={{
               width: '100%',
-              backgroundColor: '#181c1e',
-              border: selectedVibes.length > 0 ? '1px solid #00e676' : '1px solid #283033',
+              backgroundColor: 'var(--surface-hover)',
+              border: selectedVibes.length > 0 ? '1px solid var(--primary)' : '1px solid var(--border-color)',
               borderRadius: '9999px',
               padding: '0.65rem 1rem',
-              color: '#ffffff',
+              color: 'var(--text-main)',
               fontSize: '0.85rem',
               fontWeight: 800,
               cursor: 'pointer',
@@ -633,9 +632,9 @@ export default function Feed() {
               gap: '0.4rem',
               transition: 'all 0.15s ease'
             }}
-            onMouseEnter={(e) => e.currentTarget.style.borderColor = '#00e676'}
+            onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--primary)'}
             onMouseLeave={(e) => {
-              if (selectedVibes.length === 0) e.currentTarget.style.borderColor = '#283033';
+              if (selectedVibes.length === 0) e.currentTarget.style.borderColor = 'var(--border-color)';
             }}
           >
             <Plus size={16} strokeWidth={2.5} />
@@ -690,9 +689,9 @@ export default function Feed() {
                       borderRadius: '9999px',
                       fontSize: '0.75rem',
                       fontWeight: 700,
-                      border: isSelected ? '1px solid #00e676' : '1px solid #2e373b',
-                      backgroundColor: isSelected ? 'rgba(0, 230, 118, 0.15)' : '#1b2022',
-                      color: isSelected ? '#00e676' : '#8e9ca0',
+                      border: isSelected ? '1px solid var(--primary)' : '1px solid var(--border-color)',
+                      backgroundColor: isSelected ? 'var(--primary-light)' : 'var(--surface-hover)',
+                      color: isSelected ? 'var(--primary)' : 'var(--text-muted)',
                       cursor: 'pointer',
                       transition: 'all 0.15s ease'
                     }}
@@ -707,17 +706,17 @@ export default function Feed() {
 
         {/* ─── 4. Section: Mis Etiquetas ─── */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-          <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#e2e8f0' }}>Mis Etiquetas</span>
+          <span style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--text-main)' }}>Mis Etiquetas</span>
 
           <button
             onClick={() => setShowTagsPicker(!showTagsPicker)}
             style={{
               width: '100%',
-              backgroundColor: '#181c1e',
-              border: selectedTags.length > 0 ? '1px solid #38bdf8' : '1px solid #283033',
+              backgroundColor: 'var(--surface-hover)',
+              border: selectedTags.length > 0 ? '1px solid var(--accent-blue)' : '1px solid var(--border-color)',
               borderRadius: '9999px',
               padding: '0.65rem 1rem',
-              color: '#ffffff',
+              color: 'var(--text-main)',
               fontSize: '0.85rem',
               fontWeight: 800,
               cursor: 'pointer',
@@ -727,9 +726,9 @@ export default function Feed() {
               gap: '0.4rem',
               transition: 'all 0.15s ease'
             }}
-            onMouseEnter={(e) => e.currentTarget.style.borderColor = '#38bdf8'}
+            onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--accent-blue)'}
             onMouseLeave={(e) => {
-              if (selectedTags.length === 0) e.currentTarget.style.borderColor = '#283033';
+              if (selectedTags.length === 0) e.currentTarget.style.borderColor = 'var(--border-color)';
             }}
           >
             <Plus size={16} strokeWidth={2.5} />
