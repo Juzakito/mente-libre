@@ -583,18 +583,34 @@ export default function MainLayout() {
             </button>
 
             {activeInfoModal === 'salas' && (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }} className="animate-fade-in">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                  <div style={{ fontSize: '2.2rem' }}>🚪</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', textAlign: 'left' }} className="animate-fade-in">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+                  <div style={{
+                    width: '48px',
+                    height: '48px',
+                    borderRadius: '16px',
+                    backgroundColor: 'rgba(0, 230, 118, 0.15)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '1.6rem',
+                    flexShrink: 0
+                  }}>
+                    🚪
+                  </div>
                   <div>
-                    <h3 style={{ fontSize: '1.3rem', fontWeight: 900, margin: 0, color: 'var(--text-main)' }}>Salas Comunitarias</h3>
-                    <p style={{ color: 'var(--text-muted)', fontSize: '0.82rem', margin: 0 }}>Encuentra compañeros y conversaciones en tiempo real</p>
+                    <h3 style={{ fontSize: '1.4rem', fontWeight: 900, margin: 0, color: '#ffffff', letterSpacing: '-0.01em' }}>
+                      Salas Comunitarias
+                    </h3>
+                    <p style={{ color: '#9ba7ac', fontSize: '0.84rem', margin: '0.15rem 0 0', lineHeight: 1.35 }}>
+                      Encuentra compañeros y conversaciones anónimas en tiempo real
+                    </p>
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginTop: '0.2rem' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginTop: '0.2rem' }}>
                   {[
-                    { id: 'primer_ano', name: '🌱 Primeros Ciclos UCS', topic: 'Adaptación, profesores y vida universitaria', users: 38, tag: '#PrimerAño' },
+                    { id: 'primer_ano', name: '🌱 Primeros Ciclos Universitarios', topic: 'Adaptación, profesores y vida en el campus', users: 38, tag: '#PrimerAño' },
                     { id: 'examenes', name: '📚 Preparación de Exámenes', topic: 'Desahogo y grupos de estudio sin estrés', users: 52, tag: '#ExámenesFinales' },
                     { id: 'salud_mental', name: '🧠 Manejo de la Ansiedad', topic: 'Espacio de escucha y apoyo guiado', users: 24, tag: '#SaludMental' },
                     { id: 'desahogo', name: '💬 Desahogo Libre 24/7', topic: 'Exprésate sin filtros de forma anónima', users: 19, tag: '#DesahogoLibre' }
@@ -602,43 +618,56 @@ export default function MainLayout() {
                     <div
                       key={room.id}
                       style={{
-                        padding: '0.85rem 1rem',
-                        borderRadius: '14px',
-                        backgroundColor: 'var(--surface-elevated)',
-                        border: '1px solid var(--border-color)',
+                        padding: '1rem 1.15rem',
+                        borderRadius: '16px',
+                        backgroundColor: '#1f262a',
+                        border: '1px solid rgba(255, 255, 255, 0.08)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'space-between',
-                        gap: '0.75rem'
+                        gap: '1rem',
+                        transition: 'all 0.2s ease'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.borderColor = 'rgba(0, 230, 118, 0.35)';
+                        e.currentTarget.style.backgroundColor = '#242c31';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+                        e.currentTarget.style.backgroundColor = '#1f262a';
                       }}
                     >
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
-                        <div style={{ fontWeight: 800, fontSize: '0.92rem', color: 'var(--text-main)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem', flex: 1 }}>
+                        <div style={{ fontWeight: 800, fontSize: '0.95rem', color: '#ffffff', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
                           <span>{room.name}</span>
-                          <span style={{ fontSize: '0.72rem', backgroundColor: 'rgba(0, 230, 118, 0.15)', color: '#00e676', padding: '0.15rem 0.5rem', borderRadius: '9999px', fontWeight: 700 }}>
+                          <span style={{ fontSize: '0.72rem', backgroundColor: 'rgba(0, 230, 118, 0.15)', color: '#00e676', padding: '0.15rem 0.55rem', borderRadius: '9999px', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
                             🟢 {room.users} en vivo
                           </span>
                         </div>
-                        <span style={{ color: 'var(--text-muted)', fontSize: '0.78rem' }}>{room.topic}</span>
+                        <span style={{ color: '#9ba7ac', fontSize: '0.8rem', lineHeight: 1.35 }}>{room.topic}</span>
                       </div>
                       <button
                         onClick={() => {
                           setActiveInfoModal(null);
                           showToast(`Conectado a la sala ${room.tag} ✨`);
-                          navigate('/app/chat');
+                          navigate('/app/chat', { state: { activeRoom: room } });
                         }}
                         style={{
-                          backgroundColor: '#00e676',
+                          background: 'linear-gradient(135deg, #00e676 0%, #00c853 100%)',
                           color: '#082e30',
                           border: 'none',
-                          padding: '0.45rem 0.95rem',
+                          padding: '0.55rem 1.15rem',
                           borderRadius: '9999px',
                           fontWeight: 900,
-                          fontSize: '0.8rem',
+                          fontSize: '0.82rem',
                           cursor: 'pointer',
                           whiteSpace: 'nowrap',
-                          boxShadow: '0 4px 12px rgba(0, 230, 118, 0.3)'
+                          boxShadow: '0 4px 14px rgba(0, 230, 118, 0.35)',
+                          flexShrink: 0,
+                          transition: 'all 0.15s ease'
                         }}
+                        onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.04)'}
+                        onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
                       >
                         Unirme →
                       </button>
@@ -649,11 +678,11 @@ export default function MainLayout() {
             )}
 
             {activeInfoModal === 'notificaciones' && (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }} className="animate-fade-in">
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', textAlign: 'left' }} className="animate-fade-in">
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
                     <div style={{ fontSize: '2rem' }}>🔔</div>
-                    <h3 style={{ fontSize: '1.3rem', fontWeight: 900, margin: 0 }}>Notificaciones</h3>
+                    <h3 style={{ fontSize: '1.3rem', fontWeight: 900, margin: 0, color: '#ffffff' }}>Notificaciones</h3>
                   </div>
                   {notificationsList.length > 0 && (
                     <button
@@ -669,7 +698,7 @@ export default function MainLayout() {
                 </div>
 
                 {notificationsList.length === 0 ? (
-                  <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', textAlign: 'center', padding: '1.5rem 0' }}>
+                  <p style={{ color: '#9ba7ac', fontSize: '0.88rem', textAlign: 'center', padding: '1.5rem 0' }}>
                     No tienes notificaciones pendientes ✨
                   </p>
                 ) : (
@@ -685,20 +714,20 @@ export default function MainLayout() {
                           setActiveInfoModal(null);
                         }}
                         style={{
-                          backgroundColor: item.read ? 'var(--surface)' : 'rgba(0, 230, 118, 0.08)',
+                          backgroundColor: item.read ? '#1f262a' : 'rgba(0, 230, 118, 0.08)',
                           padding: '0.85rem 1rem',
                           borderRadius: '14px',
-                          border: item.read ? '1px solid var(--border-color)' : '1px solid rgba(0, 230, 118, 0.35)',
+                          border: item.read ? '1px solid rgba(255,255,255,0.08)' : '1px solid rgba(0, 230, 118, 0.35)',
                           cursor: 'pointer',
                           textAlign: 'left',
                           transition: 'all 0.15s ease'
                         }}
                       >
-                        <div style={{ fontWeight: 800, fontSize: '0.85rem', color: item.read ? 'var(--text-main)' : '#00e676', marginBottom: '2px' }}>
+                        <div style={{ fontWeight: 800, fontSize: '0.85rem', color: item.read ? '#ffffff' : '#00e676', marginBottom: '2px' }}>
                           {item.title}
                         </div>
-                        <div style={{ color: 'var(--text-muted)', fontSize: '0.78rem' }}>{item.desc}</div>
-                        <div style={{ color: 'var(--text-muted)', fontSize: '0.7rem', marginTop: '4px', opacity: 0.7 }}>{item.time}</div>
+                        <div style={{ color: '#9ba7ac', fontSize: '0.78rem' }}>{item.desc}</div>
+                        <div style={{ color: '#697a80', fontSize: '0.7rem', marginTop: '4px' }}>{item.time}</div>
                       </div>
                     ))}
                   </div>
@@ -707,12 +736,12 @@ export default function MainLayout() {
             )}
 
             {activeInfoModal === 'mejoras' && (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }} className="animate-fade-in">
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', textAlign: 'left' }} className="animate-fade-in">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                   <div style={{ fontSize: '2.2rem' }}>⚡</div>
                   <div>
-                    <h3 style={{ fontSize: '1.3rem', fontWeight: 900, margin: 0 }}>Mejoras de la Plataforma</h3>
-                    <p style={{ color: 'var(--text-muted)', fontSize: '0.82rem', margin: 0 }}>¡Vota por las funciones que deseas ver primero!</p>
+                    <h3 style={{ fontSize: '1.3rem', fontWeight: 900, margin: 0, color: '#ffffff' }}>Mejoras de la Plataforma</h3>
+                    <p style={{ color: '#9ba7ac', fontSize: '0.82rem', margin: 0 }}>¡Vota por las funciones que deseas ver primero!</p>
                   </div>
                 </div>
 
@@ -727,8 +756,8 @@ export default function MainLayout() {
                       style={{
                         padding: '0.85rem 1rem',
                         borderRadius: '14px',
-                        backgroundColor: 'var(--surface-elevated)',
-                        border: '1px solid var(--border-color)',
+                        backgroundColor: '#1f262a',
+                        border: '1px solid rgba(255,255,255,0.08)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'space-between'
@@ -736,13 +765,13 @@ export default function MainLayout() {
                     >
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
                         <span style={{ fontSize: '1.2rem' }}>{feat.icon}</span>
-                        <span style={{ fontWeight: 800, fontSize: '0.86rem', color: 'var(--text-main)' }}>{feat.title}</span>
+                        <span style={{ fontWeight: 800, fontSize: '0.86rem', color: '#ffffff' }}>{feat.title}</span>
                       </div>
                       <button
                         onClick={() => handleUpvoteFeature(feat.key)}
                         style={{
                           backgroundColor: featureVotes.userVoted[feat.key] ? '#00e676' : 'rgba(255, 255, 255, 0.08)',
-                          color: featureVotes.userVoted[feat.key] ? '#082e30' : 'var(--text-main)',
+                          color: featureVotes.userVoted[feat.key] ? '#082e30' : '#ffffff',
                           border: 'none',
                           padding: '0.4rem 0.85rem',
                           borderRadius: '9999px',
@@ -787,12 +816,12 @@ export default function MainLayout() {
                     placeholder="Proponer una nueva mejora..."
                     style={{
                       flex: 1,
-                      backgroundColor: 'var(--surface-elevated)',
-                      border: '1px solid var(--border-color)',
+                      backgroundColor: '#1f262a',
+                      border: '1px solid rgba(255,255,255,0.1)',
                       borderRadius: '12px',
                       padding: '0.65rem 0.85rem',
                       fontSize: '0.84rem',
-                      color: 'var(--text-main)',
+                      color: '#ffffff',
                       outline: 'none'
                     }}
                   />
@@ -816,38 +845,38 @@ export default function MainLayout() {
             )}
 
             {activeInfoModal === 'dotz' && (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem' }} className="animate-fade-in">
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem', textAlign: 'left' }} className="animate-fade-in">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                   <div style={{ fontSize: '2.2rem' }}>🪶</div>
                   <div>
-                    <h3 style={{ fontSize: '1.3rem', fontWeight: 900, margin: 0 }}>Dotz (Plumas) & Logros</h3>
-                    <p style={{ color: 'var(--text-muted)', fontSize: '0.82rem', margin: 0 }}>Recompensas por tu empatía y autocuidado</p>
+                    <h3 style={{ fontSize: '1.3rem', fontWeight: 900, margin: 0, color: '#ffffff' }}>Dotz (Plumas) & Logros</h3>
+                    <p style={{ color: '#9ba7ac', fontSize: '0.82rem', margin: 0 }}>Recompensas por tu empatía y autocuidado</p>
                   </div>
                 </div>
 
                 <div style={{ display: 'flex', gap: '0.75rem' }}>
                   <div style={{ flex: 1, backgroundColor: 'rgba(56, 189, 248, 0.12)', border: '1px solid rgba(56, 189, 248, 0.3)', padding: '0.85rem', borderRadius: '14px', textAlign: 'center' }}>
                     <div style={{ fontSize: '1.4rem', fontWeight: 900, color: '#38bdf8' }}>150 🪶</div>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 700 }}>Plumas Acumuladas</div>
+                    <div style={{ fontSize: '0.75rem', color: '#9ba7ac', fontWeight: 700 }}>Plumas Acumuladas</div>
                   </div>
                   <div style={{ flex: 1, backgroundColor: 'rgba(251, 191, 36, 0.12)', border: '1px solid rgba(251, 191, 36, 0.3)', padding: '0.85rem', borderRadius: '14px', textAlign: 'center' }}>
                     <div style={{ fontSize: '1.4rem', fontWeight: 900, color: '#fbbf24' }}>3 Días 🔥</div>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 700 }}>Racha de Bienestar</div>
+                    <div style={{ fontSize: '0.75rem', color: '#9ba7ac', fontWeight: 700 }}>Racha de Bienestar</div>
                   </div>
                 </div>
 
                 <div style={{ textAlign: 'left', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                  <div style={{ fontSize: '0.82rem', fontWeight: 800, color: 'var(--text-muted)' }}>MISIONES PARA GANAR MÁS PLUMAS:</div>
+                  <div style={{ fontSize: '0.82rem', fontWeight: 800, color: '#9ba7ac' }}>MISIONES PARA GANAR MÁS PLUMAS:</div>
                   <button
                     onClick={() => { setActiveInfoModal(null); navigate('/app/mood'); }}
-                    style={{ backgroundColor: 'var(--surface-elevated)', border: '1px solid var(--border-color)', padding: '0.7rem 0.9rem', borderRadius: '12px', color: 'var(--text-main)', fontSize: '0.84rem', fontWeight: 700, display: 'flex', justifyContent: 'space-between', cursor: 'pointer' }}
+                    style={{ backgroundColor: '#1f262a', border: '1px solid rgba(255,255,255,0.08)', padding: '0.7rem 0.9rem', borderRadius: '12px', color: '#ffffff', fontSize: '0.84rem', fontWeight: 700, display: 'flex', justifyContent: 'space-between', cursor: 'pointer' }}
                   >
                     <span>+10 🪶 Registrar tu estado de ánimo de hoy</span>
                     <span style={{ color: '#00e676' }}>Ir →</span>
                   </button>
                   <button
                     onClick={() => { setActiveInfoModal(null); navigate('/app/feed'); }}
-                    style={{ backgroundColor: 'var(--surface-elevated)', border: '1px solid var(--border-color)', padding: '0.7rem 0.9rem', borderRadius: '12px', color: 'var(--text-main)', fontSize: '0.84rem', fontWeight: 700, display: 'flex', justifyContent: 'space-between', cursor: 'pointer' }}
+                    style={{ backgroundColor: '#1f262a', border: '1px solid rgba(255,255,255,0.08)', padding: '0.7rem 0.9rem', borderRadius: '12px', color: '#ffffff', fontSize: '0.84rem', fontWeight: 700, display: 'flex', justifyContent: 'space-between', cursor: 'pointer' }}
                   >
                     <span>+5 🪶 Enviar un abrazo virtual a un compañero</span>
                     <span style={{ color: '#00e676' }}>Ir →</span>
@@ -864,12 +893,12 @@ export default function MainLayout() {
             )}
 
             {activeInfoModal === 'seguridad' && (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem' }} className="animate-fade-in">
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem', textAlign: 'left' }} className="animate-fade-in">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                   <div style={{ fontSize: '2.2rem' }}>🛡️</div>
                   <div>
-                    <h3 style={{ fontSize: '1.3rem', fontWeight: 900, margin: 0 }}>Centro de Seguridad</h3>
-                    <p style={{ color: 'var(--text-muted)', fontSize: '0.82rem', margin: 0 }}>Configura tus preferencias de privacidad y anonimato</p>
+                    <h3 style={{ fontSize: '1.3rem', fontWeight: 900, margin: 0, color: '#ffffff' }}>Centro de Seguridad</h3>
+                    <p style={{ color: '#9ba7ac', fontSize: '0.82rem', margin: 0 }}>Configura tus preferencias de privacidad y anonimato</p>
                   </div>
                 </div>
 
@@ -890,13 +919,13 @@ export default function MainLayout() {
                         alignItems: 'center',
                         justifyContent: 'space-between',
                         padding: '0.75rem 0.9rem',
-                        backgroundColor: 'var(--surface-elevated)',
+                        backgroundColor: '#1f262a',
                         borderRadius: '12px',
-                        border: '1px solid var(--border-color)',
+                        border: '1px solid rgba(255,255,255,0.08)',
                         cursor: 'pointer'
                       }}
                     >
-                      <span style={{ fontSize: '0.84rem', fontWeight: 700, color: 'var(--text-main)' }}>{setting.label}</span>
+                      <span style={{ fontSize: '0.84rem', fontWeight: 700, color: '#ffffff' }}>{setting.label}</span>
                       <input
                         type="checkbox"
                         checked={privacySettings[setting.key]}
@@ -913,20 +942,20 @@ export default function MainLayout() {
             )}
 
             {activeInfoModal === 'guia' && (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem' }} className="animate-fade-in">
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem', textAlign: 'left' }} className="animate-fade-in">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                   <div style={{ fontSize: '2.2rem' }}>📖</div>
                   <div>
-                    <h3 style={{ fontSize: '1.3rem', fontWeight: 900, margin: 0 }}>Guía de la Comunidad</h3>
-                    <p style={{ color: 'var(--text-muted)', fontSize: '0.82rem', margin: 0 }}>Paso {guideStep} de 4 · Aprende a usar Free Mind</p>
+                    <h3 style={{ fontSize: '1.3rem', fontWeight: 900, margin: 0, color: '#ffffff' }}>Guía de la Comunidad</h3>
+                    <p style={{ color: '#9ba7ac', fontSize: '0.82rem', margin: 0 }}>Paso {guideStep} de 4 · Aprende a usar Free Mind</p>
                   </div>
                 </div>
 
-                <div style={{ backgroundColor: 'var(--surface-elevated)', padding: '1.25rem', borderRadius: '16px', border: '1px solid var(--border-color)', textAlign: 'left', minHeight: '130px' }}>
+                <div style={{ backgroundColor: '#1f262a', padding: '1.25rem', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.08)', textAlign: 'left', minHeight: '130px' }}>
                   {guideStep === 1 && (
                     <>
                       <h4 style={{ color: '#00e676', margin: '0 0 0.4rem', fontSize: '1rem', fontWeight: 900 }}>1. Desahógate sin juicios</h4>
-                      <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', lineHeight: 1.5, margin: 0 }}>
+                      <p style={{ color: '#9ba7ac', fontSize: '0.85rem', lineHeight: 1.5, margin: 0 }}>
                         Publica lo que sientes con total tranquilidad. Tu seudónimo protege tu privacidad para que puedas hablar sobre estrés, exámenes o emociones libremente.
                       </p>
                     </>
@@ -934,7 +963,7 @@ export default function MainLayout() {
                   {guideStep === 2 && (
                     <>
                       <h4 style={{ color: '#38bdf8', margin: '0 0 0.4rem', fontSize: '1rem', fontWeight: 900 }}>2. Apoya a tus compañeros</h4>
-                      <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', lineHeight: 1.5, margin: 0 }}>
+                      <p style={{ color: '#9ba7ac', fontSize: '0.85rem', lineHeight: 1.5, margin: 0 }}>
                         Haz clic en el botón 💙 de cada publicación para enviar un abrazo virtual. Una sola palabra empática puede cambiar el día de un estudiante.
                       </p>
                     </>
@@ -942,7 +971,7 @@ export default function MainLayout() {
                   {guideStep === 3 && (
                     <>
                       <h4 style={{ color: '#fbbf24', margin: '0 0 0.4rem', fontSize: '1rem', fontWeight: 900 }}>3. Acumula Plumas & Avatares</h4>
-                      <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', lineHeight: 1.5, margin: 0 }}>
+                      <p style={{ color: '#9ba7ac', fontSize: '0.85rem', lineHeight: 1.5, margin: 0 }}>
                         Cada día que registres tu estado de ánimo o ayudes a un par ganarás Plumas para personalizar tu perfil con avatares exclusivos.
                       </p>
                     </>
@@ -950,7 +979,7 @@ export default function MainLayout() {
                   {guideStep === 4 && (
                     <>
                       <h4 style={{ color: '#f43f5e', margin: '0 0 0.4rem', fontSize: '1rem', fontWeight: 900 }}>4. Botón S.O.S de Emergencia</h4>
-                      <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', lineHeight: 1.5, margin: 0 }}>
+                      <p style={{ color: '#9ba7ac', fontSize: '0.85rem', lineHeight: 1.5, margin: 0 }}>
                         Si tú o alguien necesita apoyo profesional inmediato, el botón S.O.S conecta 24/7 con psicólogos del campus y líneas clínicas gratuitas.
                       </p>
                     </>
@@ -961,7 +990,7 @@ export default function MainLayout() {
                   {guideStep > 1 && (
                     <button
                       onClick={() => setGuideStep(guideStep - 1)}
-                      style={{ flex: 1, backgroundColor: 'var(--surface-elevated)', color: 'var(--text-main)', border: '1px solid var(--border-color)', padding: '0.75rem', borderRadius: '12px', fontWeight: 800, cursor: 'pointer' }}
+                      style={{ flex: 1, backgroundColor: '#1f262a', color: '#ffffff', border: '1px solid rgba(255,255,255,0.08)', padding: '0.75rem', borderRadius: '12px', fontWeight: 800, cursor: 'pointer' }}
                     >
                       ← Anterior
                     </button>
