@@ -45,6 +45,7 @@ import LanguageToggle from './ui/LanguageToggle';
 import GlobalAudioPlayer from './audio/GlobalAudioPlayer';
 import ComposePostModal from '../features/feed/components/ComposePostModal';
 import { useAppContext } from '../context/AppContext';
+import { getRegisteredAccounts } from '../services/accountRegistryService';
 
 export default function MainLayout() {
   const { user, logout, isAuthLoading } = useAuth();
@@ -149,14 +150,30 @@ export default function MainLayout() {
 
     setTimeout(() => {
       setPeerMatching(false);
+      
+      const allUsers = getRegisteredAccounts() || [];
+      const potentialPeers = allUsers.filter(u => u.id !== user?.id && u.nickname);
+      
+      let matchedPeer = null;
+      if (potentialPeers.length > 0) {
+        const randomIndex = Math.floor(Math.random() * potentialPeers.length);
+        matchedPeer = potentialPeers[randomIndex];
+      } else {
+        matchedPeer = {
+          nickname: 'IvoryBird_21',
+          avatar: '🐱',
+          career: 'Psicología UCS'
+        };
+      }
+
       setPeerMatchResult({
-        nickname: 'IvoryBird_21',
-        avatar: '🐱',
-        career: 'Psicología UCS',
+        nickname: matchedPeer.nickname,
+        avatar: matchedPeer.avatar || '🦊',
+        career: matchedPeer.career || 'Estudiante Universitario',
         topic: peerTopic,
         status: 'Disponible ahora'
       });
-      showToast('¡Amigo encontrado! Conectando con IvoryBird_21 ✨');
+      showToast(`¡Amigo encontrado! Conectando con ${matchedPeer.nickname} ✨`);
     }, 2000);
   };
 
@@ -1279,40 +1296,36 @@ export default function MainLayout() {
             {activeInfoModal === 'aliado' && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0', textAlign: 'left' }} className="animate-fade-in">
 
-                {/* ── Gradient Header ── */}
+                {/* ── Clean Header ── */}
                 <div style={{
-                  background: 'linear-gradient(135deg, #0d9488 0%, #0891b2 50%, #7c3aed 100%)',
+                  backgroundColor: 'var(--surface-elevated)',
+                  border: '1px solid var(--border-color)',
                   borderRadius: '16px',
                   padding: '1.4rem 1.25rem',
                   marginBottom: '1.25rem',
                   position: 'relative',
                   overflow: 'hidden'
                 }}>
-                  {/* Decorative blobs */}
-                  <div style={{ position: 'absolute', top: '-20px', right: '-20px', width: '80px', height: '80px', background: 'rgba(255,255,255,0.08)', borderRadius: '50%' }} />
-                  <div style={{ position: 'absolute', bottom: '-15px', left: '30%', width: '60px', height: '60px', background: 'rgba(255,255,255,0.06)', borderRadius: '50%' }} />
-
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', position: 'relative', zIndex: 1 }}>
                     <div style={{
                       width: '52px', height: '52px', borderRadius: '16px',
-                      background: 'rgba(255,255,255,0.18)',
-                      backdropFilter: 'blur(8px)',
+                      backgroundColor: 'var(--surface-hover)',
                       display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.6rem',
-                      border: '1px solid rgba(255,255,255,0.25)', flexShrink: 0
+                      border: '1px solid var(--border-color)', flexShrink: 0
                     }}>🤝</div>
                     <div>
-                      <h3 style={{ fontSize: '1.2rem', fontWeight: 900, margin: 0, color: '#ffffff', letterSpacing: '-0.02em' }}>Hazte un Amigo</h3>
-                      <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '0.78rem', margin: '2px 0 0', fontWeight: 500 }}>Encuentra o sé un acompañante universitario</p>
+                      <h3 style={{ fontSize: '1.2rem', fontWeight: 900, margin: 0, color: 'var(--text-main)', letterSpacing: '-0.02em' }}>Hazte un Amigo</h3>
+                      <p style={{ color: 'var(--text-muted)', fontSize: '0.78rem', margin: '2px 0 0', fontWeight: 500 }}>Encuentra o sé un acompañante universitario</p>
                     </div>
                   </div>
 
                   {/* Mini stats */}
                   <div style={{ display: 'flex', gap: '0.85rem', marginTop: '1rem', position: 'relative', zIndex: 1 }}>
                     {[{ val: '42', label: 'aliados online', icon: '🟢' }, { val: '100%', label: 'anónimo', icon: '🔒' }, { val: '2 min', label: 'tiempo medio', icon: '⚡' }].map((s, i) => (
-                      <div key={i} style={{ flex: 1, background: 'rgba(255,255,255,0.12)', borderRadius: '10px', padding: '0.45rem 0.5rem', textAlign: 'center', backdropFilter: 'blur(4px)' }}>
+                      <div key={i} style={{ flex: 1, backgroundColor: 'var(--surface)', border: '1px solid var(--border-color)', borderRadius: '10px', padding: '0.45rem 0.5rem', textAlign: 'center' }}>
                         <div style={{ fontSize: '0.7rem', marginBottom: '1px' }}>{s.icon}</div>
-                        <div style={{ fontWeight: 900, color: '#ffffff', fontSize: '0.9rem', lineHeight: 1 }}>{s.val}</div>
-                        <div style={{ fontSize: '0.62rem', color: 'rgba(255,255,255,0.7)', fontWeight: 600, marginTop: '1px' }}>{s.label}</div>
+                        <div style={{ fontWeight: 900, color: 'var(--text-main)', fontSize: '0.9rem', lineHeight: 1 }}>{s.val}</div>
+                        <div style={{ fontSize: '0.62rem', color: 'var(--text-muted)', fontWeight: 600, marginTop: '1px' }}>{s.label}</div>
                       </div>
                     ))}
                   </div>
@@ -1376,7 +1389,7 @@ export default function MainLayout() {
                     {/* Match result or find button */}
                     {peerMatchResult ? (
                       <div style={{
-                        background: 'linear-gradient(135deg, rgba(13,148,136,0.1) 0%, rgba(8,145,178,0.08) 100%)',
+                        backgroundColor: 'var(--primary-light)',
                         border: '1.5px solid var(--primary)',
                         padding: '1rem', borderRadius: '16px',
                         display: 'flex', flexDirection: 'column', gap: '0.75rem'
@@ -1402,7 +1415,7 @@ export default function MainLayout() {
                           </button>
                           <button
                             onClick={() => { setActiveInfoModal(null); navigate('/app/chat'); }}
-                            style={{ flex: 2, background: 'linear-gradient(135deg, var(--primary) 0%, #0891b2 100%)', color: '#ffffff', border: 'none', padding: '0.55rem', borderRadius: '10px', fontWeight: 900, fontSize: '0.8rem', cursor: 'pointer', boxShadow: '0 4px 12px rgba(13,148,136,0.35)' }}
+                            style={{ flex: 2, backgroundColor: 'var(--primary)', color: '#ffffff', border: 'none', padding: '0.55rem', borderRadius: '10px', fontWeight: 900, fontSize: '0.8rem', cursor: 'pointer', boxShadow: 'none' }}
                           >
                             Chatear ahora →
                           </button>
@@ -1414,12 +1427,12 @@ export default function MainLayout() {
                         disabled={peerMatching}
                         style={{
                           width: '100%',
-                          background: peerMatching ? 'var(--surface-hover)' : 'linear-gradient(135deg, var(--primary) 0%, #0891b2 100%)',
+                          backgroundColor: peerMatching ? 'var(--surface-hover)' : 'var(--primary)',
                           color: peerMatching ? 'var(--text-muted)' : '#ffffff',
                           border: 'none', padding: '0.9rem', borderRadius: '12px',
                           fontWeight: 900, fontSize: '0.92rem',
                           cursor: peerMatching ? 'not-allowed' : 'pointer',
-                          boxShadow: peerMatching ? 'none' : '0 6px 20px rgba(13,148,136,0.35)',
+                          boxShadow: 'none',
                           transition: 'all 0.2s ease',
                           display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem'
                         }}
