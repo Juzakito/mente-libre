@@ -38,7 +38,12 @@ import {
   Award,
   Building,
   ArrowUpRight,
-  ArrowRight
+  ArrowRight,
+  Check,
+  Send,
+  Lightbulb,
+  Radio,
+  Flame
 } from 'lucide-react';
 import { useAuth } from '../store/AuthContext';
 import { useTheme } from '../store/ThemeContext';
@@ -630,23 +635,23 @@ export default function MainLayout() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', textAlign: 'left' }} className="animate-fade-in">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
                   <div style={{
-                    width: '48px',
-                    height: '48px',
-                    borderRadius: '16px',
-                    backgroundColor: 'rgba(0, 230, 118, 0.15)',
+                    width: '46px',
+                    height: '46px',
+                    borderRadius: '14px',
+                    backgroundColor: 'rgba(16, 185, 129, 0.12)',
+                    border: '1px solid rgba(16, 185, 129, 0.25)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    fontSize: '1.6rem',
                     flexShrink: 0
                   }}>
-                    🚪
+                    <AppleEmoji emoji="🚪" size={24} />
                   </div>
                   <div>
-                    <h3 style={{ fontSize: '1.4rem', fontWeight: 900, margin: 0, color: '#ffffff', letterSpacing: '-0.01em' }}>
+                    <h3 style={{ fontSize: '1.35rem', fontWeight: 850, margin: 0, color: 'var(--text-main)', letterSpacing: '-0.02em' }}>
                       Salas Comunitarias
                     </h3>
-                    <p style={{ color: '#9ba7ac', fontSize: '0.84rem', margin: '0.15rem 0 0', lineHeight: 1.35 }}>
+                    <p style={{ color: 'var(--text-muted)', fontSize: '0.84rem', margin: '0.15rem 0 0', lineHeight: 1.35 }}>
                       Encuentra compañeros y conversaciones anónimas en tiempo real
                     </p>
                   </div>
@@ -654,18 +659,18 @@ export default function MainLayout() {
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginTop: '0.2rem' }}>
                   {[
-                    { id: 'primer_ano', name: '🌱 Primeros Ciclos Universitarios', topic: 'Adaptación, profesores y vida en el campus', users: 38, tag: '#PrimerAño' },
-                    { id: 'examenes', name: '📚 Preparación de Exámenes', topic: 'Desahogo y grupos de estudio sin estrés', users: 52, tag: '#ExámenesFinales' },
-                    { id: 'salud_mental', name: '🧠 Manejo de la Ansiedad', topic: 'Espacio de escucha y apoyo guiado', users: 24, tag: '#SaludMental' },
-                    { id: 'desahogo', name: '💬 Desahogo Libre 24/7', topic: 'Exprésate sin filtros de forma anónima', users: 19, tag: '#DesahogoLibre' }
+                    { id: 'primer_ano', emoji: '🌱', name: 'Primeros Ciclos Universitarios', topic: 'Adaptación, profesores y vida en el campus', users: 38, tag: '#PrimerAño' },
+                    { id: 'examenes', emoji: '📚', name: 'Preparación de Exámenes', topic: 'Desahogo y grupos de estudio sin estrés', users: 52, tag: '#ExámenesFinales' },
+                    { id: 'salud_mental', emoji: '🧠', name: 'Manejo de la Ansiedad', topic: 'Espacio de escucha y apoyo guiado', users: 24, tag: '#SaludMental' },
+                    { id: 'desahogo', emoji: '💬', name: 'Desahogo Libre 24/7', topic: 'Exprésate sin filtros de forma anónima', users: 19, tag: '#DesahogoLibre' }
                   ].map((room) => (
                     <div
                       key={room.id}
                       style={{
                         padding: '1rem 1.15rem',
                         borderRadius: '16px',
-                        backgroundColor: '#1f262a',
-                        border: '1px solid rgba(255, 255, 255, 0.08)',
+                        backgroundColor: 'var(--surface-elevated)',
+                        border: '1px solid var(--border-color)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'space-between',
@@ -673,22 +678,38 @@ export default function MainLayout() {
                         transition: 'all 0.2s ease'
                       }}
                       onMouseEnter={(e) => {
-                        e.currentTarget.style.borderColor = 'rgba(0, 230, 118, 0.35)';
-                        e.currentTarget.style.backgroundColor = '#242c31';
+                        e.currentTarget.style.borderColor = 'var(--primary)';
+                        e.currentTarget.style.backgroundColor = 'var(--surface-hover)';
                       }}
                       onMouseLeave={(e) => {
-                        e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
-                        e.currentTarget.style.backgroundColor = '#1f262a';
+                        e.currentTarget.style.borderColor = 'var(--border-color)';
+                        e.currentTarget.style.backgroundColor = 'var(--surface-elevated)';
                       }}
                     >
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem', flex: 1 }}>
-                        <div style={{ fontWeight: 800, fontSize: '0.95rem', color: '#ffffff', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-                          <span>{room.name}</span>
-                          <span style={{ fontSize: '0.72rem', backgroundColor: 'rgba(0, 230, 118, 0.15)', color: '#00e676', padding: '0.15rem 0.55rem', borderRadius: '9999px', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
-                            🟢 {room.users} en vivo
-                          </span>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', flex: 1 }}>
+                        <div style={{
+                          width: '40px',
+                          height: '40px',
+                          borderRadius: '12px',
+                          backgroundColor: 'var(--surface)',
+                          border: '1px solid var(--border-color)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          flexShrink: 0
+                        }}>
+                          <AppleEmoji emoji={room.emoji} size={22} />
                         </div>
-                        <span style={{ color: '#9ba7ac', fontSize: '0.8rem', lineHeight: 1.35 }}>{room.topic}</span>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', flex: 1 }}>
+                          <div style={{ fontWeight: 800, fontSize: '0.92rem', color: 'var(--text-main)', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+                            <span>{room.name}</span>
+                            <span style={{ fontSize: '0.7rem', backgroundColor: 'rgba(16, 185, 129, 0.12)', color: 'var(--primary)', padding: '0.15rem 0.55rem', borderRadius: '9999px', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
+                              <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--primary)' }} />
+                              {room.users} en vivo
+                            </span>
+                          </div>
+                          <span style={{ color: 'var(--text-muted)', fontSize: '0.78rem', lineHeight: 1.35 }}>{room.topic}</span>
+                        </div>
                       </div>
                       <button
                         onClick={() => {
@@ -697,16 +718,16 @@ export default function MainLayout() {
                           navigate('/app/chat', { state: { activeRoom: room } });
                         }}
                         style={{
-                          background: 'linear-gradient(135deg, #00e676 0%, #00c853 100%)',
-                          color: '#082e30',
+                          background: 'var(--primary)',
+                          color: '#ffffff',
                           border: 'none',
                           padding: '0.55rem 1.15rem',
-                          borderRadius: '9999px',
-                          fontWeight: 900,
+                          borderRadius: '12px',
+                          fontWeight: 800,
                           fontSize: '0.82rem',
                           cursor: 'pointer',
                           whiteSpace: 'nowrap',
-                          boxShadow: '0 4px 14px rgba(0, 230, 118, 0.35)',
+                          boxShadow: '0 4px 14px rgba(16, 185, 129, 0.3)',
                           flexShrink: 0,
                           transition: 'all 0.15s ease'
                         }}
@@ -724,9 +745,23 @@ export default function MainLayout() {
             {activeInfoModal === 'notificaciones' && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', textAlign: 'left' }} className="animate-fade-in">
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                    <div style={{ fontSize: '2rem' }}>🔔</div>
-                    <h3 style={{ fontSize: '1.3rem', fontWeight: 900, margin: 0, color: '#ffffff' }}>Notificaciones</h3>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                    <div style={{
+                      width: '44px',
+                      height: '44px',
+                      borderRadius: '14px',
+                      backgroundColor: 'rgba(16, 185, 129, 0.12)',
+                      border: '1px solid rgba(16, 185, 129, 0.25)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexShrink: 0
+                    }}>
+                      <AppleEmoji emoji="🔔" size={22} />
+                    </div>
+                    <h3 style={{ fontSize: '1.35rem', fontWeight: 850, margin: 0, color: 'var(--text-main)', letterSpacing: '-0.02em' }}>
+                      Notificaciones
+                    </h3>
                   </div>
                   {notificationsList.length > 0 && (
                     <button
@@ -734,7 +769,7 @@ export default function MainLayout() {
                         setNotificationsList(prev => prev.map(n => ({ ...n, read: true })));
                         showToast('Todas las notificaciones marcadas como leídas');
                       }}
-                      style={{ background: 'none', border: 'none', color: '#00e676', fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer', textDecoration: 'underline' }}
+                      style={{ background: 'none', border: 'none', color: 'var(--primary)', fontSize: '0.78rem', fontWeight: 750, cursor: 'pointer', textDecoration: 'underline' }}
                     >
                       Marcar leídas
                     </button>
@@ -742,11 +777,11 @@ export default function MainLayout() {
                 </div>
 
                 {notificationsList.length === 0 ? (
-                  <p style={{ color: '#9ba7ac', fontSize: '0.88rem', textAlign: 'center', padding: '1.5rem 0' }}>
+                  <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', textAlign: 'center', padding: '2rem 0' }}>
                     No tienes notificaciones pendientes ✨
                   </p>
                 ) : (
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
                     {notificationsList.map((item) => (
                       <div
                         key={item.id}
@@ -758,20 +793,22 @@ export default function MainLayout() {
                           setActiveInfoModal(null);
                         }}
                         style={{
-                          backgroundColor: item.read ? '#1f262a' : 'rgba(0, 230, 118, 0.08)',
-                          padding: '0.85rem 1rem',
-                          borderRadius: '14px',
-                          border: item.read ? '1px solid rgba(255,255,255,0.08)' : '1px solid rgba(0, 230, 118, 0.35)',
+                          backgroundColor: item.read ? 'var(--surface-elevated)' : 'rgba(16, 185, 129, 0.08)',
+                          padding: '0.9rem 1.15rem',
+                          borderRadius: '16px',
+                          border: item.read ? '1px solid var(--border-color)' : '1px solid rgba(16, 185, 129, 0.35)',
                           cursor: 'pointer',
                           textAlign: 'left',
                           transition: 'all 0.15s ease'
                         }}
+                        onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--primary)'}
+                        onMouseLeave={(e) => e.currentTarget.style.borderColor = item.read ? 'var(--border-color)' : 'rgba(16, 185, 129, 0.35)'}
                       >
-                        <div style={{ fontWeight: 800, fontSize: '0.85rem', color: item.read ? '#ffffff' : '#00e676', marginBottom: '2px' }}>
+                        <div style={{ fontWeight: 800, fontSize: '0.88rem', color: item.read ? 'var(--text-main)' : 'var(--primary)', marginBottom: '3px' }}>
                           {item.title}
                         </div>
-                        <div style={{ color: '#9ba7ac', fontSize: '0.78rem' }}>{item.desc}</div>
-                        <div style={{ color: '#697a80', fontSize: '0.7rem', marginTop: '4px' }}>{item.time}</div>
+                        <div style={{ color: 'var(--text-muted)', fontSize: '0.8rem', lineHeight: 1.4 }}>{item.desc}</div>
+                        <div style={{ color: 'var(--text-muted)', fontSize: '0.72rem', marginTop: '5px', opacity: 0.8 }}>{item.time}</div>
                       </div>
                     ))}
                   </div>
@@ -780,156 +817,428 @@ export default function MainLayout() {
             )}
 
             {activeInfoModal === 'mejoras' && (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', textAlign: 'left' }} className="animate-fade-in">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                  <div style={{ fontSize: '2.2rem' }}>⚡</div>
-                  <div>
-                    <h3 style={{ fontSize: '1.3rem', fontWeight: 900, margin: 0, color: '#ffffff' }}>Mejoras de la Plataforma</h3>
-                    <p style={{ color: '#9ba7ac', fontSize: '0.82rem', margin: 0 }}>¡Vota por las funciones que deseas ver primero!</p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', textAlign: 'left' }} className="animate-fade-in">
+                {/* Header with status pill and sleek icon */}
+                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '1rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+                    <div style={{
+                      width: '46px',
+                      height: '46px',
+                      borderRadius: '14px',
+                      background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(234, 88, 12, 0.1) 100%)',
+                      border: '1px solid rgba(245, 158, 11, 0.3)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexShrink: 0
+                    }}>
+                      <AppleEmoji emoji="⚡" size={24} />
+                    </div>
+                    <div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.2rem' }}>
+                        <h3 style={{ fontSize: '1.35rem', fontWeight: 850, margin: 0, color: 'var(--text-main)', letterSpacing: '-0.02em' }}>
+                          Roadmap & Mejoras
+                        </h3>
+                      </div>
+                      <p style={{ color: 'var(--text-muted)', fontSize: '0.82rem', margin: 0, lineHeight: 1.4 }}>
+                        Vota las funciones prioritarias o propón tus ideas para Free Mind.
+                      </p>
+                    </div>
                   </div>
+                  <span style={{
+                    fontSize: '0.72rem',
+                    fontWeight: 700,
+                    padding: '0.25rem 0.65rem',
+                    borderRadius: '9999px',
+                    background: 'rgba(16, 185, 129, 0.12)',
+                    color: 'var(--primary)',
+                    border: '1px solid rgba(16, 185, 129, 0.25)',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.35rem',
+                    whiteSpace: 'nowrap',
+                    flexShrink: 0
+                  }}>
+                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--primary)' }} />
+                    Votación Q3
+                  </span>
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+                {/* Features List */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                   {[
-                    { key: 'oled', icon: '🌙', title: 'Modo Nocturno Profundo OLED', votes: featureVotes.oled },
-                    { key: 'audio', icon: '🎙️', title: 'Salas de Audio Anónimas 24/7', votes: featureVotes.audio },
-                    { key: 'workshops', icon: '🧘', title: 'Talleres de Manejo de Ansiedad', votes: featureVotes.workshops }
-                  ].map((feat) => (
-                    <div
-                      key={feat.key}
-                      style={{
-                        padding: '0.85rem 1rem',
-                        borderRadius: '14px',
-                        backgroundColor: '#1f262a',
-                        border: '1px solid rgba(255,255,255,0.08)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between'
-                      }}
-                    >
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                        <span style={{ fontSize: '1.2rem' }}>{feat.icon}</span>
-                        <span style={{ fontWeight: 800, fontSize: '0.86rem', color: '#ffffff' }}>{feat.title}</span>
-                      </div>
-                      <button
-                        onClick={() => handleUpvoteFeature(feat.key)}
+                    {
+                      key: 'oled',
+                      icon: '🌙',
+                      title: 'Modo Nocturno Profundo OLED',
+                      desc: 'Negros puros para máxima comodidad visual durante sesiones de estudio nocturnas.',
+                      tag: 'Interfaz',
+                      votes: featureVotes.oled
+                    },
+                    {
+                      key: 'audio',
+                      icon: '🎙️',
+                      title: 'Salas de Audio Anónimas 24/7',
+                      desc: 'Espacios de voz espontáneos sin cámara para conversar y acompañarse en vivo.',
+                      tag: 'Comunidad',
+                      votes: featureVotes.audio
+                    },
+                    {
+                      key: 'workshops',
+                      icon: '🧘',
+                      title: 'Talleres de Manejo de Ansiedad',
+                      desc: 'Sesiones guiadas interactivas con psicólogos universitarios y técnicas CBT.',
+                      tag: 'Bienestar',
+                      votes: featureVotes.workshops
+                    }
+                  ].map((feat) => {
+                    const hasVoted = !!featureVotes.userVoted[feat.key];
+                    return (
+                      <div
+                        key={feat.key}
                         style={{
-                          backgroundColor: featureVotes.userVoted[feat.key] ? '#00e676' : 'rgba(255, 255, 255, 0.08)',
-                          color: featureVotes.userVoted[feat.key] ? '#082e30' : '#ffffff',
-                          border: 'none',
-                          padding: '0.4rem 0.85rem',
-                          borderRadius: '9999px',
-                          fontWeight: 800,
-                          fontSize: '0.78rem',
-                          cursor: 'pointer',
+                          padding: '0.95rem 1.15rem',
+                          borderRadius: '16px',
+                          backgroundColor: 'var(--surface-elevated)',
+                          border: hasVoted ? '1px solid var(--primary)' : '1px solid var(--border-color)',
                           display: 'flex',
                           alignItems: 'center',
-                          gap: '0.35rem'
+                          justifyContent: 'space-between',
+                          gap: '0.85rem',
+                          transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+                          boxShadow: hasVoted ? '0 4px 16px rgba(16, 185, 129, 0.12)' : 'none'
                         }}
                       >
-                        <ThumbsUp size={13} />
-                        <span>{feat.votes}</span>
-                      </button>
-                    </div>
-                  ))}
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', flex: 1, minWidth: 0 }}>
+                          <div style={{
+                            width: '42px',
+                            height: '42px',
+                            borderRadius: '12px',
+                            backgroundColor: 'var(--surface)',
+                            border: '1px solid var(--border-color)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            flexShrink: 0
+                          }}>
+                            <AppleEmoji emoji={feat.icon} size={22} />
+                          </div>
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.15rem', minWidth: 0 }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', flexWrap: 'wrap' }}>
+                              <span style={{ fontWeight: 750, fontSize: '0.9rem', color: 'var(--text-main)', letterSpacing: '-0.01em' }}>
+                                {feat.title}
+                              </span>
+                              <span style={{
+                                fontSize: '0.68rem',
+                                fontWeight: 700,
+                                padding: '0.1rem 0.45rem',
+                                borderRadius: '6px',
+                                backgroundColor: 'var(--surface)',
+                                color: 'var(--text-muted)',
+                                border: '1px solid var(--border-color)'
+                              }}>
+                                {feat.tag}
+                              </span>
+                            </div>
+                            <span style={{
+                              color: 'var(--text-muted)',
+                              fontSize: '0.78rem',
+                              lineHeight: 1.35,
+                              whiteSpace: 'normal',
+                              overflow: 'hidden',
+                              textOverflow: 'ellipsis'
+                            }}>
+                              {feat.desc}
+                            </span>
+                          </div>
+                        </div>
 
+                        <button
+                          onClick={() => handleUpvoteFeature(feat.key)}
+                          style={{
+                            backgroundColor: hasVoted ? 'var(--primary)' : 'var(--surface)',
+                            color: hasVoted ? '#ffffff' : 'var(--text-main)',
+                            border: hasVoted ? '1px solid var(--primary)' : '1px solid var(--border-color)',
+                            padding: '0.5rem 0.95rem',
+                            borderRadius: '12px',
+                            fontWeight: 800,
+                            fontSize: '0.82rem',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '0.45rem',
+                            flexShrink: 0,
+                            boxShadow: hasVoted ? '0 4px 14px rgba(16, 185, 129, 0.3)' : 'none',
+                            transition: 'all 0.15s ease'
+                          }}
+                          onMouseEnter={(e) => {
+                            if (!hasVoted) {
+                              e.currentTarget.style.borderColor = 'var(--primary)';
+                              e.currentTarget.style.backgroundColor = 'var(--surface-hover)';
+                            }
+                          }}
+                          onMouseLeave={(e) => {
+                            if (!hasVoted) {
+                              e.currentTarget.style.borderColor = 'var(--border-color)';
+                              e.currentTarget.style.backgroundColor = 'var(--surface)';
+                            }
+                          }}
+                        >
+                          <ThumbsUp size={13} fill={hasVoted ? 'currentColor' : 'none'} />
+                          <span>{feat.votes}</span>
+                          {hasVoted && <Check size={12} strokeWidth={3} />}
+                        </button>
+                      </div>
+                    );
+                  })}
+
+                  {/* Custom user proposals */}
                   {customProposals.map((prop) => (
                     <div
                       key={prop.id}
                       style={{
-                        padding: '0.85rem 1rem',
-                        borderRadius: '14px',
-                        backgroundColor: 'rgba(0, 230, 118, 0.08)',
-                        border: '1px solid rgba(0, 230, 118, 0.3)',
+                        padding: '0.9rem 1.15rem',
+                        borderRadius: '16px',
+                        backgroundColor: 'rgba(16, 185, 129, 0.05)',
+                        border: '1px dashed rgba(16, 185, 129, 0.4)',
                         display: 'flex',
                         alignItems: 'center',
-                        justifyContent: 'space-between'
+                        justifyContent: 'space-between',
+                        gap: '0.75rem'
                       }}
                     >
-                      <span style={{ fontWeight: 800, fontSize: '0.86rem', color: '#00e676' }}>💡 {prop.title}</span>
-                      <span style={{ fontSize: '0.78rem', color: '#00e676', fontWeight: 800 }}>En revisión</span>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flex: 1, minWidth: 0 }}>
+                        <div style={{
+                          width: '38px',
+                          height: '38px',
+                          borderRadius: '10px',
+                          backgroundColor: 'rgba(16, 185, 129, 0.12)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          flexShrink: 0
+                        }}>
+                          <AppleEmoji emoji="💡" size={18} />
+                        </div>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.1rem' }}>
+                          <span style={{ fontWeight: 750, fontSize: '0.88rem', color: 'var(--text-main)' }}>
+                            {prop.title}
+                          </span>
+                          <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
+                            Propuesta enviada por ti • Evaluación en curso
+                          </span>
+                        </div>
+                      </div>
+                      <span style={{
+                        fontSize: '0.72rem',
+                        color: 'var(--primary)',
+                        backgroundColor: 'rgba(16, 185, 129, 0.12)',
+                        padding: '0.2rem 0.6rem',
+                        borderRadius: '9999px',
+                        fontWeight: 800,
+                        flexShrink: 0
+                      }}>
+                        En revisión 🚀
+                      </span>
                     </div>
                   ))}
                 </div>
 
-                <form onSubmit={handleAddProposal} style={{ display: 'flex', gap: '0.5rem', marginTop: '0.4rem' }}>
+                {/* Proposal Submission Bar */}
+                <form
+                  onSubmit={handleAddProposal}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    backgroundColor: 'var(--surface-elevated)',
+                    border: '1px solid var(--border-color)',
+                    borderRadius: '16px',
+                    padding: '0.35rem 0.45rem 0.35rem 1rem',
+                    gap: '0.6rem',
+                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
+                    transition: 'border-color 0.2s'
+                  }}
+                  onFocus={(e) => e.currentTarget.style.borderColor = 'var(--primary)'}
+                  onBlur={(e) => e.currentTarget.style.borderColor = 'var(--border-color)'}
+                >
+                  <AppleEmoji emoji="💡" size={18} />
                   <input
                     type="text"
                     value={newProposalText}
                     onChange={(e) => setNewProposalText(e.target.value)}
-                    placeholder="Proponer una nueva mejora..."
+                    placeholder="¿Qué función te gustaría ver en Free Mind?..."
                     style={{
                       flex: 1,
-                      backgroundColor: '#1f262a',
-                      border: '1px solid rgba(255,255,255,0.1)',
-                      borderRadius: '12px',
-                      padding: '0.65rem 0.85rem',
-                      fontSize: '0.84rem',
-                      color: '#ffffff',
+                      backgroundColor: 'transparent',
+                      border: 'none',
+                      padding: '0.55rem 0',
+                      fontSize: '0.86rem',
+                      color: 'var(--text-main)',
                       outline: 'none'
                     }}
                   />
                   <button
                     type="submit"
+                    disabled={!newProposalText.trim()}
                     style={{
-                      backgroundColor: '#00e676',
-                      color: '#082e30',
+                      backgroundColor: newProposalText.trim() ? 'var(--primary)' : 'var(--surface)',
+                      color: newProposalText.trim() ? '#ffffff' : 'var(--text-muted)',
                       border: 'none',
-                      padding: '0.65rem 1rem',
+                      padding: '0.55rem 1.15rem',
                       borderRadius: '12px',
-                      fontWeight: 900,
-                      fontSize: '0.84rem',
-                      cursor: 'pointer'
+                      fontWeight: 800,
+                      fontSize: '0.82rem',
+                      cursor: newProposalText.trim() ? 'pointer' : 'default',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.4rem',
+                      transition: 'all 0.15s ease',
+                      boxShadow: newProposalText.trim() ? '0 4px 12px rgba(16, 185, 129, 0.25)' : 'none'
                     }}
                   >
-                    Enviar
+                    <Send size={13} />
+                    <span>Proponer</span>
                   </button>
                 </form>
+
+                <div style={{ textAlign: 'center' }}>
+                  <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)', fontWeight: 500 }}>
+                    🤝 Las sugerencias más votadas por la comunidad son priorizadas en cada sprint semanal.
+                  </span>
+                </div>
               </div>
             )}
 
             {activeInfoModal === 'dotz' && (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem', textAlign: 'left' }} className="animate-fade-in">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                  <div style={{ fontSize: '2.2rem' }}>🪶</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', textAlign: 'left' }} className="animate-fade-in">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+                  <div style={{
+                    width: '46px',
+                    height: '46px',
+                    borderRadius: '14px',
+                    backgroundColor: 'rgba(56, 189, 248, 0.12)',
+                    border: '1px solid rgba(56, 189, 248, 0.25)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0
+                  }}>
+                    <AppleEmoji emoji="🪶" size={24} />
+                  </div>
                   <div>
-                    <h3 style={{ fontSize: '1.3rem', fontWeight: 900, margin: 0, color: '#ffffff' }}>Dotz (Plumas) & Logros</h3>
-                    <p style={{ color: '#9ba7ac', fontSize: '0.82rem', margin: 0 }}>Recompensas por tu empatía y autocuidado</p>
+                    <h3 style={{ fontSize: '1.35rem', fontWeight: 850, margin: 0, color: 'var(--text-main)', letterSpacing: '-0.02em' }}>
+                      Dotz (Plumas) & Logros
+                    </h3>
+                    <p style={{ color: 'var(--text-muted)', fontSize: '0.82rem', margin: '0.15rem 0 0' }}>
+                      Recompensas por tu empatía, racha y autocuidado
+                    </p>
                   </div>
                 </div>
 
                 <div style={{ display: 'flex', gap: '0.75rem' }}>
-                  <div style={{ flex: 1, backgroundColor: 'rgba(56, 189, 248, 0.12)', border: '1px solid rgba(56, 189, 248, 0.3)', padding: '0.85rem', borderRadius: '14px', textAlign: 'center' }}>
-                    <div style={{ fontSize: '1.4rem', fontWeight: 900, color: '#38bdf8' }}>150 🪶</div>
-                    <div style={{ fontSize: '0.75rem', color: '#9ba7ac', fontWeight: 700 }}>Plumas Acumuladas</div>
+                  <div style={{ flex: 1, backgroundColor: 'var(--surface-elevated)', border: '1px solid var(--border-color)', padding: '1rem', borderRadius: '16px', textAlign: 'center', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
+                    <div style={{ fontSize: '1.5rem', fontWeight: 900, color: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.35rem' }}>
+                      <span>150</span>
+                      <AppleEmoji emoji="🪶" size={20} />
+                    </div>
+                    <div style={{ fontSize: '0.76rem', color: 'var(--text-muted)', fontWeight: 700, marginTop: '2px' }}>Plumas Acumuladas</div>
                   </div>
-                  <div style={{ flex: 1, backgroundColor: 'rgba(251, 191, 36, 0.12)', border: '1px solid rgba(251, 191, 36, 0.3)', padding: '0.85rem', borderRadius: '14px', textAlign: 'center' }}>
-                    <div style={{ fontSize: '1.4rem', fontWeight: 900, color: '#fbbf24' }}>3 Días 🔥</div>
-                    <div style={{ fontSize: '0.75rem', color: '#9ba7ac', fontWeight: 700 }}>Racha de Bienestar</div>
+                  <div style={{ flex: 1, backgroundColor: 'var(--surface-elevated)', border: '1px solid var(--border-color)', padding: '1rem', borderRadius: '16px', textAlign: 'center', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
+                    <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#fbbf24', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.35rem' }}>
+                      <span>3 Días</span>
+                      <AppleEmoji emoji="🔥" size={20} />
+                    </div>
+                    <div style={{ fontSize: '0.76rem', color: 'var(--text-muted)', fontWeight: 700, marginTop: '2px' }}>Racha de Bienestar</div>
                   </div>
                 </div>
 
-                <div style={{ textAlign: 'left', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                  <div style={{ fontSize: '0.82rem', fontWeight: 800, color: '#9ba7ac' }}>MISIONES PARA GANAR MÁS PLUMAS:</div>
+                <div style={{ textAlign: 'left', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                  <div style={{ fontSize: '0.78rem', fontWeight: 800, color: 'var(--text-muted)', letterSpacing: '0.03em', textTransform: 'uppercase' }}>
+                    Misiones para ganar más plumas:
+                  </div>
                   <button
                     onClick={() => { setActiveInfoModal(null); navigate('/app/mood'); }}
-                    style={{ backgroundColor: '#1f262a', border: '1px solid rgba(255,255,255,0.08)', padding: '0.7rem 0.9rem', borderRadius: '12px', color: '#ffffff', fontSize: '0.84rem', fontWeight: 700, display: 'flex', justifyContent: 'space-between', cursor: 'pointer' }}
+                    style={{
+                      backgroundColor: 'var(--surface-elevated)',
+                      border: '1px solid var(--border-color)',
+                      padding: '0.85rem 1rem',
+                      borderRadius: '14px',
+                      color: 'var(--text-main)',
+                      fontSize: '0.85rem',
+                      fontWeight: 700,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      cursor: 'pointer',
+                      transition: 'all 0.15s ease'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--primary)';
+                      e.currentTarget.style.backgroundColor = 'var(--surface-hover)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--border-color)';
+                      e.currentTarget.style.backgroundColor = 'var(--surface-elevated)';
+                    }}
                   >
-                    <span>+10 🪶 Registrar tu estado de ánimo de hoy</span>
-                    <span style={{ color: '#00e676' }}>Ir →</span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      <span style={{ color: 'var(--primary)', fontWeight: 800 }}>+10</span>
+                      <AppleEmoji emoji="🪶" size={16} />
+                      <span>Registrar tu estado de ánimo de hoy</span>
+                    </div>
+                    <span style={{ color: 'var(--primary)', fontWeight: 800 }}>Ir →</span>
                   </button>
                   <button
                     onClick={() => { setActiveInfoModal(null); navigate('/app/feed'); }}
-                    style={{ backgroundColor: '#1f262a', border: '1px solid rgba(255,255,255,0.08)', padding: '0.7rem 0.9rem', borderRadius: '12px', color: '#ffffff', fontSize: '0.84rem', fontWeight: 700, display: 'flex', justifyContent: 'space-between', cursor: 'pointer' }}
+                    style={{
+                      backgroundColor: 'var(--surface-elevated)',
+                      border: '1px solid var(--border-color)',
+                      padding: '0.85rem 1rem',
+                      borderRadius: '14px',
+                      color: 'var(--text-main)',
+                      fontSize: '0.85rem',
+                      fontWeight: 700,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      cursor: 'pointer',
+                      transition: 'all 0.15s ease'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--primary)';
+                      e.currentTarget.style.backgroundColor = 'var(--surface-hover)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--border-color)';
+                      e.currentTarget.style.backgroundColor = 'var(--surface-elevated)';
+                    }}
                   >
-                    <span>+5 🪶 Enviar un abrazo virtual a un compañero</span>
-                    <span style={{ color: '#00e676' }}>Ir →</span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      <span style={{ color: 'var(--primary)', fontWeight: 800 }}>+5</span>
+                      <AppleEmoji emoji="🪶" size={16} />
+                      <span>Enviar un abrazo virtual a un compañero</span>
+                    </div>
+                    <span style={{ color: 'var(--primary)', fontWeight: 800 }}>Ir →</span>
                   </button>
                 </div>
 
                 <button
                   onClick={() => { setActiveInfoModal(null); navigate('/app/profile'); }}
-                  style={{ width: '100%', backgroundColor: '#00e676', color: '#082e30', border: 'none', padding: '0.85rem', borderRadius: '9999px', fontWeight: 900, fontSize: '0.92rem', cursor: 'pointer', boxShadow: '0 6px 20px rgba(0, 230, 118, 0.35)' }}
+                  style={{
+                    width: '100%',
+                    backgroundColor: 'var(--primary)',
+                    color: '#ffffff',
+                    border: 'none',
+                    padding: '0.85rem',
+                    borderRadius: '14px',
+                    fontWeight: 850,
+                    fontSize: '0.92rem',
+                    cursor: 'pointer',
+                    boxShadow: '0 4px 16px rgba(16, 185, 129, 0.3)',
+                    transition: 'all 0.15s ease'
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-1px)'}
+                  onMouseLeave={(e) => e.currentTarget.style.transform = 'none'}
                 >
                   Abrir Tienda de Avatares →
                 </button>
