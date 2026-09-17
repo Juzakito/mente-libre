@@ -32,7 +32,13 @@ import {
   Coffee,
   Share2,
   ChevronRight,
-  Zap
+  Zap,
+  ThumbsUp,
+  Lock,
+  Award,
+  Building,
+  ArrowUpRight,
+  ArrowRight
 } from 'lucide-react';
 import { useAuth } from '../store/AuthContext';
 import { useTheme } from '../store/ThemeContext';
