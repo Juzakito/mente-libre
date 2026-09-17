@@ -142,9 +142,9 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
 
   // Derive mood pill
   const mood = post.mood || (
-    post.text.toLowerCase().includes('solo') || post.text.toLowerCase().includes('triste') || post.text.toLowerCase().includes('duele') ? { label: 'Sad 🙁', bg: 'rgba(59, 130, 246, 0.18)', color: '#60a5fa' } :
-    post.text.toLowerCase().includes('enfoque') || post.text.toLowerCase().includes('sonreiré') || post.text.toLowerCase().includes('esperanza') ? { label: 'Hopeful 😀', bg: 'rgba(168, 85, 247, 0.18)', color: '#c084fc' } :
-    post.text.toLowerCase().includes('ansioso') || post.text.toLowerCase().includes('miedo') || post.text.toLowerCase().includes('desmoronando') || post.text.toLowerCase().includes('odio') ? { label: 'Anxious 😩', bg: 'rgba(14, 165, 233, 0.18)', color: '#38bdf8' } :
+    post.text.toLowerCase().includes('solo') || post.text.toLowerCase().includes('triste') || post.text.toLowerCase().includes('duele') ? { label: 'Sad', emoji: '🙁', bg: 'rgba(59, 130, 246, 0.18)', color: '#60a5fa' } :
+    post.text.toLowerCase().includes('enfoque') || post.text.toLowerCase().includes('sonreiré') || post.text.toLowerCase().includes('esperanza') ? { label: 'Hopeful', emoji: '😀', bg: 'rgba(168, 85, 247, 0.18)', color: '#c084fc' } :
+    post.text.toLowerCase().includes('ansioso') || post.text.toLowerCase().includes('miedo') || post.text.toLowerCase().includes('desmoronando') || post.text.toLowerCase().includes('odio') ? { label: 'Anxious', emoji: '😩', bg: 'rgba(14, 165, 233, 0.18)', color: '#38bdf8' } :
     null
   );
 
@@ -285,7 +285,9 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
             fontWeight: 700,
             border: '1px solid var(--border-color)'
           }}>
-            {mood.label}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+              {mood.label} {mood.emoji && <AppleEmoji emoji={mood.emoji} size={14} />}
+            </div>
           </span>
         </div>
       )}

@@ -20,6 +20,12 @@ const quickReplies = ['Me siento mal 😞', 'Estoy estresado 😫', 'Necesito ha
 export default function Chat() {
   const { t } = useTranslation();
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const [peerMatch, setPeerMatch] = useState(() => {
+    if (location.state?.peerMatch) return location.state.peerMatch;
+    return safeJSONParse(sessionStorage.getItem('active_peer_match'), null);
+  });
 
   const [activeRoom, setActiveRoom] = useState(() => {
     if (location.state?.activeRoom) return location.state.activeRoom;
@@ -47,28 +53,57 @@ export default function Chat() {
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
-    const room = location.state?.selectedRoom || safeJSONParse(sessionStorage.getItem('active_chat_room'), null);
-    if (room) {
-      setActiveRoom(room);
+    const incomingPeerMatch = location.state?.peerMatch;
+    const incomingRoom = location.state?.selectedRoom;
+    
+    if (incomingPeerMatch) {
+      setPeerMatch(incomingPeerMatch);
+      setActiveRoom(null);
       setConnected(true);
+      setHistory([]);
       setMessages([
-        { id: 1, sender: 'system', text: `🔒 Conectado a la Sala Comunitaria: ${room.name} (${room.tag})` },
-        { id: 2, sender: 'system', text: `🟢 ${room.users} estudiantes compartiendo en vivo.` },
+        { id: 1, sender: 'system', text: '🔒 Conexión segura y anónima establecida.' },
+        { id: 2, sender: 'system', text: `Estás hablando con ${incomingPeerMatch.nickname}` },
+        { id: 3, sender: 'peer', text: `¡Hola! Vi que también quieres hablar sobre ${incomingPeerMatch.topic}`, time: new Date().toLocaleTimeString(undefined, {hour: '2-digit', minute:'2-digit'}) }
+      ]);
+      // Clear location state to prevent loop
+      navigate(location.pathname, { replace: true, state: {} });
+    } else if (incomingRoom) {
+      setActiveRoom(incomingRoom);
+      setPeerMatch(null);
+      setConnected(true);
+      setHistory([]);
+      setMessages([
+        { id: 1, sender: 'system', text: `🔒 Conectado a la Sala Comunitaria: ${incomingRoom.name} (${incomingRoom.tag})` },
+        { id: 2, sender: 'system', text: `🟢 ${incomingRoom.users} estudiantes compartiendo en vivo.` },
         { id: 3, sender: 'peer', author: 'FlyingJay_99', avatar: '🦊', text: '¡Hola a todos en la sala! 👋 ¿Cómo van con sus avances de esta semana?', time: 'hace 2m' },
         { id: 4, sender: 'peer', author: 'Búho_Científica', avatar: '🦉', text: '¡Buenas! Con bastante carga académica pero aquí nos apoyamos entre todos 💪', time: 'hace 1m' }
       ]);
+      navigate(location.pathname, { replace: true, state: {} });
     }
-  }, [location.state]);
+  }, [location.state, navigate, location.pathname]);
 
   useEffect(() => {
     sessionStorage.setItem('chat_connected', connected);
     sessionStorage.setItem('chat_messages', JSON.stringify(messages));
     sessionStorage.setItem('chat_history', JSON.stringify(history));
-  }, [connected, messages, history]);
+    if (peerMatch) {
+      sessionStorage.setItem('active_peer_match', JSON.stringify(peerMatch));
+    } else {
+      sessionStorage.removeItem('active_peer_match');
+    }
+    if (activeRoom) {
+      sessionStorage.setItem('active_chat_room', JSON.stringify(activeRoom));
+    } else {
+      sessionStorage.removeItem('active_chat_room');
+    }
+  }, [connected, messages, history, peerMatch, activeRoom]);
 
   const leaveRoom = () => {
     sessionStorage.removeItem('active_chat_room');
+    sessionStorage.removeItem('active_peer_match');
     setActiveRoom(null);
+    setPeerMatch(null);
     setConnected(false);
     setMessages([]);
     setHistory([]);
@@ -541,17 +576,29 @@ export default function Chat() {
           
           {activeRoom ? (
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-              <div style={{ backgroundColor: 'rgba(0, 230, 118, 0.12)', width: '2.5rem', height: '2.5rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem' }}>
-                🚪
+              <div style={{ backgroundColor: 'var(--primary-light)', width: '2.5rem', height: '2.5rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem' }}>
+                <AppleEmoji emoji="🚪" size={24} />
               </div>
               <div>
                 <h2 style={{ fontSize: '1.15rem', fontWeight: 900, color: 'var(--text-main)', margin: 0 }}>
                   {activeRoom.name}
                 </h2>
-                <div style={{ fontSize: '0.72rem', fontWeight: 700, color: '#00e676', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                <div style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--primary)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                   <span>🟢 {activeRoom.users} en vivo</span>
                   <span>·</span>
                   <span style={{ color: 'var(--text-muted)' }}>{activeRoom.tag}</span>
+                </div>
+              </div>
+            </div>
+          ) : peerMatch ? (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <div style={{ backgroundColor: 'var(--bg-color)', width: '2.5rem', height: '2.5rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <AppleEmoji emoji={peerMatch.avatar} size={24} />
+              </div>
+              <div>
+                <h2 style={{ fontSize: '1.25rem', fontWeight: 900, color: 'var(--text-main)', margin: 0 }}>{peerMatch.nickname}</h2>
+                <div style={{ fontSize: '0.65rem', fontWeight: 700, color: peerTyping ? 'var(--primary)' : 'var(--accent-emerald)', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                  {peerTyping ? t('chatMisc.typing') : <><span style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: 'var(--accent-emerald)', display: 'inline-block' }}></span> {peerMatch.status || t('chatMisc.online')}</>}
                 </div>
               </div>
             </div>

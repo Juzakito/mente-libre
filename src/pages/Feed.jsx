@@ -19,6 +19,8 @@ import PostCard from '../features/feed/components/PostCard';
 import ComposePostModal from '../features/feed/components/ComposePostModal';
 import { supabase } from '../services/supabase/client';
 
+import AppleEmoji from '../components/ui/AppleEmoji';
+
 // Re-export PostCard for backward compatibility with PublicProfile
 export { PostCard };
 
@@ -31,12 +33,12 @@ const FEED_TABS = [
 ];
 
 const AVAILABLE_VIBES = [
-  { id: 'anxious', label: 'Ansioso 🥺', tag: 'Anxious' },
-  { id: 'sad', label: 'Triste 🙁', tag: 'Sad' },
-  { id: 'hopeful', label: 'Con esperanza 😀', tag: 'Hopeful' },
-  { id: 'stressed', label: 'Estresado 😫', tag: 'Stressed' },
-  { id: 'thankful', label: 'Agradecido 🙏', tag: 'Thankful' },
-  { id: 'motivated', label: 'Motivado 💪', tag: 'Motivated' }
+  { id: 'anxious', label: 'Ansioso', emoji: '🥺', tag: 'Anxious' },
+  { id: 'sad', label: 'Triste', emoji: '🙁', tag: 'Sad' },
+  { id: 'hopeful', label: 'Con esperanza', emoji: '😀', tag: 'Hopeful' },
+  { id: 'stressed', label: 'Estresado', emoji: '😫', tag: 'Stressed' },
+  { id: 'thankful', label: 'Agradecido', emoji: '🙏', tag: 'Thankful' },
+  { id: 'motivated', label: 'Motivado', emoji: '💪', tag: 'Motivated' }
 ];
 
 const AVAILABLE_TAGS = [
@@ -337,7 +339,7 @@ export default function Feed() {
             padding: '0.6rem 1rem',
             gap: '0.5rem'
           }}>
-            <Search size={16} color="#00e676" />
+            <Search size={16} color="var(--primary)" />
             <input
               type="text"
               value={searchQuery}
@@ -394,8 +396,8 @@ export default function Feed() {
                 key={v}
                 onClick={() => setSelectedVibes(selectedVibes.filter(item => item !== v))}
                 style={{
-                  backgroundColor: 'rgba(0, 230, 118, 0.15)',
-                  color: '#00e676',
+                  backgroundColor: 'var(--primary-light)',
+                  color: 'var(--primary)',
                   fontSize: '0.75rem',
                   fontWeight: 800,
                   padding: '0.2rem 0.6rem',
@@ -406,7 +408,14 @@ export default function Feed() {
                   gap: '0.25rem'
                 }}
               >
-                {AVAILABLE_VIBES.find(x => x.id === v)?.label || v} <X size={12} />
+                {(() => {
+                  const vItem = AVAILABLE_VIBES.find(x => x.id === v);
+                  return vItem ? (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                      {vItem.label} <AppleEmoji emoji={vItem.emoji} size={14} />
+                    </div>
+                  ) : v;
+                })()} <X size={12} />
               </span>
             ))}
 
@@ -415,8 +424,8 @@ export default function Feed() {
                 key={t}
                 onClick={() => setSelectedTags(selectedTags.filter(item => item !== t))}
                 style={{
-                  backgroundColor: 'rgba(56, 189, 248, 0.15)',
-                  color: '#38bdf8',
+                  backgroundColor: 'color-mix(in srgb, var(--accent-blue) 15%, transparent)',
+                  color: 'var(--accent-blue)',
                   fontSize: '0.75rem',
                   fontWeight: 800,
                   padding: '0.2rem 0.6rem',
@@ -663,7 +672,14 @@ export default function Feed() {
                     gap: '0.2rem'
                   }}
                 >
-                  {AVAILABLE_VIBES.find(x => x.id === v)?.label || v} <X size={12} />
+                  {(() => {
+                    const vItem = AVAILABLE_VIBES.find(x => x.id === v);
+                    return vItem ? (
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                        {vItem.label} <AppleEmoji emoji={vItem.emoji} size={14} />
+                      </div>
+                    ) : v;
+                  })()} <X size={12} />
                 </span>
               ))}
             </div>
@@ -696,7 +712,9 @@ export default function Feed() {
                       transition: 'all 0.15s ease'
                     }}
                   >
-                    {v.label}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                      {v.label} <AppleEmoji emoji={v.emoji} size={14} />
+                    </div>
                   </button>
                 );
               })}
@@ -888,11 +906,11 @@ export default function Feed() {
                 width: '22px',
                 height: '22px',
                 borderRadius: '50%',
-                backgroundColor: '#00e676',
+                backgroundColor: 'var(--primary)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                boxShadow: '0 2px 6px rgba(0, 230, 118, 0.5)'
+                boxShadow: 'var(--shadow-sm)'
               }}>
                 <CheckCircle size={16} color="#082e30" strokeWidth={3} />
               </div>
@@ -917,7 +935,7 @@ export default function Feed() {
               marginBottom: '0.75rem'
             }}>
               Hemos enviado un correo electrónico a{' '}
-              <span style={{ color: '#00e676', fontWeight: 800, wordBreak: 'break-all' }}>
+              <span style={{ color: 'var(--primary)', fontWeight: 800, wordBreak: 'break-all' }}>
                 {unverifiedEmail || 'tu correo Gmail'}
               </span>
             </p>
@@ -933,11 +951,11 @@ export default function Feed() {
 
             {resendStatusMsg && (
               <div style={{
-                backgroundColor: 'rgba(0, 230, 118, 0.15)',
-                border: '1px solid rgba(0, 230, 118, 0.35)',
+                backgroundColor: 'var(--primary-light)',
+                border: '1px solid var(--primary)',
                 borderRadius: '12px',
                 padding: '0.75rem 0.9rem',
-                color: '#69f0ae',
+                color: 'var(--primary)',
                 fontSize: '0.82rem',
                 fontWeight: 600,
                 marginBottom: '1.25rem',
@@ -953,15 +971,15 @@ export default function Feed() {
                 onClick={handleConfirmVerified}
                 style={{
                   width: '100%',
-                  background: 'linear-gradient(135deg, #00e676 0%, #00c853 100%)',
-                  color: '#082e30',
+                  background: 'var(--primary)',
+                  color: 'var(--bg-color)',
                   border: 'none',
-                  borderRadius: '9999px',
+                  borderRadius: '12px',
                   padding: '0.9rem',
-                  fontSize: '1rem',
-                  fontWeight: 800,
+                  fontSize: '0.9rem',
+                  fontWeight: 900,
                   cursor: 'pointer',
-                  boxShadow: '0 4px 14px rgba(0, 230, 118, 0.35)',
+                  boxShadow: 'var(--shadow-sm)',
                   transition: 'all 0.15s ease'
                 }}
               >
@@ -973,9 +991,9 @@ export default function Feed() {
                 disabled={resendingEmail}
                 style={{
                   width: '100%',
-                  backgroundColor: '#282d30',
-                  color: '#ffffff',
-                  border: '1px solid rgba(255,255,255,0.1)',
+                  background: 'var(--surface)',
+                  color: 'var(--text-main)',
+                  border: '1px solid var(--border-color)',
                   borderRadius: '9999px',
                   padding: '0.8rem',
                   fontSize: '0.9rem',

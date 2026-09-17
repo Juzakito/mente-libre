@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { X, Send, ShieldCheck, Tag, Sparkles, Heart, Lock, AlertCircle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useAppContext } from '../../../context/AppContext';
+import AppleEmoji from '../../../components/ui/AppleEmoji';
 
 const INTENTION_OPTIONS = [
   { id: 'desahogo', label: 'Desahogo libre', emoji: '🌿', color: 'var(--accent-emerald)' },
@@ -237,7 +238,7 @@ export default function ComposePostModal({ onClose, onPublish }) {
                       }
                     }}
                   >
-                    <span style={{ fontSize: '1.1rem' }}>{m.emoji}</span>
+                    <AppleEmoji emoji={m.emoji} size={18} />
                     <span>{m.label}</span>
                   </button>
                 );

@@ -46,11 +46,12 @@ import GlobalAudioPlayer from './audio/GlobalAudioPlayer';
 import ComposePostModal from '../features/feed/components/ComposePostModal';
 import { useAppContext } from '../context/AppContext';
 import { getRegisteredAccounts } from '../services/accountRegistryService';
+import AppleEmoji from './ui/AppleEmoji';
 
 export default function MainLayout() {
   const { user, logout, isAuthLoading } = useAuth();
   const { theme, toggleTheme } = useTheme();
-  const { addPost } = useAppContext();
+  const { addPost, posts } = useAppContext();
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation();
@@ -151,8 +152,25 @@ export default function MainLayout() {
     setTimeout(() => {
       setPeerMatching(false);
       
-      const allUsers = getRegisteredAccounts() || [];
-      const potentialPeers = allUsers.filter(u => u.id !== user?.id && u.nickname);
+      // Use unique users from feed posts
+      const uniqueUsers = [];
+      const seenNicknames = new Set();
+      
+      posts.forEach(p => {
+        if (!seenNicknames.has(p.author) && p.author !== user?.nickname && p.author !== user?.full_name) {
+          seenNicknames.add(p.author);
+          uniqueUsers.push({
+            nickname: p.author,
+            avatar: p.avatar,
+            career: p.career || 'Estudiante Universitario'
+          });
+        }
+      });
+      
+      const allUsers = [...getRegisteredAccounts(), ...uniqueUsers];
+      
+      // Filter out current user again just in case
+      const potentialPeers = allUsers.filter(u => u.nickname && u.nickname !== user?.nickname && u.nickname !== user?.full_name);
       
       let matchedPeer = null;
       if (potentialPeers.length > 0) {
@@ -160,8 +178,8 @@ export default function MainLayout() {
         matchedPeer = potentialPeers[randomIndex];
       } else {
         matchedPeer = {
-          nickname: 'IvoryBird_21',
-          avatar: '🐱',
+          nickname: 'Anxious_Soul',
+          avatar: '👽',
           career: 'Psicología UCS'
         };
       }
@@ -1312,7 +1330,7 @@ export default function MainLayout() {
                       backgroundColor: 'var(--surface-hover)',
                       display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.6rem',
                       border: '1px solid var(--border-color)', flexShrink: 0
-                    }}>🤝</div>
+                    }}><AppleEmoji emoji="🤝" size={32} /></div>
                     <div>
                       <h3 style={{ fontSize: '1.2rem', fontWeight: 900, margin: 0, color: 'var(--text-main)', letterSpacing: '-0.02em' }}>Hazte un Amigo</h3>
                       <p style={{ color: 'var(--text-muted)', fontSize: '0.78rem', margin: '2px 0 0', fontWeight: 500 }}>Encuentra o sé un acompañante universitario</p>
@@ -1323,7 +1341,7 @@ export default function MainLayout() {
                   <div style={{ display: 'flex', gap: '0.85rem', marginTop: '1rem', position: 'relative', zIndex: 1 }}>
                     {[{ val: '42', label: 'aliados online', icon: '🟢' }, { val: '100%', label: 'anónimo', icon: '🔒' }, { val: '2 min', label: 'tiempo medio', icon: '⚡' }].map((s, i) => (
                       <div key={i} style={{ flex: 1, backgroundColor: 'var(--surface)', border: '1px solid var(--border-color)', borderRadius: '10px', padding: '0.45rem 0.5rem', textAlign: 'center' }}>
-                        <div style={{ fontSize: '0.7rem', marginBottom: '1px' }}>{s.icon}</div>
+                        <div style={{ fontSize: '0.7rem', marginBottom: '1px' }}><AppleEmoji emoji={s.icon} size={14} /></div>
                         <div style={{ fontWeight: 900, color: 'var(--text-main)', fontSize: '0.9rem', lineHeight: 1 }}>{s.val}</div>
                         <div style={{ fontSize: '0.62rem', color: 'var(--text-muted)', fontWeight: 600, marginTop: '1px' }}>{s.label}</div>
                       </div>
@@ -1359,10 +1377,10 @@ export default function MainLayout() {
                       <label style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-muted)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>Tema de conversación</label>
                       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
                         {[
-                          { value: 'Exámenes y Estrés', label: '📚 Exámenes', color: 'var(--accent-amber)' },
-                          { value: 'Adaptación UCS', label: '🌱 Adaptación', color: 'var(--accent-emerald)' },
-                          { value: 'Salud Mental', label: '🧠 Salud Mental', color: 'var(--primary)' },
-                          { value: 'Habilidades Sociales', label: '💬 Conversación', color: 'var(--accent-blue)' },
+                          { value: 'Exámenes y Estrés', label: 'Exámenes', emoji: '📚', color: 'var(--accent-amber)' },
+                          { value: 'Adaptación UCS', label: 'Adaptación', emoji: '🌱', color: 'var(--accent-emerald)' },
+                          { value: 'Salud Mental', label: 'Salud Mental', emoji: '🧠', color: 'var(--primary)' },
+                          { value: 'Habilidades Sociales', label: 'Conversación', emoji: '💬', color: 'var(--accent-blue)' },
                         ].map((t) => (
                           <button
                             key={t.value}
@@ -1380,7 +1398,9 @@ export default function MainLayout() {
                               boxShadow: peerTopic === t.value ? `0 0 0 3px color-mix(in srgb, ${t.color} 10%, transparent)` : 'none'
                             }}
                           >
-                            {t.label}
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                              <AppleEmoji emoji={t.emoji} size={14} /> {t.label}
+                            </div>
                           </button>
                         ))}
                       </div>
@@ -1404,7 +1424,7 @@ export default function MainLayout() {
                               {peerMatchResult.status}
                             </div>
                           </div>
-                          <div style={{ fontSize: '1.4rem' }}>✅</div>
+                          <div style={{ fontSize: '1.4rem' }}><AppleEmoji emoji="✅" size={24} /></div>
                         </div>
                         <div style={{ display: 'flex', gap: '0.5rem' }}>
                           <button
@@ -1414,7 +1434,23 @@ export default function MainLayout() {
                             Buscar otro
                           </button>
                           <button
-                            onClick={() => { setActiveInfoModal(null); navigate('/app/chat'); }}
+                            onClick={() => { 
+                              // Create notification
+                              setNotificationsList(prev => [{
+                                id: Date.now(),
+                                type: 'chat',
+                                title: `💬 Nuevo mensaje de ${peerMatchResult.nickname}`,
+                                desc: `¡Hola! Vi que también quieres hablar sobre ${peerMatchResult.topic}`,
+                                time: 'Justo ahora',
+                                read: false
+                              }, ...prev]);
+                              
+                              // Route to chat with peer state
+                              setActiveInfoModal(null); 
+                              navigate('/app/chat', { 
+                                state: { peerMatch: peerMatchResult } 
+                              }); 
+                            }}
                             style={{ flex: 2, backgroundColor: 'var(--primary)', color: '#ffffff', border: 'none', padding: '0.55rem', borderRadius: '10px', fontWeight: 900, fontSize: '0.8rem', cursor: 'pointer', boxShadow: 'none' }}
                           >
                             Chatear ahora →

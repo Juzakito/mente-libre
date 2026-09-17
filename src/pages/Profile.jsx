@@ -225,17 +225,17 @@ export default function Profile() {
             cursor: 'pointer',
             display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', 
             padding: '1.25rem 0.5rem', 
-            background: 'linear-gradient(135deg, color-mix(in srgb, var(--primary) 15%, transparent) 0%, color-mix(in srgb, var(--primary) 5%, transparent) 100%)', 
+            backgroundColor: 'var(--surface)', 
             borderRadius: '20px', 
-            border: '1px solid color-mix(in srgb, var(--primary) 40%, transparent)', 
-            boxShadow: '0 4px 12px color-mix(in srgb, var(--primary) 15%, transparent)',
-            transition: 'transform 0.2s, box-shadow 0.2s'
+            border: '1px solid var(--primary)', 
+            boxShadow: 'var(--shadow-sm)',
+            transition: 'transform 0.2s, background-color 0.2s'
           }}
-          onMouseOver={e => { e.currentTarget.style.transform = 'translateY(-2px)'; }}
-          onMouseOut={e => { e.currentTarget.style.transform = 'translateY(0)'; }}
+          onMouseOver={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.backgroundColor = 'var(--surface-hover)'; }}
+          onMouseOut={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.backgroundColor = 'var(--surface)'; }}
           title="Toca para ver o reclamar beneficios de Fundador"
         >
-          <div style={{ width: '2.5rem', height: '2.5rem', borderRadius: '50%', backgroundColor: 'color-mix(in srgb, var(--primary) 20%, transparent)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.5rem', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>
+          <div style={{ width: '2.5rem', height: '2.5rem', borderRadius: '50%', backgroundColor: 'color-mix(in srgb, var(--primary) 20%, transparent)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.5rem' }}>
             <span style={{ fontSize: '1.25rem', display: 'flex' }}><AppleEmoji emoji="🪶" size={24} /></span>
           </div>
           <div style={{ fontSize: '1.75rem', fontWeight: 900, color: 'var(--primary)', lineHeight: 1 }}>{feathers}</div>
@@ -263,15 +263,15 @@ export default function Profile() {
               <div key={badge.id} style={{ 
                 display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem', 
                 flex: 1, padding: '1.25rem 0.5rem',
-                backgroundColor: isUnlocked ? 'var(--surface)' : 'color-mix(in srgb, var(--surface) 50%, transparent)', 
+                backgroundColor: 'var(--surface)', 
                 border: `1px solid ${isUnlocked ? 'var(--border-color)' : 'transparent'}`, 
                 borderRadius: '20px', boxShadow: isUnlocked ? 'var(--shadow-sm)' : 'none', 
                 position: 'relative', overflow: 'hidden',
-                opacity: isUnlocked ? 1 : 0.4, filter: isUnlocked ? 'none' : 'grayscale(1)'
+                opacity: isUnlocked ? 1 : 0.5, filter: isUnlocked ? 'none' : 'grayscale(1)'
               }}>
                 {isUnlocked && <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '4px', backgroundColor: badge.color }}></div>}
                 
-                <div style={{ fontSize: '2rem', filter: isUnlocked ? 'drop-shadow(0 4px 6px rgba(0,0,0,0.1))' : 'none' }}>
+                <div style={{ fontSize: '2rem' }}>
                   <AppleEmoji emoji={badge.icon} size={32} />
                 </div>
                 <div>
@@ -294,7 +294,7 @@ export default function Profile() {
             <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>{t('profile.unlockStyles')}</p>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', backgroundColor: 'color-mix(in srgb, var(--primary) 15%, transparent)', color: 'var(--primary)', padding: '0.5rem 0.75rem', borderRadius: 'var(--radius-full)', fontWeight: 900, fontSize: '0.85rem' }}>
-            {feathers} <span style={{ fontSize: '1rem' }}>🪶</span>
+            {feathers} <AppleEmoji emoji="🪶" size={16} />
           </div>
         </div>
 
@@ -308,7 +308,7 @@ export default function Profile() {
               <div key={avatar.name} style={{
                 flex: '0 0 140px',
                 scrollSnapAlign: 'start',
-                backgroundColor: isEquipped ? 'color-mix(in srgb, var(--primary) 5%, transparent)' : 'var(--bg-color)',
+                backgroundColor: 'var(--surface)',
                 border: `2px solid ${isEquipped ? 'var(--primary)' : 'var(--border-color)'}`,
                 borderRadius: '20px',
                 padding: '1.25rem 0.5rem',
@@ -318,19 +318,19 @@ export default function Profile() {
                 gap: '0.75rem',
                 position: 'relative',
                 transition: 'all 0.2s',
-                boxShadow: isEquipped ? '0 8px 16px color-mix(in srgb, var(--primary) 15%, transparent)' : 'none'
+                boxShadow: isEquipped ? 'var(--shadow-sm)' : 'none'
               }}>
                 {!isUnlocked && (
-                  <div style={{ position: 'absolute', top: '0.75rem', right: '0.75rem', color: 'var(--text-light)', backgroundColor: 'var(--surface)', padding: '0.25rem', borderRadius: '50%', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+                  <div style={{ position: 'absolute', top: '0.75rem', right: '0.75rem', color: 'var(--text-light)', backgroundColor: 'var(--surface)', padding: '0.25rem', borderRadius: '50%' }}>
                     <Lock size={12} />
                   </div>
                 )}
                 
                 {isEquipped && (
-                  <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', borderRadius: 'inherit', background: 'radial-gradient(circle at center, color-mix(in srgb, var(--primary) 10%, transparent) 0%, transparent 70%)', pointerEvents: 'none' }}></div>
+                  <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', borderRadius: 'inherit', backgroundColor: 'var(--primary-light)', opacity: 0.5, pointerEvents: 'none' }}></div>
                 )}
 
-                <div style={{ filter: !isUnlocked ? 'grayscale(100%) opacity(0.4)' : 'drop-shadow(0 4px 8px rgba(0,0,0,0.1))', transition: 'all 0.3s', display: 'flex', justifyContent: 'center' }}>
+                <div style={{ filter: !isUnlocked ? 'grayscale(100%) opacity(0.5)' : 'none', transition: 'all 0.3s', display: 'flex', justifyContent: 'center', zIndex: 1 }}>
                   <AppleEmoji emoji={avatar.emoji} size={64} />
                 </div>
                 
@@ -339,8 +339,8 @@ export default function Profile() {
                     {avatar.name}
                   </div>
                   {!isUnlocked && (
-                    <div style={{ fontSize: '0.7rem', fontWeight: 800, color: canAfford ? 'var(--primary)' : 'var(--text-muted)', marginTop: '0.1rem' }}>
-                      {avatar.cost} 🪶
+                    <div style={{ fontSize: '0.7rem', fontWeight: 800, color: canAfford ? 'var(--primary)' : 'var(--text-muted)', marginTop: '0.1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '2px' }}>
+                      {avatar.cost} <AppleEmoji emoji="🪶" size={12} />
                     </div>
                   )}
                 </div>
@@ -356,10 +356,10 @@ export default function Profile() {
                     fontSize: '0.75rem',
                     fontWeight: 900,
                     cursor: (!isUnlocked && !canAfford) ? 'not-allowed' : 'pointer',
-                    backgroundColor: isEquipped ? 'var(--primary)' : (isUnlocked ? 'var(--surface)' : (canAfford ? 'var(--primary)' : 'var(--surface)')),
+                    backgroundColor: isEquipped ? 'var(--primary)' : (isUnlocked ? 'var(--surface-hover)' : (canAfford ? 'var(--primary)' : 'var(--surface-hover)')),
                     color: isEquipped ? 'white' : (isUnlocked ? 'var(--text-main)' : (canAfford ? 'white' : 'var(--text-muted)')),
                     border: (isUnlocked && !isEquipped) || (!isUnlocked && !canAfford) ? '1px solid var(--border-color)' : 'none',
-                    boxShadow: canAfford && !isUnlocked ? '0 4px 10px color-mix(in srgb, var(--primary) 30%, transparent)' : 'none',
+                    boxShadow: 'none',
                     transition: 'all 0.2s',
                     zIndex: 1
                   }}
