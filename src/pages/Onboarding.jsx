@@ -335,7 +335,7 @@ export default function Onboarding() {
       width: '100%',
       flex: 1,
       backgroundColor: 'var(--bg-color)',
-      color: '#ffffff',
+      color: 'var(--text-main)',
       fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
       position: 'relative',
       overflowX: 'hidden',
@@ -427,7 +427,7 @@ export default function Onboarding() {
                   <span>{currentQuote.vibeText}</span>
                   <AppleEmoji emoji={currentQuote.vibeEmoji} size={16} />
                 </div>
-                <div style={{ fontWeight: 800, fontSize: '1.15rem', color: '#ffffff' }}>
+                <div style={{ fontWeight: 800, fontSize: '1.15rem', color: 'var(--text-main)' }}>
                   {currentQuote.author}
                 </div>
               </div>
@@ -452,7 +452,7 @@ export default function Onboarding() {
           <p style={{
             fontSize: 'clamp(1.1rem, 2vw, 1.35rem)',
             fontWeight: 700,
-            color: 'rgba(255, 255, 255, 0.9)',
+            color: 'var(--text-main)',
             marginBottom: '2.5rem',
             maxWidth: '540px',
             lineHeight: 1.45
