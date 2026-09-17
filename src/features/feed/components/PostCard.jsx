@@ -191,31 +191,14 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem', marginTop: isSolid ? '0.2rem' : '0' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
           <Link to={`/app/u/${post.author}`} style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-            {isCreature ? (
-              <TalkCampusAvatar
-                id={creatureKey}
-                size={42}
-                style={{
-                  border: isSolid ? '2px solid var(--primary)' : '1px solid var(--border-color)',
-                  boxShadow: isSolid ? '0 0 12px var(--primary-light)' : 'none'
-                }}
-              />
-            ) : (
-              <div style={{
-                width: '42px',
-                height: '42px',
-                borderRadius: '12px',
-                overflow: 'hidden',
-                flexShrink: 0,
-                backgroundColor: 'var(--surface-hover)',
+            <TalkCampusAvatar
+              id={creatureKey}
+              size={42}
+              style={{
                 border: isSolid ? '2px solid var(--primary)' : '1px solid var(--border-color)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}>
-                <AppleEmoji emoji={post.avatar || '🦊'} size={28} />
-              </div>
-            )}
+                boxShadow: isSolid ? '0 0 12px var(--primary-light)' : 'none'
+              }}
+            />
             <div>
               <div style={{ fontWeight: 800, color: 'var(--text-main)', fontSize: '0.95rem', lineHeight: 1.2 }}>
                 {post.author}
