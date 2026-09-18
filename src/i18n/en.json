@@ -239,7 +239,21 @@
     "botUnavailable": "The companion bot is currently unavailable. Please try again later.",
     "searchingPeer": "Searching for an available companion...",
     "typing": "typing...",
-    "online": "Online"
+    "online": "Online",
+    "connectedSecure": "🔒 Secure and anonymous connection established.",
+    "talkingTo": "You are talking to {{name}}",
+    "greetingPeer": "Hi! I saw you also want to talk about {{topic}}",
+    "connectedRoom": "🔒 Connected to Community Room: {{name}} ({{tag}})",
+    "roomStudentsSharing": "🟢 {{count}} students sharing live.",
+    "roomStudySession": "🟢 {{count}} students in active study session.",
+    "roomGuidedSpace": "🟢 {{count}} peers in a guided safe space.",
+    "roomFreeSharing": "🟢 {{count}} students sharing freely.",
+    "inputPlaceholder": "Anonymous message (cleared on exit)...",
+    "send": "Send",
+    "systemPrefix": "System",
+    "back": "Back",
+    "leave": "Leave",
+    "liveCompanions": "{{count}} live peers"
   },
   "moodMisc": {
     "saveDay": "Save my day",
@@ -518,6 +532,32 @@
     },
     "badges": {
       "me": "You"
+    }
+  },
+  "rooms": {
+    "title": "Community Rooms",
+    "subtitle": "Find your tribe. 100% anonymous.",
+    "header": "Rooms",
+    "liveCount": "{{count}} live",
+    "description": "Anonymous meeting spaces, study groups, and real-time venting among campus students.",
+    "peopleCount": "{{count}} people",
+    "footer": "100% anonymous spaces. Active moderation.",
+    "connectedToast": "Connected to room {{name}} ✨",
+    "primer_ano": {
+      "name": "First Year Students",
+      "topic": "Campus adaptation, advice on professors, paperwork, and first midterms."
+    },
+    "examenes": {
+      "name": "Exam Preparation",
+      "topic": "Study groups, 50m Pomodoro sessions, and shared summaries."
+    },
+    "salud_mental": {
+      "name": "Anxiety Management",
+      "topic": "Safe space, breathing breaks, and guided support without judgment."
+    },
+    "desahogo": {
+      "name": "Free Venting 24/7",
+      "topic": "Express yourself with total freedom and no filters, 100% anonymous among peers."
     }
   }
 }

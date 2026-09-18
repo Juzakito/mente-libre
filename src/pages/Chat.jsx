@@ -124,9 +124,9 @@ export default function Chat() {
       setConnected(true);
       setHistory([]);
       setMessages([
-        { id: 1, sender: 'system', text: '🔒 Conexión segura y anónima establecida.' },
-        { id: 2, sender: 'system', text: `Estás hablando con ${incomingPeerMatch.nickname}` },
-        { id: 3, sender: 'peer', text: `¡Hola! Vi que también quieres hablar sobre ${incomingPeerMatch.topic}`, time: new Date().toLocaleTimeString(undefined, {hour: '2-digit', minute:'2-digit'}) }
+        { id: 1, sender: 'system', text: t('chatMisc.connectedSecure') },
+        { id: 2, sender: 'system', text: t('chatMisc.talkingTo', { name: incomingPeerMatch.nickname }) },
+        { id: 3, sender: 'peer', text: t('chatMisc.greetingPeer', { topic: incomingPeerMatch.topic }), time: new Date().toLocaleTimeString(undefined, {hour: '2-digit', minute:'2-digit'}) }
       ]);
       navigate(location.pathname, { replace: true, state: {} });
     } else if (incomingRoom) {
@@ -139,31 +139,31 @@ export default function Chat() {
       const getInitialRoomMessages = (room) => {
         if (room.id === 'primer_ano') {
           return [
-            { id: 1, sender: 'system', text: `🔒 Conectado a la Sala Comunitaria: ${room.name} (${room.tag})` },
-            { id: 2, sender: 'system', text: `🟢 ${room.users} estudiantes compartiendo en vivo.` },
+            { id: 1, sender: 'system', text: t('chatMisc.connectedRoom', { name: t(`rooms.${room.id}.name`), tag: room.tag }) },
+            { id: 2, sender: 'system', text: t('chatMisc.roomStudentsSharing', { count: room.users }) },
             { id: 3, sender: 'peer', author: 'FlyingJay_99', avatar: '🦊', text: '¡Hola a todos! 👋 ¿Alguien más adaptándose a los horarios de este ciclo? Me costó agarrarle el ritmo a los cursos.', time: 'hace 3m' },
             { id: 4, sender: 'peer', author: 'Val_Psi', avatar: '🌿', text: '¡Tranqui! El inicio es demandante pero con calma se saca adelante. Recuerden pausar entre lecturas 💪', time: 'hace 1m' }
           ];
         }
         if (room.id === 'examenes') {
           return [
-            { id: 1, sender: 'system', text: `🔒 Conectado a la Sala Comunitaria: ${room.name} (${room.tag})` },
-            { id: 2, sender: 'system', text: `🟢 ${room.users} estudiantes en sesión de estudio activa.` },
+            { id: 1, sender: 'system', text: t('chatMisc.connectedRoom', { name: t(`rooms.${room.id}.name`), tag: room.tag }) },
+            { id: 2, sender: 'system', text: t('chatMisc.roomStudySession', { count: room.users }) },
             { id: 3, sender: 'peer', author: 'Mateo_Ing', avatar: '⚡', text: 'Bloque de estudio pomodoro de 50 minutos arrancando ahora mismo 🍅 ¿Quién se suma sin distracciones?', time: 'hace 4m' },
             { id: 4, sender: 'peer', author: 'Sofi_Med', avatar: '📚', text: '¡Me sumo! Repasando para el parcial de mañana. Recuerden hidratarse y descansar la vista.', time: 'hace 2m' }
           ];
         }
         if (room.id === 'salud_mental') {
           return [
-            { id: 1, sender: 'system', text: `🔒 Conectado a la Sala Comunitaria: ${room.name} (${room.tag})` },
-            { id: 2, sender: 'system', text: `🟢 ${room.users} compañeros en espacio seguro guiado.` },
+            { id: 1, sender: 'system', text: t('chatMisc.connectedRoom', { name: t(`rooms.${room.id}.name`), tag: room.tag }) },
+            { id: 2, sender: 'system', text: t('chatMisc.roomGuidedSpace', { count: room.users }) },
             { id: 3, sender: 'peer', author: 'AlmaLibre', avatar: '🧘', text: 'Hola a todos. Hoy sentí bastante ansiedad antes de una sustentación, pero hacer pausas de respiración me bajó las pulsaciones.', time: 'hace 5m' },
             { id: 4, sender: 'peer', author: 'Búho_Comunitario', avatar: '🦉', text: 'Gracias por compartirlo. Es completamente válido sentirse así. Este es un espacio libre de juicios 🤍', time: 'hace 1m' }
           ];
         }
         return [
-          { id: 1, sender: 'system', text: `🔒 Conectado a la Sala Comunitaria: ${room.name} (${room.tag})` },
-          { id: 2, sender: 'system', text: `🟢 ${room.users} estudiantes compartiendo libremente.` },
+          { id: 1, sender: 'system', text: t('chatMisc.connectedRoom', { name: t(`rooms.${room.id}.name`), tag: room.tag }) },
+          { id: 2, sender: 'system', text: t('chatMisc.roomFreeSharing', { count: room.users }) },
           { id: 3, sender: 'peer', author: 'Anonimo_Campus', avatar: '💬', text: 'Solo necesitaba desahogarme: esta semana se sintió larguísima 😵‍💫 Necesitaba un respiro sincero.', time: 'hace 3m' },
           { id: 4, sender: 'peer', author: 'Cris_Arq', avatar: '🎨', text: 'Te entiendo al 100%, las entregas son agotadoras. Desahógate tranquilo que aquí nos acompañamos.', time: 'hace 1m' }
         ];
@@ -226,8 +226,8 @@ export default function Chat() {
       setSearching(false);
       setConnected(true);
       setMessages([
-        { id: 1, sender: 'system', text: '🔒 Conexión segura y anónima establecida.' },
-        { id: 2, sender: 'system', text: 'Estás hablando con BuhoNocturno 🦉' }
+        { id: 1, sender: 'system', text: t('chatMisc.connectedSecure') },
+        { id: 2, sender: 'system', text: t('chatMisc.talkingTo', { name: 'BuhoNocturno 🦉' }) }
       ]);
       setPeerTyping(true);
       
@@ -797,7 +797,9 @@ REGLAS ESTRICTAS:
                 <div style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--primary)', display: 'flex', alignItems: 'center', gap: '0.4rem', marginTop: '1px' }}>
                   <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
                     <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--primary)', display: 'inline-block' }} />
-                    {activeRoom.users} compañeros en vivo
+                    <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)', fontWeight: 700 }}>
+                      {t('chatMisc.liveCompanions', { count: activeRoom.users })}
+                    </span>
                   </span>
                   <span style={{ color: 'var(--text-muted)' }}>·</span>
                   <span style={{ color: 'var(--text-muted)', fontWeight: 600 }}>{activeRoom.tag}</span>
@@ -860,7 +862,7 @@ REGLAS ESTRICTAS:
             }}
           >
             <LogOut size={13} />
-            <span>Salir de sala</span>
+            <span>{t('chatMisc.leave')}</span>
           </button>
         )}
       </div>

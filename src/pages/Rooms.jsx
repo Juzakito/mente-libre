@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import { Menu, ShieldCheck } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const ROOMS_DATA = [
   {
@@ -52,11 +53,12 @@ const ROOMS_DATA = [
 export default function Rooms() {
   const navigate = useNavigate();
   const outletCtx = useOutletContext();
+  const { t } = useTranslation();
 
   const handleJoinRoom = (room) => {
     sessionStorage.setItem('active_chat_room', JSON.stringify(room));
     sessionStorage.removeItem('active_peer_match');
-    outletCtx?.showToast?.(`Conectado a la sala ${room.name} ✨`);
+    outletCtx?.showToast?.(t('rooms.connectedToast', { name: t(`rooms.${room.id}.name`) }));
     navigate('/app/chat', { state: { activeRoom: room, selectedRoom: room } });
   };
 
@@ -69,8 +71,8 @@ export default function Rooms() {
         {/* Desktop Header */}
         <div className="desktop-header hide-on-mobile" style={{ marginBottom: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
           <div>
-            <h1 style={{ margin: 0, fontSize: '2.5rem', fontWeight: 900, color: 'var(--text-main)', letterSpacing: '-0.04em' }}>Salas Comunitarias</h1>
-            <p style={{ margin: '0.5rem 0 0', color: 'var(--text-muted)', fontSize: '1rem' }}>Encuentra tu tribu. 100% anónimo.</p>
+            <h1 style={{ margin: 0, fontSize: '2.5rem', fontWeight: 900, color: 'var(--text-main)', letterSpacing: '-0.04em' }}>{t('rooms.title')}</h1>
+            <p style={{ margin: '0.5rem 0 0', color: 'var(--text-muted)', fontSize: '1rem' }}>{t('rooms.subtitle')}</p>
           </div>
         </div>
 
@@ -81,18 +83,18 @@ export default function Rooms() {
           <div style={{ padding: '0 0.5rem', marginBottom: '0.5rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
               <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-main)', margin: 0, letterSpacing: '-0.02em' }}>
-                Salas
+                {t('rooms.header')}
               </h2>
               <span style={{
                 color: 'var(--primary)',
                 fontSize: '0.8rem',
                 fontWeight: 700,
               }}>
-                133 en vivo
+                {t('rooms.liveCount', { count: 133 })}
               </span>
             </div>
             <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', margin: 0, lineHeight: 1.5 }}>
-              Espacios anónimos de encuentro, grupos de estudio y desahogo en tiempo real entre estudiantes de campus.
+              {t('rooms.description')}
             </p>
           </div>
 
@@ -119,18 +121,18 @@ export default function Rooms() {
                   <div style={{ flex: 1 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.1rem' }}>
                       <span style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-main)' }}>
-                        {room.name}
+                        {t(`rooms.${room.id}.name`)}
                       </span>
                       <span style={{
                         color: 'var(--text-muted)',
                         fontSize: '0.75rem',
                         fontWeight: 600,
                       }}>
-                        {room.users} personas
+                        {t('rooms.peopleCount', { count: room.users })}
                       </span>
                     </div>
                     <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', margin: 0, lineHeight: 1.4 }}>
-                      {room.topic}
+                      {t(`rooms.${room.id}.topic`)}
                     </p>
                   </div>
                 </div>
@@ -150,7 +152,7 @@ export default function Rooms() {
           }}>
             <ShieldCheck size={16} color="var(--text-muted)" />
             <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: 500 }}>
-              Espacios 100% anónimos. Moderación activa.
+              {t('rooms.footer')}
             </span>
           </div>
 

@@ -146,5 +146,47 @@
     "badges": {
       "me": "Qam"
     }
+  },
+  "rooms": {
+    "title": "Ayllu Wasiykuna",
+    "subtitle": "Aylluykita tariy. 100% sutinnaq.",
+    "header": "Wasiykuna",
+    "liveCount": "{{count}} kawsachkan",
+    "description": "Sutinnaq tupana wasiykuna, yachaqanapaq huñunakuykuna, llakikuy willakuy yachaq masiykunawan.",
+    "peopleCount": "{{count}} runakuna",
+    "footer": "100% sutinnaq wasiykuna. Allin qawasqa.",
+    "connectedToast": "{{name}} wasiman yaykusqa ✨",
+    "primer_ano": {
+      "name": "Qallariy Yachaykuna",
+      "topic": "Hatun yachay wasiman yachakuy, yachachiqkunamanta yuyaychaykuna, qallariy pruyebakuna."
+    },
+    "examenes": {
+      "name": "Pruyebakunapaq Wakichikuy",
+      "topic": "Yachaqanapaq huñunakuykuna, 50 t'uqsipacha Pomodoro, yachasqanchikmanta rakinakuy."
+    },
+    "salud_mental": {
+      "name": "Llakikuy Qaway",
+      "topic": "Llakiy samachinapaq wasi, samariykuna, yanapakuykuna mana pitapas huchachaspa."
+    },
+    "desahogo": {
+      "name": "Llakikuy Willakuy 24/7",
+      "topic": "Llakiykita willakuy mana iskayrayaspa, 100% sutinnaq yachaq masiykunawan."
+    }
+  },
+  "chatMisc": {
+    "connectedSecure": "🔒 Sutinnaq, mana imamanta manchakuq tinkiy.",
+    "talkingTo": "{{name}} sutiyuqwanmi rimachkanki",
+    "greetingPeer": "¡Allillanchu! Rikuni qampas {{topic}}manta rimayta munasqaykita",
+    "connectedRoom": "🔒 Ayllu Wasiman Tinkisqa: {{name}} ({{tag}})",
+    "roomStudentsSharing": "🟢 {{count}} yachaq masiykuna kawsachkan.",
+    "roomStudySession": "🟢 {{count}} yachaq masiykuna yachaqachkan.",
+    "roomGuidedSpace": "🟢 {{count}} yachaq masiykuna llakiy samachinapaq wasipi.",
+    "roomFreeSharing": "🟢 {{count}} yachaq masiykuna llakikuy willakuchkan.",
+    "inputPlaceholder": "Sutinnaq qillqa (lluqsirquptiykiqa pichakunqam)...",
+    "send": "Apachiy",
+    "systemPrefix": "Llika",
+    "back": "Kutiy",
+    "leave": "Lluqsiy",
+    "liveCompanions": "{{count}} kawsachkaq masiykuna"
   }
 }

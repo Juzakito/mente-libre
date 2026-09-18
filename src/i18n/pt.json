@@ -146,5 +146,47 @@
     "badges": {
       "me": "Você"
     }
+  },
+  "rooms": {
+    "title": "Salas Comunitárias",
+    "subtitle": "Encontre sua tribo. 100% anônimo.",
+    "header": "Salas",
+    "liveCount": "{{count}} ao vivo",
+    "description": "Espaços de encontro anônimos, grupos de estudo e desabafos em tempo real entre alunos do campus.",
+    "peopleCount": "{{count}} pessoas",
+    "footer": "Espaços 100% anônimos. Moderação ativa.",
+    "connectedToast": "Conectado à sala {{name}} ✨",
+    "primer_ano": {
+      "name": "Primeiros Ciclos Universitários",
+      "topic": "Adaptação ao campus, dicas sobre professores, burocracia e primeiras provas."
+    },
+    "examenes": {
+      "name": "Preparação para Exames",
+      "topic": "Grupos de estudo, sessões Pomodoro de 50m e resumos compartilhados."
+    },
+    "salud_mental": {
+      "name": "Controle de Ansiedade",
+      "topic": "Espaço de contenção, pausas para respiração e apoio guiado sem julgamentos."
+    },
+    "desahogo": {
+      "name": "Desabafo Livre 24/7",
+      "topic": "Expresse-se com total liberdade e sem filtros, 100% anônimo entre colegas."
+    }
+  },
+  "chatMisc": {
+    "connectedSecure": "🔒 Conexão segura e anônima estabelecida.",
+    "talkingTo": "Você está falando com {{name}}",
+    "greetingPeer": "Olá! Vi que você também quer falar sobre {{topic}}",
+    "connectedRoom": "🔒 Conectado à Sala Comunitária: {{name}} ({{tag}})",
+    "roomStudentsSharing": "🟢 {{count}} estudantes compartilhando ao vivo.",
+    "roomStudySession": "🟢 {{count}} estudantes em sessão de estudo ativa.",
+    "roomGuidedSpace": "🟢 {{count}} colegas em espaço seguro guiado.",
+    "roomFreeSharing": "🟢 {{count}} estudantes compartilhando livremente.",
+    "inputPlaceholder": "Mensagem anônima (apagada ao sair)...",
+    "send": "Enviar",
+    "systemPrefix": "Sistema",
+    "back": "Voltar",
+    "leave": "Sair",
+    "liveCompanions": "{{count}} colegas ao vivo"
   }
 }

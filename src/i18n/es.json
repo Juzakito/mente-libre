@@ -239,7 +239,21 @@
     "botUnavailable": "El bot de acompañamiento no está disponible en este momento. Inténtalo más tarde.",
     "searchingPeer": "Buscando compañero disponible...",
     "typing": "escribiendo...",
-    "online": "En línea"
+    "online": "En línea",
+    "connectedSecure": "🔒 Conexión segura y anónima establecida.",
+    "talkingTo": "Estás hablando con {{name}}",
+    "greetingPeer": "¡Hola! Vi que también quieres hablar sobre {{topic}}",
+    "connectedRoom": "🔒 Conectado a la Sala Comunitaria: {{name}} ({{tag}})",
+    "roomStudentsSharing": "🟢 {{count}} estudiantes compartiendo en vivo.",
+    "roomStudySession": "🟢 {{count}} estudiantes en sesión de estudio activa.",
+    "roomGuidedSpace": "🟢 {{count}} compañeros en espacio seguro guiado.",
+    "roomFreeSharing": "🟢 {{count}} estudiantes compartiendo libremente.",
+    "inputPlaceholder": "Mensaje anónimo (se borra al salir)...",
+    "send": "Enviar",
+    "systemPrefix": "Sistema",
+    "back": "Volver",
+    "leave": "Salir",
+    "liveCompanions": "{{count}} compañeros en vivo"
   },
   "moodMisc": {
     "saveDay": "Guardar mi día",
@@ -518,6 +532,32 @@
     },
     "badges": {
       "me": "Tú"
+    }
+  },
+  "rooms": {
+    "title": "Salas Comunitarias",
+    "subtitle": "Encuentra tu tribu. 100% anónimo.",
+    "header": "Salas",
+    "liveCount": "{{count}} en vivo",
+    "description": "Espacios anónimos de encuentro, grupos de estudio y desahogo en tiempo real entre estudiantes de campus.",
+    "peopleCount": "{{count}} personas",
+    "footer": "Espacios 100% anónimos. Moderación activa.",
+    "connectedToast": "Conectado a la sala {{name}} ✨",
+    "primer_ano": {
+      "name": "Primeros Ciclos Universitarios",
+      "topic": "Adaptación al campus, consejos sobre profesores, trámites y primeros parciales."
+    },
+    "examenes": {
+      "name": "Preparación de Exámenes",
+      "topic": "Grupos de estudio, sesiones Pomodoro de 50m y resúmenes compartidos."
+    },
+    "salud_mental": {
+      "name": "Manejo de la Ansiedad",
+      "topic": "Espacio de contención, pausas de respiración y apoyo guiado sin juicios."
+    },
+    "desahogo": {
+      "name": "Desahogo Libre 24/7",
+      "topic": "Exprésate con total libertad y sin filtros, 100% anónimo entre compañeros."
     }
   }
 }
