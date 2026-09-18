@@ -23,6 +23,7 @@ import {
   DoorOpen,
   CircleDot,
   ChevronDown,
+  Feather,
   ChevronUp,
   Calendar,
   Map,
@@ -80,10 +81,10 @@ export default function MainLayout() {
 
   // ─── SIDEBAR INTERACTIVE MODALS STATE ────────────────────────
   const [notificationsList, setNotificationsList] = useState([
-    { id: 1, type: 'hug', title: '💙 FlyingJay_99 te envió un abrazo', desc: 'En tu publicación de desahogo "Exámenes finales"', time: 'hace 15m', read: false },
-    { id: 2, type: 'comment', title: '🦉 Búho_Científica comentó', desc: '"¡No estás solo! Todos apoyamos aquí 💪"', time: 'hace 1h', read: false },
-    { id: 3, type: 'reward', title: '🪶 +15 Plumas ganadas', desc: 'Por tu registro de estado de ánimo de hoy', time: 'hace 3h', read: false },
-    { id: 4, type: 'reminder', title: '📅 Recordatorio de Cita', desc: 'Psicología Científica del Sur mañana a las 4:00 PM', time: 'hace 5h', read: true }
+    { id: 1, type: 'hug', title: 'FlyingJay_99 te envió un abrazo', desc: 'En tu publicación de desahogo "Exámenes finales"', time: 'hace 15m', read: false },
+    { id: 2, type: 'comment', title: 'Búho_Científica comentó', desc: '"¡No estás solo! Todos apoyamos aquí 💪"', time: 'hace 1h', read: false },
+    { id: 3, type: 'reward', title: '+15 Plumas ganadas', desc: 'Por tu registro de estado de ánimo de hoy', time: 'hace 3h', read: false },
+    { id: 4, type: 'reminder', title: 'Recordatorio de Cita', desc: 'Psicología Científica del Sur mañana a las 4:00 PM', time: 'hace 5h', read: true }
   ]);
 
   const [featureVotes, setFeatureVotes] = useState({
@@ -729,7 +730,7 @@ export default function MainLayout() {
                       justifyContent: 'center',
                       flexShrink: 0
                     }}>
-                      <AppleEmoji emoji="🔔" size={22} />
+                      <Bell size={22} color="var(--primary)" />
                     </div>
                     <h3 style={{ fontSize: '1.35rem', fontWeight: 850, margin: 0, color: 'var(--text-main)', letterSpacing: '-0.02em' }}>
                       Notificaciones
@@ -775,11 +776,27 @@ export default function MainLayout() {
                         onMouseEnter={(e) => e.currentTarget.style.backgroundColor = item.read ? 'var(--surface-hover)' : 'rgba(16, 185, 129, 0.08)'}
                         onMouseLeave={(e) => e.currentTarget.style.backgroundColor = item.read ? 'transparent' : 'rgba(16, 185, 129, 0.04)'}
                       >
-                        <div style={{ fontWeight: 700, fontSize: '0.88rem', color: item.read ? 'var(--text-main)' : 'var(--primary)', marginBottom: '3px' }}>
-                          {item.title}
+                        <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+                          <div style={{
+                            marginTop: '2px',
+                            color: item.type === 'hug' ? '#3b82f6' :
+                                   item.type === 'comment' ? 'var(--primary)' :
+                                   item.type === 'reward' ? '#f59e0b' :
+                                   item.type === 'reminder' ? '#ef4444' : 'var(--text-muted)'
+                          }}>
+                            {item.type === 'hug' && <Heart size={16} fill="currentColor" />}
+                            {item.type === 'comment' && <MessageCircle size={16} fill="currentColor" />}
+                            {item.type === 'reward' && <Feather size={16} />}
+                            {item.type === 'reminder' && <Calendar size={16} />}
+                          </div>
+                          <div>
+                            <div style={{ fontWeight: 700, fontSize: '0.88rem', color: item.read ? 'var(--text-main)' : 'var(--text-main)', marginBottom: '3px' }}>
+                              {item.title}
+                            </div>
+                            <div style={{ color: 'var(--text-muted)', fontSize: '0.8rem', lineHeight: 1.3 }}>{item.desc}</div>
+                            <div style={{ color: 'var(--text-muted)', fontSize: '0.7rem', marginTop: '5px', opacity: 0.8 }}>{item.time}</div>
+                          </div>
                         </div>
-                        <div style={{ color: 'var(--text-muted)', fontSize: '0.8rem', lineHeight: 1.3 }}>{item.desc}</div>
-                        <div style={{ color: 'var(--text-muted)', fontSize: '0.7rem', marginTop: '5px', opacity: 0.8 }}>{item.time}</div>
                       </div>
                     ))}
                   </div>

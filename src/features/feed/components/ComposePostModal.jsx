@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { X, Send, ShieldCheck, Tag, Sparkles, Heart, Lock, AlertCircle } from 'lucide-react';
+import { X, Send, ShieldCheck, Tag, Sparkles, Heart, Lock, AlertCircle, Leaf, MessageCircle, Lightbulb, GraduationCap } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useAppContext } from '../../../context/AppContext';
 import AppleEmoji from '../../../components/ui/AppleEmoji';
 
 const INTENTION_OPTIONS = [
-  { id: 'desahogo', label: 'Desahogo libre', emoji: '🌿', color: 'var(--accent-emerald)' },
-  { id: 'abrumado', label: 'Expresar emoción', emoji: '💭', color: 'var(--accent-blue)' },
-  { id: 'consejo', label: 'Buscar consejo', emoji: '💡', color: 'var(--accent-amber)' },
-  { id: 'reflexion', label: 'Reflexión universitaria', emoji: '🎓', color: 'var(--accent-purple)' }
+  { id: 'desahogo', label: 'Desahogo libre', icon: Leaf, color: 'var(--accent-emerald)' },
+  { id: 'abrumado', label: 'Expresar emoción', icon: MessageCircle, color: 'var(--accent-blue)' },
+  { id: 'consejo', label: 'Buscar consejo', icon: Lightbulb, color: 'var(--accent-amber)' },
+  { id: 'reflexion', label: 'Reflexión universitaria', icon: GraduationCap, color: 'var(--accent-purple)' }
 ];
 
 const SUGGESTED_TAGS = [
@@ -109,16 +109,15 @@ export default function ComposePostModal({ onClose, onPublish }) {
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <div style={{
-              width: '38px',
-              height: '38px',
-              borderRadius: '50%',
+              width: '42px',
+              height: '42px',
+              borderRadius: '12px',
               backgroundColor: 'var(--surface-hover)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '1.2rem',
             }}>
-              {user?.avatar || '🦉'}
+              <AppleEmoji emoji={user?.avatar || '🦊'} size={24} />
             </div>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
@@ -203,21 +202,23 @@ export default function ComposePostModal({ onClose, onPublish }) {
                     type="button"
                     onClick={() => setSelectedIntention(m)}
                     style={{
-                      backgroundColor: isSelected ? 'rgba(13, 148, 136, 0.08)' : 'transparent',
-                      border: `1px solid ${isSelected ? 'var(--primary)' : 'var(--border-color)'}`,
-                      borderRadius: '8px',
-                      padding: '0.5rem 0.6rem',
-                      color: isSelected ? 'var(--primary)' : 'var(--text-muted)',
-                      fontSize: '0.8rem',
-                      fontWeight: isSelected ? 700 : 500,
-                      cursor: 'pointer',
+                      flex: '1 1 calc(50% - 0.35rem)',
                       display: 'flex',
                       alignItems: 'center',
+                      justifyContent: 'center',
                       gap: '0.4rem',
-                      transition: 'all 0.15s ease'
+                      padding: '0.65rem',
+                      backgroundColor: isSelected ? `${m.color}15` : 'transparent',
+                      border: `1px solid ${isSelected ? m.color : 'var(--border-color)'}`,
+                      borderRadius: '12px',
+                      color: isSelected ? m.color : 'var(--text-muted)',
+                      fontWeight: isSelected ? 700 : 600,
+                      fontSize: '0.82rem',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease',
                     }}
                   >
-                    <AppleEmoji emoji={m.emoji} size={16} />
+                    <m.icon size={16} strokeWidth={isSelected ? 2.5 : 2} color={isSelected ? m.color : 'var(--text-muted)'} />
                     <span>{m.label}</span>
                   </button>
                 );
