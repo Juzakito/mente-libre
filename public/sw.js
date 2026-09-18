@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mente-libre-v4-force-fresh';
+const CACHE_NAME = 'mente-libre-v5-chat-fix';
 
 self.addEventListener('install', event => {
   self.skipWaiting();
