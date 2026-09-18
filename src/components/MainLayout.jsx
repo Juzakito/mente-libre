@@ -796,16 +796,14 @@ export default function MainLayout() {
                       key={room.id}
                       className="tc-room-card"
                       style={{
-                        padding: '1.05rem 1.15rem',
-                        borderRadius: '16px',
-                        backgroundColor: 'var(--surface-elevated)',
-                        border: '1px solid var(--border-color)',
+                        padding: '0.85rem 0.5rem',
+                        borderBottom: '1px solid var(--border-color)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'space-between',
-                        gap: '1rem',
-                        transition: 'all 0.2s ease',
-                        cursor: 'pointer'
+                        gap: '0.75rem',
+                        cursor: 'pointer',
+                        backgroundColor: 'transparent'
                       }}
                       onClick={() => {
                         setNotificationsList(prev => [{
@@ -823,125 +821,76 @@ export default function MainLayout() {
                         navigate('/app/chat', { state: { activeRoom: room, selectedRoom: room } });
                       }}
                       onMouseEnter={(e) => {
-                        e.currentTarget.style.borderColor = room.accentColor;
                         e.currentTarget.style.backgroundColor = 'var(--surface-hover)';
-                        e.currentTarget.style.transform = 'translateY(-2px)';
-                        e.currentTarget.style.boxShadow = '0 6px 20px rgba(0,0,0,0.06)';
                       }}
                       onMouseLeave={(e) => {
-                        e.currentTarget.style.borderColor = 'var(--border-color)';
-                        e.currentTarget.style.backgroundColor = 'var(--surface-elevated)';
-                        e.currentTarget.style.transform = 'translateY(0)';
-                        e.currentTarget.style.boxShadow = 'none';
+                        e.currentTarget.style.backgroundColor = 'transparent';
                       }}
                     >
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.9rem', flex: 1, minWidth: 0 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flex: 1, minWidth: 0 }}>
                         <div style={{
-                          width: '44px',
-                          height: '44px',
-                          borderRadius: '14px',
-                          backgroundColor: room.bgAlpha,
-                          border: `1px solid ${room.borderAlpha}`,
+                          width: '40px',
+                          height: '40px',
+                          borderRadius: '50%',
+                          backgroundColor: 'var(--surface-elevated)',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
                           flexShrink: 0
                         }}>
-                          <AppleEmoji emoji={room.emoji} size={24} />
+                          <AppleEmoji emoji={room.emoji} size={20} />
                         </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', flex: 1, minWidth: 0 }}>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-                            <span style={{ fontWeight: 800, fontSize: '0.94rem', color: 'var(--text-main)' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.15rem', flex: 1, minWidth: 0 }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexWrap: 'wrap' }}>
+                            <span style={{ fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-main)' }}>
                               {room.name}
                             </span>
                             <span style={{
-                              fontSize: '0.68rem',
+                              fontSize: '0.65rem',
                               fontWeight: 700,
                               color: room.accentColor,
                               backgroundColor: room.bgAlpha,
-                              padding: '0.12rem 0.5rem',
-                              borderRadius: '9999px',
+                              padding: '0.1rem 0.4rem',
+                              borderRadius: '4px',
                               display: 'inline-flex',
                               alignItems: 'center',
-                              gap: '0.25rem'
+                              gap: '0.2rem'
                             }}>
-                              <span style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: room.accentColor }} />
-                              {room.users} en vivo
+                              <span style={{ width: '4px', height: '4px', borderRadius: '50%', backgroundColor: room.accentColor }} />
+                              {room.users}
                             </span>
                           </div>
-                          <span className="tc-room-desc" style={{ color: 'var(--text-muted)', fontSize: '0.78rem', lineHeight: 1.35 }}>
+                          <span className="tc-room-desc" style={{ 
+                            color: 'var(--text-muted)', 
+                            fontSize: '0.8rem', 
+                            lineHeight: 1.3,
+                            display: '-webkit-box',
+                            WebkitLineClamp: 2,
+                            WebkitBoxOrient: 'vertical',
+                            overflow: 'hidden'
+                          }}>
                             {room.topic}
                           </span>
-                          {/* Live peers preview avatars */}
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginTop: '0.15rem' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', marginLeft: '2px' }}>
-                              {room.avatars.map((av, idx) => (
-                                <div
-                                  key={idx}
-                                  style={{
-                                    width: '20px',
-                                    height: '20px',
-                                    borderRadius: '50%',
-                                    backgroundColor: 'var(--surface)',
-                                    border: '1.5px solid var(--surface-elevated)',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    marginLeft: idx > 0 ? '-6px' : 0,
-                                    zIndex: 3 - idx
-                                  }}
-                                >
-                                  <AppleEmoji emoji={av} size={12} />
-                                </div>
-                              ))}
-                            </div>
-                            <span className="tc-room-stats" style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontWeight: 600 }}>
-                              +{room.users - 3} estudiantes participando
-                            </span>
-                          </div>
                         </div>
                       </div>
 
                       <button
                         type="button"
-                        className="tc-room-btn"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setNotificationsList(prev => [{
-                            id: Date.now(),
-                            type: 'chat',
-                            title: `💬 Te uniste a la sala ${room.name}`,
-                            desc: `Conexión establecida con ${room.users} compañeros en ${room.tag}`,
-                            time: 'Justo ahora',
-                            read: false
-                          }, ...prev]);
-                          sessionStorage.setItem('active_chat_room', JSON.stringify(room));
-                          sessionStorage.removeItem('active_peer_match');
-                          setActiveInfoModal(null);
-                          showToast(`Conectado a la sala ${room.name} ✨`);
-                          navigate('/app/chat', { state: { activeRoom: room, selectedRoom: room } });
-                        }}
+                        className="tc-room-btn hide-on-mobile"
                         style={{
-                          background: 'var(--primary)',
-                          color: '#ffffff',
+                          background: 'transparent',
+                          color: 'var(--primary)',
                           border: 'none',
-                          padding: '0.55rem 1.05rem',
-                          borderRadius: '12px',
-                          fontWeight: 800,
-                          fontSize: '0.82rem',
+                          padding: '0.5rem',
+                          fontWeight: 700,
+                          fontSize: '0.85rem',
                           cursor: 'pointer',
-                          whiteSpace: 'nowrap',
-                          boxShadow: '0 4px 14px rgba(16, 185, 129, 0.25)',
-                          flexShrink: 0,
                           display: 'inline-flex',
                           alignItems: 'center',
-                          gap: '0.35rem',
-                          transition: 'all 0.15s ease'
+                          gap: '0.25rem',
                         }}
-                        onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.04)'}
-                        onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
                       >
-                        <span>Unirme</span>
+                        <span>Entrar</span>
                         <ArrowRight size={14} />
                       </button>
                     </div>
