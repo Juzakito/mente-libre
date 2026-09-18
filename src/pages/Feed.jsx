@@ -235,6 +235,8 @@ export default function Feed() {
     }
 
     // Tab specific filtering / sorting
+    if (activeTab === t('feed.tabs.forYou', 'Para ti')) {
+      // Default sorting / filtering for 'Para ti'
     } else if (activeTab === t('feed.tabs.university', 'Mi universidad')) {
       result = result.filter(p =>
         p.text.toLowerCase().includes('científica') ||
