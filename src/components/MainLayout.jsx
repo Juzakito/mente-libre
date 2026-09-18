@@ -309,7 +309,7 @@ export default function MainLayout() {
           
           {/* Tu Progreso */}
           <div style={{ fontSize: '0.7rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.3rem', marginTop: '0.5rem', paddingLeft: '0.5rem' }}>
-            Tu progreso
+            {t('student.nav.groupProgress', 'Tu progreso')}
           </div>
           <SidebarButton icon={<Sparkles size={18} color="#a855f7" />} label={t('student.nav.wellnessCenter', 'Centro de Bienestar')} active={currentPath === '/app/mood'} onClick={() => handleNavClick('/app/mood')} />
           <SidebarButton icon={<CircleDot size={18} color="#38bdf8" />} label={t('student.nav.dotz', 'Dotz (Plumas)')} onClick={() => setActiveInfoModal('dotz')} />
@@ -319,7 +319,7 @@ export default function MainLayout() {
 
           {/* Soporte y Seguridad */}
           <div style={{ fontSize: '0.7rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.3rem', paddingLeft: '0.5rem' }}>
-            Soporte & Seguridad
+            {t('student.nav.groupSupport', 'Soporte & Seguridad')}
           </div>
           <SidebarButton icon={<ShieldAlert size={18} color="#f43f5e" />} label={t('student.nav.needHelp', 'Necesito ayuda')} onClick={() => setShowSOS(true)} accentColor="#f43f5e" />
           <SidebarButton icon={<PhoneCall size={18} color="#f43f5e" />} label={t('student.nav.helpline', 'Línea de ayuda clínica')} onClick={() => setActiveInfoModal('helpline')} />
@@ -330,7 +330,7 @@ export default function MainLayout() {
 
           {/* Comunidad y Ajustes */}
           <div style={{ fontSize: '0.7rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.3rem', paddingLeft: '0.5rem' }}>
-            Comunidad & Ajustes
+            {t('student.nav.groupCommunity', 'Comunidad & Ajustes')}
           </div>
           <SidebarButton icon={<Zap size={18} color="#fbbf24" />} label={t('student.nav.improvements', 'Mejoras')} onClick={() => setActiveInfoModal('mejoras')} />
           <SidebarButton icon={<Compass size={18} />} label={t('student.nav.guide', 'Guía de uso')} onClick={() => setActiveInfoModal('guia')} />

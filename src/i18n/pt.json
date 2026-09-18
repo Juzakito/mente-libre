@@ -14,5 +14,28 @@
   "anonymous": "Modo 100% Anônimo",
   "connected": "CONECTADO",
   "chatPlaceholder": "Desabafe ou expresse como você se sente hoje...",
-  "aiTone": "Tom da IA Emocional"
+  "aiTone": "Tom da IA Emocional",
+  "student": {
+    "nav": {
+      "improvements": "Melhorias",
+      "wellnessCenter": "Centro de Bem-Estar",
+      "dotz": "Dotz (Penas)",
+      "makeFriend": "Fazer um Amigo",
+      "needHelp": "Preciso de Ajuda",
+      "helpline": "Linha de Apoio Clínico",
+      "securityCenter": "Centro de Segurança",
+      "studentServices": "Serviços Estudantis",
+      "guide": "Guia de Uso",
+      "about": "Sobre Free Mind",
+      "feed": "Feed",
+      "rooms": "Salas",
+      "messages": "Mensagens",
+      "notifications": "Notificações",
+      "darkMode": "Modo Escuro",
+      "lightMode": "Modo Claro",
+      "groupProgress": "Seu Progresso",
+      "groupSupport": "Suporte e Segurança",
+      "groupCommunity": "Comunidade e Ajustes"
+    }
+  }
 }

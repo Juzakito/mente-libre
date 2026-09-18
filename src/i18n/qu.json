@@ -14,5 +14,28 @@
   "anonymous": "100% Pacasqa Suti (Anónimo)",
   "connected": "TUPASQA",
   "chatPlaceholder": "Imaynallam kachkanki kunan p'unchay, willarikuy...",
-  "aiTone": "IA Sonqo Rimay"
+  "aiTone": "IA Sonqo Rimay",
+  "student": {
+    "nav": {
+      "improvements": "Allinyachiy",
+      "wellnessCenter": "Allin Kawsay Wasi",
+      "dotz": "Dotz (Phuru)",
+      "makeFriend": "Masiyariykuy",
+      "needHelp": "Yanapayta Munani",
+      "helpline": "Hanpiq Yanapay",
+      "securityCenter": "Amachay Wasi",
+      "studentServices": "Yachaq Yanapay",
+      "guide": "Yachachiq",
+      "about": "Free Mind-manta",
+      "feed": "Ayllu Llaqta",
+      "rooms": "Wasi",
+      "messages": "Willaykuna",
+      "notifications": "Musyachiq",
+      "darkMode": "Tutaykachiy",
+      "lightMode": "P'unchaykachiy",
+      "groupProgress": "Qampaq Ñawpariyniyki",
+      "groupSupport": "Amachay & Yanapay",
+      "groupCommunity": "Ayllu & Allichaykuna"
+    }
+  }
 }
