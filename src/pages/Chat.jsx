@@ -71,6 +71,8 @@ export default function Chat() {
   const { t } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
+  const outletCtx = useOutletContext();
+  const setHideBottomNav = outletCtx?.setHideBottomNav;
 
   const [peerMatch, setPeerMatch] = useState(() => {
     if (location.state?.peerMatch) return location.state.peerMatch;
@@ -102,6 +104,15 @@ export default function Chat() {
   });
   const [searchProgress, setSearchProgress] = useState(0);
   const messagesEndRef = useRef(null);
+
+  useEffect(() => {
+    if (setHideBottomNav) {
+      setHideBottomNav(connected);
+    }
+    return () => {
+      if (setHideBottomNav) setHideBottomNav(false);
+    };
+  }, [connected, setHideBottomNav]);
 
   useEffect(() => {
     const incomingPeerMatch = location.state?.peerMatch;

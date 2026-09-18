@@ -39,7 +39,7 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
 
   const handleHug = () => {
     if (post.isMine) {
-      showToast('No puedes darte apoyo a ti mismo, ¡deja que otros lo hagan! 💙');
+      showToast(t('postCard.toasts.selfHug', 'No puedes darte apoyo a ti mismo, ¡deja que otros lo hagan! 💙'));
       return;
     }
     toggleHug(post.id, post.hugs, !hasHugged);
@@ -224,7 +224,7 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
               </button>
             </>
           )}
-          <button style={{ color: 'var(--text-muted)', background: 'transparent', border: 'none', cursor: 'pointer', padding: '4px' }} title="Opciones">
+          <button style={{ color: 'var(--text-muted)', background: 'transparent', border: 'none', cursor: 'pointer', padding: '4px' }} title={t('postCard.actions.options', 'Opciones')}>
             <MoreHorizontal size={18} />
           </button>
         </div>
@@ -234,9 +234,9 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
       {!showSensitive && !isEditing ? (
         <div style={{ border: '1px solid var(--border-color)', padding: '1.25rem', borderRadius: '12px', textAlign: 'center', margin: '0.5rem 0', backgroundColor: 'var(--surface-hover)' }}>
           <EyeOff color="var(--text-muted)" size={22} style={{ margin: '0 auto 0.4rem' }} />
-          <p style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-muted)' }}>Contenido sensible</p>
+          <p style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-muted)' }}>{t('postCard.sensitive.title', 'Contenido sensible oculto')}</p>
           <button onClick={() => setShowSensitive(true)} style={{ marginTop: '0.5rem', backgroundColor: 'var(--primary)', color: '#ffffff', border: 'none', fontSize: '0.75rem', fontWeight: 700, padding: '0.4rem 1rem', borderRadius: '9999px', cursor: 'pointer' }}>
-            Ver contenido
+            {t('postCard.sensitive.reveal', 'Mostrar de todos modos')}
           </button>
         </div>
       ) : isEditing ? (
@@ -249,10 +249,10 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
           />
           <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.5rem', marginTop: '0.5rem' }}>
             <button onClick={() => { setIsEditing(false); setEditText(post.text); }} style={{ padding: '0.375rem 0.75rem', fontSize: '0.75rem', borderRadius: '9999px', backgroundColor: 'transparent', color: 'var(--text-muted)', border: 'none', cursor: 'pointer' }}>
-              Cancelar
+              {t('postCard.actions.cancel', 'Cancelar')}
             </button>
             <button onClick={() => { updatePost(post.id, editText); setIsEditing(false); }} style={{ padding: '0.375rem 0.75rem', fontSize: '0.75rem', borderRadius: '9999px', backgroundColor: 'var(--primary)', color: '#ffffff', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.25rem', border: 'none', cursor: 'pointer' }}>
-              <Check size={14} /> Guardar
+              <Check size={14} /> {t('postCard.actions.save', 'Guardar')}
             </button>
           </div>
         </div>
@@ -264,7 +264,7 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
               onClick={() => setIsExpanded(!isExpanded)}
               style={{ background: 'none', border: 'none', color: 'var(--primary)', fontSize: '0.92rem', cursor: 'pointer', padding: '0 0 0 4px', textDecoration: 'none', fontWeight: 700 }}
             >
-              {isExpanded ? ' (leer menos)' : ' (leer más)'}
+              {isExpanded ? t('postCard.actions.readLess', ' (leer menos)') : t('postCard.actions.readMore', ' (leer más)')}
             </button>
           )}
         </p>
@@ -361,7 +361,7 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
                 <textarea 
                   value={commentText}
                   onChange={(e) => setCommentText(e.target.value)}
-                  placeholder="Postea tu respuesta..."
+                  placeholder={t('postCard.comments.placeholder', 'Postea tu respuesta...')}
                   style={{
                     width: '100%',
                     minHeight: '65px',
@@ -394,7 +394,7 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
                       boxShadow: commentText.trim() ? '0 4px 12px rgba(13,148,136,0.3)' : 'none'
                     }}
                   >
-                    Responder
+                    {t('postCard.actions.reply', 'Responder')}
                   </button>
                 </div>
               </div>
@@ -448,10 +448,10 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
                             />
                             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.5rem' }}>
                               <button onClick={() => setEditingCommentId(null)} style={{ backgroundColor: 'transparent', color: 'var(--text-muted)', padding: '0.25rem 0.75rem', borderRadius: '9999px', border: '1px solid var(--border-color)', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 800 }}>
-                                Cancelar
+                                {t('postCard.actions.cancel', 'Cancelar')}
                               </button>
                               <button onClick={() => { updateComment(c.id, editCommentText); setEditingCommentId(null); }} style={{ backgroundColor: 'var(--primary)', color: '#ffffff', padding: '0.25rem 0.75rem', borderRadius: '9999px', border: 'none', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 700 }}>
-                                Guardar
+                                {t('postCard.actions.save', 'Guardar')}
                               </button>
                             </div>
                           </div>
@@ -465,7 +465,7 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
                               <button onClick={() => handleReplyClick(c.author, c.id)} style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: 'var(--text-muted)', background: 'transparent', cursor: 'pointer', padding: 0 }}>
                                 <MessageCircle size={16} strokeWidth={1.75} />
                               </button>
-                              <button onClick={() => showToast('¡Compartido!')} style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: 'var(--text-muted)', background: 'transparent', cursor: 'pointer', padding: 0 }}>
+                              <button onClick={() => showToast(t('postCard.toasts.shared', '¡Compartido!'))} style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: 'var(--text-muted)', background: 'transparent', cursor: 'pointer', padding: 0 }}>
                                 <Repeat2 size={16} strokeWidth={1.75} />
                               </button>
                               <button 
@@ -480,10 +480,10 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
                                 <BarChart2 size={16} strokeWidth={1.75} />
                               </button>
                               <div style={{ display: 'flex', gap: '0.75rem' }}>
-                                <button onClick={() => showToast('Guardado')} style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: 'var(--text-muted)', background: 'transparent', cursor: 'pointer', padding: 0 }}>
+                                <button onClick={() => showToast(t('postCard.toasts.savedShort', 'Guardado'))} style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: 'var(--text-muted)', background: 'transparent', cursor: 'pointer', padding: 0 }}>
                                   <Bookmark size={16} strokeWidth={1.75} />
                                 </button>
-                                <button onClick={() => showToast('Enlace copiado')} style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: 'var(--text-muted)', background: 'transparent', cursor: 'pointer', padding: 0 }}>
+                                <button onClick={() => showToast(t('postCard.toasts.linkCopiedShort', 'Enlace copiado'))} style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: 'var(--text-muted)', background: 'transparent', cursor: 'pointer', padding: 0 }}>
                                   <Share size={16} strokeWidth={1.75} />
                                 </button>
                               </div>
@@ -501,7 +501,7 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
                         </div>
                         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
                           <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                            <span>Respondiendo a <span style={{ color: 'var(--primary)', fontWeight: 700 }}>@{replyingTo?.replace(/\s/g, '')}</span></span>
+                            <span>{t('postCard.comments.replyingTo', 'Respondiendo a')} <span style={{ color: 'var(--primary)', fontWeight: 700 }}>@{replyingTo?.replace(/\s/g, '')}</span></span>
                             <button type="button" onClick={() => setReplyingToId(null)} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--text-muted)', padding: 0 }}>
                               <X size={14} />
                             </button>
@@ -510,12 +510,12 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
                             ref={commentInputRef}
                             value={commentText}
                             onChange={(e) => setCommentText(e.target.value)}
-                            placeholder="Escribe tu respuesta..."
+                            placeholder={t('postCard.comments.replyPlaceholder', 'Escribe tu respuesta...')}
                             style={{ width: '100%', minHeight: '55px', padding: '0.6rem 0.85rem', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', fontSize: '0.9rem', color: 'var(--text-main)', outline: 'none', resize: 'vertical', borderRadius: '10px', fontFamily: 'inherit' }}
                           />
                           <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: '0.25rem' }}>
                             <button type="submit" disabled={!commentText.trim()} style={{ backgroundColor: commentText.trim() ? 'var(--primary)' : 'var(--surface-hover)', color: commentText.trim() ? '#ffffff' : 'var(--text-muted)', padding: '0.35rem 1rem', borderRadius: '9999px', fontWeight: 700, fontSize: '0.8rem', border: 'none', cursor: commentText.trim() ? 'pointer' : 'default', transition: 'all 0.15s ease' }}>
-                              Responder
+                              {t('postCard.actions.reply', 'Responder')}
                             </button>
                           </div>
                         </div>
@@ -571,7 +571,7 @@ export default function PostCard({ post, feedStyle = 'classic' }) {
               })}
             </div>
           ) : (
-            <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', textAlign: 'center', margin: '1.5rem 0', fontWeight: 600 }}>Aún no hay respuestas. ¡Sé el primero!</div>
+            <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', textAlign: 'center', margin: '1.5rem 0', fontWeight: 600 }}>{t('postCard.comments.noReplies', 'Aún no hay respuestas. ¡Sé el primero!')}</div>
           )}
         </div>
       )}

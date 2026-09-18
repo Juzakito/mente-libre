@@ -4,31 +4,33 @@ import { useTranslation } from 'react-i18next';
 import { useAppContext } from '../../../context/AppContext';
 import AppleEmoji from '../../../components/ui/AppleEmoji';
 
-const INTENTION_OPTIONS = [
-  { id: 'desahogo', label: 'Desahogo libre', icon: Leaf, color: 'var(--accent-emerald)' },
-  { id: 'abrumado', label: 'Expresar emoción', icon: MessageCircle, color: 'var(--accent-blue)' },
-  { id: 'consejo', label: 'Buscar consejo', icon: Lightbulb, color: 'var(--accent-amber)' },
-  { id: 'reflexion', label: 'Reflexión universitaria', icon: GraduationCap, color: 'var(--accent-purple)' }
+const getIntentionOptions = (t) => [
+  { id: 'vent', label: t('compose.intentions.vent', 'Desahogo libre'), icon: Leaf, color: 'var(--accent-emerald)' },
+  { id: 'emotion', label: t('compose.intentions.emotion', 'Expresar emoción'), icon: MessageCircle, color: 'var(--accent-blue)' },
+  { id: 'advice', label: t('compose.intentions.advice', 'Buscar consejo'), icon: Lightbulb, color: 'var(--accent-amber)' },
+  { id: 'reflection', label: t('compose.intentions.reflection', 'Reflexión universitaria'), icon: GraduationCap, color: 'var(--accent-purple)' }
 ];
 
-const SUGGESTED_TAGS = [
-  '#Desahogo',
-  '#Exámenes',
-  '#Ansiedad',
-  '#PrimerAño',
-  '#Consejos',
-  '#Amistad',
-  '#Motivación',
-  '#Soledad',
-  '#Futuro'
+const getSuggestedTags = (t) => [
+  t('compose.tags.vent', '#Desahogo'),
+  t('compose.tags.exams', '#Exámenes'),
+  t('compose.tags.anxiety', '#Ansiedad'),
+  t('compose.tags.firstYear', '#PrimerAño'),
+  t('compose.tags.tips', '#Consejos'),
+  t('compose.tags.friendship', '#Amistad'),
+  t('compose.tags.motivation', '#Motivación'),
+  t('compose.tags.loneliness', '#Soledad'),
+  t('compose.tags.future', '#Futuro')
 ];
 
 export default function ComposePostModal({ onClose, onPublish }) {
   const { t } = useTranslation();
   const { user } = useAppContext();
+  const INTENTION_OPTIONS = getIntentionOptions(t);
+  const SUGGESTED_TAGS = getSuggestedTags(t);
   const [text, setText] = useState('');
   const [selectedIntention, setSelectedIntention] = useState(INTENTION_OPTIONS[0]);
-  const [selectedTags, setSelectedTags] = useState(['#Desahogo']);
+  const [selectedTags, setSelectedTags] = useState([t('compose.tags.vent', '#Desahogo')]);
 
   // Detect sensitive crisis keywords for real-time safety banner
   const isCrisisDetected = React.useMemo(() => {
@@ -132,11 +134,11 @@ export default function ComposePostModal({ onClose, onPublish }) {
                   alignItems: 'center',
                   gap: '0.2rem',
                 }}>
-                  <ShieldCheck size={12} strokeWidth={2.5} /> 100% Anónimo
+                  <ShieldCheck size={12} strokeWidth={2.5} /> {t('compose.anonymousBadge', '100% Anónimo')}
                 </span>
               </div>
               <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 500 }}>
-                {user?.career || 'Comunidad Universitaria'}
+                {user?.career || t('compose.community', 'Comunidad Universitaria')}
               </span>
             </div>
           </div>
@@ -184,14 +186,14 @@ export default function ComposePostModal({ onClose, onPublish }) {
           }}>
             <Lock size={14} color="var(--primary)" />
             <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-              <strong style={{ fontWeight: 700, color: 'var(--text-main)' }}>Seguro:</strong> Tu identidad nunca se vincula a esta publicación.
+              <strong style={{ fontWeight: 700, color: 'var(--text-main)' }}>{t('compose.secure', 'Seguro:')}</strong> {t('compose.privacyNotice', 'Tu identidad nunca se vincula a esta publicación.')}
             </span>
           </div>
 
           {/* Emotional Intention Selector */}
           <div>
             <label style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '0.5rem', display: 'block' }}>
-              ¿Qué buscas con esta publicación?
+              {t('compose.intentionLabel', '¿Qué buscas con esta publicación?')}
             </label>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.5rem' }}>
               {INTENTION_OPTIONS.map((m) => {
@@ -231,7 +233,7 @@ export default function ComposePostModal({ onClose, onPublish }) {
             <textarea
               value={text}
               onChange={(e) => setText(e.target.value)}
-              placeholder="Escribe libremente sobre lo que estás viviendo..."
+              placeholder={t('compose.placeholder', 'Escribe libremente sobre lo que estás viviendo...')}
               maxLength={500}
               style={{
                 width: '100%',
@@ -290,10 +292,10 @@ export default function ComposePostModal({ onClose, onPublish }) {
               </div>
               <div>
                 <span style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--accent-rose)', display: 'block', marginBottom: '0.3rem' }}>
-                  Soporte Inmediato Disponible
+                  {t('compose.safetyTitle', 'Soporte Inmediato Disponible')}
                 </span>
                 <span style={{ fontSize: '0.82rem', color: 'var(--text-main)', lineHeight: 1.5, display: 'block' }}>
-                  Detectamos que estás pasando por un momento muy difícil. Recuerda que no estás solo. Tienes acceso al <strong>Botón S.O.S</strong> para ayuda clínica gratuita 24/7 en el panel principal.
+                  {t('compose.safetyDesc', 'Detectamos que estás pasando por un momento muy difícil. Recuerda que no estás solo. Tienes acceso al')} <strong>{t('compose.sosButton', 'Botón S.O.S')}</strong> {t('compose.safetyDesc2', 'para ayuda clínica gratuita 24/7 en el panel principal.')}
                 </span>
               </div>
             </div>

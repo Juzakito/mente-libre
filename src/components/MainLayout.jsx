@@ -74,6 +74,7 @@ export default function MainLayout() {
   const [showCompose, setShowCompose] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [hideBottomNav, setHideBottomNav] = useState(false);
   const [activeInfoModal, setActiveInfoModal] = useState(null); // 'salas', 'notificaciones', 'mejoras', 'dotz', 'seguridad', 'guia', 'helpline', 'acerca', 'aliado'
   const [expertDropdownOpen, setExpertDropdownOpen] = useState(() => {
     return location.pathname === '/app/expertos' || location.pathname === '/app/citas';
@@ -500,13 +501,14 @@ export default function MainLayout() {
             showToast, 
             openCompose: () => setShowCompose(true),
             setActiveInfoModal,
-            setMobileMenuOpen
+            setMobileMenuOpen,
+            setHideBottomNav
           }} />
         </div>
       </main>
 
       {/* ─── MOBILE BOTTOM NAV ──────────────────────────── */}
-      {!currentPath.startsWith('/app/chat') && (
+      {!hideBottomNav && (
         <div className="mobile-bottom-nav">
           <button
             onClick={() => handleNavClick('/app/feed')}

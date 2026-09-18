@@ -37,5 +37,114 @@
       "groupSupport": "Suporte e Segurança",
       "groupCommunity": "Comunidade e Ajustes"
     }
+  },
+  "feed": {
+    "tabs": {
+      "recent": "Mais recente",
+      "university": "Minha universidade",
+      "anxiety": "Ansiedade e Estresse",
+      "tips": "Dicas",
+      "community": "Comunidade"
+    },
+    "vibes": {
+      "anxious": "Ansioso",
+      "sad": "Triste",
+      "hopeful": "Esperançoso",
+      "stressed": "Estressado",
+      "thankful": "Grato",
+      "motivated": "Motivado"
+    },
+    "filters": {
+      "title": "Opções do Feed",
+      "reset": "Redefinir opções",
+      "styles": "Estilos",
+      "classic": "Clássico",
+      "solid": "Sólido",
+      "themeNote": "Os temas mudam mensalmente.",
+      "age": "Idade",
+      "vibesTitle": "Vibes",
+      "addVibes": "Adicione vibes ao seu filtro",
+      "tagsTitle": "Minhas Tags",
+      "addTags": "Busque ou crie tags",
+      "activeFilters": "Filtros ativos:",
+      "clearAll": "Limpar todos"
+    },
+    "empty": {
+      "title": "Nenhuma publicação neste filtro",
+      "desc": "Tente ajustar as opções do feed ou seja o primeiro a desabafar com a comunidade.",
+      "btn": "Redefinir Opções"
+    },
+    "header": "Feed",
+    "searchPlaceholder": "Pesquisar por palavras-chave, autor ou tags..."
+  },
+  "compose": {
+    "intentions": {
+      "vent": "Desabafo livre",
+      "emotion": "Expressar emoção",
+      "advice": "Buscar conselho",
+      "reflection": "Reflexão universitária"
+    },
+    "tags": {
+      "vent": "#Desabafo",
+      "exams": "#Provas",
+      "anxiety": "#Ansiedade",
+      "firstYear": "#PrimeiroAno",
+      "tips": "#Dicas",
+      "friendship": "#Amizade",
+      "motivation": "#Motivação",
+      "loneliness": "#Solidão",
+      "future": "#Futuro"
+    },
+    "header": "Nova Publicação",
+    "placeholder": "Escreva livremente sobre o que você está vivenciando...",
+    "publish": "Publicar",
+    "cancel": "Cancelar",
+    "anonymousToggle": "Publicar anonimamente",
+    "anonymousHint": "Ninguém saberá sua identidade real. Este é um espaço seguro.",
+    "rulesLink": "Regras da Comunidade",
+    "sensitiveWarning": "Trigger warning obrigatório",
+    "safetyBannerTitle": "Risco Zero",
+    "safetyBannerDesc": "Detectamos palavras relacionadas a suicídio ou automutilação. Você não está sozinho. Uma equipe de psicólogos está disponível agora mesmo 24/7.",
+    "safetyBannerBtn": "Falar com Psicólogo Clínico",
+    "anonymousBadge": "100% Anônimo",
+    "community": "Comunidade Universitária",
+    "secure": "Seguro:",
+    "privacyNotice": "Sua identidade nunca é vinculada a este post.",
+    "intentionLabel": "O que você procura com esta publicação?",
+    "safetyTitle": "Suporte Imediato Disponível",
+    "safetyDesc": "Detectamos que você está passando por um momento muito difícil. Lembre-se de que você não está sozinho. Você tem acesso ao",
+    "sosButton": "Botão S.O.S",
+    "safetyDesc2": "para ajuda clínica gratuita 24/7 no painel principal."
+  },
+  "postCard": {
+    "toasts": {
+      "selfHug": "Você não pode dar apoio a si mesmo, deixe que outros façam isso! 💙",
+      "saved": "Salvo no seu perfil para depois! 🔖",
+      "linkCopied": "Link copiado para a área de transferência"
+    },
+    "sensitive": {
+      "title": "Conteúdo sensível oculto",
+      "reveal": "Mostrar mesmo assim"
+    },
+    "actions": {
+      "edit": "Editar desabafo",
+      "delete": "Excluir desabafo",
+      "save": "Salvar Alterações",
+      "cancel": "Cancelar",
+      "reply": "Responder",
+      "showComments": "Ver comentários",
+      "hideComments": "Ocultar comentários",
+      "savePost": "Salvar",
+      "share": "Compartilhar",
+      "sendReply": "Enviar"
+    },
+    "comments": {
+      "placeholder": "Deixe um comentário de apoio...",
+      "replyingTo": "Respondendo a",
+      "noComments": "Ninguém comentou ainda. Seja o primeiro a apoiar!"
+    },
+    "badges": {
+      "me": "Você"
+    }
   }
 }

@@ -37,5 +37,114 @@
       "groupSupport": "Amachay & Yanapay",
       "groupCommunity": "Ayllu & Allichaykuna"
     }
+  },
+  "feed": {
+    "tabs": {
+      "recent": "Asullaraq",
+      "university": "Hatun yachaywasiy",
+      "anxiety": "Llakikuy & Saykuy",
+      "tips": "Yuyaychay",
+      "community": "Ayllu"
+    },
+    "vibes": {
+      "anxious": "Llakisqa",
+      "sad": "Llakisqa",
+      "hopeful": "Suyakuyniyuq",
+      "stressed": "Saykusqa",
+      "thankful": "Añaychakuq",
+      "motivated": "Kallpanchasqa"
+    },
+    "filters": {
+      "title": "Ayllu akllanakuna",
+      "reset": "Allinchay",
+      "styles": "Rikchaykuna",
+      "classic": "Ñawpa",
+      "solid": "Sinch'i",
+      "themeNote": "Rikchaykuna killa killa tikrakun.",
+      "age": "Wata",
+      "vibesTitle": "Vibras",
+      "addVibes": "Yapasqa vibras",
+      "tagsTitle": "Sutiykuna",
+      "addTags": "Maskay",
+      "activeFilters": "Akllasqakuna:",
+      "clearAll": "Pichay"
+    },
+    "empty": {
+      "title": "Mana imapas kanchu",
+      "desc": "Waq akllanakunata maskay.",
+      "btn": "Allinchay"
+    },
+    "header": "Ayllu",
+    "searchPlaceholder": "Maskay..."
+  },
+  "compose": {
+    "intentions": {
+      "vent": "Llakiykuna willakuy",
+      "emotion": "Sunqu rikuchiy",
+      "advice": "Yuyaychay maskay",
+      "reflection": "Yachaywasi yuyaymanay"
+    },
+    "tags": {
+      "vent": "#Willakuy",
+      "exams": "#YachayQhaway",
+      "anxiety": "#Llakikuy",
+      "firstYear": "#ÑawpaWata",
+      "tips": "#Yuyaychay",
+      "friendship": "#Masiyariykuy",
+      "motivation": "#Kallpanchay",
+      "loneliness": "#Sapaykay",
+      "future": "#QhipaPacha"
+    },
+    "header": "Musuq Willakuy",
+    "placeholder": "Imatapas qillqay...",
+    "publish": "Kachay",
+    "cancel": "Ama kachay",
+    "anonymousToggle": "Mana sutiyuq kachay",
+    "anonymousHint": "Pipas manam yachanqachu pi kasqaykita. Seguro kanki.",
+    "rulesLink": "Ayllu Kamachiykuna",
+    "sensitiveWarning": "Mancharikuq kuna kanan tiyan",
+    "safetyBannerTitle": "Cero Riesgos",
+    "safetyBannerDesc": "Wañuymanta qillqasqaykita rikurqayku. Manam sapallaykichu kachkanki. Psicólogo masiykuna maskayta atinki kunanpacha 24/7.",
+    "safetyBannerBtn": "Psicólogo Clínico rimay",
+    "anonymousBadge": "100% Mana sutiyuq",
+    "community": "Yachaywasi Ayllu",
+    "secure": "Seguro:",
+    "privacyNotice": "Manam pipas yachanqachu pi kasqaykita.",
+    "intentionLabel": "Imata maskanki kay willakuywan?",
+    "safetyTitle": "Usqhay Yanapay Kanan",
+    "safetyDesc": "Llakikuypi kasqaykita rikurqayku. Manam sapallaykichu kachkanki. Kayman yaykuy",
+    "sosButton": "S.O.S Niy",
+    "safetyDesc2": "yanapayta maskanapaq 24/7."
+  },
+  "postCard": {
+    "toasts": {
+      "selfHug": "Manam kikiykita yanapakuwaqchu, hukkuna yanapasunqaku! 💙",
+      "saved": "Qhipapaq waqaychasqa! 🔖",
+      "linkCopied": "Tinkiq qillqasqa"
+    },
+    "sensitive": {
+      "title": "Mancharikuq qillqasqa pakasqa",
+      "reveal": "Rikuchiy"
+    },
+    "actions": {
+      "edit": "Willakuyta allinchay",
+      "delete": "Willakuyta pichay",
+      "save": "Waqaychay",
+      "cancel": "Ama",
+      "reply": "Kutichiy",
+      "showComments": "Rimaykuna qaway",
+      "hideComments": "Rimaykuna pakay",
+      "savePost": "Waqaychay",
+      "share": "Willay",
+      "sendReply": "Kachay"
+    },
+    "comments": {
+      "placeholder": "Rimaykita qillqay...",
+      "replyingTo": "Kutichkanki kayman:",
+      "noComments": "Manam pipas rimanchu. Ñawpaqta rimay!"
+    },
+    "badges": {
+      "me": "Qam"
+    }
   }
 }

@@ -410,5 +410,114 @@
     "cancel": "Cancelar",
     "confirmDeploy": "Confirmar Despliegue",
     "challengeDeployed": "Reto desplegado exitosamente a los estudiantes en riesgo."
+  },
+  "feed": {
+    "tabs": {
+      "recent": "Más reciente",
+      "university": "Mi universidad",
+      "anxiety": "Ansiedad & Estrés",
+      "tips": "Consejos",
+      "community": "Comunidad"
+    },
+    "vibes": {
+      "anxious": "Ansioso",
+      "sad": "Triste",
+      "hopeful": "Con esperanza",
+      "stressed": "Estresado",
+      "thankful": "Agradecido",
+      "motivated": "Motivado"
+    },
+    "filters": {
+      "title": "Opciones de feed",
+      "reset": "Restablecer opciones",
+      "styles": "Estilos",
+      "classic": "Clásico",
+      "solid": "Sólido",
+      "themeNote": "Los temas cambian mensualmente.",
+      "age": "Edad",
+      "vibesTitle": "Vibras",
+      "addVibes": "Añade vibras a tu filtro",
+      "tagsTitle": "Mis Etiquetas",
+      "addTags": "Busca o crea etiquetas",
+      "activeFilters": "Filtros activos:",
+      "clearAll": "Limpiar todos"
+    },
+    "empty": {
+      "title": "No hay publicaciones en este filtro",
+      "desc": "Prueba ajustando las opciones de feed o sé el primero en iniciar un desahogo con la comunidad.",
+      "btn": "Restablecer Opciones"
+    },
+    "header": "Feed",
+    "searchPlaceholder": "Buscar por palabras clave, autor o etiquetas..."
+  },
+  "compose": {
+    "intentions": {
+      "vent": "Desahogo libre",
+      "emotion": "Expresar emoción",
+      "advice": "Buscar consejo",
+      "reflection": "Reflexión universitaria"
+    },
+    "tags": {
+      "vent": "#Desahogo",
+      "exams": "#Exámenes",
+      "anxiety": "#Ansiedad",
+      "firstYear": "#PrimerAño",
+      "tips": "#Consejos",
+      "friendship": "#Amistad",
+      "motivation": "#Motivación",
+      "loneliness": "#Soledad",
+      "future": "#Futuro"
+    },
+    "header": "Nuevo Desahogo",
+    "placeholder": "Escribe libremente sobre lo que estás viviendo...",
+    "publish": "Publicar",
+    "cancel": "Cancelar",
+    "anonymousToggle": "Publicar anónimamente",
+    "anonymousHint": "Nadie sabrá tu identidad real. Eres un espacio seguro.",
+    "rulesLink": "Reglas de la comunidad",
+    "sensitiveWarning": "Se requiere trigger warning",
+    "safetyBannerTitle": "Cero Riesgos",
+    "safetyBannerDesc": "Hemos detectado palabras relacionadas con suicidio o autolesiones. No estás solo. Un equipo de psicólogos está disponible ahora mismo 24/7.",
+    "safetyBannerBtn": "Hablar con Psicólogo Clínico",
+    "anonymousBadge": "100% Anónimo",
+    "community": "Comunidad Universitaria",
+    "secure": "Seguro:",
+    "privacyNotice": "Tu identidad nunca se vincula a esta publicación.",
+    "intentionLabel": "¿Qué buscas con esta publicación?",
+    "safetyTitle": "Soporte Inmediato Disponible",
+    "safetyDesc": "Detectamos que estás pasando por un momento muy difícil. Recuerda que no estás solo. Tienes acceso al",
+    "sosButton": "Botón S.O.S",
+    "safetyDesc2": "para ayuda clínica gratuita 24/7 en el panel principal."
+  },
+  "postCard": {
+    "toasts": {
+      "selfHug": "No puedes darte apoyo a ti mismo, ¡deja que otros lo hagan! 💙",
+      "saved": "¡Guardado en tu perfil para después! 🔖",
+      "linkCopied": "Enlace copiado al portapapeles"
+    },
+    "sensitive": {
+      "title": "Contenido sensible oculto",
+      "reveal": "Mostrar de todos modos"
+    },
+    "actions": {
+      "edit": "Editar desahogo",
+      "delete": "Eliminar desahogo",
+      "save": "Guardar Cambios",
+      "cancel": "Cancelar",
+      "reply": "Responder",
+      "showComments": "Ver comentarios",
+      "hideComments": "Ocultar comentarios",
+      "savePost": "Guardar",
+      "share": "Compartir",
+      "sendReply": "Enviar"
+    },
+    "comments": {
+      "placeholder": "Deja un comentario de apoyo...",
+      "replyingTo": "Respondiendo a",
+      "noComments": "Nadie ha comentado aún. ¡Sé el primero en dar apoyo!"
+    },
+    "badges": {
+      "me": "Tú"
+    }
   }
 }

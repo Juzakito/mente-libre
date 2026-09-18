@@ -21,6 +21,7 @@ import TalkCampusAvatar from '../components/ui/TalkCampusAvatar';
 import PostCard from '../features/feed/components/PostCard';
 import ComposePostModal from '../features/feed/components/ComposePostModal';
 import { supabase } from '../services/supabase/client';
+import { useTranslation } from 'react-i18next';
 
 import AppleEmoji from '../components/ui/AppleEmoji';
 
@@ -56,12 +57,21 @@ const AVAILABLE_TAGS = [
 ];
 
 export default function Feed() {
+  const { t } = useTranslation();
   const { user, posts, addPost } = useAppContext();
   const outletCtx = useOutletContext();
   const showToast = outletCtx?.showToast || console.log;
 
+  const FEED_TABS = [
+    t('feed.tabs.recent', 'Más reciente'),
+    t('feed.tabs.university', 'Mi universidad'),
+    t('feed.tabs.anxiety', 'Ansiedad & Estrés'),
+    t('feed.tabs.tips', 'Consejos'),
+    t('feed.tabs.community', 'Comunidad')
+  ];
+
   // Active Tab
-  const [activeTab, setActiveTab] = useState('Más reciente');
+  const [activeTab, setActiveTab] = useState(t('feed.tabs.recent', 'Más reciente'));
 
   // Search & Layout
   const [searchOpen, setSearchOpen] = useState(false);
@@ -109,7 +119,7 @@ export default function Feed() {
 
   // Reset all feed options
   const handleResetFilters = () => {
-    setActiveTab('Más reciente');
+    setActiveTab(t('feed.tabs.recent', 'Más reciente'));
     setFeedStyle('classic');
     setAgeRange(60);
     setSelectedVibes([]);
@@ -225,7 +235,7 @@ export default function Feed() {
     }
 
     // Tab specific filtering / sorting
-    if (activeTab === 'Mi universidad') {
+    } else if (activeTab === t('feed.tabs.university', 'Mi universidad')) {
       result = result.filter(p =>
         p.text.toLowerCase().includes('científica') ||
         p.text.toLowerCase().includes('universidad') ||
@@ -295,7 +305,7 @@ export default function Feed() {
               <Menu size={18} />
             </button>
             <h1 style={{ fontSize: '1.75rem', fontWeight: 900, color: 'var(--text-main)', margin: 0, letterSpacing: '-0.5px' }}>
-              Feed
+              {t('feed.header', 'Feed')}
             </h1>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
@@ -401,7 +411,7 @@ export default function Feed() {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Buscar por palabras clave, autor o etiquetas..."
+              placeholder={t('feed.searchPlaceholder', 'Buscar por palabras clave, autor o etiquetas...')}
               autoFocus
               style={{
                 flex: 1,
@@ -426,7 +436,7 @@ export default function Feed() {
         {/* Active Filters Bar (if any selected) */}
         {(selectedVibes.length > 0 || selectedTags.length > 0 || ageRange < 60 || searchQuery) && (
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', alignItems: 'center', backgroundColor: 'var(--surface-hover)', padding: '0.6rem 0.85rem', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
-            <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 700 }}>Filtros activos:</span>
+            <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 700 }}>{t('feed.filters.activeFilters', 'Filtros activos:')}</span>
 
             {ageRange < 60 && (
               <span
@@ -500,7 +510,7 @@ export default function Feed() {
             <button
               onClick={handleResetFilters}
               style={{ background: 'none', border: 'none', color: 'var(--text-muted)', fontSize: '0.75rem', cursor: 'pointer', textDecoration: 'underline', marginLeft: 'auto' }}>
-              Limpiar todos
+              {t('feed.filters.clearAll', 'Limpiar todos')}
             </button>
           </div>
         )}
@@ -517,10 +527,10 @@ export default function Feed() {
             }}>
               <div style={{ fontSize: '3rem', marginBottom: '0.75rem' }}>🌱</div>
               <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-main)', marginBottom: '0.4rem' }}>
-                No hay publicaciones en este filtro
+                {t('feed.empty.title', 'No hay publicaciones en este filtro')}
               </h3>
               <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', maxWidth: '380px', margin: '0 auto 1.5rem' }}>
-                Prueba ajustando las opciones de feed o sé el primero en iniciar un desahogo con la comunidad.
+                {t('feed.empty.desc', 'Prueba ajustando las opciones de feed o sé el primero en iniciar un desahogo con la comunidad.')}
               </p>
               <button
                 onClick={handleResetFilters}
@@ -538,7 +548,7 @@ export default function Feed() {
                 onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
                 onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
               >
-                Restablecer Opciones
+                {t('feed.empty.btn', 'Restablecer Opciones')}
               </button>
             </div>
           ) : (
@@ -562,7 +572,7 @@ export default function Feed() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
             <SlidersHorizontal size={18} color="var(--text-main)" />
             <h3 style={{ fontSize: '1.05rem', fontWeight: 900, color: 'var(--text-main)', margin: 0 }}>
-              Opciones de feed
+              {t('feed.filters.title', 'Opciones de feed')}
             </h3>
           </div>
           <button
@@ -580,7 +590,7 @@ export default function Feed() {
             }}
             onMouseEnter={(e) => e.currentTarget.style.color = 'var(--primary)'}
             onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
-            title="Restablecer opciones"
+            title={t('feed.filters.reset', 'Restablecer opciones')}
           >
             <RotateCcw size={16} />
           </button>
@@ -645,14 +655,14 @@ export default function Feed() {
           </div>
 
           <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
-            Los temas cambian mensualmente.
+            {t('feed.filters.themeNote', 'Los temas cambian mensualmente.')}
           </span>
         </div>
 
         {/* ─── 2. Section: Edad Slider (16-60+) ─── */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--text-main)' }}>Edad</span>
+            <span style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--text-main)' }}>{t('feed.filters.age', 'Edad')}</span>
             <span style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--primary)' }}>
               16-{ageRange === 60 ? '60+' : ageRange}
             </span>
@@ -678,7 +688,7 @@ export default function Feed() {
 
         {/* ─── 3. Section: Vibras ─── */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-          <span style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--text-main)' }}>Vibras</span>
+          <span style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--text-main)' }}>{t('feed.filters.vibesTitle', 'Vibras')}</span>
 
           <button
             onClick={() => setShowVibesPicker(!showVibesPicker)}
@@ -705,7 +715,7 @@ export default function Feed() {
           >
             <Plus size={16} strokeWidth={2.5} />
             <span>
-              {selectedVibes.length > 0 ? `Vibras (${selectedVibes.length})` : 'Añade vibras a tu filtro'}
+              {selectedVibes.length > 0 ? `${t('feed.filters.vibesTitle', 'Vibras')} (${selectedVibes.length})` : t('feed.filters.addVibes', 'Añade vibras a tu filtro')}
             </span>
           </button>
 
@@ -770,7 +780,7 @@ export default function Feed() {
                     }}
                   >
                     <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                      {v.label} <AppleEmoji emoji={v.emoji} size={14} />
+                      {t(`feed.vibes.${v.id}`, v.label)} <AppleEmoji emoji={v.emoji} size={14} />
                     </div>
                   </button>
                 );
@@ -781,7 +791,7 @@ export default function Feed() {
 
         {/* ─── 4. Section: Mis Etiquetas ─── */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-          <span style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--text-main)' }}>Mis Etiquetas</span>
+          <span style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--text-main)' }}>{t('feed.filters.tagsTitle', 'Mis Etiquetas')}</span>
 
           <button
             onClick={() => setShowTagsPicker(!showTagsPicker)}
@@ -808,7 +818,7 @@ export default function Feed() {
           >
             <Plus size={16} strokeWidth={2.5} />
             <span>
-              {selectedTags.length > 0 ? `Etiquetas (${selectedTags.length})` : 'Añade etiquetas a tu filtro'}
+              {selectedTags.length > 0 ? `${t('feed.filters.tagsTitle', 'Mis Etiquetas')} (${selectedTags.length})` : t('feed.filters.addTags', 'Busca o crea etiquetas')}
             </span>
           </button>
 

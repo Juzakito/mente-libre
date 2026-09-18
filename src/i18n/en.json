@@ -410,5 +410,114 @@
     "cancel": "Cancel",
     "confirmDeploy": "Confirm Deployment",
     "challengeDeployed": "Challenge deployed successfully to at-risk students."
+  },
+  "feed": {
+    "tabs": {
+      "recent": "Most recent",
+      "university": "My university",
+      "anxiety": "Anxiety & Stress",
+      "tips": "Tips",
+      "community": "Community"
+    },
+    "vibes": {
+      "anxious": "Anxious",
+      "sad": "Sad",
+      "hopeful": "Hopeful",
+      "stressed": "Stressed",
+      "thankful": "Thankful",
+      "motivated": "Motivated"
+    },
+    "filters": {
+      "title": "Feed Options",
+      "reset": "Reset options",
+      "styles": "Styles",
+      "classic": "Classic",
+      "solid": "Solid",
+      "themeNote": "Themes change monthly.",
+      "age": "Age",
+      "vibesTitle": "Vibes",
+      "addVibes": "Add vibes to your filter",
+      "tagsTitle": "My Tags",
+      "addTags": "Search or create tags",
+      "activeFilters": "Active filters:",
+      "clearAll": "Clear all"
+    },
+    "empty": {
+      "title": "No posts in this filter",
+      "desc": "Try adjusting the feed options or be the first to start a vent with the community.",
+      "btn": "Reset Options"
+    },
+    "header": "Feed",
+    "searchPlaceholder": "Search by keywords, author or tags..."
+  },
+  "compose": {
+    "intentions": {
+      "vent": "Free venting",
+      "emotion": "Express emotion",
+      "advice": "Seek advice",
+      "reflection": "University reflection"
+    },
+    "tags": {
+      "vent": "#Venting",
+      "exams": "#Exams",
+      "anxiety": "#Anxiety",
+      "firstYear": "#FirstYear",
+      "tips": "#Tips",
+      "friendship": "#Friendship",
+      "motivation": "#Motivation",
+      "loneliness": "#Loneliness",
+      "future": "#Future"
+    },
+    "header": "New Post",
+    "placeholder": "Write freely about what you're going through...",
+    "publish": "Publish",
+    "cancel": "Cancel",
+    "anonymousToggle": "Post anonymously",
+    "anonymousHint": "No one will know your real identity. This is a safe space.",
+    "rulesLink": "Community Rules",
+    "sensitiveWarning": "Trigger warning required",
+    "safetyBannerTitle": "Zero Risk",
+    "safetyBannerDesc": "We detected words related to suicide or self-harm. You are not alone. A team of psychologists is available right now 24/7.",
+    "safetyBannerBtn": "Talk to a Clinical Psychologist",
+    "anonymousBadge": "100% Anonymous",
+    "community": "University Community",
+    "secure": "Secure:",
+    "privacyNotice": "Your identity is never linked to this post.",
+    "intentionLabel": "What are you looking for with this post?",
+    "safetyTitle": "Immediate Support Available",
+    "safetyDesc": "We detected that you are going through a very difficult time. Remember you are not alone. You have access to the",
+    "sosButton": "S.O.S Button",
+    "safetyDesc2": "for free clinical help 24/7 on the main dashboard."
+  },
+  "postCard": {
+    "toasts": {
+      "selfHug": "You can't support yourself, let others do it! 💙",
+      "saved": "Saved to your profile for later! 🔖",
+      "linkCopied": "Link copied to clipboard"
+    },
+    "sensitive": {
+      "title": "Sensitive content hidden",
+      "reveal": "Show anyway"
+    },
+    "actions": {
+      "edit": "Edit vent",
+      "delete": "Delete vent",
+      "save": "Save Changes",
+      "cancel": "Cancel",
+      "reply": "Reply",
+      "showComments": "View comments",
+      "hideComments": "Hide comments",
+      "savePost": "Save",
+      "share": "Share",
+      "sendReply": "Send"
+    },
+    "comments": {
+      "placeholder": "Leave a supportive comment...",
+      "replyingTo": "Replying to",
+      "noComments": "No one has commented yet. Be the first to show support!"
+    },
+    "badges": {
+      "me": "You"
+    }
   }
 }
