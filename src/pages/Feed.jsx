@@ -14,7 +14,8 @@ import {
   Smile
 } from 'lucide-react';
 import { useAppContext } from '../context/AppContext';
-import { useOutletContext } from 'react-router-dom';
+import { useOutletContext, useNavigate } from 'react-router-dom';
+import TalkCampusAvatar from '../components/ui/TalkCampusAvatar';
 import PostCard from '../features/feed/components/PostCard';
 import ComposePostModal from '../features/feed/components/ComposePostModal';
 import { supabase } from '../services/supabase/client';
