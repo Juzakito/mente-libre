@@ -576,46 +576,37 @@ export default function MainLayout() {
       <div className="mobile-bottom-nav">
         <button
           onClick={() => handleNavClick('/app/feed')}
-          style={{ background: 'none', border: 'none', color: currentPath === '/app/feed' ? '#00e676' : '#8e9ca0', cursor: 'pointer', padding: '0.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}
+          style={{ background: 'none', border: 'none', color: currentPath === '/app/feed' ? '#00e676' : '#8e9ca0', cursor: 'pointer', padding: '0.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', flex: 1 }}
         >
-          <Home size={22} fill={currentPath === '/app/feed' ? '#00e676' : 'none'} />
+          <Home size={24} fill={currentPath === '/app/feed' ? '#00e676' : 'none'} />
         </button>
         <button
           onClick={() => setActiveInfoModal('salas')}
-          style={{ background: 'none', border: 'none', color: '#8e9ca0', cursor: 'pointer', padding: '0.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}
+          style={{ background: 'none', border: 'none', color: '#8e9ca0', cursor: 'pointer', padding: '0.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', flex: 1 }}
         >
-          <DoorOpen size={22} />
+          <DoorOpen size={24} />
         </button>
-        <button
-          onClick={() => setShowCompose(true)}
-          style={{ 
-            backgroundColor: '#00e676', 
-            color: '#082e30', 
-            border: 'none', 
-            borderRadius: '50%', 
-            width: '48px', 
-            height: '48px', 
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'center', 
-            cursor: 'pointer',
-            boxShadow: '0 4px 15px rgba(0, 230, 118, 0.35)'
-          }}
-        >
-          <Plus size={24} strokeWidth={3} />
-        </button>
-        <button
-          onClick={() => handleNavClick('/app/chat')}
-          style={{ background: 'none', border: 'none', color: currentPath === '/app/chat' ? '#00e676' : '#8e9ca0', cursor: 'pointer', padding: '0.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}
-        >
-          <MessageCircle size={22} fill={currentPath === '/app/chat' ? '#00e676' : 'none'} />
-        </button>
-        <button
-          onClick={() => setActiveInfoModal('notificaciones')}
-          style={{ background: 'none', border: 'none', color: '#8e9ca0', cursor: 'pointer', padding: '0.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}
-        >
-          <Bell size={22} />
-        </button>
+        <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
+          <button
+            onClick={() => setShowCompose(true)}
+            style={{ 
+              backgroundColor: '#00e676', 
+              color: '#082e30', 
+              border: 'none', 
+              borderRadius: '50%', 
+              width: '48px', 
+              height: '48px', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center', 
+              cursor: 'pointer',
+              boxShadow: '0 4px 15px rgba(0, 230, 118, 0.35)',
+              transform: 'translateY(-10px)'
+            }}
+          >
+            <Plus size={26} strokeWidth={3} />
+          </button>
+        </div>
       </div>
 
       {/* ─── TOAST NOTIFICATIONS ─────────────────────────────── */}
