@@ -30,6 +30,7 @@ const CodeEntry = lazyRetry(() => import('./pages/CodeEntry'));
 const Onboarding = lazyRetry(() => import('./pages/Onboarding'));
 const UpdatePassword = lazyRetry(() => import('./pages/UpdatePassword'));
 const Feed = lazyRetry(() => import('./pages/Feed'));
+const Rooms = lazyRetry(() => import('./pages/Rooms'));
 const Explore = lazyRetry(() => import('./pages/Explore'));
 const Chat = lazyRetry(() => import('./pages/Chat'));
 const Profile = lazyRetry(() => import('./pages/Profile'));
@@ -64,6 +65,7 @@ function App() {
                 <Route path={ROUTES.APP.ROOT} element={<MainLayout />}>
                   <Route index element={<Navigate to={ROUTES.APP.FEED} replace />} />
                   <Route path="feed" element={<Feed />} />
+                  <Route path="salas" element={<Rooms />} />
                   <Route path="explore" element={<Explore />} />
                   <Route path="chat" element={<Chat />} />
                   <Route path="profile" element={<Profile />} />

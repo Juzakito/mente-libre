@@ -23,6 +23,7 @@ export const ROUTES = Object.freeze({
     ROOT: '/app',
     FEED: '/app/feed',
     EXPLORE: '/app/explore',
+    ROOMS: '/app/salas',
     CHAT: '/app/chat',
     PROFILE: '/app/profile',
     PUBLIC_PROFILE: '/app/u/:nickname',

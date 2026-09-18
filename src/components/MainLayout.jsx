@@ -339,7 +339,8 @@ export default function MainLayout() {
           <SidebarButton
             icon={<DoorOpen size={18} />}
             label={t('student.nav.rooms', 'Salas')}
-            onClick={() => setActiveInfoModal('salas')}
+            active={currentPath === '/app/salas'}
+            onClick={() => handleNavClick('/app/salas')}
           />
           <SidebarButton
             icon={<MessageCircle size={18} />}
@@ -587,10 +588,10 @@ export default function MainLayout() {
           <Home size={24} fill={currentPath === '/app/feed' ? '#00e676' : 'none'} />
         </button>
         <button
-          onClick={() => setActiveInfoModal('salas')}
-          style={{ background: 'none', border: 'none', color: '#8e9ca0', cursor: 'pointer', padding: '0.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', flex: 1 }}
+          onClick={() => handleNavClick('/app/salas')}
+          style={{ background: 'none', border: 'none', color: currentPath === '/app/salas' ? '#00e676' : '#8e9ca0', cursor: 'pointer', padding: '0.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', flex: 1 }}
         >
-          <DoorOpen size={24} />
+          <DoorOpen size={24} color={currentPath === '/app/salas' ? '#00e676' : '#8e9ca0'} />
         </button>
         <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
           <button
@@ -705,227 +706,7 @@ export default function MainLayout() {
               <X size={18} />
             </button>
 
-            {activeInfoModal === 'salas' && (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', textAlign: 'left' }} className="animate-fade-in">
-                {/* Header */}
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.9rem', paddingRight: '2.5rem' }}>
-                  <div style={{
-                    width: '48px',
-                    height: '48px',
-                    borderRadius: '14px',
-                    backgroundColor: 'rgba(16, 185, 129, 0.12)',
-                    border: '1px solid rgba(16, 185, 129, 0.25)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0
-                  }}>
-                    <AppleEmoji emoji="🏛️" size={26} />
-                  </div>
-                  <div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-                      <h3 style={{ fontSize: '1.35rem', fontWeight: 850, margin: 0, color: 'var(--text-main)', letterSpacing: '-0.02em' }}>
-                        Salas Comunitarias 24/7
-                      </h3>
-                      <span style={{
-                        fontSize: '0.68rem',
-                        fontWeight: 800,
-                        color: 'var(--primary)',
-                        backgroundColor: 'rgba(16, 185, 129, 0.12)',
-                        border: '1px solid rgba(16, 185, 129, 0.25)',
-                        padding: '0.15rem 0.55rem',
-                        borderRadius: '9999px',
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '0.35rem'
-                      }}>
-                        <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--primary)', display: 'inline-block' }} />
-                        133 en vivo
-                      </span>
-                    </div>
-                    <p style={{ color: 'var(--text-muted)', fontSize: '0.84rem', margin: '0.25rem 0 0', lineHeight: 1.4 }}>
-                      Espacios anónimos de encuentro, grupos de estudio y desahogo en tiempo real entre estudiantes de campus.
-                    </p>
-                  </div>
-                </div>
 
-                {/* Rooms List */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                  {[
-                    {
-                      id: 'primer_ano',
-                      emoji: '🌱',
-                      name: 'Primeros Ciclos Universitarios',
-                      tag: '#PrimerAño',
-                      topic: 'Adaptación al campus, consejos sobre profesores, trámites y primeros parciales.',
-                      users: 38,
-                      accentColor: '#10b981',
-                      bgAlpha: 'rgba(16, 185, 129, 0.08)',
-                      borderAlpha: 'rgba(16, 185, 129, 0.22)',
-                      avatars: ['🦊', '🌿', '🎓']
-                    },
-                    {
-                      id: 'examenes',
-                      emoji: '📚',
-                      name: 'Preparación de Exámenes',
-                      tag: '#ExámenesFinales',
-                      topic: 'Grupos de estudio, sesiones Pomodoro de 50m y resúmenes compartidos.',
-                      users: 52,
-                      accentColor: '#3b82f6',
-                      bgAlpha: 'rgba(59, 130, 246, 0.08)',
-                      borderAlpha: 'rgba(59, 130, 246, 0.22)',
-                      avatars: ['⚡', '📚', '💻']
-                    },
-                    {
-                      id: 'salud_mental',
-                      emoji: '🧠',
-                      name: 'Manejo de la Ansiedad',
-                      tag: '#SaludMental',
-                      topic: 'Espacio de contención, pausas de respiración y apoyo guiado sin juicios.',
-                      users: 24,
-                      accentColor: '#8b5cf6',
-                      bgAlpha: 'rgba(139, 92, 246, 0.08)',
-                      borderAlpha: 'rgba(139, 92, 246, 0.22)',
-                      avatars: ['🧘', '🦉', '🌸']
-                    },
-                    {
-                      id: 'desahogo',
-                      emoji: '💬',
-                      name: 'Desahogo Libre 24/7',
-                      tag: '#DesahogoLibre',
-                      topic: 'Exprésate con total libertad y sin filtros, 100% anónimo entre compañeros.',
-                      users: 19,
-                      accentColor: '#f59e0b',
-                      bgAlpha: 'rgba(245, 158, 11, 0.08)',
-                      borderAlpha: 'rgba(245, 158, 11, 0.22)',
-                      avatars: ['💬', '🎨', '✨']
-                    }
-                  ].map((room) => (
-                    <div
-                      key={room.id}
-                      className="tc-room-card"
-                      style={{
-                        padding: '0.85rem 0.5rem',
-                        borderBottom: '1px solid var(--border-color)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        gap: '0.75rem',
-                        cursor: 'pointer',
-                        backgroundColor: 'transparent'
-                      }}
-                      onClick={() => {
-                        setNotificationsList(prev => [{
-                          id: Date.now(),
-                          type: 'chat',
-                          title: `💬 Te uniste a la sala ${room.name}`,
-                          desc: `Conexión establecida con ${room.users} compañeros en ${room.tag}`,
-                          time: 'Justo ahora',
-                          read: false
-                        }, ...prev]);
-                        sessionStorage.setItem('active_chat_room', JSON.stringify(room));
-                        sessionStorage.removeItem('active_peer_match');
-                        setActiveInfoModal(null);
-                        showToast(`Conectado a la sala ${room.name} ✨`);
-                        navigate('/app/chat', { state: { activeRoom: room, selectedRoom: room } });
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor = 'var(--surface-hover)';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor = 'transparent';
-                      }}
-                    >
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flex: 1, minWidth: 0 }}>
-                        <div style={{
-                          width: '40px',
-                          height: '40px',
-                          borderRadius: '50%',
-                          backgroundColor: 'var(--surface-elevated)',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          flexShrink: 0
-                        }}>
-                          <AppleEmoji emoji={room.emoji} size={20} />
-                        </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.15rem', flex: 1, minWidth: 0 }}>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexWrap: 'wrap' }}>
-                            <span style={{ fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-main)' }}>
-                              {room.name}
-                            </span>
-                            <span style={{
-                              fontSize: '0.65rem',
-                              fontWeight: 700,
-                              color: room.accentColor,
-                              backgroundColor: room.bgAlpha,
-                              padding: '0.1rem 0.4rem',
-                              borderRadius: '4px',
-                              display: 'inline-flex',
-                              alignItems: 'center',
-                              gap: '0.2rem'
-                            }}>
-                              <span style={{ width: '4px', height: '4px', borderRadius: '50%', backgroundColor: room.accentColor }} />
-                              {room.users}
-                            </span>
-                          </div>
-                          <span className="tc-room-desc" style={{ 
-                            color: 'var(--text-muted)', 
-                            fontSize: '0.8rem', 
-                            lineHeight: 1.3,
-                            display: '-webkit-box',
-                            WebkitLineClamp: 2,
-                            WebkitBoxOrient: 'vertical',
-                            overflow: 'hidden'
-                          }}>
-                            {room.topic}
-                          </span>
-                        </div>
-                      </div>
-
-                      <button
-                        type="button"
-                        className="tc-room-btn hide-on-mobile"
-                        style={{
-                          background: 'transparent',
-                          color: 'var(--primary)',
-                          border: 'none',
-                          padding: '0.5rem',
-                          fontWeight: 700,
-                          fontSize: '0.85rem',
-                          cursor: 'pointer',
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          gap: '0.25rem',
-                        }}
-                      >
-                        <span>Entrar</span>
-                        <ArrowRight size={14} />
-                      </button>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Privacy and Moderation Trust Banner */}
-                <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '0.5rem',
-                  backgroundColor: 'var(--surface-hover)',
-                  border: '1px solid var(--border-color)',
-                  borderRadius: '12px',
-                  padding: '0.7rem 1rem',
-                  fontSize: '0.76rem',
-                  color: 'var(--text-muted)',
-                  fontWeight: 600,
-                  textAlign: 'center'
-                }}>
-                  <ShieldCheck size={16} color="var(--primary)" style={{ flexShrink: 0 }} />
-                  <span>Espacios 100% anónimos · Sin registro de nombres personales · Moderación activa</span>
-                </div>
-              </div>
-            )}
 
             {activeInfoModal === 'notificaciones' && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', textAlign: 'left' }} className="animate-fade-in">
