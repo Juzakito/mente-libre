@@ -66,6 +66,7 @@ export default function Feed() {
   const [layoutMode, setLayoutMode] = useState('cards'); // 'cards' | 'compact'
 
   // Right Sidebar Filter Options (Image 4) - Persisted in localStorage
+  const navigate = useNavigate();
   const [feedStyle, setFeedStyle] = useState(() => {
     return localStorage.getItem('tc_feed_style') || 'classic';
   });
@@ -266,6 +267,39 @@ export default function Feed() {
           CENTER COLUMN: FEED MAIN (IMAGE 4)
          ========================================================= */}
       <section className="tc-feed-main">
+        {/* Mobile Custom Header (Matches Screenshots) */}
+        <div className="mobile-header" style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '0.25rem 0.25rem 0.75rem',
+          width: '100%'
+        }}>
+          <h1 style={{ fontSize: '1.75rem', fontWeight: 900, color: 'var(--text-main)', margin: 0, letterSpacing: '-0.5px' }}>
+            Feed
+          </h1>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+            <button
+              onClick={() => {
+                showToast("Filtros abertos");
+                // Here we could scroll to the sidebar on mobile or open a modal
+              }}
+              style={{ background: 'none', border: 'none', color: 'var(--text-main)', cursor: 'pointer', padding: '2px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            >
+              <SlidersHorizontal size={22} strokeWidth={2.5} />
+            </button>
+            <button
+              onClick={() => setSearchOpen(!searchOpen)}
+              style={{ background: 'none', border: 'none', color: 'var(--text-main)', cursor: 'pointer', padding: '2px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            >
+              <Search size={22} strokeWidth={2.5} />
+            </button>
+            <div style={{ marginLeft: '0.25rem', cursor: 'pointer', border: '2px solid #00e676', borderRadius: '50%', padding: '2px' }} onClick={() => navigate('/app/profile')}>
+              <TalkCampusAvatar id={user?.avatar || '🦉'} size={30} />
+            </div>
+          </div>
+        </div>
+
         {/* Horizontal Navigation Tabs Bar */}
         <div style={{
           display: 'flex',
@@ -284,14 +318,15 @@ export default function Feed() {
                 key={tab}
                 onClick={() => setActiveTab(tab)}
                 className={`tc-tab-item ${activeTab === tab ? 'active' : ''}`}
+                style={activeTab === tab ? { backgroundColor: '#00e676', color: '#082e30', boxShadow: 'none', borderColor: 'transparent' } : {}}
               >
                 {tab}
               </button>
             ))}
           </div>
 
-          {/* Right actions: Layout switch & Search icon */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', flexShrink: 0 }}>
+          {/* Right actions: Layout switch & Search icon (Desktop only) */}
+          <div className="hide-on-mobile" style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', flexShrink: 0 }}>
             <button
               onClick={() => setLayoutMode(layoutMode === 'cards' ? 'compact' : 'cards')}
               style={{

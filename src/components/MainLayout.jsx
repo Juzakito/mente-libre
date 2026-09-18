@@ -272,18 +272,10 @@ export default function MainLayout() {
 
       {/* ─── LEFT SIDEBAR ─────────────────────────── */}
       <aside style={{
-        width: '240px',
-        flexShrink: 0,
-        height: '100%',
         backgroundColor: 'var(--sidebar-bg)',
-        borderRight: '1px solid var(--sidebar-border)',
-        display: 'flex',
-        flexDirection: 'column',
         padding: '1.15rem 0.85rem 1rem',
         overflowY: 'auto',
-        zIndex: 95,
-        scrollbarWidth: 'none',
-        position: 'relative'
+        scrollbarWidth: 'none'
       }} className={`desktop-sidebar no-scrollbar ${mobileMenuOpen ? 'mobile-open' : ''}`}>
 
         {/* Top Brand Header: Logo + CONECTADO status + Language Toggle */}
@@ -327,7 +319,7 @@ export default function MainLayout() {
               onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--primary)'; e.currentTarget.style.transform = 'translateY(0)'; }}
             >
               <Plus size={18} strokeWidth={2.5} />
-              <span>Crear Publicación</span>
+              <span>{t('student.nav.createPost', 'Crear Publicación')}</span>
             </button>
           </div>
 
@@ -340,24 +332,24 @@ export default function MainLayout() {
         <nav style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem', flex: 1 }}>
           <SidebarButton
             icon={<Home size={18} />}
-            label="Feed"
+            label={t('student.nav.feed', 'Feed')}
             active={currentPath === '/app/feed'}
             onClick={() => handleNavClick('/app/feed')}
           />
           <SidebarButton
             icon={<DoorOpen size={18} />}
-            label="Salas"
+            label={t('student.nav.rooms', 'Salas')}
             onClick={() => setActiveInfoModal('salas')}
           />
           <SidebarButton
             icon={<MessageCircle size={18} />}
-            label="Mensajes"
+            label={t('student.nav.messages', 'Mensajes')}
             active={currentPath === '/app/chat'}
             onClick={() => handleNavClick('/app/chat')}
           />
           <SidebarButton
             icon={<Bell size={18} />}
-            label="Notificaciones"
+            label={t('student.nav.notifications', 'Notificaciones')}
             onClick={() => setActiveInfoModal('notificaciones')}
           />
 
@@ -365,55 +357,55 @@ export default function MainLayout() {
 
           <SidebarButton
             icon={<Zap size={18} color="#fbbf24" />}
-            label="Mejoras"
+            label={t('student.nav.improvements', 'Mejoras')}
             onClick={() => setActiveInfoModal('mejoras')}
           />
           <SidebarButton
             icon={<Sparkles size={18} color="#a855f7" />}
-            label="Centro de Bienestar"
+            label={t('student.nav.wellnessCenter', 'Centro de Bienestar')}
             active={currentPath === '/app/mood'}
             onClick={() => handleNavClick('/app/mood')}
           />
           <SidebarButton
             icon={<CircleDot size={18} color="#38bdf8" />}
-            label="Dotz (Plumas)"
+            label={t('student.nav.dotz', 'Dotz (Plumas)')}
             onClick={() => setActiveInfoModal('dotz')}
           />
           <SidebarButton
             icon={<ShieldCheck size={18} color="#10b981" />}
-            label="Centro de Seguridad"
+            label={t('student.nav.securityCenter', 'Centro de Seguridad')}
             onClick={() => setActiveInfoModal('seguridad')}
           />
           <SidebarButton
             icon={<ShieldAlert size={18} color="#f43f5e" />}
-            label="Necesito ayuda"
+            label={t('student.nav.needHelp', 'Necesito ayuda')}
             onClick={() => setShowSOS(true)}
             accentColor="#f43f5e"
           />
           <SidebarButton
             icon={<Compass size={18} />}
-            label="Guía de uso"
+            label={t('student.nav.guide', 'Guía de uso')}
             onClick={() => setActiveInfoModal('guia')}
           />
           <SidebarButton
             icon={<GraduationCap size={18} />}
-            label="Servicios Estudiantiles"
+            label={t('student.nav.studentServices', 'Servicios Estudiantiles')}
             active={currentPath === '/app/expertos' || currentPath === '/app/citas'}
             onClick={() => handleNavClick('/app/expertos')}
           />
           <SidebarButton
             icon={<PhoneCall size={18} color="#f43f5e" />}
-            label="Línea de ayuda clínica"
+            label={t('student.nav.helpline', 'Línea de ayuda clínica')}
             onClick={() => setActiveInfoModal('helpline')}
           />
           <SidebarButton
             icon={<Info size={18} />}
-            label="Acerca de Free Mind"
+            label={t('student.nav.about', 'Acerca de Free Mind')}
             onClick={() => setActiveInfoModal('acerca')}
           />
           <SidebarButton
             icon={<UserPlus size={18} color="#00e676" />}
-            label="Hazte un Amigo"
+            label={t('student.nav.makeFriend', 'Hazte un Amigo')}
             onClick={() => setActiveInfoModal('aliado')}
           />
         </nav>
@@ -442,7 +434,7 @@ export default function MainLayout() {
               }}
             >
               {theme === 'light' ? <Moon size={14} color="#38bdf8" /> : <Sun size={14} color="#f59e0b" />}
-              <span>{theme === 'light' ? 'Modo Oscuro' : 'Modo Claro'}</span>
+              <span>{theme === 'light' ? t('student.nav.darkMode', 'Modo Oscuro') : t('student.nav.lightMode', 'Modo Claro')}</span>
             </button>
 
             <button
@@ -461,7 +453,7 @@ export default function MainLayout() {
                 flexShrink: 0,
                 transition: 'all 0.15s ease'
               }}
-              title="Compartir"
+              title={t('student.nav.share', 'Compartir')}
             >
               <Share2 size={15} />
             </button>
@@ -503,7 +495,7 @@ export default function MainLayout() {
                 justifyContent: 'center',
                 transition: 'color 0.15s'
               }}
-              title="Cerrar sesión"
+              title={t('student.nav.logout', 'Cerrar sesión')}
               onMouseEnter={(e) => e.currentTarget.style.color = '#f43f5e'}
               onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
             >
@@ -524,6 +516,7 @@ export default function MainLayout() {
         flexDirection: 'column'
       }}>
         {/* Mobile Header (Hidden on desktop) */}
+        {currentPath !== '/app/feed' && (
         <header style={{
           display: 'flex',
           alignItems: 'center',
@@ -568,15 +561,62 @@ export default function MainLayout() {
             }}
           >
             <Plus size={14} strokeWidth={3} />
-            <span>Publicar</span>
+            <span>{t('student.nav.publish', 'Publicar')}</span>
           </button>
         </header>
+        )}
 
         {/* Center Routed View (Feed, Chat, Profile, etc.) */}
         <div style={{ flex: 1 }}>
           <Outlet context={{ handleSOS: () => setShowSOS(true), showToast, openCompose: () => setShowCompose(true) }} />
         </div>
       </main>
+
+      {/* ─── MOBILE BOTTOM NAV ──────────────────────────── */}
+      <div className="mobile-bottom-nav">
+        <button
+          onClick={() => handleNavClick('/app/feed')}
+          style={{ background: 'none', border: 'none', color: currentPath === '/app/feed' ? '#00e676' : '#8e9ca0', cursor: 'pointer', padding: '0.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}
+        >
+          <Home size={22} fill={currentPath === '/app/feed' ? '#00e676' : 'none'} />
+        </button>
+        <button
+          onClick={() => setActiveInfoModal('salas')}
+          style={{ background: 'none', border: 'none', color: '#8e9ca0', cursor: 'pointer', padding: '0.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}
+        >
+          <DoorOpen size={22} />
+        </button>
+        <button
+          onClick={() => setShowCompose(true)}
+          style={{ 
+            backgroundColor: '#00e676', 
+            color: '#082e30', 
+            border: 'none', 
+            borderRadius: '50%', 
+            width: '48px', 
+            height: '48px', 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center', 
+            cursor: 'pointer',
+            boxShadow: '0 4px 15px rgba(0, 230, 118, 0.35)'
+          }}
+        >
+          <Plus size={24} strokeWidth={3} />
+        </button>
+        <button
+          onClick={() => handleNavClick('/app/chat')}
+          style={{ background: 'none', border: 'none', color: currentPath === '/app/chat' ? '#00e676' : '#8e9ca0', cursor: 'pointer', padding: '0.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}
+        >
+          <MessageCircle size={22} fill={currentPath === '/app/chat' ? '#00e676' : 'none'} />
+        </button>
+        <button
+          onClick={() => setActiveInfoModal('notificaciones')}
+          style={{ background: 'none', border: 'none', color: '#8e9ca0', cursor: 'pointer', padding: '0.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}
+        >
+          <Bell size={22} />
+        </button>
+      </div>
 
       {/* ─── TOAST NOTIFICATIONS ─────────────────────────────── */}
       {toastMessage && (
