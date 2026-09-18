@@ -64,35 +64,7 @@ export default function Rooms() {
     <div className="tc-dashboard-wrapper">
       <section className="tc-feed-main" style={{ backgroundColor: 'var(--bg-color)', minHeight: '100vh' }}>
         
-        {/* Mobile Header */}
-        <div className="mobile-header" style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          padding: '0.75rem 0.25rem',
-          width: '100%'
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-            <button
-              onClick={() => outletCtx.setMobileMenuOpen?.(true)}
-              style={{
-                backgroundColor: '#1b2022',
-                border: '1px solid #283033',
-                color: '#ffffff',
-                borderRadius: '8px',
-                padding: '6px',
-                display: 'flex',
-                alignItems: 'center',
-                cursor: 'pointer'
-              }}
-            >
-              <Menu size={18} />
-            </button>
-            <h1 style={{ fontSize: '1.75rem', fontWeight: 900, color: 'var(--text-main)', margin: 0, letterSpacing: '-0.5px' }}>
-              Salas
-            </h1>
-          </div>
-        </div>
+
 
         {/* Desktop Header */}
         <div className="desktop-header hide-on-mobile" style={{ marginBottom: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
@@ -103,88 +75,61 @@ export default function Rooms() {
         </div>
 
         {/* Content */}
-        <div style={{ padding: '0 0.5rem', display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
+        <div style={{ padding: '1rem 0.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           
           {/* Header Description */}
-          <div style={{
-            display: 'flex',
-            alignItems: 'flex-start',
-            gap: '1rem',
-            marginBottom: '1rem'
-          }}>
-            <div style={{
-              width: '46px',
-              height: '46px',
-              borderRadius: '14px',
-              backgroundColor: 'rgba(16, 185, 129, 0.1)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '1.4rem'
-            }}>
-              🏛️
+          <div style={{ padding: '0 0.5rem', marginBottom: '0.5rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
+              <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-main)', margin: 0, letterSpacing: '-0.02em' }}>
+                Salas
+              </h2>
+              <span style={{
+                color: 'var(--primary)',
+                fontSize: '0.8rem',
+                fontWeight: 700,
+              }}>
+                133 en vivo
+              </span>
             </div>
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <h2 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-main)', margin: 0, letterSpacing: '-0.02em' }}>
-                  Salas 24/7
-                </h2>
-                <span style={{
-                  backgroundColor: 'rgba(16, 185, 129, 0.15)',
-                  color: '#10b981',
-                  fontSize: '0.7rem',
-                  fontWeight: 800,
-                  padding: '0.2rem 0.6rem',
-                  borderRadius: '9999px',
-                }}>
-                  ● 133 en vivo
-                </span>
-              </div>
-              <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', margin: '0.35rem 0 0', lineHeight: 1.5 }}>
-                Espacios anónimos de encuentro, grupos de estudio y desahogo en tiempo real entre estudiantes de campus.
-              </p>
-            </div>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', margin: 0, lineHeight: 1.5 }}>
+              Espacios anónimos de encuentro, grupos de estudio y desahogo en tiempo real entre estudiantes de campus.
+            </p>
           </div>
 
           {/* Rooms List */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
             {ROOMS_DATA.map((room) => (
               <div
                 key={room.id}
-                className="tc-room-card"
                 style={{
-                  padding: '0.85rem 0.5rem',
+                  padding: '1rem 0.5rem',
                   borderBottom: '1px solid var(--border-color)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
                   gap: '0.75rem',
-                  cursor: 'pointer',
-                  backgroundColor: 'transparent'
+                  cursor: 'pointer'
                 }}
                 onClick={() => handleJoinRoom(room)}
               >
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem', flex: 1 }}>
-                  <div style={{ fontSize: '1.5rem', marginTop: '0.1rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flex: 1 }}>
+                  <div style={{ fontSize: '1.5rem' }}>
                     {room.emoji}
                   </div>
                   <div style={{ flex: 1 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.2rem' }}>
-                      <span style={{ fontSize: '0.95rem', fontWeight: 800, color: 'var(--text-main)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.1rem' }}>
+                      <span style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-main)' }}>
                         {room.name}
                       </span>
                       <span style={{
-                        color: room.accentColor,
-                        backgroundColor: room.bgAlpha,
-                        fontSize: '0.65rem',
-                        fontWeight: 800,
-                        padding: '0.15rem 0.4rem',
-                        borderRadius: '4px'
+                        color: 'var(--text-muted)',
+                        fontSize: '0.75rem',
+                        fontWeight: 600,
                       }}>
-                        ● {room.users}
+                        {room.users} personas
                       </span>
                     </div>
-                    <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', margin: 0, lineHeight: 1.4 }}>
+                    <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', margin: 0, lineHeight: 1.4 }}>
                       {room.topic}
                     </p>
                   </div>
@@ -199,14 +144,13 @@ export default function Rooms() {
             justifyContent: 'center',
             gap: '0.5rem',
             padding: '1rem',
-            backgroundColor: 'var(--surface-hover)',
-            borderRadius: '12px',
-            marginTop: '1.5rem',
-            textAlign: 'center'
+            marginTop: '1rem',
+            textAlign: 'center',
+            borderTop: '1px solid var(--border-color)'
           }}>
-            <ShieldCheck size={16} color="var(--primary)" />
-            <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 600 }}>
-              Espacios 100% anónimos · Moderación activa
+            <ShieldCheck size={16} color="var(--text-muted)" />
+            <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: 500 }}>
+              Espacios 100% anónimos. Moderación activa.
             </span>
           </div>
 
