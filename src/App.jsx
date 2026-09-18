@@ -39,6 +39,13 @@ const Donate = lazyRetry(() => import('./pages/Donate'));
 const Mood = lazyRetry(() => import('./pages/Mood'));
 const Experts = lazyRetry(() => import('./pages/Experts'));
 const Appointments = lazyRetry(() => import('./pages/Appointments'));
+const Dotz = lazyRetry(() => import('./pages/Dotz'));
+const SOS = lazyRetry(() => import('./pages/SOS'));
+const Helpline = lazyRetry(() => import('./pages/Helpline'));
+const Security = lazyRetry(() => import('./pages/Security'));
+const Improvements = lazyRetry(() => import('./pages/Improvements'));
+const Guide = lazyRetry(() => import('./pages/Guide'));
+const About = lazyRetry(() => import('./pages/About'));
 
 // Loading Fallback
 const LoadingScreen = () => (
@@ -74,6 +81,13 @@ function App() {
                   <Route path="mood" element={<Mood />} />
                   <Route path="expertos" element={<Experts />} />
                   <Route path="citas" element={<Appointments />} />
+                  <Route path="dotz" element={<Dotz />} />
+                  <Route path="sos" element={<SOS />} />
+                  <Route path="helpline" element={<Helpline />} />
+                  <Route path="security" element={<Security />} />
+                  <Route path="improvements" element={<Improvements />} />
+                  <Route path="guide" element={<Guide />} />
+                  <Route path="about" element={<About />} />
                 </Route>
               </Routes>
             </Suspense>

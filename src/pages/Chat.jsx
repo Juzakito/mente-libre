@@ -105,14 +105,7 @@ export default function Chat() {
   const [searchProgress, setSearchProgress] = useState(0);
   const messagesEndRef = useRef(null);
 
-  useEffect(() => {
-    if (setHideBottomNav) {
-      setHideBottomNav(connected);
-    }
-    return () => {
-      if (setHideBottomNav) setHideBottomNav(false);
-    };
-  }, [connected, setHideBottomNav]);
+
 
   useEffect(() => {
     const incomingPeerMatch = location.state?.peerMatch;

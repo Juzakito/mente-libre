@@ -31,6 +31,13 @@ export const ROUTES = Object.freeze({
     MOOD: '/app/mood',
     EXPERTS: '/app/expertos',
     APPOINTMENTS: '/app/citas',
+    DOTZ: '/app/dotz',
+    SOS: '/app/sos',
+    HELPLINE: '/app/helpline',
+    SECURITY: '/app/security',
+    IMPROVEMENTS: '/app/improvements',
+    GUIDE: '/app/guide',
+    ABOUT: '/app/about',
   }),
 });
 
