@@ -187,6 +187,7 @@ export default function Chat() {
     setConnected(false);
     setMessages([]);
     setHistory([]);
+    navigate('/app/feed');
   };
 
   const { handleSOS } = useOutletContext();
