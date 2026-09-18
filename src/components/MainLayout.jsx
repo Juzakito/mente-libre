@@ -580,76 +580,82 @@ export default function MainLayout() {
       </main>
 
       {/* ─── MOBILE BOTTOM NAV ──────────────────────────── */}
-      <div className="mobile-bottom-nav">
-        <button
-          onClick={() => handleNavClick('/app/feed')}
-          style={{ background: 'none', border: 'none', color: currentPath === '/app/feed' ? '#00e676' : '#8e9ca0', cursor: 'pointer', padding: '0.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', flex: 1 }}
-        >
-          <Home size={24} fill={currentPath === '/app/feed' ? '#00e676' : 'none'} />
-        </button>
-        <button
-          onClick={() => handleNavClick('/app/salas')}
-          style={{ background: 'none', border: 'none', color: currentPath === '/app/salas' ? '#00e676' : '#8e9ca0', cursor: 'pointer', padding: '0.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', flex: 1 }}
-        >
-          <DoorOpen size={24} color={currentPath === '/app/salas' ? '#00e676' : '#8e9ca0'} />
-        </button>
-        <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
+      {!currentPath.startsWith('/app/chat') && (
+        <div className="mobile-bottom-nav">
           <button
-            onClick={() => setShowCompose(true)}
-            style={{ 
-              backgroundColor: '#00e676', 
-              color: '#082e30', 
-              border: 'none', 
-              borderRadius: '50%', 
-              width: '48px', 
-              height: '48px', 
-              display: 'flex', 
-              alignItems: 'center', 
-              justifyContent: 'center', 
-              cursor: 'pointer',
-              boxShadow: '0 4px 15px rgba(0, 230, 118, 0.35)',
-              transform: 'translateY(-10px)'
-            }}
+            onClick={() => handleNavClick('/app/feed')}
+            style={{ background: 'none', border: 'none', color: currentPath === '/app/feed' ? '#00e676' : '#8e9ca0', cursor: 'pointer', padding: '0.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', flex: 1 }}
           >
-            <Plus size={26} strokeWidth={3} />
+            <Home size={24} fill={currentPath === '/app/feed' ? '#00e676' : 'none'} />
+          </button>
+          <button
+            onClick={() => handleNavClick('/app/salas')}
+            style={{ background: 'none', border: 'none', color: currentPath === '/app/salas' ? '#00e676' : '#8e9ca0', cursor: 'pointer', padding: '0.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', flex: 1 }}
+          >
+            <DoorOpen size={24} color={currentPath === '/app/salas' ? '#00e676' : '#8e9ca0'} />
+          </button>
+          <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
+            <button
+              onClick={() => setShowCompose(true)}
+              style={{ 
+                backgroundColor: '#00e676', 
+                color: '#082e30', 
+                border: 'none', 
+                borderRadius: '50%', 
+                width: '48px', 
+                height: '48px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center', 
+                cursor: 'pointer',
+                boxShadow: '0 4px 15px rgba(0, 230, 118, 0.35)',
+                transform: 'translateY(-10px)'
+              }}
+            >
+              <Plus size={26} strokeWidth={3} />
+            </button>
+          </div>
+          <button
+            onClick={() => handleNavClick('/app/chat')}
+            style={{ background: 'none', border: 'none', color: currentPath === '/app/chat' ? '#00e676' : '#8e9ca0', cursor: 'pointer', padding: '0.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', flex: 1 }}
+          >
+            <MessageCircle size={24} fill={currentPath === '/app/chat' ? '#00e676' : 'none'} />
+          </button>
+          <button
+            onClick={() => handleNavClick('/app/profile')}
+            style={{ background: 'none', border: 'none', color: currentPath === '/app/profile' ? '#00e676' : '#8e9ca0', cursor: 'pointer', padding: '0.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', flex: 1 }}
+          >
+            <User size={24} fill={currentPath === '/app/profile' ? '#00e676' : 'none'} />
           </button>
         </div>
-        <button
-          onClick={() => handleNavClick('/app/chat')}
-          style={{ background: 'none', border: 'none', color: currentPath === '/app/chat' ? '#00e676' : '#8e9ca0', cursor: 'pointer', padding: '0.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', flex: 1 }}
-        >
-          <MessageCircle size={24} fill={currentPath === '/app/chat' ? '#00e676' : 'none'} />
-        </button>
-        <button
-          onClick={() => handleNavClick('/app/profile')}
-          style={{ background: 'none', border: 'none', color: currentPath === '/app/profile' ? '#00e676' : '#8e9ca0', cursor: 'pointer', padding: '0.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', flex: 1 }}
-        >
-          <User size={24} fill={currentPath === '/app/profile' ? '#00e676' : 'none'} />
-        </button>
-      </div>
+      )}
 
       {/* ─── TOAST NOTIFICATIONS ─────────────────────────────── */}
       {toastMessage && (
         <div style={{
           position: 'fixed',
-          bottom: '2rem',
+          top: '1.5rem',
           left: '50%',
           transform: 'translateX(-50%)',
-          backgroundColor: '#181c1e',
-          color: '#ffffff',
-          padding: '0.85rem 1.5rem',
+          backgroundColor: 'var(--surface)',
+          color: 'var(--text-main)',
+          padding: '0.65rem 1.25rem',
           borderRadius: '9999px',
-          border: '1px solid #00e676',
-          boxShadow: '0 8px 30px rgba(0, 230, 118, 0.25)',
+          border: '1px solid var(--border-color)',
+          boxShadow: '0 8px 30px rgba(0,0,0,0.15)',
           zIndex: 9999,
-          fontSize: '0.9rem',
-          fontWeight: 700,
+          fontSize: '0.85rem',
+          fontWeight: 600,
           display: 'flex',
           alignItems: 'center',
-          gap: '0.5rem'
-        }} className="animate-slide-up">
-          <span style={{ color: '#00e676' }}>✨</span>
-          <span>{toastMessage}</span>
+          gap: '0.5rem',
+          whiteSpace: 'nowrap',
+          maxWidth: '90vw',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis'
+        }} className="animate-fade-in">
+          <span style={{ color: '#00e676', flexShrink: 0 }}>✨</span>
+          <span style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>{toastMessage}</span>
         </div>
       )}
 
