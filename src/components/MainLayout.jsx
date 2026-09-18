@@ -794,6 +794,7 @@ export default function MainLayout() {
                   ].map((room) => (
                     <div
                       key={room.id}
+                      className="tc-room-card"
                       style={{
                         padding: '1.05rem 1.15rem',
                         borderRadius: '16px',
@@ -868,7 +869,7 @@ export default function MainLayout() {
                               {room.users} en vivo
                             </span>
                           </div>
-                          <span style={{ color: 'var(--text-muted)', fontSize: '0.78rem', lineHeight: 1.35 }}>
+                          <span className="tc-room-desc" style={{ color: 'var(--text-muted)', fontSize: '0.78rem', lineHeight: 1.35 }}>
                             {room.topic}
                           </span>
                           {/* Live peers preview avatars */}
@@ -894,7 +895,7 @@ export default function MainLayout() {
                                 </div>
                               ))}
                             </div>
-                            <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontWeight: 600 }}>
+                            <span className="tc-room-stats" style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontWeight: 600 }}>
                               +{room.users - 3} estudiantes participando
                             </span>
                           </div>
@@ -903,6 +904,7 @@ export default function MainLayout() {
 
                       <button
                         type="button"
+                        className="tc-room-btn"
                         onClick={(e) => {
                           e.stopPropagation();
                           setNotificationsList(prev => [{
