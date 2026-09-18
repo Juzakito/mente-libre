@@ -957,7 +957,7 @@ export default function MainLayout() {
                     No tienes notificaciones pendientes ✨
                   </p>
                 ) : (
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
                     {notificationsList.map((item) => (
                       <div
                         key={item.id}
@@ -969,22 +969,21 @@ export default function MainLayout() {
                           setActiveInfoModal(null);
                         }}
                         style={{
-                          backgroundColor: item.read ? 'var(--surface-elevated)' : 'rgba(16, 185, 129, 0.08)',
-                          padding: '0.9rem 1.15rem',
-                          borderRadius: '16px',
-                          border: item.read ? '1px solid var(--border-color)' : '1px solid rgba(16, 185, 129, 0.35)',
+                          backgroundColor: item.read ? 'transparent' : 'rgba(16, 185, 129, 0.04)',
+                          padding: '0.75rem 0.5rem',
+                          borderBottom: '1px solid var(--border-color)',
                           cursor: 'pointer',
                           textAlign: 'left',
-                          transition: 'all 0.15s ease'
+                          transition: 'background-color 0.15s ease'
                         }}
-                        onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--primary)'}
-                        onMouseLeave={(e) => e.currentTarget.style.borderColor = item.read ? 'var(--border-color)' : 'rgba(16, 185, 129, 0.35)'}
+                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = item.read ? 'var(--surface-hover)' : 'rgba(16, 185, 129, 0.08)'}
+                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = item.read ? 'transparent' : 'rgba(16, 185, 129, 0.04)'}
                       >
-                        <div style={{ fontWeight: 800, fontSize: '0.88rem', color: item.read ? 'var(--text-main)' : 'var(--primary)', marginBottom: '3px' }}>
+                        <div style={{ fontWeight: 700, fontSize: '0.88rem', color: item.read ? 'var(--text-main)' : 'var(--primary)', marginBottom: '3px' }}>
                           {item.title}
                         </div>
-                        <div style={{ color: 'var(--text-muted)', fontSize: '0.8rem', lineHeight: 1.4 }}>{item.desc}</div>
-                        <div style={{ color: 'var(--text-muted)', fontSize: '0.72rem', marginTop: '5px', opacity: 0.8 }}>{item.time}</div>
+                        <div style={{ color: 'var(--text-muted)', fontSize: '0.8rem', lineHeight: 1.3 }}>{item.desc}</div>
+                        <div style={{ color: 'var(--text-muted)', fontSize: '0.7rem', marginTop: '5px', opacity: 0.8 }}>{item.time}</div>
                       </div>
                     ))}
                   </div>
