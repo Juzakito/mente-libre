@@ -101,48 +101,42 @@ export default function ComposePostModal({ onClose, onPublish }) {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          padding: '1.25rem 1.5rem',
+          padding: '1rem 1.25rem',
           borderBottom: '1px solid var(--border-color)',
           backgroundColor: 'var(--surface)',
           position: 'relative',
           zIndex: 10
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <div style={{
-              width: '46px',
-              height: '46px',
-              borderRadius: '16px',
+              width: '38px',
+              height: '38px',
+              borderRadius: '50%',
               backgroundColor: 'var(--surface-hover)',
-              border: '1px solid var(--border-color)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '1.4rem',
-              boxShadow: '0 4px 10px rgba(0,0,0,0.05)'
+              fontSize: '1.2rem',
             }}>
               {user?.avatar || '🦉'}
             </div>
             <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                <span style={{ fontWeight: 800, fontSize: '1.05rem', color: 'var(--text-main)', letterSpacing: '-0.01em' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                <span style={{ fontWeight: 700, fontSize: '0.95rem', color: 'var(--text-main)', letterSpacing: '-0.01em' }}>
                   {user?.nickname || 'Estudiante Anónimo'}
                 </span>
                 <span style={{
-                  background: 'linear-gradient(135deg, rgba(13,148,136,0.15) 0%, rgba(56,189,248,0.15) 100%)',
                   color: 'var(--primary)',
-                  fontSize: '0.72rem',
+                  fontSize: '0.7rem',
                   fontWeight: 700,
-                  padding: '0.2rem 0.6rem',
-                  borderRadius: '9999px',
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '0.3rem',
-                  border: '1px solid rgba(13,148,136,0.2)'
+                  gap: '0.2rem',
                 }}>
                   <ShieldCheck size={12} strokeWidth={2.5} /> 100% Anónimo
                 </span>
               </div>
-              <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: 500 }}>
+              <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 500 }}>
                 {user?.career || 'Comunidad Universitaria'}
               </span>
             </div>
@@ -179,33 +173,28 @@ export default function ComposePostModal({ onClose, onPublish }) {
         </div>
 
         {/* Content Body */}
-        <div style={{ padding: '1.5rem 1.75rem', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '1.5rem', backgroundColor: 'var(--surface)' }}>
+        <div style={{ padding: '1rem 1.25rem', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '1rem', backgroundColor: 'var(--surface)' }}>
           
           {/* Privacy Guarantee Banner */}
           <div style={{
-            background: 'linear-gradient(135deg, var(--surface-hover) 0%, var(--bg-color) 100%)',
-            border: '1px dashed var(--border-color)',
-            borderRadius: '16px',
-            padding: '0.85rem 1.15rem',
             display: 'flex',
             alignItems: 'center',
-            gap: '0.85rem',
-            boxShadow: 'inset 0 2px 10px rgba(0,0,0,0.02)'
+            gap: '0.5rem',
+            paddingBottom: '0.5rem',
+            borderBottom: '1px solid var(--surface-hover)'
           }}>
-            <div style={{ backgroundColor: 'var(--primary-light)', padding: '6px', borderRadius: '10px' }}>
-              <Lock size={18} color="var(--primary)" />
-            </div>
-            <span style={{ fontSize: '0.82rem', color: 'var(--text-main)', lineHeight: 1.4 }}>
-              <strong style={{ fontWeight: 800 }}>Espacio Seguro:</strong> Tu correo e identidad personal nunca se vinculan a esta publicación.
+            <Lock size={14} color="var(--primary)" />
+            <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
+              <strong style={{ fontWeight: 700, color: 'var(--text-main)' }}>Seguro:</strong> Tu identidad nunca se vincula a esta publicación.
             </span>
           </div>
 
           {/* Emotional Intention Selector */}
           <div>
-            <label style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '0.65rem', display: 'block' }}>
+            <label style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '0.5rem', display: 'block' }}>
               ¿Qué buscas con esta publicación?
             </label>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.65rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.5rem' }}>
               {INTENTION_OPTIONS.map((m) => {
                 const isSelected = selectedIntention.id === m.id;
                 return (
@@ -214,31 +203,21 @@ export default function ComposePostModal({ onClose, onPublish }) {
                     type="button"
                     onClick={() => setSelectedIntention(m)}
                     style={{
-                      backgroundColor: isSelected ? 'var(--surface)' : 'var(--surface-hover)',
-                      border: `1px solid ${isSelected ? m.color : 'transparent'}`,
-                      borderRadius: '12px',
-                      padding: '0.65rem 0.85rem',
-                      color: isSelected ? 'var(--text-main)' : 'var(--text-muted)',
-                      fontSize: '0.85rem',
+                      backgroundColor: isSelected ? 'rgba(13, 148, 136, 0.08)' : 'transparent',
+                      border: `1px solid ${isSelected ? 'var(--primary)' : 'var(--border-color)'}`,
+                      borderRadius: '8px',
+                      padding: '0.5rem 0.6rem',
+                      color: isSelected ? 'var(--primary)' : 'var(--text-muted)',
+                      fontSize: '0.8rem',
                       fontWeight: isSelected ? 700 : 500,
                       cursor: 'pointer',
                       display: 'flex',
                       alignItems: 'center',
-                      gap: '0.5rem',
+                      gap: '0.4rem',
                       transition: 'all 0.15s ease'
                     }}
-                    onMouseEnter={(e) => {
-                      if (!isSelected) {
-                        e.currentTarget.style.backgroundColor = 'var(--surface-elevated)';
-                      }
-                    }}
-                    onMouseLeave={(e) => {
-                      if (!isSelected) {
-                        e.currentTarget.style.backgroundColor = 'var(--surface-hover)';
-                      }
-                    }}
                   >
-                    <AppleEmoji emoji={m.emoji} size={18} />
+                    <AppleEmoji emoji={m.emoji} size={16} />
                     <span>{m.label}</span>
                   </button>
                 );
@@ -251,30 +230,28 @@ export default function ComposePostModal({ onClose, onPublish }) {
             <textarea
               value={text}
               onChange={(e) => setText(e.target.value)}
-              placeholder="Escribe libremente sobre lo que estás viviendo. Este es un espacio respetuoso, libre de juicios y enfocado en el apoyo mutuo..."
+              placeholder="Escribe libremente sobre lo que estás viviendo..."
               maxLength={500}
               style={{
                 width: '100%',
-                minHeight: '160px',
-                backgroundColor: 'var(--bg-color)',
-                border: '1px solid var(--border-color)',
-                borderRadius: '16px',
-                padding: '1.25rem',
-                fontSize: '1rem',
+                minHeight: '100px',
+                backgroundColor: 'transparent',
+                border: 'none',
+                borderBottom: '1px solid var(--border-color)',
+                padding: '0.5rem 0',
+                fontSize: '0.95rem',
                 color: 'var(--text-main)',
                 outline: 'none',
                 resize: 'none',
-                lineHeight: 1.6,
+                lineHeight: 1.5,
                 boxSizing: 'border-box',
-                transition: 'border-color 0.2s ease, box-shadow 0.2s ease'
+                transition: 'border-color 0.2s ease'
               }}
               onFocus={(e) => {
                 e.target.style.borderColor = 'var(--primary)';
-                e.target.style.boxShadow = '0 0 0 4px rgba(13,148,136,0.1)';
               }}
               onBlur={(e) => {
                 e.target.style.borderColor = 'var(--border-color)';
-                e.target.style.boxShadow = 'none';
               }}
               autoFocus
             />
@@ -366,50 +343,36 @@ export default function ComposePostModal({ onClose, onPublish }) {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          padding: '1.25rem 1.75rem',
+          padding: '1rem 1.25rem',
           borderTop: '1px solid var(--border-color)',
-          backgroundColor: 'var(--bg-color)',
+          backgroundColor: 'var(--surface)',
           position: 'relative',
           zIndex: 10
         }}>
-          <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'inline-flex', alignItems: 'center', gap: '0.4rem', fontWeight: 600 }}>
-            <Sparkles size={16} color="var(--primary)" /> Moderado por la comunidad
+          <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'inline-flex', alignItems: 'center', gap: '0.3rem', fontWeight: 600 }}>
+            <Sparkles size={14} color="var(--primary)" /> Comunidad
           </span>
 
           <button
             onClick={handlePublish}
             disabled={!text.trim()}
             style={{
-              background: text.trim() ? 'linear-gradient(135deg, var(--primary) 0%, #0891b2 100%)' : 'var(--surface-hover)',
+              background: text.trim() ? 'var(--primary)' : 'var(--surface-hover)',
               color: text.trim() ? '#ffffff' : 'var(--text-muted)',
-              border: text.trim() ? 'none' : '1px solid var(--border-color)',
-              borderRadius: '9999px',
-              padding: '0.8rem 1.6rem',
-              fontSize: '0.92rem',
-              fontWeight: 900,
+              border: 'none',
+              borderRadius: '8px',
+              padding: '0.6rem 1.2rem',
+              fontSize: '0.85rem',
+              fontWeight: 700,
               cursor: text.trim() ? 'pointer' : 'not-allowed',
               display: 'flex',
               alignItems: 'center',
-              gap: '0.6rem',
-              transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
-              boxShadow: text.trim() ? '0 6px 20px rgba(13,148,136,0.35)' : 'none',
-              transform: text.trim() ? 'scale(1)' : 'scale(0.98)'
-            }}
-            onMouseEnter={(e) => {
-              if (text.trim()) {
-                e.currentTarget.style.transform = 'scale(1.03)';
-                e.currentTarget.style.boxShadow = '0 8px 25px rgba(13,148,136,0.45)';
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (text.trim()) {
-                e.currentTarget.style.transform = 'scale(1)';
-                e.currentTarget.style.boxShadow = '0 6px 20px rgba(13,148,136,0.35)';
-              }
+              gap: '0.4rem',
+              transition: 'all 0.15s ease',
             }}
           >
-            <span>Publicar Anónimamente</span>
-            <Send size={16} strokeWidth={2.5} />
+            Publicar Anónimamente
+            <Send size={14} style={{ marginLeft: '0.2rem' }} />
           </button>
         </div>
       </div>
