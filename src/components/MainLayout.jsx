@@ -297,119 +297,44 @@ export default function MainLayout() {
 
           {/* + PUBLICACIÓN BUTTON WITH HOPE TOOLTIP BANNER */}
           <div style={{ position: 'relative' }}>
-            <button
-              onClick={() => setShowCompose(true)}
-              style={{
-                width: '100%',
-                backgroundColor: 'var(--primary)',
-                color: '#ffffff',
-                border: 'none',
-                borderRadius: '9999px',
-                padding: '0.75rem 1rem',
-                fontSize: '0.9rem',
-                fontWeight: 700,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '0.5rem',
-                cursor: 'pointer',
-                boxShadow: 'var(--shadow-sm)',
-                transition: 'all var(--transition-fast)'
-              }}
-              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--primary-hover)'; e.currentTarget.style.transform = 'translateY(-1px)'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--primary)'; e.currentTarget.style.transform = 'translateY(0)'; }}
-            >
-              <Plus size={18} strokeWidth={2.5} />
-              <span>{t('student.nav.createPost', 'Crear Publicación')}</span>
-            </button>
           </div>
 
-          <div style={{ display: 'flex', justifyContent: 'flex-start', marginTop: '0.1rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'flex-start', marginTop: '0.5rem' }}>
             <LanguageToggle />
           </div>
         </div>
 
-        {/* Navigation Links matched 100% with reference bar */}
-        <nav style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem', flex: 1 }}>
-          <SidebarButton
-            icon={<Home size={18} />}
-            label={t('student.nav.feed', 'Feed')}
-            active={currentPath === '/app/feed'}
-            onClick={() => handleNavClick('/app/feed')}
-          />
-          <SidebarButton
-            icon={<DoorOpen size={18} />}
-            label={t('student.nav.rooms', 'Salas')}
-            active={currentPath === '/app/salas'}
-            onClick={() => handleNavClick('/app/salas')}
-          />
-          <SidebarButton
-            icon={<MessageCircle size={18} />}
-            label={t('student.nav.messages', 'Mensajes')}
-            active={currentPath === '/app/chat'}
-            onClick={() => handleNavClick('/app/chat')}
-          />
-          <SidebarButton
-            icon={<Bell size={18} />}
-            label={t('student.nav.notifications', 'Notificaciones')}
-            onClick={() => setActiveInfoModal('notificaciones')}
-          />
+        {/* Navigation Links - Optimized and Grouped */}
+        <nav style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', flex: 1, overflowY: 'auto' }} className="no-scrollbar">
+          
+          {/* Tu Progreso */}
+          <div style={{ fontSize: '0.7rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.3rem', marginTop: '0.5rem', paddingLeft: '0.5rem' }}>
+            Tu progreso
+          </div>
+          <SidebarButton icon={<Sparkles size={18} color="#a855f7" />} label={t('student.nav.wellnessCenter', 'Centro de Bienestar')} active={currentPath === '/app/mood'} onClick={() => handleNavClick('/app/mood')} />
+          <SidebarButton icon={<CircleDot size={18} color="#38bdf8" />} label={t('student.nav.dotz', 'Dotz (Plumas)')} onClick={() => setActiveInfoModal('dotz')} />
+          <SidebarButton icon={<UserPlus size={18} color="#00e676" />} label={t('student.nav.makeFriend', 'Hazte un Amigo')} onClick={() => setActiveInfoModal('aliado')} />
 
-          <div style={{ margin: '0.4rem 0', height: '1px', backgroundColor: 'var(--border-color)', opacity: 0.5 }} />
+          <div style={{ margin: '0.6rem 0', height: '1px', backgroundColor: 'var(--border-color)', opacity: 0.5 }} />
 
-          <SidebarButton
-            icon={<Zap size={18} color="#fbbf24" />}
-            label={t('student.nav.improvements', 'Mejoras')}
-            onClick={() => setActiveInfoModal('mejoras')}
-          />
-          <SidebarButton
-            icon={<Sparkles size={18} color="#a855f7" />}
-            label={t('student.nav.wellnessCenter', 'Centro de Bienestar')}
-            active={currentPath === '/app/mood'}
-            onClick={() => handleNavClick('/app/mood')}
-          />
-          <SidebarButton
-            icon={<CircleDot size={18} color="#38bdf8" />}
-            label={t('student.nav.dotz', 'Dotz (Plumas)')}
-            onClick={() => setActiveInfoModal('dotz')}
-          />
-          <SidebarButton
-            icon={<ShieldCheck size={18} color="#10b981" />}
-            label={t('student.nav.securityCenter', 'Centro de Seguridad')}
-            onClick={() => setActiveInfoModal('seguridad')}
-          />
-          <SidebarButton
-            icon={<ShieldAlert size={18} color="#f43f5e" />}
-            label={t('student.nav.needHelp', 'Necesito ayuda')}
-            onClick={() => setShowSOS(true)}
-            accentColor="#f43f5e"
-          />
-          <SidebarButton
-            icon={<Compass size={18} />}
-            label={t('student.nav.guide', 'Guía de uso')}
-            onClick={() => setActiveInfoModal('guia')}
-          />
-          <SidebarButton
-            icon={<GraduationCap size={18} />}
-            label={t('student.nav.studentServices', 'Servicios Estudiantiles')}
-            active={currentPath === '/app/expertos' || currentPath === '/app/citas'}
-            onClick={() => handleNavClick('/app/expertos')}
-          />
-          <SidebarButton
-            icon={<PhoneCall size={18} color="#f43f5e" />}
-            label={t('student.nav.helpline', 'Línea de ayuda clínica')}
-            onClick={() => setActiveInfoModal('helpline')}
-          />
-          <SidebarButton
-            icon={<Info size={18} />}
-            label={t('student.nav.about', 'Acerca de Free Mind')}
-            onClick={() => setActiveInfoModal('acerca')}
-          />
-          <SidebarButton
-            icon={<UserPlus size={18} color="#00e676" />}
-            label={t('student.nav.makeFriend', 'Hazte un Amigo')}
-            onClick={() => setActiveInfoModal('aliado')}
-          />
+          {/* Soporte y Seguridad */}
+          <div style={{ fontSize: '0.7rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.3rem', paddingLeft: '0.5rem' }}>
+            Soporte & Seguridad
+          </div>
+          <SidebarButton icon={<ShieldAlert size={18} color="#f43f5e" />} label={t('student.nav.needHelp', 'Necesito ayuda')} onClick={() => setShowSOS(true)} accentColor="#f43f5e" />
+          <SidebarButton icon={<PhoneCall size={18} color="#f43f5e" />} label={t('student.nav.helpline', 'Línea de ayuda clínica')} onClick={() => setActiveInfoModal('helpline')} />
+          <SidebarButton icon={<ShieldCheck size={18} color="#10b981" />} label={t('student.nav.securityCenter', 'Centro de Seguridad')} onClick={() => setActiveInfoModal('seguridad')} />
+          <SidebarButton icon={<GraduationCap size={18} />} label={t('student.nav.studentServices', 'Servicios Estudiantiles')} active={currentPath === '/app/expertos' || currentPath === '/app/citas'} onClick={() => handleNavClick('/app/expertos')} />
+
+          <div style={{ margin: '0.6rem 0', height: '1px', backgroundColor: 'var(--border-color)', opacity: 0.5 }} />
+
+          {/* Comunidad y Ajustes */}
+          <div style={{ fontSize: '0.7rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.3rem', paddingLeft: '0.5rem' }}>
+            Comunidad & Ajustes
+          </div>
+          <SidebarButton icon={<Zap size={18} color="#fbbf24" />} label={t('student.nav.improvements', 'Mejoras')} onClick={() => setActiveInfoModal('mejoras')} />
+          <SidebarButton icon={<Compass size={18} />} label={t('student.nav.guide', 'Guía de uso')} onClick={() => setActiveInfoModal('guia')} />
+          <SidebarButton icon={<Info size={18} />} label={t('student.nav.about', 'Acerca de Free Mind')} onClick={() => setActiveInfoModal('acerca')} />
         </nav>
 
         {/* Bottom Section: Theme Toggle + User Profile Card Footer */}
