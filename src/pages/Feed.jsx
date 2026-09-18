@@ -11,7 +11,8 @@ import {
   Plus,
   Send,
   Tag,
-  Smile
+  Smile,
+  Bell
 } from 'lucide-react';
 import { useAppContext } from '../context/AppContext';
 import { useOutletContext, useNavigate } from 'react-router-dom';
@@ -283,7 +284,6 @@ export default function Feed() {
             <button
               onClick={() => {
                 showToast("Filtros abertos");
-                // Here we could scroll to the sidebar on mobile or open a modal
               }}
               style={{ background: 'none', border: 'none', color: 'var(--text-main)', cursor: 'pointer', padding: '2px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
             >
@@ -295,9 +295,12 @@ export default function Feed() {
             >
               <Search size={22} strokeWidth={2.5} />
             </button>
-            <div style={{ marginLeft: '0.25rem', cursor: 'pointer', border: '2px solid #00e676', borderRadius: '50%', padding: '2px' }} onClick={() => navigate('/app/profile')}>
-              <TalkCampusAvatar id={user?.avatar || '🦉'} size={30} />
-            </div>
+            <button
+              onClick={() => outletCtx.setActiveInfoModal?.('notificaciones')}
+              style={{ background: 'none', border: 'none', color: 'var(--text-main)', cursor: 'pointer', padding: '2px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            >
+              <Bell size={22} strokeWidth={2.5} />
+            </button>
           </div>
         </div>
 

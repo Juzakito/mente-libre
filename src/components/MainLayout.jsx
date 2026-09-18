@@ -544,31 +544,36 @@ export default function MainLayout() {
             <TalkCampusLogo size={24} showText={false} />
           </div>
 
-          <button
-            onClick={() => setShowCompose(true)}
-            style={{
-              backgroundColor: '#00e676',
-              color: '#082e30',
-              border: 'none',
-              borderRadius: '9999px',
-              padding: '0.4rem 0.85rem',
-              fontSize: '0.8rem',
-              fontWeight: 900,
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.25rem',
-              cursor: 'pointer'
-            }}
-          >
-            <Plus size={14} strokeWidth={3} />
-            <span>{t('student.nav.publish', 'Publicar')}</span>
-          </button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <button
+              onClick={() => setActiveInfoModal('notificaciones')}
+              style={{
+                backgroundColor: 'var(--surface-hover)',
+                border: 'none',
+                color: 'var(--text-main)',
+                borderRadius: '50%',
+                width: '36px',
+                height: '36px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer'
+              }}
+            >
+              <Bell size={18} strokeWidth={2.5} />
+            </button>
+          </div>
         </header>
         )}
 
         {/* Center Routed View (Feed, Chat, Profile, etc.) */}
         <div style={{ flex: 1 }}>
-          <Outlet context={{ handleSOS: () => setShowSOS(true), showToast, openCompose: () => setShowCompose(true) }} />
+          <Outlet context={{ 
+            handleSOS: () => setShowSOS(true), 
+            showToast, 
+            openCompose: () => setShowCompose(true),
+            setActiveInfoModal
+          }} />
         </div>
       </main>
 
@@ -607,6 +612,18 @@ export default function MainLayout() {
             <Plus size={26} strokeWidth={3} />
           </button>
         </div>
+        <button
+          onClick={() => handleNavClick('/app/chat')}
+          style={{ background: 'none', border: 'none', color: currentPath === '/app/chat' ? '#00e676' : '#8e9ca0', cursor: 'pointer', padding: '0.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', flex: 1 }}
+        >
+          <MessageCircle size={24} fill={currentPath === '/app/chat' ? '#00e676' : 'none'} />
+        </button>
+        <button
+          onClick={() => handleNavClick('/app/profile')}
+          style={{ background: 'none', border: 'none', color: currentPath === '/app/profile' ? '#00e676' : '#8e9ca0', cursor: 'pointer', padding: '0.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', flex: 1 }}
+        >
+          <User size={24} fill={currentPath === '/app/profile' ? '#00e676' : 'none'} />
+        </button>
       </div>
 
       {/* ─── TOAST NOTIFICATIONS ─────────────────────────────── */}
