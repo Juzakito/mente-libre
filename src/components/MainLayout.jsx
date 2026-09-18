@@ -829,14 +829,14 @@ export default function MainLayout() {
                         <div
                           key={feat.key}
                           style={{
-                            padding: '1.1rem 1.25rem',
-                            borderRadius: '20px',
+                            padding: '0.85rem 1rem',
+                            borderRadius: '18px',
                             backgroundColor: 'var(--surface-elevated)',
                             border: hasVoted ? '1.5px solid var(--primary)' : '1px solid var(--border-color)',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'space-between',
-                            gap: '1.1rem',
+                            gap: '0.85rem',
                             transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
                             boxShadow: hasVoted ? '0 8px 24px rgba(16, 185, 129, 0.15)' : '0 2px 10px rgba(0,0,0,0.02)'
                           }}
@@ -851,12 +851,12 @@ export default function MainLayout() {
                             e.currentTarget.style.boxShadow = hasVoted ? '0 8px 24px rgba(16, 185, 129, 0.15)' : '0 2px 10px rgba(0,0,0,0.02)';
                           }}
                         >
-                          {/* Left: Icon & Details */}
-                          <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.95rem', flex: 1, minWidth: 0 }}>
+                          {/* Left: Icon & Middle: Details */}
+                          <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.85rem', flex: 1, minWidth: 0 }}>
                             <div style={{
-                              width: '46px',
-                              height: '46px',
-                              borderRadius: '14px',
+                              width: '42px',
+                              height: '42px',
+                              borderRadius: '12px',
                               background: feat.iconBg,
                               border: `1px solid ${feat.iconBorder}`,
                               display: 'flex',
@@ -865,36 +865,79 @@ export default function MainLayout() {
                               flexShrink: 0,
                               boxShadow: '0 4px 10px rgba(0,0,0,0.03)'
                             }}>
-                              <AppleEmoji emoji={feat.icon} size={24} />
+                              <AppleEmoji emoji={feat.icon} size={22} />
                             </div>
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem', flex: 1, minWidth: 0 }}>
-                              <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem', flexWrap: 'wrap' }}>
-                                <span style={{ fontWeight: 800, fontSize: '0.95rem', color: 'var(--text-main)', letterSpacing: '-0.01em' }}>
-                                  {feat.title}
-                                </span>
-                                <span style={{
-                                  fontSize: '0.68rem',
-                                  fontWeight: 800,
-                                  padding: '0.12rem 0.5rem',
-                                  borderRadius: '6px',
-                                  backgroundColor: feat.tagBg,
-                                  color: feat.tagColor,
-                                  letterSpacing: '0.02em'
-                                }}>
-                                  {feat.tag}
-                                </span>
+                            
+                            <div style={{ display: 'flex', flexDirection: 'column', flex: 1, minWidth: 0 }}>
+                              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '0.5rem' }}>
+                                <div>
+                                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexWrap: 'wrap', marginBottom: '0.2rem' }}>
+                                    <span style={{ fontWeight: 800, fontSize: '0.9rem', color: 'var(--text-main)', letterSpacing: '-0.01em', lineHeight: 1.2 }}>
+                                      {feat.title}
+                                    </span>
+                                    <span style={{
+                                      fontSize: '0.62rem',
+                                      fontWeight: 800,
+                                      padding: '0.12rem 0.4rem',
+                                      borderRadius: '6px',
+                                      backgroundColor: feat.tagBg,
+                                      color: feat.tagColor,
+                                      letterSpacing: '0.02em'
+                                    }}>
+                                      {feat.tag}
+                                    </span>
+                                  </div>
+                                  <span style={{
+                                    color: 'var(--text-muted)',
+                                    fontSize: '0.75rem',
+                                    lineHeight: 1.35,
+                                    display: '-webkit-box',
+                                    WebkitLineClamp: 2,
+                                    WebkitBoxOrient: 'vertical',
+                                    overflow: 'hidden'
+                                  }}>
+                                    {feat.desc}
+                                  </span>
+                                </div>
+                                
+                                {/* Right: Compact Vote Widget */}
+                                <button
+                                  onClick={() => handleUpvoteFeature(feat.key)}
+                                  style={{
+                                    padding: '0.35rem 0.55rem',
+                                    borderRadius: '10px',
+                                    backgroundColor: hasVoted ? 'var(--primary)' : 'var(--surface)',
+                                    color: hasVoted ? '#ffffff' : 'var(--text-main)',
+                                    border: hasVoted ? '1.5px solid var(--primary)' : '1.5px solid var(--border-color)',
+                                    cursor: 'pointer',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '0.25rem',
+                                    flexShrink: 0,
+                                    boxShadow: hasVoted ? '0 4px 12px rgba(16, 185, 129, 0.25)' : 'none',
+                                    transition: 'all 0.2s ease'
+                                  }}
+                                  onMouseEnter={(e) => {
+                                    if (!hasVoted) {
+                                      e.currentTarget.style.borderColor = 'var(--primary)';
+                                      e.currentTarget.style.color = 'var(--primary)';
+                                    }
+                                  }}
+                                  onMouseLeave={(e) => {
+                                    if (!hasVoted) {
+                                      e.currentTarget.style.borderColor = 'var(--border-color)';
+                                      e.currentTarget.style.color = 'var(--text-main)';
+                                    }
+                                  }}
+                                >
+                                  <ChevronUp size={14} strokeWidth={hasVoted ? 3 : 2.5} />
+                                  <span style={{ fontSize: '0.85rem', fontWeight: 900 }}>{feat.votes}</span>
+                                </button>
                               </div>
-                              <span style={{
-                                color: 'var(--text-muted)',
-                                fontSize: '0.8rem',
-                                lineHeight: 1.45
-                              }}>
-                                {feat.desc}
-                              </span>
 
                               {/* Progress bar of votes */}
-                              <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginTop: '0.45rem' }}>
-                                <div style={{ flex: 1, height: '6px', backgroundColor: 'var(--border-color)', borderRadius: '9999px', overflow: 'hidden' }}>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginTop: '0.6rem' }}>
+                                <div style={{ flex: 1, height: '4px', backgroundColor: 'var(--border-color)', borderRadius: '9999px', overflow: 'hidden' }}>
                                   <div style={{
                                     width: `${percent}%`,
                                     height: '100%',
@@ -903,54 +946,12 @@ export default function MainLayout() {
                                     transition: 'width 0.4s ease'
                                   }} />
                                 </div>
-                                <span style={{ fontSize: '0.72rem', fontWeight: 800, color: 'var(--text-muted)', minWidth: '70px', textAlign: 'right' }}>
-                                  {feat.votes} votos • {percent}%
+                                <span style={{ fontSize: '0.68rem', fontWeight: 800, color: 'var(--text-muted)' }}>
+                                  {percent}%
                                 </span>
                               </div>
                             </div>
                           </div>
-
-                          {/* Right: SaaS Upvote Widget */}
-                          <button
-                            onClick={() => handleUpvoteFeature(feat.key)}
-                            style={{
-                              minWidth: '68px',
-                              padding: '0.65rem 0.5rem',
-                              borderRadius: '14px',
-                              backgroundColor: hasVoted ? 'var(--primary)' : 'var(--surface)',
-                              color: hasVoted ? '#ffffff' : 'var(--text-main)',
-                              border: hasVoted ? '1.5px solid var(--primary)' : '1.5px solid var(--border-color)',
-                              cursor: 'pointer',
-                              display: 'flex',
-                              flexDirection: 'column',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              gap: '0.2rem',
-                              flexShrink: 0,
-                              boxShadow: hasVoted ? '0 4px 16px rgba(16, 185, 129, 0.35)' : 'none',
-                              transition: 'all 0.2s ease'
-                            }}
-                            onMouseEnter={(e) => {
-                              if (!hasVoted) {
-                                e.currentTarget.style.borderColor = 'var(--primary)';
-                                e.currentTarget.style.color = 'var(--primary)';
-                                e.currentTarget.style.transform = 'scale(1.05)';
-                              }
-                            }}
-                            onMouseLeave={(e) => {
-                              if (!hasVoted) {
-                                e.currentTarget.style.borderColor = 'var(--border-color)';
-                                e.currentTarget.style.color = 'var(--text-main)';
-                                e.currentTarget.style.transform = 'scale(1)';
-                              }
-                            }}
-                          >
-                            <ChevronUp size={16} strokeWidth={hasVoted ? 3 : 2.5} />
-                            <span style={{ fontSize: '0.92rem', fontWeight: 900 }}>{feat.votes}</span>
-                            <span style={{ fontSize: '0.64rem', fontWeight: 800, letterSpacing: '0.04em' }}>
-                              {hasVoted ? 'VOTADO' : 'VOTAR'}
-                            </span>
-                          </button>
                         </div>
                       );
                     })}
@@ -970,7 +971,7 @@ export default function MainLayout() {
                           gap: '0.85rem'
                         }}
                       >
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', flex: 1, minWidth: 0 }}>
+                        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.85rem', flex: 1, minWidth: 0 }}>
                           <div style={{
                             width: '42px',
                             height: '42px',
@@ -984,22 +985,22 @@ export default function MainLayout() {
                             <AppleEmoji emoji="💡" size={22} />
                           </div>
                           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.15rem' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                              <span style={{ fontWeight: 800, fontSize: '0.92rem', color: 'var(--text-main)' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexWrap: 'wrap', marginBottom: '0.1rem' }}>
+                              <span style={{ fontWeight: 800, fontSize: '0.9rem', color: 'var(--text-main)', letterSpacing: '-0.01em', lineHeight: 1.2 }}>
                                 {prop.title}
                               </span>
                               <span style={{
-                                fontSize: '0.68rem',
+                                fontSize: '0.62rem',
                                 color: 'var(--primary)',
                                 backgroundColor: 'rgba(16, 185, 129, 0.12)',
-                                padding: '0.15rem 0.55rem',
-                                borderRadius: '9999px',
+                                padding: '0.12rem 0.4rem',
+                                borderRadius: '6px',
                                 fontWeight: 800
                               }}>
                                 En revisión 🚀
                               </span>
                             </div>
-                            <span style={{ fontSize: '0.76rem', color: 'var(--text-muted)' }}>
+                            <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', lineHeight: 1.35, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                               Propuesta comunitaria enviada por ti • Evaluación para el siguiente sprint
                             </span>
                           </div>
