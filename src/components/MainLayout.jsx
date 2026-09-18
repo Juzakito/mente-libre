@@ -572,7 +572,8 @@ export default function MainLayout() {
             handleSOS: () => setShowSOS(true), 
             showToast, 
             openCompose: () => setShowCompose(true),
-            setActiveInfoModal
+            setActiveInfoModal,
+            setMobileMenuOpen
           }} />
         </div>
       </main>

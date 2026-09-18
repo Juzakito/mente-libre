@@ -12,7 +12,8 @@ import {
   Send,
   Tag,
   Smile,
-  Bell
+  Bell,
+  Menu
 } from 'lucide-react';
 import { useAppContext } from '../context/AppContext';
 import { useOutletContext, useNavigate } from 'react-router-dom';
@@ -274,12 +275,29 @@ export default function Feed() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          padding: '0.25rem 0.25rem 0.75rem',
+          padding: '0.75rem 0.25rem',
           width: '100%'
         }}>
-          <h1 style={{ fontSize: '1.75rem', fontWeight: 900, color: 'var(--text-main)', margin: 0, letterSpacing: '-0.5px' }}>
-            Feed
-          </h1>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <button
+              onClick={() => outletCtx.setMobileMenuOpen?.(true)}
+              style={{
+                backgroundColor: '#1b2022',
+                border: '1px solid #283033',
+                color: '#ffffff',
+                borderRadius: '8px',
+                padding: '6px',
+                display: 'flex',
+                alignItems: 'center',
+                cursor: 'pointer'
+              }}
+            >
+              <Menu size={18} />
+            </button>
+            <h1 style={{ fontSize: '1.75rem', fontWeight: 900, color: 'var(--text-main)', margin: 0, letterSpacing: '-0.5px' }}>
+              Feed
+            </h1>
+          </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
             <button
               onClick={() => {
